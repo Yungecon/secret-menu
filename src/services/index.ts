@@ -2,3 +2,4 @@
 export * from './analytics';
 export * from './recommendationEngine';
 export * from './soundEffects';
+export * from './abTesting';
