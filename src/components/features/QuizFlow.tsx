@@ -93,6 +93,18 @@ const QuizFlow = () => {
           "How wonderfully cerebral your choice...",
           "A devotee of life's more intricate pleasures...",
           "Your taste reveals a deeply cultured soul..."
+        ],
+        balanced: [
+          "How beautifully harmonious your approach...",
+          "Your palate seeks the perfect equilibrium...",
+          "Such sophisticated appreciation for balance...",
+          "You understand the art of refined moderation...",
+          "How elegantly measured your taste...",
+          "Your spirit craves the symphony of perfect harmony...",
+          "Such wise appreciation for life's gentle balance...",
+          "A true connoisseur of sophisticated restraint...",
+          "Your taste reveals a soul of perfect poise...",
+          "How magnificently centered your preference..."
         ]
       },
       citrusVsStone: {
@@ -119,6 +131,18 @@ const QuizFlow = () => {
           "A connoisseur of life's most intimate flavors...",
           "Your taste reveals a deeply passionate nature...",
           "Such sophisticated longing for the profound..."
+        ],
+        tropical: [
+          "How wonderfully exotic your taste...",
+          "Your spirit craves the magic of distant shores...",
+          "Such adventurous appreciation for tropical paradise...",
+          "You seek the sunshine of island dreams...",
+          "How beautifully vibrant your preference...",
+          "Your palate dances with tropical rhythms...",
+          "Such magnificent longing for paradise...",
+          "A true explorer of exotic flavors...",
+          "Your taste reveals a wanderer's soul...",
+          "How delightfully adventurous your spirit..."
         ]
       },
       lightVsBoozy: {
@@ -145,6 +169,18 @@ const QuizFlow = () => {
           "A true warrior of liquid sophistication...",
           "Your taste reveals an untamed, noble spirit...",
           "Such commanding appreciation for liquid poetry..."
+        ],
+        medium: [
+          "How beautifully versatile your approach...",
+          "Your palate seeks the perfect middle ground...",
+          "Such sophisticated appreciation for adaptability...",
+          "You understand the art of refined versatility...",
+          "How elegantly balanced your preference...",
+          "Your spirit craves the harmony of perfect moderation...",
+          "Such wise appreciation for life's flexible pleasures...",
+          "A true connoisseur of sophisticated adaptability...",
+          "Your taste reveals a soul of perfect versatility...",
+          "How magnificently adaptable your spirit..."
         ]
       },
       classicVsExperimental: {
@@ -171,6 +207,18 @@ const QuizFlow = () => {
           "A true explorer of cocktail possibilities...",
           "Your taste reveals a visionary's soul...",
           "How delightfully rebellious your sophistication..."
+        ],
+        modern: [
+          "How beautifully contemporary your taste...",
+          "Your spirit embraces the elegance of today...",
+          "Such sophisticated appreciation for modern refinement...",
+          "You understand the art of contemporary sophistication...",
+          "How elegantly current your preference...",
+          "Your palate seeks the harmony of modern excellence...",
+          "Such wise appreciation for refined innovation...",
+          "A true connoisseur of sophisticated modernity...",
+          "Your taste reveals a soul of perfect contemporary grace...",
+          "How magnificently refined your modern spirit..."
         ]
       },
       moodPreference: {

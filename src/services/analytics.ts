@@ -62,11 +62,54 @@ class Analytics {
   }
 
   trackQuestionAnswered(questionId: string, answer: string, questionNumber: number) {
+    // Enhanced tracking for new third options
+    const isNewOption = this.isNewThirdOption(questionId, answer);
+    
     this.trackEvent('quiz', 'question_answered', questionId, questionNumber, {
       answer,
       questionNumber,
-      questionId
+      questionId,
+      isNewThirdOption: isNewOption,
+      optionType: this.getOptionType(questionId, answer)
     });
+  }
+
+  private isNewThirdOption(questionId: string, answer: string): boolean {
+    const newOptions = {
+      sweetVsBitter: ['balanced'],
+      citrusVsStone: ['tropical'],
+      lightVsBoozy: ['medium'],
+      classicVsExperimental: ['modern']
+    };
+    
+    return newOptions[questionId as keyof typeof newOptions]?.includes(answer) || false;
+  }
+
+  private getOptionType(questionId: string, answer: string): string {
+    const optionTypes = {
+      sweetVsBitter: {
+        sweet: 'traditional',
+        bitter: 'traditional', 
+        balanced: 'enhanced'
+      },
+      citrusVsStone: {
+        citrus: 'traditional',
+        stone: 'traditional',
+        tropical: 'enhanced'
+      },
+      lightVsBoozy: {
+        light: 'traditional',
+        boozy: 'traditional',
+        medium: 'enhanced'
+      },
+      classicVsExperimental: {
+        classic: 'traditional',
+        experimental: 'traditional',
+        modern: 'enhanced'
+      }
+    };
+    
+    return optionTypes[questionId as keyof typeof optionTypes]?.[answer as keyof any] || 'unknown';
   }
 
   trackQuizCompleted(totalQuestions: number, completionTime: number) {
@@ -81,6 +124,33 @@ class Analytics {
     this.trackEvent('recommendation', 'viewed', cocktailName, matchScore, {
       cocktailName,
       matchScore
+    });
+  }
+
+  trackEnhancedRecommendationViewed(cocktailName: string, matchScore: number, fuzzyMatches?: string[], fallbackUsed?: boolean) {
+    this.trackEvent('recommendation', 'enhanced_viewed', cocktailName, matchScore, {
+      cocktailName,
+      matchScore,
+      fuzzyMatches: fuzzyMatches || [],
+      fallbackUsed: fallbackUsed || false,
+      enhancedFeatures: true
+    });
+  }
+
+  trackFuzzyMatchingUsage(questionId: string, answer: string, fuzzyMatches: string[]) {
+    this.trackEvent('recommendation', 'fuzzy_matching_used', questionId, 0, {
+      questionId,
+      answer,
+      fuzzyMatches,
+      matchingMethod: 'fuzzy'
+    });
+  }
+
+  trackCoverageGap(combination: string, missingTags: string[]) {
+    this.trackEvent('system', 'coverage_gap_detected', combination, 0, {
+      combination,
+      missingTags,
+      gapType: 'insufficient_tags'
     });
   }
 
@@ -110,4 +180,10 @@ export const trackQuizCompleted = (totalQuestions: number, completionTime: numbe
   analytics.trackQuizCompleted(totalQuestions, completionTime);
 export const trackRecommendationViewed = (cocktailName: string, matchScore: number) => 
   analytics.trackRecommendationViewed(cocktailName, matchScore);
+export const trackEnhancedRecommendationViewed = (cocktailName: string, matchScore: number, fuzzyMatches?: string[], fallbackUsed?: boolean) => 
+  analytics.trackEnhancedRecommendationViewed(cocktailName, matchScore, fuzzyMatches, fallbackUsed);
+export const trackFuzzyMatchingUsage = (questionId: string, answer: string, fuzzyMatches: string[]) => 
+  analytics.trackFuzzyMatchingUsage(questionId, answer, fuzzyMatches);
+export const trackCoverageGap = (combination: string, missingTags: string[]) => 
+  analytics.trackCoverageGap(combination, missingTags);
 export const trackQuizRestart = () => analytics.trackQuizRestart();

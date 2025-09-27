@@ -1,0 +1,10 @@
+{
+  "totalCombinations": 324,
+  "successfulCombinations": 324,
+  "successRate": 100,
+  "fuzzyMatchingUsed": 14,
+  "fallbackUsed": 14,
+  "failedCombinations": [],
+  "avgScore": 98,
+  "avgMatchingFactors": 5.083333333333333
+}

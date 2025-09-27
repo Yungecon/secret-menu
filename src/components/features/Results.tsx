@@ -3,7 +3,7 @@ import { useQuiz } from '../../hooks';
 import { generateRecommendations } from '../../services/recommendationEngine';
 import { useEffect, useState } from 'react';
 import { RecommendationResult } from '../../types';
-import { trackRecommendationViewed, trackQuizRestart } from '../../services/analytics';
+import { trackRecommendationViewed, trackEnhancedRecommendationViewed, trackQuizRestart } from '../../services/analytics';
 import { playCocktailReveal } from '../../services/soundEffects';
 import { MagicalLoader, MagicalParticles } from '../ui/animations';
 
@@ -17,8 +17,12 @@ const Results = () => {
       const result = generateRecommendations(answers);
       setRecommendations(result);
       
-      // Track recommendation viewed
-      trackRecommendationViewed(result.primary.name, result.matchScore);
+      // Track recommendation viewed with enhanced analytics
+      if (result.fuzzyMatches || result.fallbackUsed) {
+        trackEnhancedRecommendationViewed(result.primary.name, result.matchScore, result.fuzzyMatches, result.fallbackUsed);
+      } else {
+        trackRecommendationViewed(result.primary.name, result.matchScore);
+      }
       
       // Play cocktail reveal sound after a brief delay
       setTimeout(() => {

@@ -1,0 +1,28 @@
+{
+  "timestamp": "2025-09-27T06:31:54.168Z",
+  "performance": {
+    "threshold": 500,
+    "overallAvg": 0.1885625239999997,
+    "overallMax": 1.5227080000000015,
+    "overallP95": 0.32375840000000194,
+    "passed": true
+  },
+  "quality": {
+    "threshold": {
+      "score": 85,
+      "matches": 2
+    },
+    "avgScore": 98,
+    "avgMatches": 5.4,
+    "fuzzyUsage": 1,
+    "passed": true
+  },
+  "loadTest": {
+    "requests": 100,
+    "totalTime": 11.943958999999992,
+    "avgTime": 0.11644671999999943,
+    "maxTime": 0.2747090000000014,
+    "throughput": 858761.8440433573
+  },
+  "overallPassed": true
+}

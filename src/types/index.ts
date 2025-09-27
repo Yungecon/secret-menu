@@ -22,6 +22,30 @@ export interface QuizAnswers {
   moodPreference?: string;
 }
 
+// Enhanced interface for the new three-option system
+export interface EnhancedQuizAnswers {
+  sweetVsBitter: 'sweet' | 'bitter' | 'balanced';
+  citrusVsStone: 'citrus' | 'stone' | 'tropical';
+  lightVsBoozy: 'light' | 'boozy' | 'medium';
+  classicVsExperimental: 'classic' | 'experimental' | 'modern';
+  moodPreference: 'celebratory' | 'elegant' | 'cozy' | 'adventurous';
+}
+
+// Fuzzy matching result interface
+export interface FuzzyMatchResult {
+  cocktail: Cocktail;
+  score: number;
+  matchingFactors: number;
+  fuzzyMatches: string[];
+  fallbackUsed: boolean;
+}
+
+// Enhanced recommendation result with fuzzy matching metadata
+export interface EnhancedRecommendationResult extends RecommendationResult {
+  fuzzyMatches?: string[];
+  fallbackUsed?: boolean;
+}
+
 export interface RecommendationResult {
   primary: Cocktail;
   adjacent: Cocktail[];
