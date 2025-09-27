@@ -27,10 +27,11 @@ The Secret Shuffle feature adds a magical "surprise me" mechanic to the existing
 1. WHEN a user initiates a shuffle THEN the system SHALL display a slot machine interface with three reels
 2. WHEN the slot machine appears THEN the system SHALL immediately start all three reels spinning simultaneously
 3. WHEN all reels are spinning THEN the system SHALL show the first reel with flavor attributes (sweet, bitter, citrus, herbal, spicy, etc.), the second reel with mood attributes (adventurous, elegant, playful, cozy, celebratory, etc.), and the third reel with style attributes (classic, experimental, light, boozy, etc.)
-4. WHEN a user taps the screen for the first time THEN the system SHALL stop the first reel on a random flavor attribute with premium animation while the other two reels continue spinning
-5. WHEN a user taps the screen for the second time THEN the system SHALL stop the second reel on a random mood attribute while the third reel continues spinning
-6. WHEN a user taps the screen for the third time THEN the system SHALL stop the third reel on a random style attribute and begin cocktail matching
-7. WHEN displaying the spinning reels THEN the system SHALL ensure all three reels spin at the same speed and visual style for consistency
+4. WHEN a user taps the screen for the first time THEN the system SHALL gradually slow down and stop the first reel with mechanical deceleration animation, landing on a random flavor attribute while the other two reels continue spinning
+5. WHEN a user taps the screen for the second time THEN the system SHALL gradually slow down and stop the second reel with the same mechanical deceleration, landing on a random mood attribute while the third reel continues spinning
+6. WHEN a user taps the screen for the third time THEN the system SHALL gradually slow down and stop the third reel with mechanical deceleration, landing on a random style attribute and begin cocktail matching
+7. WHEN each reel stops THEN the system SHALL use realistic mechanical timing with gradual deceleration over 1-2 seconds, not instant stopping
+8. WHEN displaying the spinning reels THEN the system SHALL ensure all three reels spin at the same speed and visual style for consistency, with smooth mechanical rotation that mimics real slot machine physics
 
 ### Requirement 3
 
@@ -51,12 +52,13 @@ The Secret Shuffle feature adds a magical "surprise me" mechanic to the existing
 
 #### Acceptance Criteria
 
-1. WHEN a user taps to stop a reel THEN the system SHALL provide immediate visual feedback (button press effect, haptic feedback on mobile)
-2. WHEN a reel stops spinning THEN the system SHALL highlight the selected attribute with premium styling and brief celebration animation
-3. WHEN transitioning between reels THEN the system SHALL use smooth, magical animations that build anticipation
-4. WHEN all reels are complete THEN the system SHALL display a brief "matching your perfect combination..." loading state
-5. WHEN the slot machine is active THEN the system SHALL show clear instructions: "Tap to stop reel 1 of 3", "Tap to stop reel 2 of 3", etc.
-6. WHEN displaying spinning reels THEN the system SHALL ensure smooth 60fps animations that feel premium and responsive
+1. WHEN a user taps to stop a reel THEN the system SHALL provide immediate visual feedback (button press effect, haptic feedback on mobile) but begin the mechanical deceleration process
+2. WHEN a reel is decelerating THEN the system SHALL show realistic mechanical slowing with slight bounce/settle effect when it stops, like a real slot machine
+3. WHEN a reel stops spinning THEN the system SHALL highlight the selected attribute with premium styling and brief celebration animation
+4. WHEN transitioning between stopped reels THEN the system SHALL maintain the mechanical authenticity while building anticipation for the next tap
+5. WHEN all reels are complete THEN the system SHALL display a brief "matching your perfect combination..." loading state with slot machine-style fanfare
+6. WHEN the slot machine is active THEN the system SHALL show clear instructions: "Tap to stop reel 1 of 3", "Tap to stop reel 2 of 3", etc.
+7. WHEN displaying spinning reels THEN the system SHALL ensure smooth 60fps animations with realistic mechanical physics that feel authentic and premium
 
 ### Requirement 5
 
