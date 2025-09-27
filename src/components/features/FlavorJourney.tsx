@@ -39,7 +39,7 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   useEffect(() => {
     const loadJourneyData = async () => {
       try {
-        const response = await fetch('/src/assets/data/flavor_journey_data.json');
+        const response = await fetch('/flavor_journey_data.json');
         const data = await response.json();
         setJourneyData(data);
       } catch (error) {
