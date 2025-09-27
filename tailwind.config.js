@@ -7,20 +7,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Premium Tesla/Rolex-inspired color palette
+        // Refined premium palette inspired by luxury brands
         premium: {
-          black: '#0a0a0a',
-          charcoal: '#1a1a1a',
-          silver: '#c0c0c0',
-          gold: '#d4af37',
-          platinum: '#e5e4e2',
+          black: '#0f0f0f',         // Warmer black
+          dark: '#1c1c1c',          // Rich dark
+          charcoal: '#2a2a2a',      // Sophisticated charcoal  
+          silver: '#a8a8a8',        // Muted silver
+          gold: '#d4a574',          // Warm gold (less yellow)
+          platinum: '#e8e6e0',      // Warm platinum
         },
-        magical: {
-          deep: '#1e1b4b',
-          mystic: '#312e81',
-          ethereal: '#4c1d95',
-          shimmer: '#7c3aed',
-          glow: '#a855f7',
+        studio: {
+          // Sophisticated neutrals inspired by high-end design studios
+          obsidian: '#0f0f0f',      // Deep black with warmth
+          charcoal: '#1c1c1c',      // Rich charcoal
+          graphite: '#2a2a2a',      // Warm graphite
+          slate: '#404040',         // Medium gray
+          stone: '#6b6b6b',         // Light gray
+          pearl: '#f8f8f8',         // Warm white
+          // Refined accent colors
+          amber: '#d4a574',         // Warm amber (like aged whiskey)
+          copper: '#b87333',        // Rich copper
+          brass: '#cd7f32',         // Antique brass
+          cream: '#f5f2e8',         // Warm cream
         }
       },
       fontFamily: {
