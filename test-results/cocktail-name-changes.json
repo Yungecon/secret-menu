@@ -1,0 +1,607 @@
+{
+  "timestamp": "2025-09-27T07:02:50.077Z",
+  "totalCocktails": 100,
+  "namesChanged": 100,
+  "changes": [
+    {
+      "id": "SCM-001",
+      "oldName": "Secret Whisper",
+      "newName": "Luxurious Vodka Mule",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-002",
+      "oldName": "Velvet Riff",
+      "newName": "Royal Gin Martini",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-003",
+      "oldName": "Golden Cascade",
+      "newName": "Sophisticated Whiskey Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-004",
+      "oldName": "Midnight Muse",
+      "newName": "Artisan Rum Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-005",
+      "oldName": "Solar Atlas",
+      "newName": "Refined Tequila Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-006",
+      "oldName": "Neon Chord",
+      "newName": "Sophisticated Mezcal Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-007",
+      "oldName": "Juniper Fox",
+      "newName": "Exquisite Spirit Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-008",
+      "oldName": "Amber Orchard",
+      "newName": "Regal Spirit Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-009",
+      "oldName": "Echo Boulevard",
+      "newName": "Supreme Liqueur Spritz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-010",
+      "oldName": "Sable Tide",
+      "newName": "Imperial Vodka Martini",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-011",
+      "oldName": "Cinder Haze",
+      "newName": "Exquisite Gin Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-012",
+      "oldName": "Citrus Glow",
+      "newName": "Masterful Whiskey Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-013",
+      "oldName": "Savory Waltz",
+      "newName": "Distinguished Rum Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-014",
+      "oldName": "Silk Charm",
+      "newName": "Refined Tequila Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-015",
+      "oldName": "Verdant Crown",
+      "newName": "Exquisite Mezcal Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-016",
+      "oldName": "Copper Harbor",
+      "newName": "Premium Spirit Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-017",
+      "oldName": "Bloom Thicket",
+      "newName": "Luxurious Spirit Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-018",
+      "oldName": "Obsidian Flare",
+      "newName": "Refined Liqueur Spritz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-019",
+      "oldName": "Hearth Chord",
+      "newName": "Luxurious Vodka Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-020",
+      "oldName": "Arcade Spire",
+      "newName": "Sophisticated Gin Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-021",
+      "oldName": "Secret Whisper",
+      "newName": "Imperial Whiskey Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-022",
+      "oldName": "Velvet Riff",
+      "newName": "Prestige Rum Daisy",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-023",
+      "oldName": "Golden Cascade",
+      "newName": "Luxurious Tequila Daisy",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-024",
+      "oldName": "Midnight Muse",
+      "newName": "Sophisticated Mezcal Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-025",
+      "oldName": "Solar Atlas",
+      "newName": "Opulent Spirit Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-026",
+      "oldName": "Neon Chord",
+      "newName": "Luxurious Spirit Daisy",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-027",
+      "oldName": "Juniper Fox",
+      "newName": "Balanced Liqueur Heritage",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-028",
+      "oldName": "Amber Orchard",
+      "newName": "Royal Vodka Mule",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-029",
+      "oldName": "Echo Boulevard",
+      "newName": "Luxurious Gin Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-030",
+      "oldName": "Sable Tide",
+      "newName": "Distinguished Whiskey Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-031",
+      "oldName": "Cinder Haze",
+      "newName": "Elite Rum Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-032",
+      "oldName": "Citrus Glow",
+      "newName": "Distinguished Tequila Mule",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-033",
+      "oldName": "Savory Waltz",
+      "newName": "Masterful Mezcal Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-034",
+      "oldName": "Silk Charm",
+      "newName": "Majestic Spirit Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-035",
+      "oldName": "Verdant Crown",
+      "newName": "Imperial Spirit Daisy",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-036",
+      "oldName": "Copper Harbor",
+      "newName": "Imperial Liqueur Spritz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-037",
+      "oldName": "Bloom Thicket",
+      "newName": "Prestige Vodka Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-038",
+      "oldName": "Obsidian Flare",
+      "newName": "Masterful Gin Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-039",
+      "oldName": "Hearth Chord",
+      "newName": "Prestige Whiskey Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-040",
+      "oldName": "Arcade Spire",
+      "newName": "Regal Rum Daisy",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-041",
+      "oldName": "Secret Whisper",
+      "newName": "Distinguished Tequila Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-042",
+      "oldName": "Velvet Riff",
+      "newName": "Elegant Mezcal Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-043",
+      "oldName": "Golden Cascade",
+      "newName": "Sophisticated Spirit Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-044",
+      "oldName": "Midnight Muse",
+      "newName": "Artisan Spirit Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-045",
+      "oldName": "Solar Atlas",
+      "newName": "Distinguished Liqueur Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-046",
+      "oldName": "Neon Chord",
+      "newName": "Regal Vodka Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-047",
+      "oldName": "Juniper Fox",
+      "newName": "Premium Gin Martini",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-048",
+      "oldName": "Amber Orchard",
+      "newName": "Noble Whiskey Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-049",
+      "oldName": "Echo Boulevard",
+      "newName": "Imperial Rum Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-050",
+      "oldName": "Sable Tide",
+      "newName": "Distinguished Tequila Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-051",
+      "oldName": "Cinder Haze",
+      "newName": "Artisan Mezcal Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-052",
+      "oldName": "Citrus Glow",
+      "newName": "Noble Spirit Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-053",
+      "oldName": "Savory Waltz",
+      "newName": "Majestic Spirit Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-054",
+      "oldName": "Silk Charm",
+      "newName": "Noble Liqueur Spritz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-055",
+      "oldName": "Verdant Crown",
+      "newName": "Imperial Vodka Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-056",
+      "oldName": "Copper Harbor",
+      "newName": "Premium Gin Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-057",
+      "oldName": "Bloom Thicket",
+      "newName": "Exquisite Whiskey Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-058",
+      "oldName": "Obsidian Flare",
+      "newName": "Distinguished Rum Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-059",
+      "oldName": "Hearth Chord",
+      "newName": "Majestic Tequila Mule",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-060",
+      "oldName": "Arcade Spire",
+      "newName": "Grand Mezcal Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-061",
+      "oldName": "Secret Whisper",
+      "newName": "Majestic Spirit Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-062",
+      "oldName": "Velvet Riff",
+      "newName": "Sophisticated Spirit Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-063",
+      "oldName": "Golden Cascade",
+      "newName": "Regal Liqueur Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-064",
+      "oldName": "Midnight Muse",
+      "newName": "Elite Vodka Martini",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-065",
+      "oldName": "Solar Atlas",
+      "newName": "Refined Gin Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-066",
+      "oldName": "Neon Chord",
+      "newName": "Exquisite Whiskey Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-067",
+      "oldName": "Juniper Fox",
+      "newName": "Opulent Rum Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-068",
+      "oldName": "Amber Orchard",
+      "newName": "Prestige Tequila Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-069",
+      "oldName": "Echo Boulevard",
+      "newName": "Imperial Mezcal Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-070",
+      "oldName": "Sable Tide",
+      "newName": "Royal Spirit Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-071",
+      "oldName": "Cinder Haze",
+      "newName": "Sophisticated Spirit Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-072",
+      "oldName": "Citrus Glow",
+      "newName": "Balanced Liqueur Interpretation",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-073",
+      "oldName": "Savory Waltz",
+      "newName": "Majestic Vodka Mule",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-074",
+      "oldName": "Silk Charm",
+      "newName": "Artisan Gin Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-075",
+      "oldName": "Verdant Crown",
+      "newName": "Supreme Whiskey Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-076",
+      "oldName": "Copper Harbor",
+      "newName": "Artisan Rum Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-077",
+      "oldName": "Bloom Thicket",
+      "newName": "Citrus Tequila Masterpiece",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-078",
+      "oldName": "Obsidian Flare",
+      "newName": "Exquisite Mezcal Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-079",
+      "oldName": "Hearth Chord",
+      "newName": "Bitter Spirit Moment",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-080",
+      "oldName": "Arcade Spire",
+      "newName": "Elite Spirit Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-081",
+      "oldName": "Secret Whisper",
+      "newName": "Royal Liqueur Spritz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-082",
+      "oldName": "Velvet Riff",
+      "newName": "Elite Vodka Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-083",
+      "oldName": "Golden Cascade",
+      "newName": "Prestige Gin Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-084",
+      "oldName": "Midnight Muse",
+      "newName": "Grand Whiskey Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-085",
+      "oldName": "Solar Atlas",
+      "newName": "Supreme Rum Collins",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-086",
+      "oldName": "Neon Chord",
+      "newName": "Royal Tequila Mule",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-087",
+      "oldName": "Juniper Fox",
+      "newName": "Supreme Mezcal Smash",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-088",
+      "oldName": "Amber Orchard",
+      "newName": "Bitter Spirit Masterpiece",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-089",
+      "oldName": "Echo Boulevard",
+      "newName": "Artisan Spirit Daisy",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-090",
+      "oldName": "Sable Tide",
+      "newName": "Balanced Liqueur Tradition",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-091",
+      "oldName": "Cinder Haze",
+      "newName": "Royal Vodka Martini",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-092",
+      "oldName": "Citrus Glow",
+      "newName": "Artisan Gin Sour",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-093",
+      "oldName": "Savory Waltz",
+      "newName": "Premium Whiskey Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-094",
+      "oldName": "Silk Charm",
+      "newName": "Luxurious Rum Fizz",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-095",
+      "oldName": "Verdant Crown",
+      "newName": "Artisan Tequila Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-096",
+      "oldName": "Copper Harbor",
+      "newName": "Premium Mezcal Cocktail",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-097",
+      "oldName": "Bloom Thicket",
+      "newName": "Grand Spirit Highball",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-098",
+      "oldName": "Obsidian Flare",
+      "newName": "Refined Spirit Old Fashioned",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-099",
+      "oldName": "Hearth Chord",
+      "newName": "Balanced Liqueur Masterpiece",
+      "reason": "Duplicate name"
+    },
+    {
+      "id": "SCM-100",
+      "oldName": "Arcade Spire",
+      "newName": "Grand Vodka Highball",
+      "reason": "Duplicate name"
+    }
+  ]
+}
