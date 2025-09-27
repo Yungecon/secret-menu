@@ -59,26 +59,48 @@ const LandingPage = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-magical-shimmer to-magical-glow opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
           </button>
 
-          {/* Alternative Shuffle Button */}
-          <div className="text-center">
-            <p className="text-luxury-pearl/60 text-sm mb-3">or</p>
-            <button
-              onClick={() => navigate('/shuffle')}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 15px 30px rgba(212, 175, 55, 0.3)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1) translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(212, 175, 55, 0.2)';
-              }}
-              className="group relative bg-luxury-charcoal/50 backdrop-blur-sm border border-luxury-gold/30 text-luxury-gold hover:bg-luxury-gold/10 text-lg px-12 py-4 rounded-xl transition-all duration-300 overflow-hidden"
-            >
-              <span className="relative z-10 font-medium">Surprise Me</span>
-              
-              {/* Button shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
-            </button>
+          {/* Alternative Navigation Options */}
+          <div className="text-center space-y-4">
+            <p className="text-luxury-pearl/60 text-sm mb-3">or explore by</p>
+            
+            {/* Secondary Navigation Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={() => navigate('/shuffle')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 15px 30px rgba(212, 175, 55, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 16px rgba(212, 175, 55, 0.2)';
+                }}
+                className="group relative bg-luxury-charcoal/50 backdrop-blur-sm border border-luxury-gold/30 text-luxury-gold hover:bg-luxury-gold/10 text-lg px-8 py-3 rounded-xl transition-all duration-300 overflow-hidden"
+              >
+                <span className="relative z-10 font-medium">🎲 Surprise Me</span>
+                
+                {/* Button shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+              </button>
+
+              <button
+                onClick={() => navigate('/ingredients')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 15px 30px rgba(34, 197, 94, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 16px rgba(34, 197, 94, 0.2)';
+                }}
+                className="group relative bg-luxury-charcoal/50 backdrop-blur-sm border border-emerald-400/30 text-emerald-400 hover:bg-emerald-400/10 text-lg px-8 py-3 rounded-xl transition-all duration-300 overflow-hidden"
+              >
+                <span className="relative z-10 font-medium">🥃 Ingredients</span>
+                
+                {/* Button shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+              </button>
+            </div>
           </div>
           
           {/* Subtle call to action */}
