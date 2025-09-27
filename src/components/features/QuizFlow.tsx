@@ -327,8 +327,41 @@ const QuizFlow = () => {
       <div className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
         showingCompliment ? 'opacity-20 blur-sm scale-95' : 'opacity-100 blur-none scale-100'
       }`}>
-        {/* Enhanced Progress indicator */}
+        {/* Enhanced Progress indicator with sticky answers */}
         <div className="mb-8">
+          {/* Sticky Previous Answers */}
+          {currentQuestion > 0 && (
+            <div className="mb-6">
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                {questions.slice(0, currentQuestion).map((question, index) => {
+                  const answer = answers[question.id as keyof QuizAnswers];
+                  const selectedOption = question.options.find(opt => opt.value === answer);
+                  
+                  return (
+                    <div
+                      key={question.id}
+                      className="relative px-4 py-2 rounded-full text-sm font-medium text-premium-black
+                                bg-gradient-to-r from-premium-gold via-premium-platinum to-magical-glow
+                                animate-shimmer bg-[length:200%_100%] shadow-lg shadow-magical-glow/30
+                                border border-premium-gold/20"
+                    >
+                      <span className="relative z-10">
+                        {selectedOption?.label || answer}
+                      </span>
+                      
+                      {/* Iridescent glow effect */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-magical-shimmer/20 via-premium-gold/20 to-magical-glow/20 animate-pulse"></div>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-premium-silver/50 text-xs text-center italic">
+                Your exquisite choices so far...
+              </p>
+            </div>
+          )}
+
+          {/* Progress dots */}
           <div className="flex justify-center items-center space-x-3 mb-6">
             {questions.map((_, index) => (
               <div key={index} className="flex items-center">

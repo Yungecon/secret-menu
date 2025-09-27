@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { LandingPage, QuizFlow, Results } from './components'
 import { QuizProvider } from './context/QuizContext'
+import PWAInstallPrompt from './components/ui/PWAInstallPrompt'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
             <Route path="/quiz" element={<QuizFlow />} />
             <Route path="/results" element={<Results />} />
           </Routes>
+          <PWAInstallPrompt />
         </div>
       </Router>
     </QuizProvider>
