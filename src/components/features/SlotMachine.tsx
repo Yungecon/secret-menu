@@ -34,7 +34,18 @@ const SlotMachine = () => {
   // Start auto-stop timer for first reel on component mount
   useEffect(() => {
     const timeout = setTimeout(() => {
-      handleTap();
+      // Direct state update instead of calling handleTap to avoid circular dependency
+      setGameState(prevState => {
+        if (prevState === 'spinning') {
+          setReelStates(prev => prev.map((reel, index) => 
+            index === 0 
+              ? { ...reel, isSpinning: false }
+              : reel
+          ));
+          return 'stopping';
+        }
+        return prevState;
+      });
     }, 6000);
     
     setAutoStopTimeouts([timeout]);
@@ -82,7 +93,17 @@ const SlotMachine = () => {
       setGameState('spinning');
       
       const timeout = setTimeout(() => {
-        handleTap();
+        setGameState(prevState => {
+          if (prevState === 'spinning') {
+            setReelStates(prev => prev.map((reel, index) => 
+              index === nextTap 
+                ? { ...reel, isSpinning: false }
+                : reel
+            ));
+            return 'stopping';
+          }
+          return prevState;
+        });
       }, 6000);
       
       setAutoStopTimeouts(prev => {
@@ -139,7 +160,17 @@ const SlotMachine = () => {
 
     // Set up auto-stop for first reel after 6 seconds
     const timeout = setTimeout(() => {
-      handleTap();
+      setGameState(prevState => {
+        if (prevState === 'spinning') {
+          setReelStates(prev => prev.map((reel, index) => 
+            index === 0 
+              ? { ...reel, isSpinning: false }
+              : reel
+          ));
+          return 'stopping';
+        }
+        return prevState;
+      });
     }, 6000);
     
     setAutoStopTimeouts([timeout]);
