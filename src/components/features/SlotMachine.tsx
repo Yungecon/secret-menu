@@ -5,8 +5,11 @@ import {
   FLAVOR_ATTRIBUTES, 
   MOOD_ATTRIBUTES, 
   STYLE_ATTRIBUTES,
-  SlotMachineResult 
+  SlotMachineResult,
+  convertSlotToQuizAnswers
 } from '../../utils/slotMachineAttributes';
+import { generateRecommendations } from '../../services/recommendationEngine';
+import { RecommendationResult } from '../../types';
 
 interface ReelState {
   isSpinning: boolean;
@@ -22,9 +25,10 @@ const SlotMachine = () => {
     { isSpinning: true }
   ]);
   
-  const [gameState, setGameState] = useState<'spinning' | 'stopping' | 'complete'>('spinning');
+  const [gameState, setGameState] = useState<'spinning' | 'stopping' | 'complete' | 'results'>('spinning');
   const [currentTap, setCurrentTap] = useState(0); // Which reel to stop next (0-2)
   const [slotResult, setSlotResult] = useState<SlotMachineResult | null>(null);
+  const [cocktailResult, setCocktailResult] = useState<RecommendationResult | null>(null);
   const [autoStopTimeouts, setAutoStopTimeouts] = useState<NodeJS.Timeout[]>([]);
 
   // Start auto-stop timer for first reel on component mount
@@ -106,6 +110,14 @@ const SlotMachine = () => {
         
         setSlotResult(result);
         setGameState('complete');
+
+        // Generate cocktail recommendation after a brief pause
+        setTimeout(() => {
+          const quizAnswers = convertSlotToQuizAnswers(result);
+          const recommendation = generateRecommendations(quizAnswers);
+          setCocktailResult(recommendation);
+          setGameState('results');
+        }, 1500); // 1.5 second pause to show the combination
       }
     }
   }, [currentTap, reelStates]);
@@ -118,6 +130,7 @@ const SlotMachine = () => {
     setGameState('spinning');
     setCurrentTap(0);
     setSlotResult(null);
+    setCocktailResult(null);
     setReelStates([
       { isSpinning: true },
       { isSpinning: true },
@@ -136,6 +149,7 @@ const SlotMachine = () => {
     if (gameState === 'spinning') return `Tap the glowing reel to stop it (${currentTap + 1} of 3) - or wait 6 seconds`;
     if (gameState === 'stopping') return 'Reel stopping...';
     if (gameState === 'complete') return 'The reels have aligned! 🎰';
+    if (gameState === 'results') return 'Your perfect cocktail awaits! 🍸';
     return '';
   };
 
@@ -203,9 +217,9 @@ const SlotMachine = () => {
             ))}
           </div>
 
-          {/* Results Display */}
+          {/* Combination Display */}
           {gameState === 'complete' && slotResult && (
-            <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-2xl p-6 mb-6">
+            <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-2xl p-6 mb-6 animate-fade-in">
               <h3 className="text-premium-gold text-xl font-semibold mb-4">
                 ✨ Your Combination ✨
               </h3>
@@ -223,32 +237,102 @@ const SlotMachine = () => {
                 </span>
               </div>
               <p className="text-premium-silver/80 text-sm mt-4">
-                The spirits aligned perfectly! Let's find your cocktail...
+                The spirits aligned perfectly! Finding your cocktail...
               </p>
+            </div>
+          )}
+
+          {/* Cocktail Results Display */}
+          {gameState === 'results' && cocktailResult && (
+            <div className="animate-fade-in">
+              {/* Cocktail Reveal */}
+              <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-2xl p-8 mb-6">
+                <div className="text-center mb-6">
+                  <p className="text-premium-gold text-lg mb-4 italic">
+                    Your combination revealed...
+                  </p>
+                  <h2 className="font-elegant text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-premium-gold via-premium-silver to-premium-gold bg-clip-text text-transparent">
+                    {cocktailResult.primary.name}
+                  </h2>
+                  <div className="inline-flex items-center space-x-2 bg-premium-charcoal/30 px-4 py-2 rounded-full border border-premium-gold/20 mb-4">
+                    <div className="w-2 h-2 bg-premium-gold rounded-full animate-pulse"></div>
+                    <span className="text-premium-gold font-medium text-sm">
+                      {cocktailResult.matchScore}% Perfect Match
+                    </span>
+                    <div className="w-2 h-2 bg-premium-gold rounded-full animate-pulse delay-500"></div>
+                  </div>
+                </div>
+
+                {/* Cocktail Details */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-center mb-4">
+                    <span className="text-premium-gold text-sm font-medium px-3 py-1 bg-premium-gold/10 rounded-full">
+                      {cocktailResult.primary.style}
+                    </span>
+                  </div>
+                  <p className="text-premium-silver text-lg mb-6 leading-relaxed italic text-center">
+                    "{cocktailResult.primary.notes || "A sophisticated blend that speaks to your refined palate"}"
+                  </p>
+                </div>
+
+                {/* Ingredients */}
+                <div className="mb-6">
+                  <h3 className="text-premium-platinum font-semibold text-lg mb-4 text-center">
+                    Crafted With
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {cocktailResult.primary.ingredients.map((ingredient, index) => (
+                      <div key={index} className="text-premium-silver text-center py-2 px-4 bg-premium-charcoal/30 rounded-lg">
+                        {ingredient}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Garnish and Glassware */}
+                <div className="border-t border-premium-silver/20 pt-4">
+                  <div className="flex justify-between text-sm text-premium-silver/70">
+                    <span>✨ Garnished with {cocktailResult.primary.garnish}</span>
+                    <span>🥃 Served in {cocktailResult.primary.glassware}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Adjacent Recommendations */}
+              {cocktailResult.adjacent.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-premium-platinum text-lg mb-4 text-center">You might also enjoy...</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {cocktailResult.adjacent.slice(0, 3).map((cocktail) => (
+                      <div
+                        key={cocktail.id}
+                        className="bg-premium-dark/30 border border-premium-silver/20 rounded-xl p-4 text-center"
+                      >
+                        <h4 className="text-premium-gold font-medium mb-2">
+                          {cocktail.name}
+                        </h4>
+                        <p className="text-premium-silver/80 text-sm mb-2">{cocktail.style}</p>
+                        <p className="text-premium-silver/60 text-xs">
+                          {cocktail.base_spirit_category}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {gameState === 'complete' && (
-            <>
-              <button
-                onClick={spinAgain}
-                className="premium-button text-lg px-8 py-3 bg-gradient-to-r from-premium-gold to-premium-silver text-premium-black hover:scale-105 transition-all duration-300"
-              >
-                🎰 Spin Again
-              </button>
-              <button
-                onClick={() => {
-                  // TODO: Navigate to results with slot machine data
-                  console.log('Navigate to results with:', slotResult);
-                }}
-                className="premium-button text-lg px-8 py-3 bg-gradient-to-r from-magical-shimmer to-magical-glow text-white hover:scale-105 transition-all duration-300"
-              >
-                🍸 Find My Cocktail
-              </button>
-            </>
+          {(gameState === 'complete' || gameState === 'results') && (
+            <button
+              onClick={spinAgain}
+              className="premium-button text-lg px-8 py-3 bg-gradient-to-r from-premium-gold to-premium-silver text-premium-black hover:scale-105 transition-all duration-300"
+            >
+              🎰 Spin Again
+            </button>
           )}
           
           {/* Navigation buttons */}
