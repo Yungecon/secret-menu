@@ -1,4 +1,4 @@
-import { IngredientMatrix, SpiritCategory, SeasonalSpotlight, BartenderRecommendation } from '../types';
+import { IngredientMatrix, BartenderRecommendation } from '../types';
 
 export interface IngredientFilter {
   spiritType?: string;
@@ -50,7 +50,7 @@ export class IngredientSpotlightService {
     const queryLower = query.toLowerCase();
 
     // Search through all spirit categories
-    for (const [spiritType, spiritData] of Object.entries(this.ingredientMatrix.ingredient_matrix.spirits)) {
+    for (const [, spiritData] of Object.entries(this.ingredientMatrix.ingredient_matrix.spirits)) {
       for (const ingredient of spiritData.ingredients) {
         if (this.matchesQuery(ingredient, queryLower) && this.matchesFilters(ingredient, filters)) {
           results.push({
@@ -64,7 +64,7 @@ export class IngredientSpotlightService {
     }
 
     // Search through liqueurs
-    for (const [liqueurType, liqueurData] of Object.entries(this.ingredientMatrix.ingredient_matrix.liqueurs)) {
+    for (const [, liqueurData] of Object.entries(this.ingredientMatrix.ingredient_matrix.liqueurs)) {
       for (const ingredient of liqueurData.ingredients) {
         if (this.matchesQuery(ingredient, queryLower) && this.matchesFilters(ingredient, filters)) {
           results.push({
@@ -78,7 +78,7 @@ export class IngredientSpotlightService {
     }
 
     // Search through mixers
-    for (const [mixerType, mixerData] of Object.entries(this.ingredientMatrix.ingredient_matrix.mixers)) {
+    for (const [, mixerData] of Object.entries(this.ingredientMatrix.ingredient_matrix.mixers)) {
       for (const ingredient of mixerData.ingredients) {
         if (this.matchesQuery(ingredient, queryLower) && this.matchesFilters(ingredient, filters)) {
           results.push({
@@ -244,9 +244,10 @@ export class IngredientSpotlightService {
       return false;
     }
 
-    if (filters.season && !ingredient.seasonal && filters.season !== 'all') {
+    if (filters.season && !ingredient.seasonal) {
       // For seasonal filter, check if ingredient is featured in that season
       // This would require checking the seasonal_spotlights data
+      // For now, we'll allow non-seasonal ingredients to pass through
     }
 
     return true;
