@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ingredientSpotlightService, SeasonalRecommendation } from '../../services/ingredientSpotlightService';
+import { IngredientSearch } from './IngredientSearch';
 import { FlavorJourney } from './FlavorJourney';
 
 interface IngredientSpotlightProps {
@@ -12,7 +13,7 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
   onCocktailSelect
 }) => {
   const [seasonalSpotlight, setSeasonalSpotlight] = useState<SeasonalRecommendation | null>(null);
-  const [activeTab, setActiveTab] = useState<'journey' | 'seasonal' | 'categories'>('journey');
+  const [activeTab, setActiveTab] = useState<'search' | 'journey' | 'seasonal' | 'categories'>('search');
 
   // Load seasonal spotlight on mount
   useEffect(() => {
@@ -50,8 +51,8 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
             Ingredient Spotlight
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Embark on a guided flavor journey to discover your perfect cocktail. 
-            Choose your base spirit, explore flavor families, and unlock personalized recipes.
+            Search for specific ingredients or embark on a guided flavor journey. 
+            Discover your perfect cocktail through exploration or targeted search.
           </p>
         </div>
 
@@ -59,6 +60,7 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
         <div className="flex justify-center mb-8">
           <div className="bg-slate-800 rounded-lg p-1 flex">
             {[
+              { id: 'search', label: 'Search', icon: '🔍' },
               { id: 'journey', label: 'Flavor Journey', icon: '🧬' },
               { id: 'seasonal', label: 'Seasonal', icon: '🌸' },
               { id: 'categories', label: 'Categories', icon: '📚' }
@@ -78,6 +80,14 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
             ))}
           </div>
         </div>
+
+        {/* Search Tab */}
+        {activeTab === 'search' && (
+          <IngredientSearch
+            onIngredientSelect={onIngredientSelect}
+            onCocktailSelect={onCocktailSelect}
+          />
+        )}
 
         {/* Flavor Journey Tab */}
         {activeTab === 'journey' && (
