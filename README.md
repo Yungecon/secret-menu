@@ -2,6 +2,49 @@
 
 A premium Progressive Web App that helps users discover their perfect cocktail through a magical, gamified taste preference quiz.
 
+## 📁 Project Structure
+
+```
+secret-cocktail-menu/
+├── docs/                          # Business documentation
+│   ├── EXECUTIVE_SUMMARY.md       # Investor presentation
+│   └── NORTH_STAR_ROADMAP.md      # Product roadmap
+├── public/                        # Public assets
+├── src/
+│   ├── assets/
+│   │   └── data/                  # Static data files
+│   │       └── secret_menu_mvp_cocktails.json
+│   ├── components/
+│   │   ├── features/              # Feature-specific components
+│   │   │   ├── QuizFlow.tsx       # Quiz functionality
+│   │   │   └── Results.tsx        # Results display
+│   │   ├── pages/                 # Page components
+│   │   │   └── LandingPage.tsx    # Landing page
+│   │   ├── ui/                    # Reusable UI components
+│   │   │   ├── animations.ts      # Animation utilities
+│   │   │   └── PremiumButton.tsx  # Button component
+│   │   └── index.ts               # Component exports
+│   ├── constants/                 # Application constants
+│   │   └── index.ts
+│   ├── context/                   # React context providers
+│   │   └── QuizContext.tsx
+│   ├── hooks/                     # Custom React hooks
+│   │   ├── useQuiz.ts
+│   │   └── index.ts
+│   ├── services/                  # Business logic & external services
+│   │   ├── analytics.ts           # Analytics tracking
+│   │   ├── recommendationEngine.ts # Cocktail recommendations
+│   │   ├── soundEffects.ts        # Audio feedback
+│   │   └── index.ts
+│   ├── types/                     # TypeScript type definitions
+│   │   └── index.ts
+│   ├── App.tsx                    # Main app component
+│   ├── index.css                  # Global styles
+│   └── main.tsx                   # App entry point
+├── .kiro/specs/                   # Development specifications
+└── [config files]                # Vite, TypeScript, Tailwind configs
+```
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -30,6 +73,26 @@ The dev server runs with `--host` flag, so you can test on your phone:
 2. On your phone, go to `http://[your-ip]:5173`
 3. Test the premium mobile experience
 
+## 🏗️ Architecture Principles
+
+### Component Organization
+- **Pages**: Top-level route components
+- **Features**: Business logic components
+- **UI**: Reusable, generic components
+- **Services**: External integrations and business logic
+- **Hooks**: Reusable React logic
+- **Constants**: Application-wide constants
+
+### Import Strategy
+- Use barrel exports (`index.ts`) for clean imports
+- Relative imports within same directory level
+- Absolute imports from `src/` for cross-cutting concerns
+
+### Code Organization
+- **Separation of Concerns**: UI, business logic, and data are separated
+- **Single Responsibility**: Each file has one clear purpose
+- **Dependency Direction**: Components depend on services, not vice versa
+
 ## 🚀 Deployment
 
 ### Automatic Deployment with Vercel
@@ -50,10 +113,6 @@ The dev server runs with `--host` flag, so you can test on your phone:
    - Vercel will auto-detect Vite and deploy
    - Get your live URL: `your-app-name.vercel.app`
 
-3. **Automatic Updates:**
-   - Every push to `main` branch auto-deploys
-   - See changes live within 30 seconds
-
 ## 🎨 Design System
 
 ### Premium Color Palette
@@ -66,23 +125,6 @@ The dev server runs with `--host` flag, so you can test on your phone:
 - **Headlines**: Playfair Display (elegant serif)
 - **Body**: Inter (clean, modern sans-serif)
 
-## 📊 Visual Checkpoints
-
-### Checkpoint 1: Premium Landing Page
-- Tesla/Rolex-inspired minimalist design
-- Magical animations and micro-interactions
-- Gracious welcome copy
-
-### Checkpoint 2: Interactive Quiz Flow  
-- Premium button interactions
-- Complimentary feedback messages
-- Smooth transitions between questions
-
-### Checkpoint 3: Magical Results Display
-- Cinematic cocktail reveal
-- Elegant ingredient presentation
-- "Discover Another Masterpiece" functionality
-
 ## 🛠 Tech Stack
 
 - **Frontend**: React 18 + TypeScript
@@ -90,14 +132,30 @@ The dev server runs with `--host` flag, so you can test on your phone:
 - **Build**: Vite with hot module replacement
 - **PWA**: Service Worker + Web App Manifest
 - **Deployment**: Vercel with automatic deployments
-- **Analytics**: Google Analytics 4 (to be added)
+- **Analytics**: Comprehensive tracking system
 
-## 📱 PWA Features
+## 📊 Key Features
 
-- **Offline Support**: Works without internet connection
-- **App-like Experience**: Can be installed on mobile devices
-- **Fast Loading**: Optimized for bar WiFi environments
-- **Responsive**: Perfect on all device sizes
+### Phase 1 (Complete)
+- ✅ Premium Tesla/Rolex-inspired design
+- ✅ 5-question sophisticated quiz with 50 unique responses
+- ✅ Real cocktail database with 100+ recipes
+- ✅ 90-98% match scores
+- ✅ Adjacent cocktail navigation
+- ✅ PWA capabilities with offline support
+- ✅ Comprehensive analytics
+- ✅ Premium sound effects and haptic feedback
+
+### Future Phases
+- 🔄 Secret Shuffle (random discovery)
+- 🔄 Ingredient Spotlight (inventory integration)
+- 🔄 Mood Compass (AI-powered recommendations)
+
+## 📋 Documentation
+
+- **Business Documents**: See `docs/` folder
+- **Technical Specs**: See `.kiro/specs/` folder
+- **API Documentation**: Generated from TypeScript types
 
 ## 🎯 Development Workflow
 

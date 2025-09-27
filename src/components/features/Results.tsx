@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useQuiz } from '../context/QuizContext';
-import { generateRecommendations } from '../utils/recommendationEngine';
+import { useQuiz } from '../../hooks';
+import { generateRecommendations } from '../../services/recommendationEngine';
 import { useEffect, useState } from 'react';
-import { RecommendationResult } from '../types';
-import { trackRecommendationViewed, trackQuizRestart } from '../utils/analytics';
-import { playCocktailReveal } from '../utils/soundEffects';
-import { MagicalLoader, ANIMATION_DELAYS, GRADIENT_CLASSES, MagicalParticles } from '../utils/animations';
+import { RecommendationResult } from '../../types';
+import { trackRecommendationViewed, trackQuizRestart } from '../../services/analytics';
+import { playCocktailReveal } from '../../services/soundEffects';
+import { MagicalLoader, GRADIENT_CLASSES, MagicalParticles } from '../ui/animations';
+import { ANIMATION_DELAYS } from '../../constants';
 
 const Results = () => {
   const navigate = useNavigate();

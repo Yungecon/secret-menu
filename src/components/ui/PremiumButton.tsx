@@ -1,5 +1,5 @@
 import React from 'react';
-import { createButtonHandlers } from '../../utils/animations';
+import { createButtonHandlers } from './animations';
 
 interface PremiumButtonProps {
   onClick: () => void;

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuiz } from '../context/QuizContext';
-import { QuizAnswers, QuizQuestion } from '../types';
-import { trackQuizStart, trackQuestionAnswered, trackQuizCompleted } from '../utils/analytics';
-import { playButtonPress, playComplimentReveal, playQuizComplete } from '../utils/soundEffects';
-import { createButtonHandlers, ANIMATION_DELAYS, MagicalParticles } from '../utils/animations';
+import { useQuiz } from '../../hooks';
+import { QuizAnswers, QuizQuestion } from '../../types';
+import { trackQuizStart, trackQuestionAnswered, trackQuizCompleted } from '../../services/analytics';
+import { playButtonPress, playComplimentReveal, playQuizComplete } from '../../services/soundEffects';
+import { createButtonHandlers, MagicalParticles } from '../ui/animations';
+import { ANIMATION_DELAYS } from '../../constants';
 
 const QuizFlow = () => {
   const navigate = useNavigate();

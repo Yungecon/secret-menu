@@ -1,11 +1,6 @@
 // Centralized animation utilities to reduce code duplication
 
-export const ANIMATION_DELAYS = {
-  SHORT: 300,
-  MEDIUM: 500,
-  LONG: 1000,
-  COMPLIMENT: 2500
-} as const;
+// ANIMATION_DELAYS moved to src/constants/index.ts
 
 export const ANIMATION_CLASSES = {
   fadeIn: 'animate-fade-in',

@@ -1,5 +1,5 @@
 import { Cocktail, QuizAnswers, RecommendationResult } from '../types';
-import cocktailData from '../../secret_menu_mvp_cocktails.json';
+import cocktailData from '../assets/data/secret_menu_mvp_cocktails.json';
 
 export const generateRecommendations = (answers: QuizAnswers): RecommendationResult => {
   const cocktails = cocktailData as Cocktail[];

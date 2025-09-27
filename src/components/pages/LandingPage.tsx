@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FloatingOrbs, GRADIENT_CLASSES, MagicalParticles } from '../utils/animations';
+import { FloatingOrbs, GRADIENT_CLASSES, MagicalParticles } from '../ui/animations';
 
 const LandingPage = () => {
   const navigate = useNavigate();
