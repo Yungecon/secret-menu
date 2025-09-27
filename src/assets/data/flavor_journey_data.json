@@ -1,0 +1,381 @@
+{
+  "base_spirits": {
+    "traditional": {
+      "vodka": {
+        "name": "Vodka",
+        "description": "Clean, neutral base perfect for any flavor profile",
+        "popular_brands": ["Belvedere", "Grey Goose", "Ketel One", "Tito's"],
+        "flavor_characteristics": ["neutral", "clean", "smooth"],
+        "best_for": ["martini", "moscow-mule", "cosmopolitan", "collins"],
+        "relationship_strength": "high"
+      },
+      "gin": {
+        "name": "Gin",
+        "description": "Botanical complexity with juniper as the backbone",
+        "popular_brands": ["Hendrick's", "Bombay Sapphire", "Tanqueray", "Beefeater"],
+        "flavor_characteristics": ["juniper", "botanical", "citrus", "herbal"],
+        "best_for": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+        "relationship_strength": "high"
+      },
+      "tequila": {
+        "name": "Tequila",
+        "description": "Agave-based with earthy, peppery notes",
+        "popular_brands": ["Don Julio", "Patrón", "Fortaleza", "Casamigos"],
+        "flavor_characteristics": ["agave", "citrus", "pepper", "earthy"],
+        "best_for": ["margarita", "paloma", "tequila-sunrise", "mule"],
+        "relationship_strength": "high"
+      },
+      "whiskey": {
+        "name": "Whiskey",
+        "description": "Rich, complex with oak and spice notes",
+        "popular_brands": ["Woodford Reserve", "Buffalo Trace", "Rittenhouse", "Maker's Mark"],
+        "flavor_characteristics": ["oak", "vanilla", "spice", "caramel"],
+        "best_for": ["old-fashioned", "manhattan", "whiskey-sour", "highball"],
+        "relationship_strength": "high"
+      },
+      "rum": {
+        "name": "Rum",
+        "description": "Tropical sweetness with molasses complexity",
+        "popular_brands": ["El Dorado", "Smith & Cross", "Mount Gay", "Plantation"],
+        "flavor_characteristics": ["sweet", "tropical", "molasses", "spice"],
+        "best_for": ["mai-tai", "daiquiri", "mojito", "dark-n-stormy"],
+        "relationship_strength": "high"
+      }
+    },
+    "non_traditional": {
+      "mezcal": {
+        "name": "Mezcal",
+        "description": "Smoky, complex agave spirit with terroir-driven flavors",
+        "popular_brands": ["Vida", "Del Maguey", "Ilegal", "Los Vecinos"],
+        "flavor_characteristics": ["smoky", "agave", "earthy", "complex"],
+        "best_for": ["paloma", "old-fashioned", "margarita", "neat"],
+        "relationship_strength": "medium"
+      },
+      "pisco": {
+        "name": "Pisco",
+        "description": "Peruvian grape brandy with floral and fruity notes",
+        "popular_brands": ["Macchu Pisco", "Pisco Portón", "La Diablada"],
+        "flavor_characteristics": ["floral", "grape", "fruity", "smooth"],
+        "best_for": ["pisco-sour", "pisco-punch", "chilcano"],
+        "relationship_strength": "medium"
+      },
+      "aquavit": {
+        "name": "Aquavit",
+        "description": "Scandinavian spirit with caraway and dill notes",
+        "popular_brands": ["Linie", "Aalborg", "Brennevin"],
+        "flavor_characteristics": ["caraway", "dill", "spicy", "herbal"],
+        "best_for": ["aquavit-sour", "nordic-mule", "neat"],
+        "relationship_strength": "low"
+      },
+      "shochu": {
+        "name": "Shochu",
+        "description": "Japanese distilled spirit with clean, subtle flavors",
+        "popular_brands": ["Satsuma", "Kuro", "Iichiko"],
+        "flavor_characteristics": ["clean", "subtle", "sweet", "smooth"],
+        "best_for": ["shochu-highball", "neat", "with-soda"],
+        "relationship_strength": "low"
+      }
+    }
+  },
+  "flavor_families": {
+    "citrus": {
+      "name": "Citrus",
+      "description": "Bright, acidic, and refreshing",
+      "icon": "🍋",
+      "color": "#FFD700",
+      "flavors": {
+        "lemon": {
+          "name": "Lemon",
+          "description": "Bright acidity with zesty freshness",
+          "ingredients": ["fresh-lemon-juice", "lemon-zest", "limoncello"],
+          "compatible_spirits": ["gin", "vodka", "tequila", "rum"],
+          "dna_profile": {"sour": 8, "bright": 9, "fresh": 9, "acidic": 8}
+        },
+        "lime": {
+          "name": "Lime",
+          "description": "Tart, tropical, and vibrant",
+          "ingredients": ["fresh-lime-juice", "lime-zest", "key-lime"],
+          "compatible_spirits": ["tequila", "rum", "gin", "vodka"],
+          "dna_profile": {"sour": 9, "tropical": 8, "fresh": 9, "acidic": 9}
+        },
+        "grapefruit": {
+          "name": "Grapefruit",
+          "description": "Bitter-sweet with pink complexity",
+          "ingredients": ["grapefruit-juice", "grapefruit-soda", "grapefruit-zest"],
+          "compatible_spirits": ["tequila", "mezcal", "gin", "vodka"],
+          "dna_profile": {"bitter": 6, "sour": 7, "complex": 7, "fresh": 8}
+        },
+        "orange": {
+          "name": "Orange",
+          "description": "Sweet citrus with floral notes",
+          "ingredients": ["orange-juice", "cointreau", "grand-marnier", "orange-zest"],
+          "compatible_spirits": ["vodka", "gin", "rum", "whiskey"],
+          "dna_profile": {"sweet": 7, "floral": 6, "bright": 7, "fruity": 8}
+        }
+      }
+    },
+    "floral": {
+      "name": "Floral",
+      "description": "Delicate, aromatic, and elegant",
+      "icon": "🌸",
+      "color": "#FF69B4",
+      "flavors": {
+        "elderflower": {
+          "name": "Elderflower",
+          "description": "Delicate sweetness with spring freshness",
+          "ingredients": ["st-germain", "elderflower-syrup"],
+          "compatible_spirits": ["gin", "vodka", "champagne"],
+          "dna_profile": {"sweet": 7, "delicate": 9, "floral": 9, "fresh": 8}
+        },
+        "rose": {
+          "name": "Rose",
+          "description": "Romantic and perfumed",
+          "ingredients": ["rose-water", "rose-syrup", "hendricks-gin"],
+          "compatible_spirits": ["gin", "vodka", "champagne"],
+          "dna_profile": {"floral": 9, "delicate": 8, "perfumed": 8, "elegant": 9}
+        },
+        "lavender": {
+          "name": "Lavender",
+          "description": "Herbal and calming",
+          "ingredients": ["lavender-syrup", "lavender-bitters"],
+          "compatible_spirits": ["gin", "vodka"],
+          "dna_profile": {"herbal": 8, "calming": 9, "floral": 7, "aromatic": 8}
+        },
+        "hibiscus": {
+          "name": "Hibiscus",
+          "description": "Tart and tropical floral",
+          "ingredients": ["hibiscus-tea", "hibiscus-syrup"],
+          "compatible_spirits": ["tequila", "rum", "gin"],
+          "dna_profile": {"tart": 8, "tropical": 7, "floral": 8, "exotic": 8}
+        }
+      }
+    },
+    "spicy": {
+      "name": "Spicy",
+      "description": "Warming, bold, and complex",
+      "icon": "🌶️",
+      "color": "#FF4500",
+      "flavors": {
+        "ginger": {
+          "name": "Ginger",
+          "description": "Warming spice with zesty bite",
+          "ingredients": ["ginger-beer", "fresh-ginger", "ginger-syrup"],
+          "compatible_spirits": ["vodka", "whiskey", "rum", "gin"],
+          "dna_profile": {"spicy": 8, "warming": 8, "zesty": 7, "bold": 7}
+        },
+        "jalapeño": {
+          "name": "Jalapeño",
+          "description": "Green heat with fresh vegetal notes",
+          "ingredients": ["jalapeño-slices", "jalapeño-syrup"],
+          "compatible_spirits": ["tequila", "mezcal", "vodka"],
+          "dna_profile": {"spicy": 9, "fresh": 7, "vegetal": 6, "bold": 8}
+        },
+        "cinnamon": {
+          "name": "Cinnamon",
+          "description": "Warming spice with sweet complexity",
+          "ingredients": ["cinnamon-syrup", "cinnamon-stick"],
+          "compatible_spirits": ["whiskey", "rum", "bourbon"],
+          "dna_profile": {"warming": 9, "sweet": 7, "spicy": 6, "complex": 7}
+        },
+        "cardamom": {
+          "name": "Cardamom",
+          "description": "Exotic spice with citrus undertones",
+          "ingredients": ["cardamom-syrup", "cardamom-bitters"],
+          "compatible_spirits": ["gin", "vodka", "whiskey"],
+          "dna_profile": {"exotic": 8, "spicy": 6, "citrus": 5, "complex": 8}
+        }
+      }
+    },
+    "herbal": {
+      "name": "Herbal",
+      "description": "Complex, aromatic, and sophisticated",
+      "icon": "🌿",
+      "color": "#32CD32",
+      "flavors": {
+        "basil": {
+          "name": "Basil",
+          "description": "Fresh herb with peppery sweetness",
+          "ingredients": ["fresh-basil", "basil-syrup"],
+          "compatible_spirits": ["gin", "vodka", "tequila"],
+          "dna_profile": {"fresh": 9, "herbal": 8, "peppery": 6, "sweet": 5}
+        },
+        "mint": {
+          "name": "Mint",
+          "description": "Cooling freshness with bright flavor",
+          "ingredients": ["fresh-mint", "mint-syrup"],
+          "compatible_spirits": ["rum", "gin", "whiskey"],
+          "dna_profile": {"fresh": 9, "cooling": 8, "bright": 7, "herbal": 7}
+        },
+        "sage": {
+          "name": "Sage",
+          "description": "Earthy herb with slight bitterness",
+          "ingredients": ["fresh-sage", "sage-syrup"],
+          "compatible_spirits": ["gin", "whiskey", "vodka"],
+          "dna_profile": {"earthy": 8, "herbal": 9, "bitter": 6, "complex": 7}
+        },
+        "thyme": {
+          "name": "Thyme",
+          "description": "Woody herb with lemony notes",
+          "ingredients": ["fresh-thyme", "thyme-syrup"],
+          "compatible_spirits": ["gin", "vodka"],
+          "dna_profile": {"woody": 7, "herbal": 8, "lemony": 6, "delicate": 7}
+        }
+      }
+    },
+    "smoky": {
+      "name": "Smoky",
+      "description": "Rich, complex, and mysterious",
+      "icon": "🔥",
+      "color": "#696969",
+      "flavors": {
+        "mezcal": {
+          "name": "Mezcal",
+          "description": "Traditional smoky agave complexity",
+          "ingredients": ["mezcal", "smoked-salt"],
+          "compatible_spirits": ["mezcal", "whiskey", "tequila"],
+          "dna_profile": {"smoky": 9, "complex": 8, "earthy": 7, "bold": 8}
+        },
+        "scotch": {
+          "name": "Scotch",
+          "description": "Peaty smoke with maritime notes",
+          "ingredients": ["scotch-whisky", "islay-whisky"],
+          "compatible_spirits": ["scotch", "whiskey"],
+          "dna_profile": {"smoky": 8, "peaty": 7, "maritime": 6, "complex": 9}
+        },
+        "chipotle": {
+          "name": "Chipotle",
+          "description": "Smoked jalapeño with earthy heat",
+          "ingredients": ["chipotle-powder", "chipotle-syrup"],
+          "compatible_spirits": ["tequila", "mezcal", "whiskey"],
+          "dna_profile": {"smoky": 7, "spicy": 8, "earthy": 7, "bold": 8}
+        }
+      }
+    },
+    "stone_fruit": {
+      "name": "Stone Fruit",
+      "description": "Sweet, juicy, and orchard-fresh",
+      "icon": "🍑",
+      "color": "#FFA500",
+      "flavors": {
+        "peach": {
+          "name": "Peach",
+          "description": "Sweet, juicy summer fruit",
+          "ingredients": ["peach-puree", "peach-schnapps"],
+          "compatible_spirits": ["vodka", "bourbon", "rum"],
+          "dna_profile": {"sweet": 8, "juicy": 9, "fruity": 9, "summer": 8}
+        },
+        "apricot": {
+          "name": "Apricot",
+          "description": "Delicate sweetness with floral notes",
+          "ingredients": ["apricot-brandy", "apricot-puree"],
+          "compatible_spirits": ["gin", "vodka", "brandy"],
+          "dna_profile": {"sweet": 7, "delicate": 8, "floral": 6, "fruity": 8}
+        },
+        "plum": {
+          "name": "Plum",
+          "description": "Rich, deep fruit with wine-like complexity",
+          "ingredients": ["plum-brandy", "plum-wine"],
+          "compatible_spirits": ["brandy", "whiskey", "gin"],
+          "dna_profile": {"rich": 8, "complex": 7, "fruity": 8, "deep": 7}
+        },
+        "cherry": {
+          "name": "Cherry",
+          "description": "Sweet-tart with almond notes",
+          "ingredients": ["cherry-liqueur", "cherry-puree"],
+          "compatible_spirits": ["bourbon", "gin", "vodka"],
+          "dna_profile": {"sweet": 7, "tart": 6, "fruity": 8, "almond": 5}
+        }
+      }
+    },
+    "tropical": {
+      "name": "Tropical",
+      "description": "Exotic, sweet, and vacation-ready",
+      "icon": "🏝️",
+      "color": "#00CED1",
+      "flavors": {
+        "coconut": {
+          "name": "Coconut",
+          "description": "Creamy tropical sweetness",
+          "ingredients": ["coconut-cream", "coconut-rum"],
+          "compatible_spirits": ["rum", "vodka"],
+          "dna_profile": {"sweet": 8, "creamy": 9, "tropical": 9, "rich": 7}
+        },
+        "passion_fruit": {
+          "name": "Passion Fruit",
+          "description": "Tart tropical with exotic complexity",
+          "ingredients": ["passion-fruit-puree", "passion-fruit-syrup"],
+          "compatible_spirits": ["rum", "vodka", "gin"],
+          "dna_profile": {"tart": 8, "tropical": 9, "exotic": 8, "complex": 7}
+        },
+        "mango": {
+          "name": "Mango",
+          "description": "Sweet tropical with floral undertones",
+          "ingredients": ["mango-puree", "mango-syrup"],
+          "compatible_spirits": ["rum", "vodka", "tequila"],
+          "dna_profile": {"sweet": 8, "tropical": 9, "floral": 5, "juicy": 8}
+        },
+        "pineapple": {
+          "name": "Pineapple",
+          "description": "Bright tropical sweetness",
+          "ingredients": ["pineapple-juice", "pineapple-puree"],
+          "compatible_spirits": ["rum", "vodka", "tequila"],
+          "dna_profile": {"sweet": 8, "tropical": 9, "bright": 8, "juicy": 8}
+        }
+      }
+    }
+  },
+  "cocktail_dna_profiles": {
+    "refreshing": {
+      "name": "Refreshing",
+      "description": "Light, bright, and thirst-quenching",
+      "characteristics": {"sour": 7, "fresh": 9, "light": 8, "bright": 8},
+      "perfect_for": ["summer", "daytime", "poolside", "brunch"]
+    },
+    "complex": {
+      "name": "Complex",
+      "description": "Layered flavors with sophisticated depth",
+      "characteristics": {"complex": 9, "layered": 8, "sophisticated": 9, "deep": 7},
+      "perfect_for": ["evening", "dinner", "special-occasion", "winter"]
+    },
+    "warming": {
+      "name": "Warming",
+      "description": "Cozy and comforting with spice",
+      "characteristics": {"warming": 9, "spicy": 7, "cozy": 8, "comforting": 8},
+      "perfect_for": ["winter", "evening", "cozy", "fall"]
+    },
+    "tropical": {
+      "name": "Tropical",
+      "description": "Exotic and vacation-inspired",
+      "characteristics": {"tropical": 9, "exotic": 8, "sweet": 7, "bright": 7},
+      "perfect_for": ["summer", "vacation", "poolside", "party"]
+    },
+    "elegant": {
+      "name": "Elegant",
+      "description": "Sophisticated and refined",
+      "characteristics": {"elegant": 9, "refined": 8, "delicate": 7, "sophisticated": 8},
+      "perfect_for": ["special-occasion", "dinner", "evening", "date-night"]
+    }
+  },
+  "ingredient_relationships": {
+    "high_compatibility": [
+      {"spirit": "gin", "flavor": "citrus", "reason": "Classic botanical-citrus harmony"},
+      {"spirit": "vodka", "flavor": "citrus", "reason": "Clean base enhances citrus brightness"},
+      {"spirit": "tequila", "flavor": "citrus", "reason": "Agave and citrus are natural partners"},
+      {"spirit": "gin", "flavor": "floral", "reason": "Botanical complexity complements floral notes"},
+      {"spirit": "whiskey", "flavor": "spicy", "reason": "Oak and spice create warming complexity"},
+      {"spirit": "rum", "flavor": "tropical", "reason": "Molasses sweetness pairs with tropical fruits"}
+    ],
+    "medium_compatibility": [
+      {"spirit": "vodka", "flavor": "floral", "reason": "Neutral base allows florals to shine"},
+      {"spirit": "tequila", "flavor": "spicy", "reason": "Pepper notes complement spice additions"},
+      {"spirit": "gin", "flavor": "herbal", "reason": "Botanical complexity with herbal additions"},
+      {"spirit": "whiskey", "flavor": "stone_fruit", "reason": "Oak aging complements stone fruit richness"}
+    ],
+    "creative_pairings": [
+      {"spirit": "mezcal", "flavor": "citrus", "reason": "Smoky complexity with bright acidity"},
+      {"spirit": "gin", "flavor": "smoky", "reason": "Botanical gin with smoky elements"},
+      {"spirit": "rum", "flavor": "herbal", "reason": "Tropical sweetness with fresh herbs"},
+      {"spirit": "vodka", "flavor": "tropical", "reason": "Clean base for exotic tropical flavors"}
+    ]
+  }
+}
