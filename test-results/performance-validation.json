@@ -1,28 +1,40 @@
 {
-  "timestamp": "2025-09-27T06:31:54.168Z",
-  "performance": {
-    "threshold": 500,
-    "overallAvg": 0.1885625239999997,
-    "overallMax": 1.5227080000000015,
-    "overallP95": 0.32375840000000194,
-    "passed": true
+  "timestamp": "2025-09-27T06:51:32.863Z",
+  "summary": {
+    "meetsStandard": true,
+    "averageTime": 1.0301039999999997
   },
-  "quality": {
-    "threshold": {
-      "score": 85,
-      "matches": 2
+  "detailedResults": {
+    "recommendationEngine": {
+      "totalTests": 2,
+      "totalTime": 2.0602079999999994,
+      "averageTime": 1.0301039999999997,
+      "maxTime": 1.1267910000000008,
+      "minTime": 0.9334169999999986,
+      "tests": [
+        {
+          "testCase": "Traditional Sweet Citrus Light Classic Celebratory",
+          "time": 1.1267910000000008,
+          "matchScore": 154,
+          "adjacentCount": 3,
+          "success": true
+        },
+        {
+          "testCase": "Enhanced Balanced Tropical Medium Modern Elegant",
+          "time": 0.9334169999999986,
+          "matchScore": 162,
+          "adjacentCount": 3,
+          "success": true
+        }
+      ]
     },
-    "avgScore": 98,
-    "avgMatches": 5.4,
-    "fuzzyUsage": 1,
-    "passed": true
-  },
-  "loadTest": {
-    "requests": 100,
-    "totalTime": 11.943958999999992,
-    "avgTime": 0.11644671999999943,
-    "maxTime": 0.2747090000000014,
-    "throughput": 858761.8440433573
-  },
-  "overallPassed": true
+    "fuzzyMatching": {
+      "totalTests": 0,
+      "totalTime": 0,
+      "averageTime": 0,
+      "maxTime": 0,
+      "minTime": null,
+      "tests": []
+    }
+  }
 }

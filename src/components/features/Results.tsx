@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuiz } from '../../hooks';
-import { generateRecommendations } from '../../services/recommendationEngine';
+import { generateRecommendations, generateEnhancedRecommendations } from '../../services/recommendationEngine';
 import { useEffect, useState } from 'react';
-import { RecommendationResult } from '../../types';
+import { RecommendationResult, EnhancedRecommendationResult } from '../../types';
 import { trackRecommendationViewed, trackEnhancedRecommendationViewed, trackQuizRestart } from '../../services/analytics';
 import { playCocktailReveal } from '../../services/soundEffects';
 import { MagicalLoader, MagicalParticles } from '../ui/animations';
@@ -10,11 +10,22 @@ import { MagicalLoader, MagicalParticles } from '../ui/animations';
 const Results = () => {
   const navigate = useNavigate();
   const { answers, resetQuiz } = useQuiz();
-  const [recommendations, setRecommendations] = useState<RecommendationResult | null>(null);
+  const [recommendations, setRecommendations] = useState<RecommendationResult | EnhancedRecommendationResult | null>(null);
 
   useEffect(() => {
     if (Object.keys(answers).length > 0) {
-      const result = generateRecommendations(answers);
+      // Check if we have all required answers for enhanced recommendations
+      const hasAllAnswers = answers.sweetVsBitter && 
+                           answers.citrusVsStone && 
+                           answers.lightVsBoozy && 
+                           answers.classicVsExperimental && 
+                           answers.moodPreference;
+      
+      // Use enhanced recommendations if we have all answers, otherwise use regular
+      const result = hasAllAnswers 
+        ? generateEnhancedRecommendations(answers as any) // Type assertion needed for now
+        : generateRecommendations(answers);
+      
       setRecommendations(result);
       
       // Track recommendation viewed with enhanced analytics

@@ -18,8 +18,7 @@ export interface QuizAnswers {
   citrusVsStone?: 'citrus' | 'stone' | 'tropical';
   lightVsBoozy?: 'light' | 'boozy' | 'medium';
   classicVsExperimental?: 'classic' | 'experimental' | 'modern';
-  spiritPreference?: string;
-  moodPreference?: string;
+  moodPreference?: 'celebratory' | 'elegant' | 'cozy' | 'adventurous';
 }
 
 // Enhanced interface for the new three-option system
@@ -44,6 +43,28 @@ export interface FuzzyMatchResult {
 export interface EnhancedRecommendationResult extends RecommendationResult {
   fuzzyMatches?: string[];
   fallbackUsed?: boolean;
+}
+
+// Fuzzy matching rules for ingredient analysis
+export interface FuzzyMatchingRules {
+  sweetness: {
+    indicators: string[];
+    weight: number;
+  };
+  fruitFamily: {
+    citrus: string[];
+    stone: string[];
+    tropical: string[];
+  };
+  intensity: {
+    light: string[];
+    medium: string[];
+    boozy: string[];
+  };
+  balance: {
+    indicators: string[];
+    weight: number;
+  };
 }
 
 export interface RecommendationResult {

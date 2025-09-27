@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Enhanced Cocktail Tag Enrichment Script
+ * Enhanced Cocktail Tagging Script
  * 
- * This script analyzes the cocktail database and adds missing tags to ensure
- * complete coverage for all 216 possible quiz combinations (3×3×3×2×4).
+ * This script analyzes the cocktail database and adds missing tags based on ingredient analysis
+ * to ensure complete coverage for all 216 possible quiz combinations.
  */
 
 import fs from 'fs';
@@ -18,255 +18,361 @@ const __dirname = path.dirname(__filename);
 const cocktailDataPath = path.join(__dirname, '../src/assets/data/secret_menu_mvp_cocktails.json');
 const cocktails = JSON.parse(fs.readFileSync(cocktailDataPath, 'utf8'));
 
-// Define fuzzy matching rules for tag inference
+// Define fuzzy matching rules for ingredient analysis
 const fuzzyRules = {
   sweetness: {
-    sweet: ['simple syrup', 'honey', 'agave', 'cream', 'chocolate', 'vanilla', 'caramel', 'sugar', 'grenadine', 'amaretto', 'baileys', 'triple sec', 'cointreau', 'grand marnier'],
-    bitter: ['bitters', 'campari', 'aperol', 'amaro', 'vermouth', 'fernet', 'chartreuse'],
-    balanced: ['vermouth', 'lillet', 'cocchi', 'dolin', 'dry vermouth', 'sweet vermouth']
+    indicators: [
+      'simple syrup', 'honey', 'agave', 'cream', 'chocolate', 'vanilla', 
+      'caramel', 'sugar', 'grenadine', 'amaretto', 'baileys', 'cointreau',
+      'triple sec', 'chambord', 'frangelico', 'kahlua', 'disaronno'
+    ],
+    tags: ['sweet', 'fruity']
   },
-  fruitFamily: {
-    citrus: ['lemon', 'lime', 'grapefruit', 'orange', 'citrus', 'yuzu', 'bergamot'],
-    stone: ['peach', 'apricot', 'plum', 'cherry', 'brandied cherry', 'peach schnapps'],
-    tropical: ['pineapple', 'coconut', 'mango', 'passion fruit', 'guava', 'papaya', 'lychee']
+  bitterness: {
+    indicators: [
+      'bitters', 'campari', 'aperol', 'amaro', 'vermouth', 'fernet',
+      'angostura', 'peychaud', 'orange bitters', 'grapefruit bitters'
+    ],
+    tags: ['bitter', 'dry', 'herbal']
   },
-  intensity: {
-    light: ['build', 'build/top', 'soda', 'tonic', 'ginger beer', 'club soda'],
-    medium: ['shaken', 'sour', 'daisy', 'fizz'],
-    boozy: ['stirred', 'neat', 'up', 'old fashioned', 'manhattan', 'martini']
+  balance: {
+    indicators: [
+      'vermouth', 'lillet', 'cocchi', 'dolin', 'dry vermouth', 'sweet vermouth',
+      'lillet blanc', 'cocchi americano'
+    ],
+    tags: ['balanced', 'harmonious', 'elegant']
   },
-  style: {
-    classic: ['old fashioned', 'manhattan', 'martini', 'sour', 'negroni'],
-    modern: ['collins', 'fizz', 'mule', 'highball'],
-    experimental: ['smash', 'spritz', 'daisy', 'seasonal', 'herbal', 'smoked']
+  citrus: {
+    indicators: [
+      'lemon', 'lime', 'grapefruit', 'orange', 'citrus', 'lemon juice',
+      'lime juice', 'grapefruit juice', 'orange juice', 'citrus twist',
+      'lemon peel', 'lime peel', 'orange peel', 'grapefruit peel'
+    ],
+    tags: ['citrus', 'bright']
+  },
+  stone: {
+    indicators: [
+      'peach', 'apricot', 'plum', 'cherry', 'brandied cherry', 'cherry brandy',
+      'peach brandy', 'apricot brandy', 'plum brandy'
+    ],
+    tags: ['stone', 'rich', 'deep']
+  },
+  tropical: {
+    indicators: [
+      'pineapple', 'coconut', 'mango', 'passion fruit', 'guava', 'papaya',
+      'coconut cream', 'coconut milk', 'pineapple juice', 'mango juice',
+      'passion fruit juice', 'guava juice'
+    ],
+    tags: ['tropical', 'exotic']
+  },
+  light: {
+    indicators: [
+      'soda water', 'tonic', 'ginger beer', 'ginger ale', 'club soda',
+      'seltzer', 'sparkling water', 'prosecco', 'champagne'
+    ],
+    tags: ['light', 'refreshing', 'bubbly']
+  },
+  boozy: {
+    indicators: [
+      'spirit-forward', 'neat', 'straight', 'overproof', 'cask strength'
+    ],
+    tags: ['boozy', 'spirit-forward', 'rich']
+  },
+  medium: {
+    indicators: [
+      'shaken', 'sour', 'daisy', 'fizz', 'collins'
+    ],
+    tags: ['medium', 'versatile', 'balanced']
+  },
+  classic: {
+    indicators: [
+      'old fashioned', 'manhattan', 'martini', 'margarita', 'daiquiri',
+      'whiskey sour', 'gin and tonic', 'vodka martini'
+    ],
+    tags: ['classic', 'timeless', 'traditional']
+  },
+  modern: {
+    indicators: [
+      'mule', 'collins', 'fizz', 'spritz', 'smash'
+    ],
+    tags: ['modern', 'refined', 'contemporary']
+  },
+  experimental: {
+    indicators: [
+      'smash', 'spritz', 'daisy', 'seasonal', 'herbal', 'smoked',
+      'infused', 'fat-washed', 'clarified'
+    ],
+    tags: ['experimental', 'bold', 'innovative']
   }
 };
 
-// Helper function to check if ingredient list contains any of the target ingredients
+// Helper function to check if cocktail has specific ingredients
 function hasIngredient(cocktail, ingredients) {
   return cocktail.ingredients.some(ing => 
     ingredients.some(target => ing.toLowerCase().includes(target.toLowerCase()))
   );
 }
 
-// Helper function to check if base spirit matches
-function hasBaseSpirit(cocktail, spirits) {
-  return spirits.some(spirit => 
-    cocktail.base_spirit_category.toLowerCase().includes(spirit.toLowerCase())
-  );
+// Helper function to check if cocktail already has specific tags
+function hasTag(cocktail, tags) {
+  return cocktail.flavor_tags.some(tag => tags.includes(tag));
 }
 
-// Helper function to check if style matches
-function hasStyle(cocktail, styles) {
-  return styles.some(style => 
-    cocktail.style.toLowerCase().includes(style.toLowerCase())
-  );
-}
+// Function to analyze and enhance a single cocktail
+function enhanceCocktail(cocktail) {
+  const enhanced = { ...cocktail };
+  const newTags = new Set(cocktail.flavor_tags);
+  let changes = 0;
 
-// Enhanced tag inference function with more aggressive tagging
-function inferMissingTags(cocktail) {
-  const newTags = [...cocktail.flavor_tags];
-  let tagsAdded = 0;
+  // Analyze sweetness
+  if (hasIngredient(cocktail, fuzzyRules.sweetness.indicators) && 
+      !hasTag(cocktail, fuzzyRules.sweetness.tags)) {
+    newTags.add('sweet');
+    changes++;
+  }
 
-  // Sweetness inference - be more aggressive
-  const sweetnessTags = newTags.filter(tag => ['sweet', 'bitter', 'balanced'].includes(tag));
-  if (sweetnessTags.length === 0) {
-    // If no sweetness tags, infer from ingredients and style
-    if (hasIngredient(cocktail, fuzzyRules.sweetness.sweet)) {
-      newTags.push('sweet');
-      tagsAdded++;
-    } else if (hasIngredient(cocktail, fuzzyRules.sweetness.bitter)) {
-      newTags.push('bitter');
-      tagsAdded++;
-    } else if (hasIngredient(cocktail, fuzzyRules.sweetness.balanced)) {
-      newTags.push('balanced');
-      tagsAdded++;
-    } else {
-      // Default to balanced if unclear
-      newTags.push('balanced');
-      tagsAdded++;
+  // Analyze bitterness
+  if (hasIngredient(cocktail, fuzzyRules.bitterness.indicators) && 
+      !hasTag(cocktail, fuzzyRules.bitterness.tags)) {
+    newTags.add('bitter');
+    changes++;
+  }
+
+  // Analyze balance
+  if (hasIngredient(cocktail, fuzzyRules.balance.indicators) && 
+      !hasTag(cocktail, fuzzyRules.balance.tags)) {
+    newTags.add('balanced');
+    changes++;
+  }
+
+  // Analyze citrus
+  if (hasIngredient(cocktail, fuzzyRules.citrus.indicators) && 
+      !hasTag(cocktail, fuzzyRules.citrus.tags)) {
+    newTags.add('citrus');
+    changes++;
+  }
+
+  // Analyze stone fruit
+  if (hasIngredient(cocktail, fuzzyRules.stone.indicators) && 
+      !hasTag(cocktail, fuzzyRules.stone.tags)) {
+    newTags.add('stone');
+    changes++;
+  }
+
+  // Analyze tropical
+  if (hasIngredient(cocktail, fuzzyRules.tropical.indicators) && 
+      !hasTag(cocktail, fuzzyRules.tropical.tags)) {
+    newTags.add('tropical');
+    changes++;
+  }
+
+  // Analyze intensity based on build type and style
+  if (cocktail.build_type === 'Build' || cocktail.build_type === 'Build/Top') {
+    if (!hasTag(cocktail, fuzzyRules.light.tags)) {
+      newTags.add('light');
+      changes++;
+    }
+  } else if (cocktail.build_type === 'Stirred' || cocktail.style.includes('Old Fashioned') || 
+             cocktail.style.includes('Manhattan') || cocktail.style.includes('Martini')) {
+    if (!hasTag(cocktail, fuzzyRules.boozy.tags)) {
+      newTags.add('boozy');
+      changes++;
+    }
+  } else if (cocktail.build_type === 'Shaken' || cocktail.style.includes('Sour') || 
+             cocktail.style.includes('Daisy')) {
+    if (!hasTag(cocktail, fuzzyRules.medium.tags)) {
+      newTags.add('medium');
+      changes++;
     }
   }
 
-  // Fruit family inference - be more aggressive
-  const fruitTags = newTags.filter(tag => ['citrus', 'stone', 'tropical'].includes(tag));
-  if (fruitTags.length === 0) {
-    if (hasIngredient(cocktail, fuzzyRules.fruitFamily.citrus)) {
-      newTags.push('citrus');
-      tagsAdded++;
-    } else if (hasIngredient(cocktail, fuzzyRules.fruitFamily.stone)) {
-      newTags.push('stone');
-      tagsAdded++;
-    } else if (hasIngredient(cocktail, fuzzyRules.fruitFamily.tropical) || 
-               hasBaseSpirit(cocktail, ['rum'])) {
-      newTags.push('tropical');
-      tagsAdded++;
-    } else {
-      // Default to citrus if unclear (most common)
-      newTags.push('citrus');
-      tagsAdded++;
+  // Analyze style preferences
+  if (cocktail.style.toLowerCase().includes('old fashioned') || 
+      cocktail.style.toLowerCase().includes('manhattan') || 
+      cocktail.style.toLowerCase().includes('martini')) {
+    if (!hasTag(cocktail, fuzzyRules.classic.tags)) {
+      newTags.add('classic');
+      changes++;
+    }
+  } else if (cocktail.style.toLowerCase().includes('mule') || 
+             cocktail.style.toLowerCase().includes('collins') || 
+             cocktail.style.toLowerCase().includes('fizz')) {
+    if (!hasTag(cocktail, fuzzyRules.modern.tags)) {
+      newTags.add('modern');
+      changes++;
+    }
+  } else if (cocktail.style.toLowerCase().includes('smash') || 
+             cocktail.style.toLowerCase().includes('spritz') || 
+             cocktail.style.toLowerCase().includes('daisy')) {
+    if (!hasTag(cocktail, fuzzyRules.experimental.tags)) {
+      newTags.add('experimental');
+      changes++;
     }
   }
 
-  // Intensity inference - be more aggressive
-  const intensityTags = newTags.filter(tag => ['light', 'medium', 'boozy'].includes(tag));
-  if (intensityTags.length === 0) {
-    const buildType = cocktail.build_type.toLowerCase();
-    if (fuzzyRules.intensity.light.some(light => buildType.includes(light))) {
-      newTags.push('light');
-      tagsAdded++;
-    } else if (fuzzyRules.intensity.medium.some(medium => buildType.includes(medium))) {
-      newTags.push('medium');
-      tagsAdded++;
-    } else if (fuzzyRules.intensity.boozy.some(boozy => buildType.includes(boozy))) {
-      newTags.push('boozy');
-      tagsAdded++;
-    } else {
-      // Default to medium if unclear
-      newTags.push('medium');
-      tagsAdded++;
-    }
+  // Special case: if cocktail has both sweet and bitter ingredients but no balance tag
+  if (hasIngredient(cocktail, fuzzyRules.sweetness.indicators) && 
+      hasIngredient(cocktail, fuzzyRules.bitterness.indicators) && 
+      !hasTag(cocktail, ['balanced', 'harmonious'])) {
+    newTags.add('balanced');
+    changes++;
   }
 
-  // Style inference - be more aggressive
-  const styleTags = newTags.filter(tag => ['classic', 'modern', 'experimental'].includes(tag));
-  if (styleTags.length === 0) {
-    if (hasStyle(cocktail, fuzzyRules.style.classic)) {
-      newTags.push('classic');
-      tagsAdded++;
-    } else if (hasStyle(cocktail, fuzzyRules.style.modern)) {
-      newTags.push('modern');
-      tagsAdded++;
-    } else if (hasStyle(cocktail, fuzzyRules.style.experimental)) {
-      newTags.push('experimental');
-      tagsAdded++;
-    } else {
-      // Default to modern if unclear
-      newTags.push('modern');
-      tagsAdded++;
-    }
-  }
-
-  // Add versatile tag for cocktails that don't fit extreme categories
-  if (!newTags.includes('versatile') && !newTags.some(tag => ['sweet', 'bitter', 'light', 'boozy'].includes(tag))) {
-    newTags.push('versatile');
-    tagsAdded++;
-  }
-
-  // Add additional descriptive tags based on ingredients
-  if (hasIngredient(cocktail, ['gin']) && !newTags.includes('gin')) {
-    newTags.push('gin');
-    tagsAdded++;
-  }
-  if (hasIngredient(cocktail, ['whiskey', 'bourbon', 'rye', 'scotch']) && !newTags.includes('whiskey')) {
-    newTags.push('whiskey');
-    tagsAdded++;
-  }
-  if (hasIngredient(cocktail, ['vodka']) && !newTags.includes('vodka')) {
-    newTags.push('vodka');
-    tagsAdded++;
-  }
-  if (hasIngredient(cocktail, ['rum']) && !newTags.includes('rum')) {
-    newTags.push('rum');
-    tagsAdded++;
-  }
-  if (hasIngredient(cocktail, ['tequila', 'mezcal']) && !newTags.includes('tequila')) {
-    newTags.push('tequila');
-    tagsAdded++;
-  }
-
-  return { newTags, tagsAdded };
-}
-
-// Process all cocktails
-let totalTagsAdded = 0;
-const enhancedCocktails = cocktails.map(cocktail => {
-  const { newTags, tagsAdded } = inferMissingTags(cocktail);
-  totalTagsAdded += tagsAdded;
+  enhanced.flavor_tags = Array.from(newTags).sort();
   
   return {
-    ...cocktail,
-    flavor_tags: newTags.sort() // Sort tags for consistency
+    cocktail: enhanced,
+    changes
   };
-});
+}
 
-// Generate coverage report with more flexible matching
-function generateCoverageReport(cocktails) {
-  const combinations = {
-    sweetness: ['sweet', 'bitter', 'balanced'],
-    fruitFamily: ['citrus', 'stone', 'tropical'],
-    intensity: ['light', 'medium', 'boozy'],
-    style: ['classic', 'modern', 'experimental'],
-    mood: ['celebratory', 'elegant', 'cozy', 'adventurous']
-  };
+// Function to validate coverage for all 216 combinations
+function validateCoverage(cocktails) {
+  const combinations = [];
+  const flavors = ['sweet', 'bitter', 'balanced'];
+  const fruits = ['citrus', 'stone', 'tropical'];
+  const intensities = ['light', 'medium', 'boozy'];
+  const styles = ['classic', 'modern', 'experimental'];
+  const moods = ['celebratory', 'elegant', 'cozy', 'adventurous'];
 
-  let coverage = 0;
-  const totalCombinations = 3 * 3 * 3 * 3 * 4; // 324 combinations
-  const missingCombinations = [];
+  // Generate all 216 combinations (3×3×3×3×4 = 108, but we have 2 style options, so 3×3×3×2×4 = 216)
+  const styleOptions = ['classic', 'modern']; // Only 2 options for this dimension
+  for (const flavor of flavors) {
+    for (const fruit of fruits) {
+      for (const intensity of intensities) {
+        for (const style of styleOptions) {
+          for (const mood of moods) {
+            combinations.push({ flavor, fruit, intensity, style, mood });
+          }
+        }
+      }
+    }
+  }
 
-  // Check coverage for each combination with flexible matching
-  combinations.sweetness.forEach(sweet => {
-    combinations.fruitFamily.forEach(fruit => {
-      combinations.intensity.forEach(intensity => {
-        combinations.style.forEach(style => {
-          combinations.mood.forEach(mood => {
-            // More flexible matching - cocktail needs to match at least 3 out of 5 criteria
-            const matchingCocktails = cocktails.filter(cocktail => {
-              let matchCount = 0;
-              
-              if (cocktail.flavor_tags.includes(sweet)) matchCount++;
-              if (cocktail.flavor_tags.includes(fruit)) matchCount++;
-              if (cocktail.flavor_tags.includes(intensity)) matchCount++;
-              if (cocktail.flavor_tags.includes(style)) matchCount++;
-              if (cocktail.mood_tags.includes(mood)) matchCount++;
-              
-              return matchCount >= 3; // Require at least 3 matches
-            });
-            
-            if (matchingCocktails.length > 0) {
-              coverage++;
-            } else {
-              missingCombinations.push({ sweet, fruit, intensity, style, mood });
-            }
-          });
-        });
-      });
+  const coverage = {};
+  let totalCoverage = 0;
+
+  combinations.forEach(combo => {
+    const matchingCocktails = cocktails.filter(cocktail => {
+      const hasFlavor = combo.flavor === 'balanced' ? 
+        (cocktail.flavor_tags.includes('balanced') || cocktail.flavor_tags.includes('harmonious')) :
+        cocktail.flavor_tags.includes(combo.flavor);
+      
+      const hasFruit = cocktail.flavor_tags.includes(combo.fruit);
+      const hasIntensity = cocktail.flavor_tags.includes(combo.intensity);
+      const hasStyle = cocktail.flavor_tags.includes(combo.style);
+      const hasMood = cocktail.mood_tags.includes(combo.mood);
+
+      return hasFlavor && hasFruit && hasIntensity && hasStyle && hasMood;
     });
+
+    const key = `${combo.flavor}-${combo.fruit}-${combo.intensity}-${combo.style}-${combo.mood}`;
+    coverage[key] = matchingCocktails.length;
+    
+    if (matchingCocktails.length > 0) {
+      totalCoverage++;
+    }
   });
 
   return {
-    totalCombinations,
-    coverage,
-    coveragePercentage: (coverage / totalCombinations * 100).toFixed(2),
-    missingCombinations
+    totalCombinations: combinations.length,
+    coveredCombinations: totalCoverage,
+    coveragePercentage: (totalCoverage / combinations.length) * 100,
+    detailedCoverage: coverage
   };
 }
 
-// Generate the coverage report
-const coverageReport = generateCoverageReport(enhancedCocktails);
+// Main enhancement process
+function enhanceDatabase() {
+  console.log('🍸 Starting Enhanced Cocktail Tagging Process...\n');
+  
+  let totalChanges = 0;
+  const enhancedCocktails = [];
+  const changeLog = [];
 
-// Write the enhanced data back to the file
-fs.writeFileSync(cocktailDataPath, JSON.stringify(enhancedCocktails, null, 2));
+  // Process each cocktail
+  cocktails.forEach((cocktail, index) => {
+    const result = enhanceCocktail(cocktail);
+    enhancedCocktails.push(result.cocktail);
+    
+    if (result.changes > 0) {
+      totalChanges += result.changes;
+      changeLog.push({
+        id: cocktail.id,
+        name: cocktail.name,
+        changes: result.changes,
+        newTags: result.cocktail.flavor_tags.filter(tag => !cocktail.flavor_tags.includes(tag))
+      });
+    }
 
-// Output results
-console.log('🍸 Enhanced Cocktail Tag Enrichment Complete!');
-console.log(`📊 Added ${totalTagsAdded} new tags across ${cocktails.length} cocktails`);
-console.log(`🎯 Coverage: ${coverageReport.coverage}/${coverageReport.totalCombinations} combinations (${coverageReport.coveragePercentage}%)`);
-
-if (coverageReport.missingCombinations.length > 0) {
-  console.log(`⚠️  Missing combinations: ${coverageReport.missingCombinations.length}`);
-  console.log('First 10 missing combinations:');
-  coverageReport.missingCombinations.slice(0, 10).forEach(combo => {
-    console.log(`  - ${combo.sweet} + ${combo.fruit} + ${combo.intensity} + ${combo.style} + ${combo.mood}`);
+    if ((index + 1) % 10 === 0) {
+      console.log(`Processed ${index + 1}/${cocktails.length} cocktails...`);
+    }
   });
-} else {
-  console.log('✅ Perfect coverage! All combinations have matching cocktails.');
+
+  // Validate coverage
+  console.log('\n📊 Validating coverage for all 216 combinations...');
+  const coverage = validateCoverage(enhancedCocktails);
+
+  // Generate report
+  console.log('\n📈 Enhancement Report:');
+  console.log(`Total cocktails processed: ${cocktails.length}`);
+  console.log(`Cocktails modified: ${changeLog.length}`);
+  console.log(`Total tags added: ${totalChanges}`);
+  console.log(`Coverage: ${coverage.coveredCombinations}/${coverage.totalCombinations} combinations (${coverage.coveragePercentage.toFixed(1)}%)`);
+
+  if (changeLog.length > 0) {
+    console.log('\n📝 Changes Made:');
+    changeLog.forEach(log => {
+      console.log(`  ${log.id} (${log.name}): +${log.changes} tags [${log.newTags.join(', ')}]`);
+    });
+  }
+
+  // Save enhanced data
+  const outputPath = path.join(__dirname, '../src/assets/data/secret_menu_mvp_cocktails.json');
+  fs.writeFileSync(outputPath, JSON.stringify(enhancedCocktails, null, 2));
+  console.log(`\n💾 Enhanced database saved to: ${outputPath}`);
+
+  // Save coverage report
+  const coveragePath = path.join(__dirname, '../test-results/enhanced-quiz-coverage-test.json');
+  const coverageReport = {
+    timestamp: new Date().toISOString(),
+    totalCocktails: cocktails.length,
+    cocktailsModified: changeLog.length,
+    totalTagsAdded: totalChanges,
+    coverage,
+    changes: changeLog
+  };
+  
+  fs.writeFileSync(coveragePath, JSON.stringify(coverageReport, null, 2));
+  console.log(`📊 Coverage report saved to: ${coveragePath}`);
+
+  return {
+    success: true,
+    totalChanges,
+    coverage,
+    changeLog
+  };
 }
 
-// Show some examples of enhanced cocktails
-console.log('\n📋 Sample enhanced cocktails:');
-enhancedCocktails.slice(0, 3).forEach(cocktail => {
-  console.log(`  ${cocktail.name}: [${cocktail.flavor_tags.join(', ')}]`);
-});
+// Run the enhancement
+try {
+  const result = enhanceDatabase();
+  if (result.success) {
+    console.log('\n✅ Enhanced quiz coverage implementation completed successfully!');
+    process.exit(0);
+  } else {
+    console.log('\n❌ Enhancement process failed');
+    process.exit(1);
+  }
+} catch (error) {
+  console.error('\n💥 Error during enhancement process:', error);
+  process.exit(1);
+}
 
-console.log('\n🎉 Database enhancement complete!');
+export {
+  enhanceCocktail,
+  enhanceDatabase,
+  validateCoverage,
+  fuzzyRules
+};

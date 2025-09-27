@@ -7,6 +7,7 @@ import { QuizAnswers } from '../../../types'
 // Mock the services with simpler mocks
 vi.mock('../../../services/analytics', () => ({
   trackRecommendationViewed: vi.fn(),
+  trackEnhancedRecommendationViewed: vi.fn(),
   trackQuizRestart: vi.fn(),
 }))
 

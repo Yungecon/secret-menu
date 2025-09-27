@@ -37,6 +37,7 @@ describe('QuizFlow Component', () => {
     expect(screen.getByText('What speaks to your refined palate?')).toBeInTheDocument()
     expect(screen.getByText('Sweet & Luxurious')).toBeInTheDocument()
     expect(screen.getByText('Bitter & Sophisticated')).toBeInTheDocument()
+    expect(screen.getByText('Balanced & Harmonious')).toBeInTheDocument()
   })
 
   it('should show progress indicator', () => {
@@ -152,4 +153,88 @@ describe('QuizFlow Component', () => {
     // Should trigger some response (compliment or next question)
     expect(button).toBeInTheDocument()
   })
+
+  it('should render all three options for each question', () => {
+    render(<QuizFlow />)
+    
+    // First question - flavor preference
+    expect(screen.getByText('Sweet & Luxurious')).toBeInTheDocument()
+    expect(screen.getByText('Bitter & Sophisticated')).toBeInTheDocument()
+    expect(screen.getByText('Balanced & Harmonious')).toBeInTheDocument()
+  })
+
+  it('should handle new third options selection', async () => {
+    render(<QuizFlow />)
+    
+    // Test the new "Balanced & Harmonious" option
+    fireEvent.click(screen.getByText('Balanced & Harmonious'))
+    
+    // Wait for compliment animation
+    await waitFor(() => {
+      const complimentText = screen.getByText(/harmonious|balance|equilibrium/i)
+      expect(complimentText).toBeInTheDocument()
+    }, { timeout: 1000 })
+  })
+
+  it('should advance through all questions with new options', async () => {
+    render(<QuizFlow />)
+    
+    // Answer all 5 questions using the new third options
+    const questions = [
+      'Balanced & Harmonious',
+      'Tropical & Exotic', 
+      'Medium & Versatile',
+      'Modern & Refined',
+      'Adventurous & Playful'
+    ]
+    
+    for (let i = 0; i < questions.length; i++) {
+      const button = screen.getByText(questions[i])
+      fireEvent.click(button)
+      
+      if (i < questions.length - 1) {
+        // Wait for next question (except on last question)
+        await waitFor(() => {
+          expect(screen.getByText(`Question ${i + 2} of 5`)).toBeInTheDocument()
+        }, { timeout: 8000 })
+      }
+    }
+    
+    // Should navigate to results after last question
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith('/results')
+    }, { timeout: 8000 })
+  }, 15000)
+
+  it('should test fruit family question with all three options', async () => {
+    render(<QuizFlow />)
+    
+    // Answer first question to get to fruit family question
+    fireEvent.click(screen.getByText('Sweet & Luxurious'))
+    
+    await waitFor(() => {
+      expect(screen.getByText('Which fruit family calls to you?')).toBeInTheDocument()
+      expect(screen.getByText('Citrus & Bright')).toBeInTheDocument()
+      expect(screen.getByText('Stone Fruit & Rich')).toBeInTheDocument()
+      expect(screen.getByText('Tropical & Exotic')).toBeInTheDocument()
+    }, { timeout: 5000 })
+  })
+
+  it('should test indulgence style question with all three options', async () => {
+    render(<QuizFlow />)
+    
+    // Answer first two questions to get to indulgence style question
+    fireEvent.click(screen.getByText('Sweet & Luxurious'))
+    
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('Citrus & Bright'))
+    }, { timeout: 8000 })
+    
+    await waitFor(() => {
+      expect(screen.getByText('How do you prefer to indulge?')).toBeInTheDocument()
+      expect(screen.getByText('Light & Refreshing')).toBeInTheDocument()
+      expect(screen.getByText('Bold & Spirit-Forward')).toBeInTheDocument()
+      expect(screen.getByText('Medium & Versatile')).toBeInTheDocument()
+    }, { timeout: 8000 })
+  }, 15000)
 })
