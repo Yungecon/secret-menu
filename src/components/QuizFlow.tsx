@@ -4,6 +4,7 @@ import { useQuiz } from '../context/QuizContext';
 import { QuizAnswers, QuizQuestion } from '../types';
 import { trackQuizStart, trackQuestionAnswered, trackQuizCompleted } from '../utils/analytics';
 import { playButtonPress, playComplimentReveal, playQuizComplete } from '../utils/soundEffects';
+import { createButtonHandlers, ANIMATION_DELAYS, MagicalParticles } from '../utils/animations';
 
 const QuizFlow = () => {
   const navigate = useNavigate();
@@ -250,7 +251,7 @@ const QuizFlow = () => {
     // Play compliment reveal sound after a brief delay
     setTimeout(() => {
       playComplimentReveal();
-    }, 300);
+    }, ANIMATION_DELAYS.SHORT);
     
     // After compliment animation completes, proceed to next question
     setTimeout(() => {
@@ -272,7 +273,7 @@ const QuizFlow = () => {
         setAnswers(newAnswers);
         navigate('/results');
       }
-    }, 2500); // Extended time for the magical moment
+    }, ANIMATION_DELAYS.COMPLIMENT);
   };
 
   // Swipe gesture handling

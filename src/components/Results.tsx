@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { RecommendationResult } from '../types';
 import { trackRecommendationViewed, trackQuizRestart } from '../utils/analytics';
 import { playCocktailReveal } from '../utils/soundEffects';
+import { MagicalLoader, ANIMATION_DELAYS, GRADIENT_CLASSES, MagicalParticles } from '../utils/animations';
 
 const Results = () => {
   const navigate = useNavigate();
@@ -36,39 +37,7 @@ const Results = () => {
   };
 
   if (!recommendations) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-        {/* Magical loading background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-24 h-24 bg-magical-glow/10 rounded-full animate-pulse blur-xl"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-32 h-32 bg-premium-gold/5 rounded-full animate-float-slow blur-2xl"></div>
-        </div>
-        
-        <div className="text-center relative z-10">
-          {/* Enhanced loading spinner */}
-          <div className="relative mb-8">
-            <div className="animate-spin w-12 h-12 border-2 border-magical-glow/30 border-t-magical-glow rounded-full mx-auto"></div>
-            <div className="absolute inset-0 animate-ping w-12 h-12 border border-magical-glow/20 rounded-full mx-auto"></div>
-          </div>
-          
-          {/* Magical loading text */}
-          <div className="space-y-2">
-            <p className="font-script text-2xl text-premium-gold animate-pulse">
-              Consulting the spirits...
-            </p>
-            <p className="text-premium-silver/60 text-sm animate-fade-in delay-500">
-              Crafting your perfect match
-            </p>
-          </div>
-          
-          {/* Loading sparkles */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/3 w-1 h-1 bg-magical-glow rounded-full animate-ping delay-300"></div>
-            <div className="absolute top-1/3 right-1/3 w-0.5 h-0.5 bg-premium-gold rounded-full animate-pulse delay-700"></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <MagicalLoader />;
   }
 
   const { primary, adjacent } = recommendations;
@@ -87,7 +56,7 @@ const Results = () => {
           
           {/* Hero cocktail name with dramatic reveal */}
           <div className="relative animate-slide-up delay-500">
-            <h1 className="font-elegant text-6xl md:text-7xl font-bold text-premium-gold mb-6 animate-shimmer bg-gradient-to-r from-premium-gold via-premium-platinum to-premium-gold bg-clip-text text-transparent bg-[length:200%_100%]">
+            <h1 className={`font-elegant text-6xl md:text-7xl font-bold mb-6 animate-shimmer ${GRADIENT_CLASSES.goldToPlatinum}`}>
               {primary.name}
             </h1>
             
@@ -112,12 +81,7 @@ const Results = () => {
             </p>
           </div>
           
-          {/* Floating celebration particles */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-0 left-1/4 w-1 h-1 bg-premium-gold rounded-full animate-float-slow opacity-60"></div>
-            <div className="absolute top-1/4 right-1/4 w-0.5 h-0.5 bg-magical-glow rounded-full animate-float-fast opacity-80"></div>
-            <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-magical-shimmer rounded-full animate-bounce opacity-40"></div>
-          </div>
+          <MagicalParticles />
         </div>
 
         {/* Cocktail details */}
@@ -154,16 +118,44 @@ const Results = () => {
           </div>
         </div>
 
-        {/* Adjacent recommendations */}
+        {/* Adjacent recommendations - now clickable */}
         {adjacent.length > 0 && (
           <div className="mb-8">
             <h3 className="text-premium-platinum text-lg mb-4">You might also enjoy...</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adjacent.map((cocktail) => (
-                <div key={cocktail.id} className="magical-card p-4">
-                  <h4 className="text-premium-gold font-medium mb-2">{cocktail.name}</h4>
-                  <p className="text-premium-silver/80 text-sm">{cocktail.style}</p>
-                </div>
+                <button
+                  key={cocktail.id}
+                  onClick={() => {
+                    // Switch to this cocktail as the primary recommendation
+                    const newRecommendations = {
+                      primary: cocktail,
+                      adjacent: adjacent.filter(c => c.id !== cocktail.id).concat([primary]).slice(0, 3),
+                      matchScore: Math.max(88, Math.floor(Math.random() * 8) + 90) // Generate high match score
+                    };
+                    setRecommendations(newRecommendations);
+                    
+                    // Track the new cocktail view
+                    trackRecommendationViewed(cocktail.name, newRecommendations.matchScore);
+                    
+                    // Play cocktail reveal sound
+                    setTimeout(() => {
+                      playCocktailReveal();
+                    }, 300);
+                  }}
+                  className="magical-card p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-magical-glow/20 active:scale-95 text-left group"
+                >
+                  <h4 className="text-premium-gold font-medium mb-2 group-hover:text-magical-glow transition-colors">
+                    {cocktail.name}
+                  </h4>
+                  <p className="text-premium-silver/80 text-sm mb-2">{cocktail.style}</p>
+                  <p className="text-premium-silver/60 text-xs italic">
+                    Tap to explore this exquisite creation
+                  </p>
+                  
+                  {/* Hover shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-magical-glow/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out opacity-0 group-hover:opacity-100 rounded-xl"></div>
+                </button>
               ))}
             </div>
           </div>

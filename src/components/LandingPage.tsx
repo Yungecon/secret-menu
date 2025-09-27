@@ -1,25 +1,17 @@
 import { useNavigate } from 'react-router-dom';
+import { FloatingOrbs, GRADIENT_CLASSES, MagicalParticles } from '../utils/animations';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Floating orbs */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-magical-glow/5 rounded-full animate-float-slow blur-xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-premium-gold/5 rounded-full animate-float-medium blur-xl"></div>
-        <div className="absolute top-1/2 right-1/3 w-40 h-40 bg-magical-shimmer/3 rounded-full animate-float-fast blur-2xl"></div>
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-magical-deep/5 to-premium-black/20"></div>
-      </div>
+      <FloatingOrbs />
 
       <div className="text-center max-w-2xl mx-auto relative z-10">
         {/* Premium Logo/Title with enhanced animation */}
         <div className="mb-8 animate-fade-in">
-          <h1 className="font-elegant text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-premium-gold via-premium-platinum to-magical-glow bg-clip-text text-transparent animate-shimmer bg-[length:200%_100%]">
+          <h1 className={`font-elegant text-6xl md:text-8xl font-bold mb-4 animate-shimmer ${GRADIENT_CLASSES.goldToPlatinum}`}>
             Secret Menu
           </h1>
           
@@ -72,18 +64,10 @@ const LandingPage = () => {
           </p>
         </div>
 
-        {/* Enhanced magical elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Floating sparkles */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-magical-glow rounded-full opacity-60 animate-ping"></div>
-          <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-premium-gold rounded-full opacity-80 animate-pulse delay-1000"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-magical-shimmer rounded-full opacity-50 animate-bounce delay-2000"></div>
-          <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-premium-platinum rounded-full opacity-40 animate-pulse delay-1500"></div>
-          <div className="absolute bottom-1/3 left-1/5 w-0.5 h-0.5 bg-magical-glow rounded-full opacity-70 animate-ping delay-3000"></div>
-          
-          {/* Magical trails */}
+        <MagicalParticles>
+          {/* Additional magical trail */}
           <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-magical-glow/20 to-transparent animate-pulse delay-2000"></div>
-        </div>
+        </MagicalParticles>
       </div>
     </div>
   );
