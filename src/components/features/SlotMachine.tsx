@@ -18,6 +18,7 @@ interface ReelState {
 
 const SlotMachine = () => {
   const navigate = useNavigate();
+  // Force rebuild - full slot machine functionality
   
   const [reelStates, setReelStates] = useState<ReelState[]>([
     { isSpinning: true },
