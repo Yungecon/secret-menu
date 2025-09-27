@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SlotReel from './SlotReel';
 import { 
@@ -7,9 +7,11 @@ import {
   STYLE_ATTRIBUTES,
   SlotMachineResult,
   convertSlotToQuizAnswers
-} from '../../utils/slotMachineAttributes';
-import { generateRecommendations } from '../../services/recommendationEngine';
-import { RecommendationResult } from '../../types';
+} from '../../../utils/slotMachineAttributes';
+import { generateRecommendations } from '../../../services/recommendationEngine';
+import { RecommendationResult } from '../../../types';
+import { trackEvent } from '../../../services/analytics';
+import { playButtonPress, playCocktailReveal } from '../../../services/soundEffects';
 
 interface ReelState {
   isSpinning: boolean;
@@ -31,14 +33,20 @@ const SlotMachine = () => {
   const [slotResult, setSlotResult] = useState<SlotMachineResult | null>(null);
   const [cocktailResult, setCocktailResult] = useState<RecommendationResult | null>(null);
 
+  // Track slot machine start
+  useEffect(() => {
+    trackEvent('slot_machine', 'started', 'secret_shuffle');
+  }, []);
+
   // Handle tap to stop current reel
   const handleTap = useCallback(() => {
     if (gameState !== 'spinning' || currentTap >= 3) return;
 
+    playButtonPress();
     setGameState('stopping');
     
     // Stop the current reel
-    setReelStates(prev => prev.map((reel, index) => 
+    setReelStates((prev: ReelState[]) => prev.map((reel: ReelState, index: number) => 
       index === currentTap 
         ? { ...reel, isSpinning: false }
         : reel
@@ -47,11 +55,16 @@ const SlotMachine = () => {
 
   // Handle when a reel stops and selects an attribute
   const handleReelStop = useCallback((reelIndex: number, selectedAttribute: string) => {
-    setReelStates(prev => prev.map((reel, index) => 
+    setReelStates((prev: ReelState[]) => prev.map((reel: ReelState, index: number) => 
       index === reelIndex 
         ? { ...reel, selectedAttribute }
         : reel
     ));
+
+    trackEvent('slot_machine', 'reel_stopped', `reel_${reelIndex + 1}`, undefined, {
+      reelIndex,
+      attribute: selectedAttribute
+    });
 
     const nextTap = currentTap + 1;
     setCurrentTap(nextTap);
@@ -61,7 +74,7 @@ const SlotMachine = () => {
       setGameState('spinning');
     } else {
       // All reels stopped, create final result
-      const updatedStates = [...reelStates];
+      const updatedStates: ReelState[] = [...reelStates];
       updatedStates[reelIndex] = { ...updatedStates[reelIndex], selectedAttribute };
       
       // Check if we have all three attributes
@@ -86,6 +99,12 @@ const SlotMachine = () => {
           const recommendation = generateRecommendations(quizAnswers);
           setCocktailResult(recommendation);
           setGameState('results');
+          playCocktailReveal();
+          trackEvent('slot_machine', 'completed', 'secret_shuffle', undefined, {
+            combination: [result.flavor, result.mood, result.style],
+            matchedCocktail: recommendation.primary.name,
+            matchScore: recommendation.matchScore
+          });
         }, 1500);
       }
     }
@@ -93,6 +112,7 @@ const SlotMachine = () => {
 
   // Reset for new spin
   const spinAgain = useCallback(() => {
+    trackEvent('slot_machine', 'spin_again_clicked', 'secret_shuffle');
     setGameState('spinning');
     setCurrentTap(0);
     setSlotResult(null);
@@ -290,3 +310,4 @@ const SlotMachine = () => {
 };
 
 export default SlotMachine;
+

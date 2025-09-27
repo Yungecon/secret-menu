@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import SlotMachine from '../SlotMachine';
+import { SlotMachine } from '../secret-shuffle';
 
 // Mock the SlotReel component to simplify testing
-vi.mock('../SlotReel', () => ({
+vi.mock('../secret-shuffle/SlotReel', () => ({
   default: ({ attributes, isSpinning, onStop, reelIndex, disabled }: any) => (
     <div data-testid={`slot-reel-${reelIndex}`}>
       <div>Reel {reelIndex + 1}</div>
