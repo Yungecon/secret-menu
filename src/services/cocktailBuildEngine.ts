@@ -1,4 +1,4 @@
-import { Cocktail, CocktailTemplate, IngredientProfile, FlavorBalance } from '../types';
+import { CocktailTemplate, IngredientProfile } from '../types';
 
 export interface RecipeGenerationRequest {
   availableIngredients: string[];
@@ -234,7 +234,7 @@ export class CocktailBuildEngine {
   /**
    * Select the best ingredient for a role
    */
-  private selectBestIngredient(ingredients: string[], role: any): string {
+  private selectBestIngredient(ingredients: string[], _role: any): string {
     // For now, return the first ingredient
     // In a more sophisticated system, this would consider:
     // - Flavor intensity matching
@@ -303,7 +303,7 @@ export class CocktailBuildEngine {
     const instructions = [...template.instructions];
 
     // Build ingredient list with proportions
-    for (const [role, ingredientId] of mapping) {
+    for (const [, ingredientId] of mapping) {
       const proportion = proportions.get(ingredientId) || 1;
       const profile = this.ingredientProfiles.get(ingredientId);
       
@@ -401,7 +401,7 @@ export class CocktailBuildEngine {
       alcoholic: 0
     };
 
-    for (const [role, ingredientId] of mapping) {
+    for (const [, ingredientId] of mapping) {
       const profile = this.ingredientProfiles.get(ingredientId);
       if (profile) {
         const intensity = profile.flavor_profile.intensity;
@@ -435,7 +435,7 @@ export class CocktailBuildEngine {
   private generateSubstitutions(mapping: Map<string, string>): Substitution[] {
     const substitutions: Substitution[] = [];
 
-    for (const [role, ingredientId] of mapping) {
+    for (const [, ingredientId] of mapping) {
       const profile = this.ingredientProfiles.get(ingredientId);
       if (profile && profile.substitutions) {
         profile.substitutions.forEach(subId => {
