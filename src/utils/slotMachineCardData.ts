@@ -274,7 +274,15 @@ export const getCardData = (value: string, type: 'flavor' | 'mood' | 'style'): C
     style: STYLE_CARDS
   };
   
-  return cardMap[type].find(card => card.value === value) || null;
+  // Try exact match first
+  let card = cardMap[type].find(card => card.value === value);
+  
+  // If no exact match, try case-insensitive match
+  if (!card) {
+    card = cardMap[type].find(card => card.value.toLowerCase() === value.toLowerCase());
+  }
+  
+  return card || null;
 };
 
 // Helper function to get all cards for a reel type

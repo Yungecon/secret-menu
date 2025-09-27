@@ -148,6 +148,18 @@ const SlotReel: React.FC<SlotReelProps> = ({
   const reelType = reelTypes[reelIndex];
   const currentCardData = getCardData(currentAttribute, reelType);
   const finalCardData = reelState.finalAttribute ? getCardData(reelState.finalAttribute, reelType) : null;
+  
+  // Debug logging
+  if (process.env.NODE_ENV === 'development') {
+    console.log('SlotReel Debug:', {
+      reelIndex,
+      reelType,
+      currentAttribute,
+      currentCardData,
+      finalAttribute: reelState.finalAttribute,
+      finalCardData
+    });
+  }
 
   const handleReelClick = () => {
     if (canTap && onTap) {
