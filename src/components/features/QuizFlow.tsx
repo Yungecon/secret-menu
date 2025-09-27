@@ -41,7 +41,7 @@ const QuizFlow = () => {
       options: [
         { label: 'Light & Refreshing', value: 'light', colorTheme: 'from-luxury-emerald to-luxury-mint', tags: ['light', 'refreshing'] },
         { label: 'Bold & Spirit-Forward', value: 'boozy', colorTheme: 'from-luxury-brass to-luxury-antique', tags: ['boozy', 'spirit-forward'] },
-        { label: 'Medium & Versatile', value: 'medium', colorTheme: 'from-luxury-platinum to-luxury-pearl', tags: ['medium', 'versatile'] }
+        { label: 'Medium & Versatile', value: 'medium', colorTheme: 'from-luxury-gold to-luxury-brass-light', tags: ['medium', 'versatile'] }
       ]
     },
     {
