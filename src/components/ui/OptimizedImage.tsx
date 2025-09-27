@@ -26,6 +26,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const [isInView, setIsInView] = useState(!lazy);
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!lazy) return;
@@ -42,14 +43,15 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       { rootMargin: '50px' }
     );
 
-    if (observer && imgRef.current) {
-      observer.observe(imgRef.current);
+    if (observer && containerRef.current) {
+      observer.observe(containerRef.current);
     }
 
     return () => {
-      if (observer && imgRef.current) {
-        observer.unobserve(imgRef.current);
+      if (observer && containerRef.current) {
+        observer.unobserve(containerRef.current);
       }
+      observer?.disconnect?.();
     };
   }, [lazy]);
 
@@ -78,6 +80,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   return (
     <div 
+      ref={containerRef}
       className={`relative overflow-hidden ${className}`}
       style={{ width, height }}
     >
