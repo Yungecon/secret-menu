@@ -3,6 +3,7 @@ import { useQuiz } from '../context/QuizContext';
 import { generateRecommendations } from '../utils/recommendationEngine';
 import { useEffect, useState } from 'react';
 import { RecommendationResult } from '../types';
+import { trackRecommendationViewed, trackQuizRestart } from '../utils/analytics';
 
 const Results = () => {
   const navigate = useNavigate();
@@ -13,6 +14,9 @@ const Results = () => {
     if (Object.keys(answers).length > 0) {
       const result = generateRecommendations(answers);
       setRecommendations(result);
+      
+      // Track recommendation viewed
+      trackRecommendationViewed(result.primary.name, result.matchScore);
     } else {
       // No answers - redirect to start
       navigate('/');
@@ -20,6 +24,7 @@ const Results = () => {
   }, [answers, navigate]);
 
   const handleTryAnother = () => {
+    trackQuizRestart();
     resetQuiz();
     navigate('/');
   };

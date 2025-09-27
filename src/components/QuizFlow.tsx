@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuiz } from '../context/QuizContext';
 import { QuizAnswers, QuizQuestion } from '../types';
+import { trackQuizStart, trackQuestionAnswered, trackQuizCompleted } from '../utils/analytics';
 
 const QuizFlow = () => {
   const navigate = useNavigate();
@@ -230,8 +231,12 @@ const QuizFlow = () => {
   const [showingCompliment, setShowingCompliment] = useState<boolean>(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [quizStartTime] = useState<number>(Date.now());
 
   const handleAnswer = (questionId: string, value: string) => {
+    // Track the answer
+    trackQuestionAnswered(questionId, value, currentQuestion + 1);
+    
     const message = getComplimentaryMessage(questionId, value);
     
     // Start the magical compliment sequence
@@ -251,7 +256,9 @@ const QuizFlow = () => {
         setFeedbackMessage("");
         setShowingCompliment(false);
       } else {
-        // Quiz complete - pass answers to context
+        // Quiz complete - track completion and pass answers to context
+        const completionTime = Date.now() - quizStartTime;
+        trackQuizCompleted(questions.length, completionTime);
         setAnswers(newAnswers);
         navigate('/results');
       }
@@ -290,6 +297,11 @@ const QuizFlow = () => {
     }
   };
 
+  // Track quiz start on component mount
+  useEffect(() => {
+    trackQuizStart();
+  }, []);
+
   const currentQ = questions[currentQuestion];
 
   return (
@@ -303,32 +315,74 @@ const QuizFlow = () => {
       <div className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
         showingCompliment ? 'opacity-20 blur-sm scale-95' : 'opacity-100 blur-none scale-100'
       }`}>
-        {/* Progress indicator */}
+        {/* Enhanced Progress indicator */}
         <div className="mb-8">
-          <div className="flex justify-center space-x-2 mb-4">
+          <div className="flex justify-center items-center space-x-3 mb-6">
             {questions.map((_, index) => (
-              <div
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index <= currentQuestion 
-                    ? 'bg-magical-glow' 
-                    : 'bg-premium-silver/30'
-                }`}
-              />
+              <div key={index} className="flex items-center">
+                <div
+                  className={`relative w-4 h-4 rounded-full transition-all duration-500 ${
+                    index < currentQuestion 
+                      ? 'bg-premium-gold shadow-lg shadow-premium-gold/50' 
+                      : index === currentQuestion
+                      ? 'bg-magical-glow shadow-lg shadow-magical-glow/50 animate-pulse'
+                      : 'bg-premium-silver/30'
+                  }`}
+                >
+                  {/* Completed checkmark */}
+                  {index < currentQuestion && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg className="w-2.5 h-2.5 text-premium-black" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                  
+                  {/* Current question glow */}
+                  {index === currentQuestion && (
+                    <div className="absolute inset-0 rounded-full bg-magical-glow animate-ping opacity-30"></div>
+                  )}
+                </div>
+                
+                {/* Connection line */}
+                {index < questions.length - 1 && (
+                  <div className={`w-8 h-0.5 mx-2 transition-all duration-500 ${
+                    index < currentQuestion 
+                      ? 'bg-premium-gold' 
+                      : 'bg-premium-silver/20'
+                  }`} />
+                )}
+              </div>
             ))}
           </div>
-          <p className="text-premium-silver/60 text-sm">
-            Question {currentQuestion + 1} of {questions.length}
-          </p>
+          
+          {/* Progress text with percentage */}
+          <div className="text-center">
+            <p className="text-premium-silver/60 text-sm mb-1">
+              Question {currentQuestion + 1} of {questions.length}
+            </p>
+            <div className="w-48 h-1 bg-premium-silver/20 rounded-full mx-auto overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-magical-shimmer to-magical-glow rounded-full transition-all duration-700 ease-out"
+                style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+              />
+            </div>
+            <p className="text-magical-glow text-xs mt-2 font-medium">
+              {Math.round(((currentQuestion + 1) / questions.length) * 100)}% Complete
+            </p>
+          </div>
         </div>
 
-        {/* Question */}
-        <h2 className="font-elegant text-4xl md:text-5xl font-semibold mb-12 text-premium-platinum">
+        {/* Question with enhanced animation */}
+        <h2 
+          key={currentQuestion} // Force re-render for animation
+          className="font-elegant text-4xl md:text-5xl font-semibold mb-12 text-premium-platinum animate-slide-up"
+        >
           {currentQ.question}
         </h2>
 
-        {/* Answer options */}
-        <div className="space-y-6">
+        {/* Answer options with enhanced animations */}
+        <div key={currentQuestion} className="space-y-6">
           {currentQ.options.map((option, index) => (
             <button
               key={option.value}
