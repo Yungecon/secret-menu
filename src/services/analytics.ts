@@ -1,6 +1,15 @@
 // Simple analytics utility for tracking user interactions
 // In production, this would integrate with Google Analytics 4 or similar
 
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+const GA_MEASUREMENT_ID = (import.meta as any).env?.VITE_GA_MEASUREMENT_ID as string | undefined;
+
 interface AnalyticsEvent {
   event: string;
   category: string;
@@ -14,11 +23,18 @@ class Analytics {
   private events: AnalyticsEvent[] = [];
   private sessionId: string;
   private startTime: number;
+  private gaInitialized: boolean = false;
+  private gaMeasurementId?: string;
 
   constructor() {
     this.sessionId = this.generateSessionId();
     this.startTime = Date.now();
     this.trackEvent('session', 'start', 'quiz_session');
+
+    this.gaMeasurementId = GA_MEASUREMENT_ID;
+    if (this.gaMeasurementId) {
+      this.initializeGA(this.gaMeasurementId);
+    }
   }
 
   private generateSessionId(): string {
@@ -42,18 +58,22 @@ class Analytics {
 
     this.events.push(event);
     
-    // In production, send to analytics service
+    // Console for local debugging
     console.log('📊 Analytics Event:', event);
-    
-    // For future Google Analytics 4 integration:
-    // if (typeof gtag !== 'undefined') {
-    //   gtag('event', action, {
-    //     event_category: category,
-    //     event_label: label,
-    //     value: value,
-    //     custom_parameter: customData
-    //   });
-    // }
+
+    // Forward to GA4 if initialized
+    try {
+      if (this.gaInitialized && typeof window.gtag === 'function') {
+        window.gtag('event', action, {
+          event_category: category,
+          event_label: label,
+          value,
+          ...event.customData,
+        });
+      }
+    } catch (err) {
+      // Swallow errors to avoid impacting UX
+    }
   }
 
   // Quiz-specific tracking methods
@@ -159,6 +179,51 @@ class Analytics {
     this.trackEvent('quiz', 'restart', 'try_another');
   }
 
+  // SPA page view tracking
+  trackPageView(pathname: string, title?: string) {
+    this.trackEvent('page', 'view', pathname, undefined, { title });
+    try {
+      if (this.gaInitialized && this.gaMeasurementId && typeof window.gtag === 'function') {
+        window.gtag('event', 'page_view', {
+          page_title: title || document.title,
+          page_location: window.location.href,
+          page_path: pathname,
+        });
+      }
+    } catch {
+      // no-op
+    }
+  }
+
+  // Initialize GA4
+  private initializeGA(measurementId: string) {
+    if (this.gaInitialized) return;
+    // Create dataLayer and gtag shim
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      // eslint-disable-next-line prefer-rest-params
+      (window.dataLayer as unknown[]).push(arguments as unknown as any);
+    } as unknown as (...args: unknown[]) => void;
+
+    // Inject gtag.js
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+    script.onerror = () => {
+      this.gaInitialized = false;
+    };
+    script.onload = () => {
+      try {
+        window.gtag && window.gtag('js', new Date());
+        window.gtag && window.gtag('config', measurementId, { send_page_view: false });
+        this.gaInitialized = true;
+      } catch {
+        this.gaInitialized = false;
+      }
+    };
+    document.head.appendChild(script);
+  }
+
   // Get analytics summary for debugging
   getAnalyticsSummary() {
     return {
@@ -188,3 +253,11 @@ export const trackFuzzyMatchingUsage = (questionId: string, answer: string, fuzz
 export const trackCoverageGap = (combination: string, missingTags: string[]) => 
   analytics.trackCoverageGap(combination, missingTags);
 export const trackQuizRestart = () => analytics.trackQuizRestart();
+export const trackPageView = (pathname: string, title?: string) => analytics.trackPageView(pathname, title);
+export const trackEvent = (
+  category: string,
+  action: string,
+  label?: string,
+  value?: number,
+  customData?: Record<string, any>
+) => analytics.trackEvent(category, action, label, value, customData);

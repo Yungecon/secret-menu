@@ -166,3 +166,34 @@ The dev server runs with `--host` flag, so you can test on your phone:
 5. **Generate QR codes** for easy bar testing
 
 Perfect for showing investors, testing in real bars, and collaborating with your team!
+
+---
+
+## 🧩 Environment Variables
+
+- `VITE_GA_MEASUREMENT_ID`: Google Analytics 4 Measurement ID (e.g., `G-XXXXXXX`). If set, the app auto-loads GA4, sends SPA page views on route changes, and forwards custom events through the analytics service.
+
+## 📈 Analytics & A/B Testing
+
+- Analytics lives in `src/services/analytics.ts`.
+  - Page views are tracked on route changes.
+  - Helper functions are exported for quiz and recommendation events.
+- A/B testing lives in `src/services/abTesting.ts`.
+  - Use `getABVariant('experiment-name', ['control', 'variant'])` to get a deterministic per-visitor variant. Exposure is auto-tracked to analytics.
+
+## 🔗 QR Code Generator
+
+- Route: `/qr`
+- Generate QR codes for table tents/posters with:
+  - Target path (e.g., `/quiz`, `/shuffle`)
+  - UTM params (`utm_source`, `utm_medium`, `utm_campaign`)
+  - `table` id for per-table attribution
+  - Size and margin controls
+  - SVG download and copy-link
+
+## 🧰 Tooling
+
+- Lint: `npm run lint`
+- Format: `npm run format`
+- Build: `npm run build`
+- Tests: `npm run test` (CI: `npm run test:ci`)
