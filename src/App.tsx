@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { LandingPage, QuizFlow, Results, SlotMachine } from './components'
+import { LandingPage, QuizFlow, Results, SlotMachine, QRCodePage } from './components'
 import { IngredientSpotlight } from './components/features/IngredientSpotlight'
 import { QuizProvider } from './context/QuizContext'
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt'
@@ -26,6 +26,7 @@ function App() {
             <Route path="/shuffle" element={<SlotMachine />} />
             <Route path="/results" element={<Results />} />
             <Route path="/ingredients" element={<IngredientSpotlight />} />
+            <Route path="/qr" element={<QRCodePage />} />
           </Routes>
           <PWAInstallPrompt />
         </div>
