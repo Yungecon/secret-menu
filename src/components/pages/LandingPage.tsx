@@ -35,8 +35,9 @@ const LandingPage = () => {
           that speaks to your distinguished taste and captures your essence.
         </p>
 
-        {/* Enhanced CTA Button */}
-        <div className="animate-fade-in delay-1000">
+        {/* Enhanced CTA Buttons */}
+        <div className="animate-fade-in delay-1000 space-y-6">
+          {/* Primary Quiz Button */}
           <button
             onClick={() => navigate('/quiz')}
             onMouseEnter={(e) => {
@@ -47,7 +48,7 @@ const LandingPage = () => {
               e.currentTarget.style.transform = 'scale(1) translateY(0)';
               e.currentTarget.style.boxShadow = '0 10px 20px rgba(168, 85, 247, 0.2)';
             }}
-            className="group relative premium-button text-xl px-16 py-6 transition-all duration-300 overflow-hidden"
+            className="group relative premium-button text-xl px-16 py-6 transition-all duration-300 overflow-hidden block mx-auto"
           >
             <span className="relative z-10 font-medium">Begin Your Journey</span>
             
@@ -57,6 +58,28 @@ const LandingPage = () => {
             {/* Button glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-magical-shimmer to-magical-glow opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
           </button>
+
+          {/* Alternative Shuffle Button */}
+          <div className="text-center">
+            <p className="text-premium-silver/60 text-sm mb-3">or</p>
+            <button
+              onClick={() => navigate('/shuffle')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 15px 30px rgba(212, 175, 55, 0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(212, 175, 55, 0.2)';
+              }}
+              className="group relative bg-premium-dark/50 backdrop-blur-sm border border-premium-gold/30 text-premium-gold hover:bg-premium-gold/10 text-lg px-12 py-4 rounded-xl transition-all duration-300 overflow-hidden"
+            >
+              <span className="relative z-10 font-medium">Surprise Me</span>
+              
+              {/* Button shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-premium-gold/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+            </button>
+          </div>
           
           {/* Subtle call to action */}
           <p className="text-premium-silver/50 text-sm mt-6 animate-pulse">

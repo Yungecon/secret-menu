@@ -29,4 +29,61 @@
     @apply border border-premium-silver/20 rounded-xl;
     @apply shadow-2xl backdrop-blur-sm;
   }
+
+  /* Slot Machine Animations */
+  .reel-spinning {
+    animation: reel-spin 0.1s linear infinite;
+  }
+
+  .reel-decelerate {
+    animation: reel-decelerate 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .reel-settle {
+    animation: reel-settle 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  .slot-machine-glow {
+    box-shadow: 
+      0 0 20px rgba(212, 175, 55, 0.3),
+      0 0 40px rgba(212, 175, 55, 0.2),
+      inset 0 0 20px rgba(212, 175, 55, 0.1);
+  }
+}
+
+@layer utilities {
+  /* Slot Machine Keyframes */
+  @keyframes reel-spin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+  }
+
+  @keyframes reel-decelerate {
+    0% { 
+      transform: translateY(0);
+      filter: blur(2px);
+    }
+    70% { 
+      transform: translateY(-5px);
+      filter: blur(1px);
+    }
+    100% { 
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes reel-settle {
+    0% { transform: translateY(0) scale(1); }
+    30% { transform: translateY(-8px) scale(1.05); }
+    60% { transform: translateY(3px) scale(0.98); }
+    100% { transform: translateY(0) scale(1); }
+  }
+
+  /* GPU Acceleration for smooth animations */
+  .gpu-accelerated {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
 }
