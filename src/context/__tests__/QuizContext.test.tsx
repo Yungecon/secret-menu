@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { QuizProvider } from '../QuizContext'
 import { useQuiz } from '../../hooks/useQuiz'
@@ -56,7 +56,7 @@ describe('QuizContext', () => {
   it('should throw error when useQuiz is used outside provider', () => {
     // Suppress console.error for this test
     const originalError = console.error
-    console.error = vi.fn()
+    vi.spyOn(console, 'error').mockImplementation(() => {})
 
     expect(() => {
       renderHook(() => useQuiz())
