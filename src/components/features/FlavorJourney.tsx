@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { cocktailBuildEngine } from '../../services/cocktailBuildEngine';
+import { CocktailResults } from './CocktailResults';
 
 interface FlavorJourneyProps {
   onCocktailGenerate?: (cocktails: any[]) => void;
@@ -34,6 +35,8 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   const [availableFlavors, setAvailableFlavors] = useState<string[]>([]);
   const [relationshipInfo, setRelationshipInfo] = useState<any>(null);
   const [dnaProfile, setDnaProfile] = useState<any>(null);
+  const [generatedCocktails, setGeneratedCocktails] = useState<any[]>([]);
+  const [showResults, setShowResults] = useState(false);
 
   // Load flavor journey data
   useEffect(() => {
@@ -125,6 +128,8 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
         console.log('Generated cocktails:', generatedCocktails);
         
         if (generatedCocktails && generatedCocktails.length > 0) {
+          setGeneratedCocktails(generatedCocktails);
+          setShowResults(true);
           onCocktailGenerate?.(generatedCocktails);
         } else {
           console.log('No cocktails generated');
@@ -143,6 +148,8 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
     setAvailableFlavors([]);
     setRelationshipInfo(null);
     setDnaProfile(null);
+    setGeneratedCocktails([]);
+    setShowResults(false);
   };
 
   if (!journeyData) {
@@ -151,6 +158,17 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-400"></div>
         <span className="ml-3 text-gray-300">Loading flavor journey...</span>
       </div>
+    );
+  }
+
+  // Show results if cocktails have been generated
+  if (showResults && generatedCocktails.length > 0) {
+    return (
+      <CocktailResults
+        cocktails={generatedCocktails}
+        onBack={() => setShowResults(false)}
+        onStartOver={resetJourney}
+      />
     );
   }
 
