@@ -79,16 +79,16 @@ const SlotReel: React.FC<SlotReelProps> = ({
     const finalIndex = Math.floor(Math.random() * attributes.length);
     const finalAttribute = attributes[finalIndex];
 
-    // Much faster deceleration with fewer steps
+    // Very fast deceleration - complete within 1.5 seconds
     let decelerationSteps = 0;
-    const maxSteps = 8; // Fewer deceleration steps for faster stopping
-    const baseDelay = 60; // Faster starting delay
+    const maxSteps = 6; // Even fewer steps for 1.5s total
+    const baseDelay = 40; // Very fast starting delay
 
     const decelerateStep = () => {
       decelerationSteps++;
       
-      // Faster exponential deceleration curve
-      const delay = baseDelay + (decelerationSteps * decelerationSteps * 15);
+      // Quick exponential deceleration curve - total ~1.2s for deceleration
+      const delay = baseDelay + (decelerationSteps * decelerationSteps * 12);
       
       setReelState(prev => ({
         ...prev,
@@ -98,7 +98,7 @@ const SlotReel: React.FC<SlotReelProps> = ({
       if (decelerationSteps < maxSteps) {
         decelerationTimeoutRef.current = setTimeout(decelerateStep, delay);
       } else {
-        // Faster final settle with bounce effect
+        // Very quick final settle - ~0.3s for bounce
         setTimeout(() => {
           setReelState(prev => ({
             ...prev,
@@ -107,26 +107,26 @@ const SlotReel: React.FC<SlotReelProps> = ({
             finalAttribute
           }));
 
-          // Quicker bounce/settle animation
+          // Super quick bounce/settle animation
           if (reelRef.current) {
-            reelRef.current.style.transform = 'translateY(-3px)';
+            reelRef.current.style.transform = 'translateY(-2px)';
             setTimeout(() => {
               if (reelRef.current) {
-                reelRef.current.style.transform = 'translateY(1px)';
+                reelRef.current.style.transform = 'translateY(0)';
                 setTimeout(() => {
                   if (reelRef.current) {
                     reelRef.current.style.transform = 'translateY(0)';
                     onStop(finalAttribute);
                   }
-                }, 100);
+                }, 60);
               }
-            }, 80);
+            }, 60);
           }
-        }, 150);
+        }, 100);
       }
     };
 
-    // Start deceleration faster
+    // Start deceleration immediately
     decelerationTimeoutRef.current = setTimeout(decelerateStep, baseDelay);
   };
 
