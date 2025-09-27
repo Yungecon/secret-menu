@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { QuizAnswers, RecommendationResult } from '../types';
+import { QuizAnswers } from '../types';
 
 interface QuizContextType {
   answers: QuizAnswers;
   setAnswers: (answers: QuizAnswers) => void;
-  recommendations: RecommendationResult | null;
-  setRecommendations: (recommendations: RecommendationResult) => void;
   resetQuiz: () => void;
 }
 
@@ -13,19 +11,15 @@ const QuizContext = createContext<QuizContextType | undefined>(undefined);
 
 export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [answers, setAnswers] = useState<QuizAnswers>({});
-  const [recommendations, setRecommendations] = useState<RecommendationResult | null>(null);
 
   const resetQuiz = () => {
     setAnswers({});
-    setRecommendations(null);
   };
 
   return (
     <QuizContext.Provider value={{
       answers,
       setAnswers,
-      recommendations,
-      setRecommendations,
       resetQuiz
     }}>
       {children}

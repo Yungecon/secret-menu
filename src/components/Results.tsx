@@ -1,22 +1,41 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuiz } from '../context/QuizContext';
+import { generateRecommendations } from '../utils/recommendationEngine';
+import { useEffect, useState } from 'react';
+import { RecommendationResult } from '../types';
 
 const Results = () => {
   const navigate = useNavigate();
-  const { resetQuiz } = useQuiz();
+  const { answers, resetQuiz } = useQuiz();
+  const [recommendations, setRecommendations] = useState<RecommendationResult | null>(null);
 
-  // Placeholder cocktail - will be replaced with actual recommendation engine
-  const mockCocktail = {
-    name: "Velvet Whisper",
-    ingredients: ["Premium Vodka", "Elderflower Liqueur", "Fresh Lime", "Champagne"],
-    description: "A sophisticated blend that speaks to your refined palate",
-    garnish: "Edible gold flake"
-  };
+  useEffect(() => {
+    if (Object.keys(answers).length > 0) {
+      const result = generateRecommendations(answers);
+      setRecommendations(result);
+    } else {
+      // No answers - redirect to start
+      navigate('/');
+    }
+  }, [answers, navigate]);
 
   const handleTryAnother = () => {
     resetQuiz();
     navigate('/');
   };
+
+  if (!recommendations) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="animate-spin w-8 h-8 border-2 border-magical-glow border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-premium-silver">Consulting the spirits...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const { primary, adjacent } = recommendations;
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -25,7 +44,7 @@ const Results = () => {
         <div className="mb-8">
           <p className="text-magical-glow text-lg mb-2">Your impeccable taste has led us to...</p>
           <h1 className="font-elegant text-5xl md:text-6xl font-bold text-premium-gold mb-4">
-            {mockCocktail.name}
+            {primary.name}
           </h1>
           <div className="w-32 h-0.5 bg-gradient-to-r from-magical-shimmer to-magical-glow mx-auto"></div>
         </div>
@@ -33,13 +52,13 @@ const Results = () => {
         {/* Cocktail details */}
         <div className="magical-card p-8 mb-8">
           <p className="text-premium-silver text-lg mb-6 leading-relaxed">
-            {mockCocktail.description}
+            {primary.notes || "A sophisticated blend that speaks to your refined palate"}
           </p>
           
           <div className="mb-6">
             <h3 className="text-premium-platinum font-semibold text-xl mb-4">Ingredients</h3>
             <ul className="space-y-2">
-              {mockCocktail.ingredients.map((ingredient, index) => (
+              {primary.ingredients.map((ingredient, index) => (
                 <li key={index} className="text-premium-silver">
                   {ingredient}
                 </li>
@@ -47,10 +66,26 @@ const Results = () => {
             </ul>
           </div>
 
-          <div className="text-sm text-premium-silver/70">
-            Garnished with {mockCocktail.garnish}
+          <div className="flex justify-between text-sm text-premium-silver/70">
+            <span>Garnished with {primary.garnish}</span>
+            <span>Served in {primary.glassware}</span>
           </div>
         </div>
+
+        {/* Adjacent recommendations */}
+        {adjacent.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-premium-platinum text-lg mb-4">You might also enjoy...</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {adjacent.map((cocktail) => (
+                <div key={cocktail.id} className="magical-card p-4">
+                  <h4 className="text-premium-gold font-medium mb-2">{cocktail.name}</h4>
+                  <p className="text-premium-silver/80 text-sm">{cocktail.style}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Try another button */}
         <button

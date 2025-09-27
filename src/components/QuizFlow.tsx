@@ -1,41 +1,46 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuiz } from '../context/QuizContext';
+import { QuizAnswers, QuizQuestion } from '../types';
 
 const QuizFlow = () => {
   const navigate = useNavigate();
   const { setAnswers } = useQuiz();
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setLocalAnswers] = useState<Record<string, string>>({});
+  const [answers, setLocalAnswers] = useState<QuizAnswers>({});
 
-  // Placeholder questions - will be expanded in implementation
-  const questions = [
+  const questions: QuizQuestion[] = [
     {
       id: 'sweetVsBitter',
       question: 'What speaks to your refined palate?',
+      category: 'flavor',
       options: [
-        { label: 'Sweet & Luxurious', value: 'sweet', colorTheme: 'from-pink-500 to-rose-400' },
-        { label: 'Bitter & Sophisticated', value: 'bitter', colorTheme: 'from-amber-600 to-orange-500' }
+        { label: 'Sweet & Luxurious', value: 'sweet', colorTheme: 'from-pink-500 to-rose-400', tags: ['sweet', 'luxurious'] },
+        { label: 'Bitter & Sophisticated', value: 'bitter', colorTheme: 'from-amber-600 to-orange-500', tags: ['bitter', 'sophisticated'] }
       ]
     },
     {
       id: 'lightVsBoozy',
       question: 'How do you prefer to indulge?',
+      category: 'style',
       options: [
-        { label: 'Light & Refreshing', value: 'light', colorTheme: 'from-blue-400 to-cyan-300' },
-        { label: 'Bold & Spirit-Forward', value: 'boozy', colorTheme: 'from-red-600 to-red-500' }
+        { label: 'Light & Refreshing', value: 'light', colorTheme: 'from-blue-400 to-cyan-300', tags: ['light', 'refreshing'] },
+        { label: 'Bold & Spirit-Forward', value: 'boozy', colorTheme: 'from-red-600 to-red-500', tags: ['boozy', 'spirit-forward'] }
       ]
     }
   ];
 
   const handleAnswer = (questionId: string, value: string) => {
-    const newAnswers = { ...answers, [questionId]: value };
+    const newAnswers = { 
+      ...answers, 
+      [questionId as keyof QuizAnswers]: value as any 
+    };
     setLocalAnswers(newAnswers);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Quiz complete
+      // Quiz complete - pass answers to context
       setAnswers(newAnswers);
       navigate('/results');
     }
