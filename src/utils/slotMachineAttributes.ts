@@ -93,12 +93,13 @@ export const convertSlotToQuizAnswers = (slotResult: SlotMachineResult): QuizAns
     return undefined;
   };
 
-  // Map spirit preference based on style
-  const spiritPreference = (): string | undefined => {
-    if (['premium', 'sophisticated'].includes(style)) return 'whiskey';
-    if (['tropical', 'light'].includes(style)) return 'rum';
-    if (['herbal', 'botanical'].includes(flavor)) return 'gin';
-    if (['bold', 'smoky'].includes(flavor)) return 'mezcal';
+
+  // Map mood to quiz format
+  const moodPreference = (): 'celebratory' | 'elegant' | 'cozy' | 'adventurous' | undefined => {
+    if (['celebratory', 'party', 'festive'].includes(mood)) return 'celebratory';
+    if (['elegant', 'sophisticated', 'refined'].includes(mood)) return 'elegant';
+    if (['cozy', 'intimate', 'warm'].includes(mood)) return 'cozy';
+    if (['adventurous', 'bold', 'exciting'].includes(mood)) return 'adventurous';
     return undefined;
   };
 
@@ -107,8 +108,7 @@ export const convertSlotToQuizAnswers = (slotResult: SlotMachineResult): QuizAns
     citrusVsStone: citrusVsStone(),
     lightVsBoozy: lightVsBoozy(),
     classicVsExperimental: classicVsExperimental(),
-    spiritPreference: spiritPreference(),
-    moodPreference: mood
+    moodPreference: moodPreference()
   };
 };
 

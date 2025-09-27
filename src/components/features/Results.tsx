@@ -29,8 +29,13 @@ const Results = () => {
       setRecommendations(result);
       
       // Track recommendation viewed with enhanced analytics
-      if (result.fuzzyMatches || result.fallbackUsed) {
-        trackEnhancedRecommendationViewed(result.primary.name, result.matchScore, result.fuzzyMatches, result.fallbackUsed);
+      if ('fuzzyMatches' in result && 'fallbackUsed' in result) {
+        const enhancedResult = result as EnhancedRecommendationResult;
+        if (enhancedResult.fuzzyMatches || enhancedResult.fallbackUsed) {
+          trackEnhancedRecommendationViewed(enhancedResult.primary.name, enhancedResult.matchScore, enhancedResult.fuzzyMatches, enhancedResult.fallbackUsed);
+        } else {
+          trackRecommendationViewed(result.primary.name, result.matchScore);
+        }
       } else {
         trackRecommendationViewed(result.primary.name, result.matchScore);
       }

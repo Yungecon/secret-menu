@@ -1,4 +1,4 @@
-import { Cocktail, QuizAnswers, RecommendationResult, EnhancedQuizAnswers, FuzzyMatchResult } from '../types';
+import { Cocktail, QuizAnswers, RecommendationResult, EnhancedQuizAnswers } from '../types';
 import cocktailData from '../assets/data/secret_menu_mvp_cocktails.json';
 
 // Fuzzy matching helper functions

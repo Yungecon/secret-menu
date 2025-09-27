@@ -109,7 +109,8 @@ class Analytics {
       }
     };
     
-    return optionTypes[questionId as keyof typeof optionTypes]?.[answer as keyof any] || 'unknown';
+    const optionTypeMap = optionTypes[questionId as keyof typeof optionTypes];
+    return optionTypeMap?.[answer as keyof typeof optionTypeMap] || 'unknown';
   }
 
   trackQuizCompleted(totalQuestions: number, completionTime: number) {
