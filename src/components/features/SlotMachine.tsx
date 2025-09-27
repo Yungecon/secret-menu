@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SlotReel from './SlotReel';
 import { 
@@ -17,37 +17,31 @@ const SlotMachine = () => {
   const navigate = useNavigate();
   
   const [reelStates, setReelStates] = useState<ReelState[]>([
-    { isSpinning: false },
-    { isSpinning: false },
-    { isSpinning: false }
+    { isSpinning: true },
+    { isSpinning: true },
+    { isSpinning: true }
   ]);
   
-  const [gameState, setGameState] = useState<'idle' | 'spinning' | 'stopping' | 'complete'>('idle');
+  const [gameState, setGameState] = useState<'spinning' | 'stopping' | 'complete'>('spinning');
   const [currentTap, setCurrentTap] = useState(0); // Which reel to stop next (0-2)
   const [slotResult, setSlotResult] = useState<SlotMachineResult | null>(null);
   const [autoStopTimeouts, setAutoStopTimeouts] = useState<NodeJS.Timeout[]>([]);
 
-  // Start all reels spinning
-  const startSpinning = useCallback(() => {
-    // Clear any existing timeouts
-    autoStopTimeouts.forEach(timeout => clearTimeout(timeout));
-    
-    setGameState('spinning');
-    setCurrentTap(0);
-    setSlotResult(null);
-    setReelStates([
-      { isSpinning: true },
-      { isSpinning: true },
-      { isSpinning: true }
-    ]);
-
-    // Set up auto-stop for first reel after 6 seconds
+  // Start auto-stop timer for first reel on component mount
+  useEffect(() => {
     const timeout = setTimeout(() => {
       handleTap();
     }, 6000);
     
     setAutoStopTimeouts([timeout]);
-  }, [autoStopTimeouts]);
+
+    // Cleanup on unmount
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+
 
   // Handle tap to stop current reel
   const handleTap = useCallback(() => {
@@ -121,19 +115,24 @@ const SlotMachine = () => {
     // Clear all auto-stop timeouts
     autoStopTimeouts.forEach(timeout => clearTimeout(timeout));
     
-    setGameState('idle');
+    setGameState('spinning');
     setCurrentTap(0);
     setSlotResult(null);
-    setAutoStopTimeouts([]);
     setReelStates([
-      { isSpinning: false },
-      { isSpinning: false },
-      { isSpinning: false }
+      { isSpinning: true },
+      { isSpinning: true },
+      { isSpinning: true }
     ]);
+
+    // Set up auto-stop for first reel after 6 seconds
+    const timeout = setTimeout(() => {
+      handleTap();
+    }, 6000);
+    
+    setAutoStopTimeouts([timeout]);
   }, [autoStopTimeouts]);
 
   const getInstructionText = () => {
-    if (gameState === 'idle') return 'Tap "Spin" to start your cocktail destiny';
     if (gameState === 'spinning') return `Tap the glowing reel to stop it (${currentTap + 1} of 3) - or wait 6 seconds`;
     if (gameState === 'stopping') return 'Reel stopping...';
     if (gameState === 'complete') return 'The reels have aligned! 🎰';
@@ -197,7 +196,7 @@ const SlotMachine = () => {
                 isSpinning={reel.isSpinning}
                 onStop={(attribute) => handleReelStop(index, attribute)}
                 reelIndex={index}
-                disabled={gameState === 'idle' || (gameState === 'spinning' && index !== currentTap)}
+                disabled={gameState === 'spinning' && index !== currentTap}
                 canTap={gameState === 'spinning' && index === currentTap}
                 onTap={handleTap}
               />
@@ -232,15 +231,6 @@ const SlotMachine = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {gameState === 'idle' && (
-            <button
-              onClick={startSpinning}
-              className="premium-button text-xl px-12 py-4 bg-gradient-to-r from-premium-gold to-premium-silver text-premium-black hover:scale-105 transition-all duration-300"
-            >
-              🎰 Spin the Reels
-            </button>
-          )}
-          
           {gameState === 'complete' && (
             <>
               <button
