@@ -171,8 +171,8 @@ describe('QuizFlow Component', () => {
     
     // Wait for compliment animation
     await waitFor(() => {
-      const complimentText = screen.getByText(/harmonious|balance|equilibrium/i)
-      expect(complimentText).toBeInTheDocument()
+      const complimentTexts = screen.getAllByText(/harmonious|balance|equilibrium/i)
+      expect(complimentTexts.length).toBeGreaterThan(0)
     }, { timeout: 1000 })
   })
 

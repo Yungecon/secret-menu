@@ -31,7 +31,7 @@ describe('SlotReel', () => {
     );
 
     expect(screen.getByText('1')).toBeInTheDocument(); // Reel number
-    expect(screen.getByText('sweet')).toBeInTheDocument(); // First attribute
+    expect(screen.getByText('Sweet')).toBeInTheDocument(); // First attribute
   });
 
   it('should show spinning state when isSpinning is true', () => {

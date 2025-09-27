@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { getCardData } from '../../utils/slotMachineCardData';
 
 interface SlotReelProps {
   attributes: string[];
@@ -141,6 +142,12 @@ const SlotReel: React.FC<SlotReelProps> = ({
   const currentAttribute = attributes[reelState.currentIndex];
   const isActive = reelState.isSpinning || reelState.isDecelerating;
   const isStopped = !isActive && reelState.finalAttribute;
+  
+  // Get card data for current attribute
+  const reelTypes = ['flavor', 'mood', 'style'] as const;
+  const reelType = reelTypes[reelIndex];
+  const currentCardData = getCardData(currentAttribute, reelType);
+  const finalCardData = reelState.finalAttribute ? getCardData(reelState.finalAttribute, reelType) : null;
 
   const handleReelClick = () => {
     if (canTap && onTap) {
@@ -161,40 +168,84 @@ const SlotReel: React.FC<SlotReelProps> = ({
           <div className="absolute inset-2 bg-gradient-to-b from-premium-black/50 to-premium-dark/30 rounded-xl border border-premium-silver/10"></div>
         </div>
 
-        {/* Spinning Reel Content */}
+        {/* Enhanced Card Content */}
         <div 
           ref={reelRef}
           className={`
-            absolute inset-4 flex items-center justify-center rounded-lg overflow-hidden
-            transition-transform duration-200 ease-out
-            ${isActive ? 'bg-premium-dark/90' : 'bg-premium-dark/70'}
+            absolute inset-2 rounded-xl overflow-hidden
+            transition-all duration-300 ease-out
+            ${canTap ? 'cursor-pointer hover:scale-105' : ''}
+            ${isStopped ? 'shadow-2xl' : 'shadow-lg'}
           `}
+          style={{
+            background: currentCardData ? (() => {
+              const gradientParts = currentCardData.gradient.split(' ');
+              const fromColor = gradientParts[0]?.replace('from-', '') || 'luxury-gold';
+              const toColor = gradientParts[2]?.replace('to-', '') || 'luxury-brass';
+              return `linear-gradient(135deg, var(--${fromColor}), var(--${toColor}))`;
+            })() : 'var(--premium-dark)',
+            boxShadow: isStopped && finalCardData ? `0 0 30px var(--${finalCardData.glowColor})` : undefined
+          }}
         >
-          {/* Attribute Display */}
+          {/* Card Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40"></div>
+          
+          {/* Card Content */}
           <div className={`
-            text-center transition-all duration-300
+            relative h-full flex flex-col items-center justify-center p-3 text-center
+            transition-all duration-300
             ${isActive ? 'blur-sm scale-110' : 'blur-none scale-100'}
             ${isStopped ? 'animate-pulse' : ''}
           `}>
+            {/* Icon */}
             <div className={`
-              font-elegant text-lg md:text-xl font-semibold capitalize
+              text-3xl md:text-4xl mb-2 transition-all duration-300
+              ${isStopped ? 'drop-shadow-lg' : ''}
+            `}>
+              {currentCardData?.icon || '🎲'}
+            </div>
+            
+            {/* Label */}
+            <div className={`
+              font-elegant text-sm md:text-base font-bold mb-1
               ${isStopped 
-                ? 'text-premium-gold bg-gradient-to-r from-premium-gold to-premium-silver bg-clip-text text-transparent' 
-                : 'text-premium-silver'
+                ? 'text-white drop-shadow-md' 
+                : 'text-white/90'
               }
             `}>
-              {currentAttribute}
+              {currentCardData?.label || currentAttribute}
+            </div>
+            
+            {/* Description */}
+            <div className={`
+              text-xs md:text-sm font-medium
+              ${isStopped 
+                ? 'text-white/80 drop-shadow-sm' 
+                : 'text-white/70'
+              }
+            `}>
+              {currentCardData?.description || ''}
             </div>
           </div>
 
           {/* Spinning Effect Overlay */}
           {isActive && (
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-premium-silver/10 to-transparent animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
           )}
 
           {/* Motion Blur Effect */}
           {reelState.isSpinning && (
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-premium-silver/5 to-transparent animate-spin"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent animate-spin"></div>
+          )}
+
+          {/* Glow Effect for Stopped Cards */}
+          {isStopped && finalCardData && (
+            <div 
+              className="absolute inset-0 rounded-xl opacity-50 animate-pulse"
+              style={{
+                boxShadow: `inset 0 0 20px var(--${finalCardData.glowColor})`
+              }}
+            ></div>
           )}
         </div>
 
