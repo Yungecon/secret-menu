@@ -298,7 +298,8 @@ const QuizFlow = () => {
 
     if (isLeftSwipe && currentQuestion < questions.length - 1) {
       // Swipe left to go to next question (if answered)
-      if (answers[currentQ.id as keyof QuizAnswers]) {
+      const currentQuestionId = questions[currentQuestion].id;
+      if (answers[currentQuestionId as keyof QuizAnswers]) {
         setCurrentQuestion(currentQuestion + 1);
       }
     }
@@ -420,14 +421,14 @@ const QuizFlow = () => {
 
         {/* Current Question with enhanced animation */}
         <h2 
-          key={currentQuestion} // Force re-render for animation
+          key={`current-question-${currentQuestion}`} // Force re-render for animation
           className="font-elegant text-4xl md:text-5xl font-semibold mb-12 text-premium-platinum animate-slide-up"
         >
           {currentQ.question}
         </h2>
 
         {/* Answer options with enhanced animations */}
-        <div key={currentQuestion} className="space-y-6">
+        <div key={`options-${currentQuestion}`} className="space-y-6">
           {currentQ.options.map((option, optionIndex) => (
             <button
               key={option.value}

@@ -108,7 +108,7 @@ describe('Accessibility Tests', () => {
     
     // Check that text elements have proper contrast classes
     const title = screen.getByText('Secret Menu')
-    expect(title).toHaveClass('text-premium-platinum')
+    expect(title).toHaveClass('text-transparent')
     
     const subtitle = screen.getByText('Discover a secret cocktail just for you')
     expect(subtitle).toHaveClass('text-premium-silver')

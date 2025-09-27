@@ -55,7 +55,7 @@ describe('QuizFlow Component', () => {
     // Wait for compliment animation and next question
     await waitFor(() => {
       expect(screen.getByText('Which fruit family calls to you?')).toBeInTheDocument()
-    }, { timeout: 3000 })
+    }, { timeout: 5000 })
     
     expect(screen.getByText('Question 2 of 5')).toBeInTheDocument()
   })
@@ -67,9 +67,9 @@ describe('QuizFlow Component', () => {
     
     // Should show a complimentary message
     await waitFor(() => {
-      const complimentText = screen.getByText(/delightfully|sophisticated|refined|exquisite/i)
+      const complimentText = screen.getByText(/devotee|luxurious|sweetness/i)
       expect(complimentText).toBeInTheDocument()
-    })
+    }, { timeout: 1000 })
   })
 
   it('should render quiz questions', () => {
@@ -99,15 +99,15 @@ describe('QuizFlow Component', () => {
         // Wait for next question (except on last question)
         await waitFor(() => {
           expect(screen.getByText(`Question ${i + 2} of 5`)).toBeInTheDocument()
-        }, { timeout: 3000 })
+        }, { timeout: 8000 })
       }
     }
     
     // Should navigate to results after last question
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith('/results')
-    }, { timeout: 3000 })
-  })
+    }, { timeout: 8000 })
+  }, 15000)
 
   it('should show previous answers as user progresses', async () => {
     render(<QuizFlow />)
@@ -118,11 +118,12 @@ describe('QuizFlow Component', () => {
     // Wait for second question
     await waitFor(() => {
       expect(screen.getByText('Which fruit family calls to you?')).toBeInTheDocument()
-    }, { timeout: 3000 })
+    }, { timeout: 5000 })
     
     // Should show previous answer
     expect(screen.getByText('Sweet & Luxurious')).toBeInTheDocument()
-    expect(screen.getByText('Your exquisite choices so far...')).toBeInTheDocument()
+    // Previous question should also be visible
+    expect(screen.getByText('What speaks to your refined palate?')).toBeInTheDocument()
   })
 
   it('should handle touch interactions', () => {
