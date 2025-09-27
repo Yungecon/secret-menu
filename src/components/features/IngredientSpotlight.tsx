@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ingredientSpotlightService, IngredientFilter, IngredientSearchResult, SeasonalRecommendation } from '../../services/ingredientSpotlightService';
+import { ingredientSpotlightService, SeasonalRecommendation } from '../../services/ingredientSpotlightService';
+import { IngredientSearch } from './IngredientSearch';
 
 interface IngredientSpotlightProps {
   onIngredientSelect?: (ingredient: any) => void;
@@ -10,12 +11,8 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
   onIngredientSelect,
   onCocktailSelect
 }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedFilters, setSelectedFilters] = useState<IngredientFilter>({});
-  const [searchResults, setSearchResults] = useState<IngredientSearchResult[]>([]);
   const [seasonalSpotlight, setSeasonalSpotlight] = useState<SeasonalRecommendation | null>(null);
   const [activeTab, setActiveTab] = useState<'search' | 'seasonal' | 'categories'>('search');
-  const [loading, setLoading] = useState(false);
 
   // Load seasonal spotlight on mount
   useEffect(() => {
@@ -28,36 +25,12 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
     loadSeasonalSpotlight();
   }, []);
 
-  // Search ingredients when query or filters change
-  useEffect(() => {
-    const searchIngredients = async () => {
-      if (searchQuery.trim()) {
-        setLoading(true);
-        const results = await ingredientSpotlightService.searchIngredients(searchQuery, selectedFilters);
-        setSearchResults(results);
-        setLoading(false);
-      } else {
-        setSearchResults([]);
-      }
-    };
-
-    const debounceTimer = setTimeout(searchIngredients, 300);
-    return () => clearTimeout(debounceTimer);
-  }, [searchQuery, selectedFilters]);
-
   const getCurrentSeason = (): string => {
     const month = new Date().getMonth();
     if (month >= 2 && month <= 4) return 'spring';
     if (month >= 5 && month <= 7) return 'summer';
     if (month >= 8 && month <= 10) return 'fall';
     return 'winter';
-  };
-
-  const handleFilterChange = (filterType: keyof IngredientFilter, value: string) => {
-    setSelectedFilters(prev => ({
-      ...prev,
-      [filterType]: value === 'all' ? undefined : value
-    }));
   };
 
   const handleIngredientClick = (ingredient: any) => {
@@ -108,160 +81,10 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
 
         {/* Search Tab */}
         {activeTab === 'search' && (
-          <div className="max-w-4xl mx-auto">
-            {/* Search Bar */}
-            <div className="relative mb-6">
-              <input
-                type="text"
-                placeholder="Search ingredients... (e.g., 'vodka', 'coffee', 'gin')"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
-              />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                <span className="text-gray-400">🔍</span>
-              </div>
-            </div>
-
-            {/* Filters */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Price Point</label>
-                <select
-                  value={selectedFilters.pricePoint || 'all'}
-                  onChange={(e) => handleFilterChange('pricePoint', e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="all">All Prices</option>
-                  <option value="budget">Budget</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                  <option value="premium">Premium</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Upsell Potential</label>
-                <select
-                  value={selectedFilters.upsellPotential || 'all'}
-                  onChange={(e) => handleFilterChange('upsellPotential', e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="all">All</option>
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                  <option value="very-high">Very High</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Inventory Priority</label>
-                <select
-                  value={selectedFilters.inventoryPriority || 'all'}
-                  onChange={(e) => handleFilterChange('inventoryPriority', e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="all">All</option>
-                  <option value="very_high">Very High</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Season</label>
-                <select
-                  value={selectedFilters.season || 'all'}
-                  onChange={(e) => handleFilterChange('season', e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                  <option value="all">All Seasons</option>
-                  <option value="spring">Spring</option>
-                  <option value="summer">Summer</option>
-                  <option value="fall">Fall</option>
-                  <option value="winter">Winter</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Search Results */}
-            {loading && (
-              <div className="text-center py-8">
-                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-400"></div>
-                <p className="mt-2 text-gray-300">Searching ingredients...</p>
-              </div>
-            )}
-
-            {!loading && searchResults.length > 0 && (
-              <div className="grid gap-4">
-                {searchResults.map((result, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleIngredientClick(result.ingredient)}
-                    className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:bg-slate-700 transition-all duration-200 cursor-pointer group"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-semibold text-white group-hover:text-purple-300 transition-colors">
-                        {result.ingredient.name}
-                      </h3>
-                      <div className="flex gap-2">
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${
-                          result.ingredient.tier === 'premium' ? 'bg-purple-600 text-white' :
-                          result.ingredient.tier === 'craft' ? 'bg-blue-600 text-white' :
-                          'bg-gray-600 text-white'
-                        }`}>
-                          {result.ingredient.tier}
-                        </span>
-                        <span className="px-2 py-1 rounded text-xs font-medium bg-green-600 text-white">
-                          {result.ingredient.price_point}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mb-3">
-                      <div className="flex flex-wrap gap-2">
-                        {result.ingredient.flavor_profile?.map((flavor: string, idx: number) => (
-                          <span key={idx} className="px-2 py-1 bg-slate-700 rounded text-sm text-gray-300">
-                            {flavor}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mb-3">
-                      <p className="text-sm text-gray-400 mb-2">Best for:</p>
-                      <div className="flex flex-wrap gap-2">
-                        {result.suggestedCocktails.map((cocktail, idx) => (
-                          <button
-                            key={idx}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleCocktailClick(cocktail);
-                            }}
-                            className="px-2 py-1 bg-purple-600 hover:bg-purple-500 rounded text-sm text-white transition-colors"
-                          >
-                            {cocktail}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="text-xs text-gray-500">
-                      Match reasons: {result.matchReasons.join(', ')}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {!loading && searchQuery && searchResults.length === 0 && (
-              <div className="text-center py-8">
-                <p className="text-gray-400">No ingredients found matching your search.</p>
-              </div>
-            )}
-          </div>
+          <IngredientSearch
+            onIngredientSelect={onIngredientSelect}
+            onCocktailSelect={onCocktailSelect}
+          />
         )}
 
         {/* Seasonal Tab */}

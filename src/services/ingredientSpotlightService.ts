@@ -207,7 +207,7 @@ export class IngredientSpotlightService {
   }
 
   /**
-   * Check if ingredient matches search query
+   * Check if ingredient matches search query using fuzzy matching
    */
   private matchesQuery(ingredient: any, query: string): boolean {
     if (!query) return true;
@@ -221,9 +221,83 @@ export class IngredientSpotlightService {
       ingredient.subcategory
     ];
 
-    return searchableFields.some(field => 
-      field && field.toString().toLowerCase().includes(query)
+    const queryLower = query.toLowerCase();
+    
+    // Exact match gets highest priority
+    if (searchableFields.some(field => 
+      field && field.toString().toLowerCase().includes(queryLower)
+    )) {
+      return true;
+    }
+
+    // Fuzzy matching for partial matches
+    return this.fuzzyMatch(queryLower, searchableFields);
+  }
+
+  /**
+   * Fuzzy matching algorithm for ingredient search
+   */
+  private fuzzyMatch(query: string, fields: any[]): boolean {
+    const queryWords = query.split(' ').filter(word => word.length > 1);
+    
+    for (const field of fields) {
+      if (!field) continue;
+      
+      const fieldStr = field.toString().toLowerCase();
+      
+      // Check if all query words appear in the field
+      const allWordsMatch = queryWords.every(word => 
+        fieldStr.includes(word) || 
+        this.calculateSimilarity(word, fieldStr) > 0.6
+      );
+      
+      if (allWordsMatch) return true;
+    }
+    
+    return false;
+  }
+
+  /**
+   * Calculate string similarity using Levenshtein distance
+   */
+  private calculateSimilarity(str1: string, str2: string): number {
+    const longer = str1.length > str2.length ? str1 : str2;
+    const shorter = str1.length > str2.length ? str2 : str1;
+    
+    if (longer.length === 0) return 1.0;
+    
+    const editDistance = this.levenshteinDistance(longer, shorter);
+    return (longer.length - editDistance) / longer.length;
+  }
+
+  /**
+   * Calculate Levenshtein distance between two strings
+   */
+  private levenshteinDistance(str1: string, str2: string): number {
+    const matrix = Array(str2.length + 1).fill(null).map(() => 
+      Array(str1.length + 1).fill(null)
     );
+
+    for (let i = 0; i <= str1.length; i++) {
+      matrix[0][i] = i;
+    }
+
+    for (let j = 0; j <= str2.length; j++) {
+      matrix[j][0] = j;
+    }
+
+    for (let j = 1; j <= str2.length; j++) {
+      for (let i = 1; i <= str1.length; i++) {
+        const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1;
+        matrix[j][i] = Math.min(
+          matrix[j][i - 1] + 1,     // deletion
+          matrix[j - 1][i] + 1,     // insertion
+          matrix[j - 1][i - 1] + indicator // substitution
+        );
+      }
+    }
+
+    return matrix[str2.length][str1.length];
   }
 
   /**
@@ -258,25 +332,45 @@ export class IngredientSpotlightService {
    */
   private calculateRelevanceScore(ingredient: any, query: string, filters?: IngredientFilter): number {
     let score = 0;
+    const queryLower = query.toLowerCase();
 
-    // Name match gets highest score
-    if (ingredient.name.toLowerCase().includes(query)) {
+    // Exact name match gets highest score
+    if (ingredient.name.toLowerCase() === queryLower) {
       score += 100;
+    } else if (ingredient.name.toLowerCase().includes(queryLower)) {
+      score += 90;
+    } else if (this.calculateSimilarity(queryLower, ingredient.name.toLowerCase()) > 0.7) {
+      score += 70;
     }
 
     // ID match gets high score
-    if (ingredient.id.toLowerCase().includes(query)) {
+    if (ingredient.id.toLowerCase().includes(queryLower)) {
       score += 80;
     }
 
-    // Flavor profile match
-    if (ingredient.flavor_profile?.some((flavor: string) => flavor.toLowerCase().includes(query))) {
-      score += 60;
+    // Flavor profile matches
+    const flavorMatches = ingredient.flavor_profile?.filter((flavor: string) => 
+      flavor.toLowerCase().includes(queryLower) || 
+      this.calculateSimilarity(queryLower, flavor.toLowerCase()) > 0.6
+    ) || [];
+    
+    if (flavorMatches.length > 0) {
+      score += 60 + (flavorMatches.length * 10); // Bonus for multiple flavor matches
     }
 
-    // Best uses match
-    if (ingredient.best_for?.some((use: string) => use.toLowerCase().includes(query))) {
-      score += 40;
+    // Best uses matches
+    const useMatches = ingredient.best_for?.filter((use: string) => 
+      use.toLowerCase().includes(queryLower) ||
+      this.calculateSimilarity(queryLower, use.toLowerCase()) > 0.6
+    ) || [];
+    
+    if (useMatches.length > 0) {
+      score += 40 + (useMatches.length * 5); // Bonus for multiple use matches
+    }
+
+    // Tier relevance (premium ingredients get slight boost)
+    if (ingredient.tier === 'premium') {
+      score += 5;
     }
 
     // Filter bonuses
@@ -292,7 +386,23 @@ export class IngredientSpotlightService {
       score += 10;
     }
 
-    return score;
+    // Seasonal bonus
+    if (filters?.season && ingredient.seasonal) {
+      score += 5;
+    }
+
+    // Inventory priority bonus (high priority ingredients get slight boost)
+    if (ingredient.inventory_priority === 'very_high') {
+      score += 3;
+    }
+
+    // Upsell potential bonus (high upsell ingredients get slight boost)
+    if (ingredient.upsell_potential === 'very-high') {
+      score += 3;
+    }
+
+    // Ensure score doesn't exceed 100
+    return Math.min(score, 100);
   }
 
   /**
