@@ -25,9 +25,13 @@ const SlotMachine = () => {
   const [gameState, setGameState] = useState<'idle' | 'spinning' | 'stopping' | 'complete'>('idle');
   const [currentTap, setCurrentTap] = useState(0); // Which reel to stop next (0-2)
   const [slotResult, setSlotResult] = useState<SlotMachineResult | null>(null);
+  const [autoStopTimeouts, setAutoStopTimeouts] = useState<NodeJS.Timeout[]>([]);
 
   // Start all reels spinning
   const startSpinning = useCallback(() => {
+    // Clear any existing timeouts
+    autoStopTimeouts.forEach(timeout => clearTimeout(timeout));
+    
     setGameState('spinning');
     setCurrentTap(0);
     setSlotResult(null);
@@ -36,11 +40,23 @@ const SlotMachine = () => {
       { isSpinning: true },
       { isSpinning: true }
     ]);
-  }, []);
+
+    // Set up auto-stop for first reel after 6 seconds
+    const timeout = setTimeout(() => {
+      handleTap();
+    }, 6000);
+    
+    setAutoStopTimeouts([timeout]);
+  }, [autoStopTimeouts]);
 
   // Handle tap to stop current reel
   const handleTap = useCallback(() => {
     if (gameState !== 'spinning' || currentTap >= 3) return;
+
+    // Clear the auto-stop timeout for current reel
+    if (autoStopTimeouts[currentTap]) {
+      clearTimeout(autoStopTimeouts[currentTap]);
+    }
 
     setGameState('stopping');
     
@@ -50,7 +66,7 @@ const SlotMachine = () => {
         ? { ...reel, isSpinning: false }
         : reel
     ));
-  }, [gameState, currentTap]);
+  }, [gameState, currentTap, autoStopTimeouts]);
 
   // Handle when a reel stops and selects an attribute
   const handleReelStop = useCallback((reelIndex: number, selectedAttribute: string) => {
@@ -64,8 +80,18 @@ const SlotMachine = () => {
     setCurrentTap(nextTap);
 
     if (nextTap < 3) {
-      // More reels to stop, return to spinning state
+      // More reels to stop, return to spinning state and set auto-stop for next reel
       setGameState('spinning');
+      
+      const timeout = setTimeout(() => {
+        handleTap();
+      }, 6000);
+      
+      setAutoStopTimeouts(prev => {
+        const newTimeouts = [...prev];
+        newTimeouts[nextTap] = timeout;
+        return newTimeouts;
+      });
     } else {
       // All reels stopped, create final result
       const updatedStates = [...reelStates];
@@ -92,19 +118,23 @@ const SlotMachine = () => {
 
   // Reset for new spin
   const spinAgain = useCallback(() => {
+    // Clear all auto-stop timeouts
+    autoStopTimeouts.forEach(timeout => clearTimeout(timeout));
+    
     setGameState('idle');
     setCurrentTap(0);
     setSlotResult(null);
+    setAutoStopTimeouts([]);
     setReelStates([
       { isSpinning: false },
       { isSpinning: false },
       { isSpinning: false }
     ]);
-  }, []);
+  }, [autoStopTimeouts]);
 
   const getInstructionText = () => {
     if (gameState === 'idle') return 'Tap "Spin" to start your cocktail destiny';
-    if (gameState === 'spinning') return `Tap to stop reel ${currentTap + 1} of 3`;
+    if (gameState === 'spinning') return `Tap the glowing reel to stop it (${currentTap + 1} of 3) - or wait 6 seconds`;
     if (gameState === 'stopping') return 'Reel stopping...';
     if (gameState === 'complete') return 'The reels have aligned! 🎰';
     return '';
@@ -168,24 +198,11 @@ const SlotMachine = () => {
                 onStop={(attribute) => handleReelStop(index, attribute)}
                 reelIndex={index}
                 disabled={gameState === 'idle' || (gameState === 'spinning' && index !== currentTap)}
+                canTap={gameState === 'spinning' && index === currentTap}
+                onTap={handleTap}
               />
             ))}
           </div>
-
-          {/* Tap Area for Mobile */}
-          {(gameState === 'spinning') && (
-            <div 
-              onClick={handleTap}
-              className="cursor-pointer bg-premium-dark/50 border-2 border-dashed border-premium-gold/50 rounded-2xl p-8 mb-6 hover:bg-premium-gold/10 transition-all duration-300 active:scale-95"
-            >
-              <p className="text-premium-gold text-lg font-medium">
-                👆 Tap here to stop reel {currentTap + 1}
-              </p>
-              <p className="text-premium-silver/70 text-sm mt-2">
-                Or tap anywhere on the screen
-              </p>
-            </div>
-          )}
 
           {/* Results Display */}
           {gameState === 'complete' && slotResult && (
@@ -259,14 +276,7 @@ const SlotMachine = () => {
           </button>
         </div>
 
-        {/* Global tap handler for mobile */}
-        {gameState === 'spinning' && (
-          <div 
-            onClick={handleTap}
-            className="fixed inset-0 z-0 cursor-pointer"
-            style={{ background: 'transparent' }}
-          />
-        )}
+
       </div>
     </div>
   );

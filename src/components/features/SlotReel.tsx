@@ -6,6 +6,8 @@ interface SlotReelProps {
   onStop: (selectedAttribute: string) => void;
   reelIndex: number;
   disabled?: boolean;
+  canTap?: boolean;
+  onTap?: () => void;
 }
 
 interface ReelState {
@@ -20,7 +22,9 @@ const SlotReel: React.FC<SlotReelProps> = ({
   isSpinning,
   onStop,
   reelIndex,
-  disabled = false
+  disabled = false,
+  canTap = false,
+  onTap
 }) => {
   const [reelState, setReelState] = useState<ReelState>({
     isSpinning: false,
@@ -49,13 +53,13 @@ const SlotReel: React.FC<SlotReelProps> = ({
       finalAttribute: undefined
     }));
 
-    // Fast spinning animation - cycle through attributes quickly
+    // Much faster spinning animation - cycle through attributes quickly
     intervalRef.current = setInterval(() => {
       setReelState(prev => ({
         ...prev,
         currentIndex: (prev.currentIndex + 1) % attributes.length
       }));
-    }, 100); // 10 FPS for visible spinning effect
+    }, 50); // 20 FPS for fast, smooth spinning effect
   };
 
   const stopSpinning = () => {
@@ -75,16 +79,16 @@ const SlotReel: React.FC<SlotReelProps> = ({
     const finalIndex = Math.floor(Math.random() * attributes.length);
     const finalAttribute = attributes[finalIndex];
 
-    // Simulate mechanical deceleration with realistic timing
+    // Much faster deceleration with fewer steps
     let decelerationSteps = 0;
-    const maxSteps = 15; // Number of deceleration steps
-    const baseDelay = 100; // Starting delay
+    const maxSteps = 8; // Fewer deceleration steps for faster stopping
+    const baseDelay = 60; // Faster starting delay
 
     const decelerateStep = () => {
       decelerationSteps++;
       
-      // Exponential deceleration curve
-      const delay = baseDelay + (decelerationSteps * decelerationSteps * 20);
+      // Faster exponential deceleration curve
+      const delay = baseDelay + (decelerationSteps * decelerationSteps * 15);
       
       setReelState(prev => ({
         ...prev,
@@ -94,7 +98,7 @@ const SlotReel: React.FC<SlotReelProps> = ({
       if (decelerationSteps < maxSteps) {
         decelerationTimeoutRef.current = setTimeout(decelerateStep, delay);
       } else {
-        // Final settle with bounce effect
+        // Faster final settle with bounce effect
         setTimeout(() => {
           setReelState(prev => ({
             ...prev,
@@ -103,26 +107,26 @@ const SlotReel: React.FC<SlotReelProps> = ({
             finalAttribute
           }));
 
-          // Add bounce/settle animation
+          // Quicker bounce/settle animation
           if (reelRef.current) {
-            reelRef.current.style.transform = 'translateY(-5px)';
+            reelRef.current.style.transform = 'translateY(-3px)';
             setTimeout(() => {
               if (reelRef.current) {
-                reelRef.current.style.transform = 'translateY(2px)';
+                reelRef.current.style.transform = 'translateY(1px)';
                 setTimeout(() => {
                   if (reelRef.current) {
                     reelRef.current.style.transform = 'translateY(0)';
                     onStop(finalAttribute);
                   }
-                }, 150);
+                }, 100);
               }
-            }, 100);
+            }, 80);
           }
-        }, 200);
+        }, 150);
       }
     };
 
-    // Start deceleration
+    // Start deceleration faster
     decelerationTimeoutRef.current = setTimeout(decelerateStep, baseDelay);
   };
 
@@ -138,10 +142,19 @@ const SlotReel: React.FC<SlotReelProps> = ({
   const isActive = reelState.isSpinning || reelState.isDecelerating;
   const isStopped = !isActive && reelState.finalAttribute;
 
+  const handleReelClick = () => {
+    if (canTap && onTap) {
+      onTap();
+    }
+  };
+
   return (
     <div className="flex flex-col items-center">
       {/* Reel Container */}
-      <div className="relative w-32 h-40 md:w-40 md:h-48 mb-4">
+      <div 
+        className={`relative w-32 h-40 md:w-40 md:h-48 mb-4 ${canTap ? 'cursor-pointer' : ''}`}
+        onClick={handleReelClick}
+      >
         {/* Reel Frame - Premium metallic appearance */}
         <div className="absolute inset-0 bg-gradient-to-b from-premium-silver/20 via-premium-dark/80 to-premium-silver/20 rounded-2xl border-2 border-premium-silver/30 shadow-2xl backdrop-blur-sm">
           {/* Inner shadow for depth */}
@@ -184,6 +197,16 @@ const SlotReel: React.FC<SlotReelProps> = ({
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-premium-silver/5 to-transparent animate-spin"></div>
           )}
         </div>
+
+        {/* Tap Indicator for Active Reel */}
+        {canTap && reelState.isSpinning && (
+          <div className="absolute inset-0 bg-premium-gold/10 border-2 border-premium-gold/50 rounded-2xl flex items-center justify-center animate-pulse">
+            <div className="text-center">
+              <div className="text-premium-gold text-2xl mb-1">👆</div>
+              <div className="text-premium-gold text-xs font-semibold">TAP HERE</div>
+            </div>
+          </div>
+        )}
 
         {/* Highlight Ring for Stopped Reel */}
         {isStopped && (
