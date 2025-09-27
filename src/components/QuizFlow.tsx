@@ -89,12 +89,16 @@ const QuizFlow = () => {
   };
 
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
+  const [showingCompliment, setShowingCompliment] = useState<boolean>(false);
 
   const handleAnswer = (questionId: string, value: string) => {
     const message = getComplimentaryMessage(questionId, value);
+    
+    // Start the magical compliment sequence
+    setShowingCompliment(true);
     setFeedbackMessage(message);
     
-    // Brief pause to show the compliment
+    // After compliment animation completes, proceed to next question
     setTimeout(() => {
       const newAnswers = { 
         ...answers, 
@@ -105,19 +109,23 @@ const QuizFlow = () => {
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
         setFeedbackMessage("");
+        setShowingCompliment(false);
       } else {
         // Quiz complete - pass answers to context
         setAnswers(newAnswers);
         navigate('/results');
       }
-    }, 1200);
+    }, 2500); // Extended time for the magical moment
   };
 
   const currentQ = questions[currentQuestion];
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="max-w-2xl mx-auto text-center animate-slide-up">
+    <div className="min-h-screen flex items-center justify-center px-4 relative">
+      {/* Main quiz content */}
+      <div className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
+        showingCompliment ? 'opacity-20 blur-sm scale-95' : 'opacity-100 blur-none scale-100'
+      }`}>
         {/* Progress indicator */}
         <div className="mb-8">
           <div className="flex justify-center space-x-2 mb-4">
@@ -148,28 +156,43 @@ const QuizFlow = () => {
             <button
               key={option.value}
               onClick={() => handleAnswer(currentQ.id, option.value)}
+              disabled={showingCompliment}
               className={`w-full p-6 rounded-xl bg-gradient-to-r ${option.colorTheme} 
                          text-white font-medium text-xl transition-all duration-300
-                         hover:scale-105 hover:shadow-xl active:scale-95`}
+                         hover:scale-105 hover:shadow-xl active:scale-95
+                         disabled:cursor-not-allowed disabled:transform-none`}
             >
               {option.label}
             </button>
           ))}
         </div>
 
-        {/* Dynamic feedback message */}
-        <div className="mt-8 h-8 flex items-center justify-center">
-          {feedbackMessage ? (
-            <p className="text-magical-glow text-lg animate-fade-in font-medium">
-              {feedbackMessage}
-            </p>
-          ) : (
+        {/* Subtle encouragement when not showing compliment */}
+        {!showingCompliment && (
+          <div className="mt-8 h-8 flex items-center justify-center">
             <p className="text-premium-silver/70 text-lg">
               Excellent taste in considering your options...
             </p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
+
+      {/* Magical compliment overlay */}
+      {showingCompliment && feedbackMessage && (
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="text-center px-8">
+            <p className="font-script text-4xl md:text-5xl text-premium-gold animate-handwriting leading-relaxed font-medium">
+              {feedbackMessage}
+            </p>
+            {/* Magical sparkles */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-magical-glow rounded-full animate-ping opacity-60"></div>
+              <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-premium-gold rounded-full animate-pulse delay-500 opacity-80"></div>
+              <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-magical-shimmer rounded-full animate-bounce delay-1000 opacity-70"></div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
