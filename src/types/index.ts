@@ -14,10 +14,10 @@ export interface Cocktail {
 }
 
 export interface QuizAnswers {
-  sweetVsBitter?: 'sweet' | 'bitter';
-  citrusVsStone?: 'citrus' | 'stone';
-  lightVsBoozy?: 'light' | 'boozy';
-  classicVsExperimental?: 'classic' | 'experimental';
+  sweetVsBitter?: 'sweet' | 'bitter' | 'balanced';
+  citrusVsStone?: 'citrus' | 'stone' | 'tropical';
+  lightVsBoozy?: 'light' | 'boozy' | 'medium';
+  classicVsExperimental?: 'classic' | 'experimental' | 'modern';
   spiritPreference?: string;
   moodPreference?: string;
 }

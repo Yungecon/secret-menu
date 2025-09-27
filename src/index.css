@@ -1,32 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
-
 @layer base {
+  :root {
+    /* Luxury Color Custom Properties */
+    
+    /* Gold Tones */
+    --luxury-gold: #FFD700;
+    --luxury-champagne: #F7E7CE;
+    --luxury-antique: #CD7F32;
+    
+    /* Rose Gold Tones */
+    --luxury-rose: #E8B4B8;
+    --luxury-rose-dark: #D4A574;
+    --luxury-blush: #F4C2C2;
+    
+    /* Brass Tones */
+    --luxury-brass: #B5651D;
+    --luxury-brass-light: #DAA520;
+    --luxury-bronze: #CD7F32;
+    
+    /* Emerald Tones */
+    --luxury-emerald: #50C878;
+    --luxury-jade: #00A86B;
+    --luxury-mint: #98FB98;
+    
+    /* Supporting Neutrals */
+    --luxury-obsidian: #0B0B0B;
+    --luxury-charcoal: #1A1A1A;
+    --luxury-pearl: #F8F6F0;
+    --luxury-platinum: #E5E4E2;
+    
+    /* Luxury Gradient Definitions */
+    --luxury-gradient-gold: linear-gradient(135deg, var(--luxury-gold), var(--luxury-champagne));
+    --luxury-gradient-rose: linear-gradient(135deg, var(--luxury-rose), var(--luxury-rose-dark));
+    --luxury-gradient-brass: linear-gradient(135deg, var(--luxury-brass), var(--luxury-bronze));
+    --luxury-gradient-emerald: linear-gradient(135deg, var(--luxury-emerald), var(--luxury-jade));
+    --luxury-gradient-mixed: linear-gradient(135deg, var(--luxury-gold), var(--luxury-rose), var(--luxury-emerald));
+    --luxury-gradient-warm: linear-gradient(135deg, var(--luxury-gold), var(--luxury-rose-dark));
+    --luxury-gradient-cool: linear-gradient(135deg, var(--luxury-emerald), var(--luxury-platinum));
+    --luxury-gradient-royal: linear-gradient(135deg, var(--luxury-bronze), var(--luxury-jade));
+    
+    /* Luxury Shadow Definitions */
+    --luxury-shadow-gold: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2);
+    --luxury-shadow-emerald: 0 0 15px rgba(80, 200, 120, 0.4), 0 0 30px rgba(80, 200, 120, 0.2);
+    --luxury-shadow-rose: 0 0 18px rgba(232, 180, 184, 0.4), 0 0 35px rgba(232, 180, 184, 0.2);
+    --luxury-shadow-brass: 0 0 16px rgba(181, 101, 29, 0.4), 0 0 32px rgba(181, 101, 29, 0.2);
+    
+    /* Browser Compatibility Fallbacks */
+    --luxury-fallback-dark: #1a1a1a;
+    --luxury-fallback-light: #f8f6f0;
+    --luxury-fallback-accent: #d4a574;
+  }
+
   html {
     font-family: 'Inter', system-ui, sans-serif;
   }
   
   body {
-    @apply bg-premium-black text-premium-platinum;
+    @apply bg-luxury-obsidian text-luxury-pearl;
     @apply min-h-screen;
   }
 }
 
 @layer components {
   .premium-button {
-    @apply bg-gradient-to-r from-studio-amber to-studio-copper;
-    @apply text-white font-medium px-8 py-4 rounded-lg;
+    @apply bg-gradient-to-r from-luxury-gold to-luxury-brass;
+    @apply text-luxury-obsidian font-medium px-8 py-4 rounded-lg;
     @apply transition-all duration-300 ease-in-out;
     @apply hover:shadow-lg hover:scale-105;
     @apply active:scale-95;
   }
   
   .magical-card {
-    @apply bg-gradient-to-br from-premium-charcoal to-studio-graphite;
-    @apply border border-premium-silver/20 rounded-xl;
+    @apply bg-gradient-to-br from-luxury-charcoal to-luxury-obsidian;
+    @apply border border-luxury-platinum/20 rounded-xl;
     @apply shadow-2xl backdrop-blur-sm;
   }
 
@@ -44,10 +95,264 @@
   }
 
   .slot-machine-glow {
+    box-shadow: var(--luxury-shadow-gold), inset 0 0 20px rgba(255, 215, 0, 0.1);
+  }
+
+  /* Luxury Utility Classes */
+  .luxury-text-gold {
+    color: var(--luxury-gold);
+  }
+
+  .luxury-text-rose {
+    color: var(--luxury-rose);
+  }
+
+  .luxury-text-emerald {
+    color: var(--luxury-emerald);
+  }
+
+  .luxury-text-brass {
+    color: var(--luxury-brass);
+  }
+
+  .luxury-bg-gradient-gold {
+    background: var(--luxury-gradient-gold);
+  }
+
+  .luxury-bg-gradient-rose {
+    background: var(--luxury-gradient-rose);
+  }
+
+  .luxury-bg-gradient-brass {
+    background: var(--luxury-gradient-brass);
+  }
+
+  .luxury-bg-gradient-emerald {
+    background: var(--luxury-gradient-emerald);
+  }
+
+  .luxury-bg-gradient-mixed {
+    background: var(--luxury-gradient-mixed);
+  }
+
+  .luxury-shadow-gold {
+    box-shadow: var(--luxury-shadow-gold);
+  }
+
+  .luxury-shadow-emerald {
+    box-shadow: var(--luxury-shadow-emerald);
+  }
+
+  .luxury-shadow-rose {
+    box-shadow: var(--luxury-shadow-rose);
+  }
+
+  .luxury-shadow-brass {
+    box-shadow: var(--luxury-shadow-brass);
+  }
+
+  /* Luxury Border Utilities */
+  .luxury-border-gold {
+    border-color: var(--luxury-gold);
+  }
+
+  .luxury-border-rose {
+    border-color: var(--luxury-rose);
+  }
+
+  .luxury-border-emerald {
+    border-color: var(--luxury-emerald);
+  }
+
+  .luxury-border-brass {
+    border-color: var(--luxury-brass);
+  }
+
+  /* Gemstone Glow Effects */
+  .gemstone-glow-gold {
     box-shadow: 
-      0 0 20px rgba(212, 175, 55, 0.3),
-      0 0 40px rgba(212, 175, 55, 0.2),
-      inset 0 0 20px rgba(212, 175, 55, 0.1);
+      0 0 10px rgba(255, 215, 0, 0.4),
+      0 0 20px rgba(255, 215, 0, 0.3),
+      0 0 30px rgba(255, 215, 0, 0.2),
+      inset 0 0 10px rgba(255, 215, 0, 0.1);
+    animation: gold-pulse 3s ease-in-out infinite alternate;
+  }
+
+  .gemstone-glow-emerald {
+    box-shadow: 
+      0 0 10px rgba(80, 200, 120, 0.4),
+      0 0 20px rgba(80, 200, 120, 0.3),
+      0 0 30px rgba(80, 200, 120, 0.2),
+      inset 0 0 10px rgba(80, 200, 120, 0.1);
+    animation: emerald-pulse 2.5s ease-in-out infinite alternate;
+  }
+
+  .gemstone-glow-rose {
+    box-shadow: 
+      0 0 10px rgba(232, 180, 184, 0.4),
+      0 0 20px rgba(232, 180, 184, 0.3),
+      0 0 30px rgba(232, 180, 184, 0.2),
+      inset 0 0 10px rgba(232, 180, 184, 0.1);
+    animation: rose-pulse 3.5s ease-in-out infinite alternate;
+  }
+
+  .gemstone-glow-brass {
+    box-shadow: 
+      0 0 10px rgba(181, 101, 29, 0.4),
+      0 0 20px rgba(181, 101, 29, 0.3),
+      0 0 30px rgba(181, 101, 29, 0.2),
+      inset 0 0 10px rgba(181, 101, 29, 0.1);
+    animation: brass-pulse 4s ease-in-out infinite alternate;
+  }
+
+  /* Metallic Shimmer Effects */
+  .metallic-shimmer-gold {
+    background: linear-gradient(
+      90deg,
+      var(--luxury-gold) 0%,
+      var(--luxury-champagne) 25%,
+      var(--luxury-gold) 50%,
+      var(--luxury-antique) 75%,
+      var(--luxury-gold) 100%
+    );
+    background-size: 200% 100%;
+    animation: gold-shimmer 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .metallic-shimmer-rose {
+    background: linear-gradient(
+      90deg,
+      var(--luxury-rose) 0%,
+      var(--luxury-blush) 25%,
+      var(--luxury-rose-dark) 50%,
+      var(--luxury-rose) 75%,
+      var(--luxury-blush) 100%
+    );
+    background-size: 200% 100%;
+    animation: rose-shimmer 4s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .metallic-shimmer-brass {
+    background: linear-gradient(
+      90deg,
+      var(--luxury-brass) 0%,
+      var(--luxury-brass-light) 25%,
+      var(--luxury-bronze) 50%,
+      var(--luxury-brass) 75%,
+      var(--luxury-brass-light) 100%
+    );
+    background-size: 200% 100%;
+    animation: brass-shimmer 3.5s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .metallic-shimmer-emerald {
+    background: linear-gradient(
+      90deg,
+      var(--luxury-emerald) 0%,
+      var(--luxury-mint) 25%,
+      var(--luxury-jade) 50%,
+      var(--luxury-emerald) 75%,
+      var(--luxury-mint) 100%
+    );
+    background-size: 200% 100%;
+    animation: emerald-shimmer 2.8s ease-in-out infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Luxury Pattern Utilities */
+  .luxury-pattern-gold {
+    background: var(--luxury-gradient-gold);
+    color: var(--luxury-obsidian);
+    border: 2px solid var(--luxury-gold);
+    box-shadow: var(--luxury-shadow-gold);
+  }
+
+  .luxury-pattern-rose {
+    background: var(--luxury-gradient-rose);
+    color: var(--luxury-obsidian);
+    border: 2px solid var(--luxury-rose);
+    box-shadow: var(--luxury-shadow-rose);
+  }
+
+  .luxury-pattern-brass {
+    background: var(--luxury-gradient-brass);
+    color: var(--luxury-pearl);
+    border: 2px solid var(--luxury-brass);
+    box-shadow: var(--luxury-shadow-brass);
+  }
+
+  .luxury-pattern-emerald {
+    background: var(--luxury-gradient-emerald);
+    color: var(--luxury-pearl);
+    border: 2px solid var(--luxury-emerald);
+    box-shadow: var(--luxury-shadow-emerald);
+  }
+
+  /* Luxury Interactive States */
+  .luxury-hover-gold:hover {
+    background: var(--luxury-gradient-gold);
+    box-shadow: var(--luxury-shadow-gold);
+    transform: translateY(-2px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .luxury-hover-rose:hover {
+    background: var(--luxury-gradient-rose);
+    box-shadow: var(--luxury-shadow-rose);
+    transform: translateY(-2px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .luxury-hover-brass:hover {
+    background: var(--luxury-gradient-brass);
+    box-shadow: var(--luxury-shadow-brass);
+    transform: translateY(-2px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .luxury-hover-emerald:hover {
+    background: var(--luxury-gradient-emerald);
+    box-shadow: var(--luxury-shadow-emerald);
+    transform: translateY(-2px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Luxury Card Styles */
+  .luxury-card {
+    background: linear-gradient(135deg, var(--luxury-charcoal), var(--luxury-obsidian));
+    border: 1px solid rgba(229, 228, 226, 0.2);
+    border-radius: 12px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 215, 0, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .luxury-card-gold {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 215, 0, 0.2),
+      var(--luxury-shadow-gold);
+  }
+
+  .luxury-card-emerald {
+    border-color: rgba(80, 200, 120, 0.3);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(80, 200, 120, 0.2),
+      var(--luxury-shadow-emerald);
   }
 }
 
@@ -85,5 +390,86 @@
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
+  }
+
+  /* Luxury Animation Keyframes */
+  @keyframes gold-pulse {
+    0% { 
+      box-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.4),
+        0 0 20px rgba(255, 215, 0, 0.3),
+        0 0 30px rgba(255, 215, 0, 0.2);
+    }
+    100% { 
+      box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.6),
+        0 0 30px rgba(255, 215, 0, 0.5),
+        0 0 45px rgba(255, 215, 0, 0.4);
+    }
+  }
+
+  @keyframes emerald-pulse {
+    0% { 
+      box-shadow: 
+        0 0 10px rgba(80, 200, 120, 0.4),
+        0 0 20px rgba(80, 200, 120, 0.3),
+        0 0 30px rgba(80, 200, 120, 0.2);
+    }
+    100% { 
+      box-shadow: 
+        0 0 15px rgba(80, 200, 120, 0.6),
+        0 0 30px rgba(80, 200, 120, 0.5),
+        0 0 45px rgba(80, 200, 120, 0.4);
+    }
+  }
+
+  @keyframes rose-pulse {
+    0% { 
+      box-shadow: 
+        0 0 10px rgba(232, 180, 184, 0.4),
+        0 0 20px rgba(232, 180, 184, 0.3),
+        0 0 30px rgba(232, 180, 184, 0.2);
+    }
+    100% { 
+      box-shadow: 
+        0 0 15px rgba(232, 180, 184, 0.6),
+        0 0 30px rgba(232, 180, 184, 0.5),
+        0 0 45px rgba(232, 180, 184, 0.4);
+    }
+  }
+
+  @keyframes brass-pulse {
+    0% { 
+      box-shadow: 
+        0 0 10px rgba(181, 101, 29, 0.4),
+        0 0 20px rgba(181, 101, 29, 0.3),
+        0 0 30px rgba(181, 101, 29, 0.2);
+    }
+    100% { 
+      box-shadow: 
+        0 0 15px rgba(181, 101, 29, 0.6),
+        0 0 30px rgba(181, 101, 29, 0.5),
+        0 0 45px rgba(181, 101, 29, 0.4);
+    }
+  }
+
+  @keyframes gold-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes rose-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes brass-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes emerald-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }

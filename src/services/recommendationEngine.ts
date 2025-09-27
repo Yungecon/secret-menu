@@ -1,52 +1,129 @@
 import { Cocktail, QuizAnswers, RecommendationResult } from '../types';
 import cocktailData from '../assets/data/secret_menu_mvp_cocktails.json';
 
+// Fuzzy matching helper functions
+const hasIngredient = (cocktail: Cocktail, ingredients: string[]): boolean => {
+  return cocktail.ingredients.some(ing => 
+    ingredients.some(target => ing.toLowerCase().includes(target.toLowerCase()))
+  );
+};
+
+const hasSweetIngredients = (cocktail: Cocktail): boolean => {
+  return hasIngredient(cocktail, [
+    'simple syrup', 'honey', 'agave', 'cream', 'chocolate', 'vanilla', 
+    'caramel', 'sugar', 'grenadine', 'amaretto', 'baileys'
+  ]);
+};
+
+const hasBitterIngredients = (cocktail: Cocktail): boolean => {
+  return hasIngredient(cocktail, [
+    'bitters', 'campari', 'aperol', 'amaro', 'vermouth', 'fernet'
+  ]) || cocktail.base_spirit_category.includes('Whiskey');
+};
+
+const hasCitrusIngredients = (cocktail: Cocktail): boolean => {
+  return hasIngredient(cocktail, [
+    'lemon', 'lime', 'grapefruit', 'orange', 'citrus'
+  ]);
+};
+
+const hasTropicalIngredients = (cocktail: Cocktail): boolean => {
+  return hasIngredient(cocktail, [
+    'pineapple', 'coconut', 'mango', 'passion fruit', 'guava', 'rum'
+  ]) || cocktail.base_spirit_category.includes('Rum');
+};
+
+const hasStoneIngredients = (cocktail: Cocktail): boolean => {
+  return hasIngredient(cocktail, [
+    'peach', 'apricot', 'plum', 'cherry', 'brandied cherry'
+  ]) || cocktail.base_spirit_category.includes('Brandy');
+};
+
 export const generateRecommendations = (answers: QuizAnswers): RecommendationResult => {
   const cocktails = cocktailData as Cocktail[];
   
-  // Score each cocktail based on quiz answers with a base score system that ensures high matches
+  // Score each cocktail based on quiz answers with enhanced fuzzy matching
   const scoredCocktails = cocktails.map(cocktail => {
     let score = 75; // Start with a high base score for magical feeling
     let matchingFactors = 0;
     
-    // Flavor preference scoring - Major factor
+    // Enhanced flavor preference scoring with fuzzy matching
     if (answers.sweetVsBitter === 'sweet') {
+      // Tag-based matching
       if (cocktail.flavor_tags.some(tag => ['sweet', 'fruity'].includes(tag))) {
         score += 15;
         matchingFactors++;
       }
+      // Fuzzy ingredient matching
+      if (hasSweetIngredients(cocktail)) {
+        score += 12;
+        matchingFactors++;
+      }
+      // Penalty for bitter
       if (cocktail.flavor_tags.some(tag => ['bitter', 'dry'].includes(tag))) score -= 5;
     } else if (answers.sweetVsBitter === 'bitter') {
+      // Tag-based matching
       if (cocktail.flavor_tags.some(tag => ['bitter', 'dry', 'herbal'].includes(tag))) {
         score += 15;
         matchingFactors++;
       }
+      // Fuzzy ingredient matching
+      if (hasBitterIngredients(cocktail)) {
+        score += 12;
+        matchingFactors++;
+      }
+      // Penalty for sweet
       if (cocktail.flavor_tags.some(tag => ['sweet', 'fruity'].includes(tag))) score -= 5;
+    } else if (answers.sweetVsBitter === 'balanced') {
+      // Balanced prefers cocktails with both elements or neutral profiles
+      if (cocktail.flavor_tags.some(tag => ['balanced', 'harmonious', 'elegant'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Bonus for cocktails that aren't extremely sweet or bitter
+      if (!cocktail.flavor_tags.some(tag => ['bitter', 'sweet'].includes(tag))) {
+        score += 8;
+        matchingFactors++;
+      }
     }
     
-    // Citrus vs Stone fruit preference
+    // Enhanced fruit preference scoring
     if (answers.citrusVsStone === 'citrus') {
+      // Tag-based matching
       if (cocktail.flavor_tags.some(tag => ['citrus', 'bright'].includes(tag))) {
         score += 12;
         matchingFactors++;
       }
-      if (cocktail.ingredients.some(ing => 
-        ing.toLowerCase().includes('lemon') || 
-        ing.toLowerCase().includes('lime') || 
-        ing.toLowerCase().includes('grapefruit') ||
-        ing.toLowerCase().includes('citrus')
-      )) {
-        score += 8;
+      // Fuzzy ingredient matching
+      if (hasCitrusIngredients(cocktail)) {
+        score += 10;
         matchingFactors++;
       }
     } else if (answers.citrusVsStone === 'stone') {
-      if (cocktail.flavor_tags.some(tag => ['rich', 'deep', 'fruity'].includes(tag))) {
+      // Tag-based matching
+      if (cocktail.flavor_tags.some(tag => ['rich', 'deep', 'fruity', 'stone'].includes(tag))) {
         score += 12;
+        matchingFactors++;
+      }
+      // Fuzzy ingredient matching
+      if (hasStoneIngredients(cocktail)) {
+        score += 10;
+        matchingFactors++;
+      }
+    } else if (answers.citrusVsStone === 'tropical') {
+      // Tag-based matching
+      if (cocktail.flavor_tags.some(tag => ['tropical', 'exotic', 'fruity'].includes(tag))) {
+        score += 12;
+        matchingFactors++;
+      }
+      // Fuzzy ingredient matching
+      if (hasTropicalIngredients(cocktail)) {
+        score += 10;
         matchingFactors++;
       }
     }
     
-    // Style preference scoring - Major factor
+    // Enhanced style preference scoring
     if (answers.lightVsBoozy === 'light') {
       if (cocktail.flavor_tags.some(tag => ['light', 'refreshing', 'bubbly', 'long'].includes(tag))) {
         score += 12;
@@ -72,15 +149,43 @@ export const generateRecommendations = (answers: QuizAnswers): RecommendationRes
         score += 8;
         matchingFactors++;
       }
+    } else if (answers.lightVsBoozy === 'medium') {
+      // Medium prefers balanced cocktails - not too light, not too boozy
+      if (cocktail.flavor_tags.some(tag => ['medium', 'versatile', 'balanced'].includes(tag))) {
+        score += 12;
+        matchingFactors++;
+      }
+      if (cocktail.build_type === 'Shaken' || 
+          cocktail.style.includes('Sour') || 
+          cocktail.style.includes('Daisy')) {
+        score += 8;
+        matchingFactors++;
+      }
     }
     
-    // Classic vs Experimental preference
+    // Enhanced classic vs experimental preference
     if (answers.classicVsExperimental === 'classic') {
       if (cocktail.style.includes('Old Fashioned') || 
           cocktail.style.includes('Manhattan') || 
           cocktail.style.includes('Martini') ||
           cocktail.style.includes('Sour')) {
         score += 10;
+        matchingFactors++;
+      }
+      if (cocktail.flavor_tags.some(tag => ['classic', 'timeless', 'traditional'].includes(tag))) {
+        score += 8;
+        matchingFactors++;
+      }
+    } else if (answers.classicVsExperimental === 'modern') {
+      // Modern prefers contemporary interpretations of classics
+      if (cocktail.flavor_tags.some(tag => ['modern', 'refined', 'contemporary'].includes(tag))) {
+        score += 10;
+        matchingFactors++;
+      }
+      if (cocktail.style.includes('Collins') || 
+          cocktail.style.includes('Fizz') || 
+          cocktail.style.includes('Mule')) {
+        score += 8;
         matchingFactors++;
       }
     } else if (answers.classicVsExperimental === 'experimental') {
@@ -90,6 +195,10 @@ export const generateRecommendations = (answers: QuizAnswers): RecommendationRes
           cocktail.flavor_tags.includes('seasonal') ||
           cocktail.flavor_tags.includes('herbal')) {
         score += 10;
+        matchingFactors++;
+      }
+      if (cocktail.flavor_tags.some(tag => ['experimental', 'bold', 'innovative'].includes(tag))) {
+        score += 8;
         matchingFactors++;
       }
     }

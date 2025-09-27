@@ -19,8 +19,9 @@ const QuizFlow = () => {
       question: 'What speaks to your refined palate?',
       category: 'flavor',
       options: [
-        { label: 'Sweet & Luxurious', value: 'sweet', colorTheme: 'from-pink-500 to-rose-400', tags: ['sweet', 'luxurious'] },
-        { label: 'Bitter & Sophisticated', value: 'bitter', colorTheme: 'from-amber-600 to-orange-500', tags: ['bitter', 'sophisticated'] }
+        { label: 'Sweet & Luxurious', value: 'sweet', colorTheme: 'from-luxury-rose to-luxury-blush', tags: ['sweet', 'luxurious'] },
+        { label: 'Bitter & Sophisticated', value: 'bitter', colorTheme: 'from-luxury-brass to-luxury-bronze', tags: ['bitter', 'sophisticated'] },
+        { label: 'Balanced & Harmonious', value: 'balanced', colorTheme: 'from-luxury-emerald to-luxury-jade', tags: ['balanced', 'harmonious'] }
       ]
     },
     {
@@ -28,8 +29,9 @@ const QuizFlow = () => {
       question: 'Which fruit family calls to you?',
       category: 'flavor',
       options: [
-        { label: 'Citrus & Bright', value: 'citrus', colorTheme: 'from-yellow-400 to-orange-400', tags: ['citrus', 'bright'] },
-        { label: 'Stone Fruit & Rich', value: 'stone', colorTheme: 'from-purple-500 to-pink-500', tags: ['stone', 'rich'] }
+        { label: 'Citrus & Bright', value: 'citrus', colorTheme: 'from-luxury-gold to-luxury-champagne', tags: ['citrus', 'bright'] },
+        { label: 'Stone Fruit & Rich', value: 'stone', colorTheme: 'from-luxury-rose-dark to-luxury-rose', tags: ['stone', 'rich'] },
+        { label: 'Tropical & Exotic', value: 'tropical', colorTheme: 'from-luxury-emerald to-luxury-mint', tags: ['tropical', 'exotic'] }
       ]
     },
     {
@@ -37,8 +39,9 @@ const QuizFlow = () => {
       question: 'How do you prefer to indulge?',
       category: 'style',
       options: [
-        { label: 'Light & Refreshing', value: 'light', colorTheme: 'from-blue-400 to-cyan-300', tags: ['light', 'refreshing'] },
-        { label: 'Bold & Spirit-Forward', value: 'boozy', colorTheme: 'from-red-600 to-red-500', tags: ['boozy', 'spirit-forward'] }
+        { label: 'Light & Refreshing', value: 'light', colorTheme: 'from-luxury-emerald to-luxury-mint', tags: ['light', 'refreshing'] },
+        { label: 'Bold & Spirit-Forward', value: 'boozy', colorTheme: 'from-luxury-brass to-luxury-antique', tags: ['boozy', 'spirit-forward'] },
+        { label: 'Medium & Versatile', value: 'medium', colorTheme: 'from-luxury-platinum to-luxury-pearl', tags: ['medium', 'versatile'] }
       ]
     },
     {
@@ -46,8 +49,9 @@ const QuizFlow = () => {
       question: 'What draws your adventurous spirit?',
       category: 'style',
       options: [
-        { label: 'Classic & Timeless', value: 'classic', colorTheme: 'from-gray-600 to-gray-500', tags: ['classic', 'timeless'] },
-        { label: 'Experimental & Bold', value: 'experimental', colorTheme: 'from-purple-600 to-indigo-600', tags: ['experimental', 'bold'] }
+        { label: 'Classic & Timeless', value: 'classic', colorTheme: 'from-luxury-platinum to-luxury-pearl', tags: ['classic', 'timeless'] },
+        { label: 'Modern & Refined', value: 'modern', colorTheme: 'from-luxury-gold to-luxury-brass-light', tags: ['modern', 'refined'] },
+        { label: 'Experimental & Bold', value: 'experimental', colorTheme: 'from-luxury-jade to-luxury-emerald', tags: ['experimental', 'bold'] }
       ]
     },
     {
@@ -55,10 +59,10 @@ const QuizFlow = () => {
       question: 'What mood shall we craft for you?',
       category: 'mood',
       options: [
-        { label: 'Celebratory & Joyful', value: 'celebratory', colorTheme: 'from-green-500 to-emerald-400', tags: ['celebratory', 'joyful'] },
-        { label: 'Elegant & Refined', value: 'elegant', colorTheme: 'from-indigo-500 to-purple-500', tags: ['elegant', 'refined'] },
-        { label: 'Cozy & Intimate', value: 'cozy', colorTheme: 'from-orange-500 to-red-500', tags: ['cozy', 'intimate'] },
-        { label: 'Adventurous & Playful', value: 'adventurous', colorTheme: 'from-teal-500 to-cyan-500', tags: ['adventurous', 'playful'] }
+        { label: 'Celebratory & Joyful', value: 'celebratory', colorTheme: 'from-luxury-gold to-luxury-brass-light', tags: ['celebratory', 'joyful'] },
+        { label: 'Elegant & Refined', value: 'elegant', colorTheme: 'from-luxury-rose to-luxury-rose-dark', tags: ['elegant', 'refined'] },
+        { label: 'Cozy & Intimate', value: 'cozy', colorTheme: 'from-luxury-brass to-luxury-bronze', tags: ['cozy', 'intimate'] },
+        { label: 'Adventurous & Playful', value: 'adventurous', colorTheme: 'from-luxury-emerald to-luxury-jade', tags: ['adventurous', 'playful'] }
       ]
     }
   ];
@@ -317,15 +321,29 @@ const QuizFlow = () => {
 
   const currentQ = questions[currentQuestion];
 
+  // Function to get luxury theme classes based on option index
+  const getLuxuryTheme = (optionIndex: number) => {
+    const themes = [
+      { hover: 'luxury-hover-gold', glow: 'gemstone-glow-gold', text: 'text-luxury-obsidian' },
+      { hover: 'luxury-hover-emerald', glow: 'gemstone-glow-emerald', text: 'text-luxury-pearl' },
+      { hover: 'luxury-hover-brass', glow: 'gemstone-glow-brass', text: 'text-luxury-pearl' },
+      { hover: 'luxury-hover-rose', glow: 'gemstone-glow-rose', text: 'text-luxury-obsidian' },
+      { hover: 'luxury-hover-gold', glow: 'gemstone-glow-gold', text: 'text-luxury-obsidian' }
+    ];
+    
+    // Cycle through themes based on option index
+    return themes[optionIndex % themes.length];
+  };
+
   return (
     <div 
-      className="min-h-screen flex items-center justify-center px-4 relative"
+      className="min-h-screen flex items-center justify-center px-4 relative bg-gradient-to-br from-luxury-obsidian via-luxury-charcoal to-luxury-obsidian"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
       {/* Main quiz content */}
-      <div className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
+      <div className={`max-w-2xl mx-auto text-center transition-all duration-700 luxury-card p-8 ${
         showingCompliment ? 'opacity-20 blur-sm scale-95' : 'opacity-100 blur-none scale-100'
       }`}>
         {/* Enhanced Progress indicator */}
@@ -338,16 +356,16 @@ const QuizFlow = () => {
                 <div
                   className={`relative w-4 h-4 rounded-full transition-all duration-500 ${
                     index < currentQuestion 
-                      ? 'bg-premium-gold shadow-lg shadow-premium-gold/50' 
+                      ? 'bg-luxury-gold shadow-lg shadow-luxury-gold/50' 
                       : index === currentQuestion
                       ? 'bg-magical-glow shadow-lg shadow-magical-glow/50 animate-pulse'
-                      : 'bg-premium-silver/30'
+                      : 'bg-luxury-platinum/30'
                   }`}
                 >
                   {/* Completed checkmark */}
                   {index < currentQuestion && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <svg className="w-2.5 h-2.5 text-premium-black" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-2.5 h-2.5 text-luxury-obsidian" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
@@ -363,8 +381,8 @@ const QuizFlow = () => {
                 {index < questions.length - 1 && (
                   <div className={`w-8 h-0.5 mx-2 transition-all duration-500 ${
                     index < currentQuestion 
-                      ? 'bg-premium-gold' 
-                      : 'bg-premium-silver/20'
+                      ? 'bg-luxury-gold' 
+                      : 'bg-luxury-platinum/20'
                   }`} />
                 )}
               </div>
@@ -373,10 +391,10 @@ const QuizFlow = () => {
           
           {/* Progress text with percentage */}
           <div className="text-center">
-            <p className="text-premium-silver/60 text-sm mb-1">
+            <p className="text-luxury-pearl/60 text-sm mb-1">
               Question {currentQuestion + 1} of {questions.length}
             </p>
-            <div className="w-48 h-1 bg-premium-silver/20 rounded-full mx-auto overflow-hidden">
+            <div className="w-48 h-1 bg-luxury-platinum/20 rounded-full mx-auto overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-magical-shimmer to-magical-glow rounded-full transition-all duration-700 ease-out"
                 style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
@@ -390,7 +408,7 @@ const QuizFlow = () => {
 
         {/* Previous Questions and Answers */}
         {currentQuestion > 0 && (
-          <div className="mb-12 space-y-8">
+          <div className="mb-12 space-y-8 luxury-card-gold p-6 rounded-xl">
             {questions.slice(0, currentQuestion).map((question, index) => {
               const answer = answers[question.id as keyof QuizAnswers];
               const selectedOption = question.options.find(opt => opt.value === answer);
@@ -406,7 +424,7 @@ const QuizFlow = () => {
               
               return (
                 <div key={question.id} className="text-center">
-                  <h3 className="font-elegant text-2xl md:text-3xl font-medium mb-3 text-premium-silver/80">
+                  <h3 className="font-elegant text-2xl md:text-3xl font-medium mb-3 text-luxury-pearl/80">
                     {question.question}
                   </h3>
                   <p className={`font-medium text-xl md:text-2xl ${shinyColors[index % shinyColors.length]} 
@@ -422,14 +440,16 @@ const QuizFlow = () => {
         {/* Current Question with enhanced animation */}
         <h2 
           key={`current-question-${currentQuestion}`} // Force re-render for animation
-          className="font-elegant text-4xl md:text-5xl font-semibold mb-12 text-premium-platinum animate-slide-up"
+          className="font-elegant text-4xl md:text-5xl font-semibold mb-12 text-luxury-pearl animate-slide-up luxury-text-gold"
         >
           {currentQ.question}
         </h2>
 
         {/* Answer options with enhanced animations */}
         <div key={`options-${currentQuestion}`} className="space-y-6">
-          {currentQ.options.map((option, optionIndex) => (
+          {currentQ.options.map((option, optionIndex) => {
+            const luxuryTheme = getLuxuryTheme(optionIndex);
+            return (
             <button
               key={option.value}
               onClick={() => handleAnswer(currentQ.id, option.value)}
@@ -455,12 +475,12 @@ const QuizFlow = () => {
               }}
               disabled={showingCompliment}
               className={`w-full p-6 rounded-xl bg-gradient-to-r ${option.colorTheme} 
-                         text-white font-medium text-xl transition-all duration-300
-                         hover:scale-105 hover:shadow-2xl hover:shadow-${option.colorTheme.split('-')[1]}-500/25
+                         ${luxuryTheme.text} font-medium text-xl transition-all duration-300
+                         hover:scale-105 hover:shadow-2xl ${luxuryTheme.hover}
                          active:animate-button-press active:shadow-inner
                          disabled:cursor-not-allowed disabled:transform-none disabled:opacity-50
                          transform-gpu will-change-transform
-                         animate-slide-up`}
+                         animate-slide-up ${luxuryTheme.glow}`}
               style={{ 
                 animationDelay: `${optionIndex * 100}ms`,
                 backgroundSize: '200% 200%',
@@ -470,18 +490,19 @@ const QuizFlow = () => {
               <span className="relative z-10 drop-shadow-sm">
                 {option.label}
               </span>
-              {/* Shimmer effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+              {/* Luxury shimmer effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/30 to-transparent 
                             transform -skew-x-12 -translate-x-full group-hover:translate-x-full 
                             transition-transform duration-1000 ease-out opacity-0 hover:opacity-100"></div>
             </button>
-          ))}
+            );
+          })}
         </div>
 
         {/* Subtle encouragement when not showing compliment */}
         {!showingCompliment && (
           <div className="mt-8 h-8 flex items-center justify-center">
-            <p className="text-premium-silver/70 text-lg">
+            <p className="text-luxury-pearl/70 text-lg">
               Excellent taste in considering your options...
             </p>
           </div>
@@ -492,7 +513,7 @@ const QuizFlow = () => {
       {showingCompliment && feedbackMessage && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="text-center px-8 relative">
-            <p className="font-script text-4xl md:text-5xl text-premium-gold animate-handwriting leading-relaxed font-medium drop-shadow-lg">
+            <p className="font-script text-4xl md:text-5xl text-luxury-gold animate-handwriting leading-relaxed font-medium drop-shadow-lg">
               {feedbackMessage}
             </p>
             
@@ -500,18 +521,18 @@ const QuizFlow = () => {
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
               {/* Floating sparkles */}
               <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-magical-glow rounded-full animate-ping opacity-60"></div>
-              <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-premium-gold rounded-full animate-pulse delay-500 opacity-80"></div>
+              <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-luxury-gold rounded-full animate-pulse delay-500 opacity-80"></div>
               <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-magical-shimmer rounded-full animate-bounce delay-1000 opacity-70"></div>
               <div className="absolute top-1/2 left-1/6 w-1 h-1 bg-magical-glow rounded-full animate-pulse delay-300 opacity-50"></div>
-              <div className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-premium-gold rounded-full animate-ping delay-700 opacity-60"></div>
+              <div className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-luxury-gold rounded-full animate-ping delay-700 opacity-60"></div>
               
               {/* Magical aura */}
               <div className="absolute inset-0 bg-gradient-radial from-magical-glow/10 via-transparent to-transparent animate-pulse"></div>
               
               {/* Floating particles */}
-              <div className="absolute top-1/3 right-1/5 w-0.5 h-0.5 bg-premium-platinum rounded-full animate-float-slow opacity-40"></div>
+              <div className="absolute top-1/3 right-1/5 w-0.5 h-0.5 bg-luxury-platinum rounded-full animate-float-slow opacity-40"></div>
               <div className="absolute bottom-2/5 left-1/5 w-0.5 h-0.5 bg-magical-shimmer rounded-full animate-float-medium opacity-50"></div>
-              <div className="absolute top-3/5 right-2/5 w-0.5 h-0.5 bg-premium-gold rounded-full animate-float-fast opacity-30"></div>
+              <div className="absolute top-3/5 right-2/5 w-0.5 h-0.5 bg-luxury-gold rounded-full animate-float-fast opacity-30"></div>
             </div>
           </div>
         </div>

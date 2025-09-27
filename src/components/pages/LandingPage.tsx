@@ -1,36 +1,36 @@
 import { useNavigate } from 'react-router-dom';
-import { FloatingOrbs, GRADIENT_CLASSES, MagicalParticles } from '../ui/animations';
+import { FloatingOrbs, MagicalParticles } from '../ui/animations';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-gradient-to-br from-luxury-obsidian via-luxury-charcoal to-luxury-obsidian">
       <FloatingOrbs />
 
       <div className="text-center max-w-2xl mx-auto relative z-10">
         {/* Premium Logo/Title with enhanced animation */}
         <div className="mb-8 animate-fade-in">
-          <h1 className={`font-elegant text-6xl md:text-8xl font-bold mb-4 animate-shimmer ${GRADIENT_CLASSES.goldToPlatinum}`}>
+          <h1 className="font-elegant text-6xl md:text-8xl font-bold mb-4 animate-shimmer text-transparent bg-clip-text bg-gradient-to-r from-luxury-gold via-luxury-champagne to-luxury-platinum">
             Secret Menu
           </h1>
           
           {/* Elegant underline */}
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-premium-gold to-transparent mx-auto animate-fade-in delay-500"></div>
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent mx-auto animate-fade-in delay-500"></div>
         </div>
         
         {/* Magical Subtitle with staggered animation */}
         <div className="mb-10 animate-slide-up delay-300">
-          <p className="text-2xl md:text-3xl text-premium-silver font-light leading-relaxed mb-4">
+          <p className="text-2xl md:text-3xl text-luxury-pearl font-light leading-relaxed mb-4">
             Discover a secret cocktail just for you
           </p>
-          <p className="text-premium-silver/70 text-lg italic">
+          <p className="text-luxury-pearl/70 text-lg italic">
             Where sophistication meets serendipity
           </p>
         </div>
 
         {/* Premium Description with fade-in */}
-        <p className="text-premium-silver/80 text-lg mb-12 leading-relaxed animate-fade-in delay-700 max-w-lg mx-auto">
+        <p className="text-luxury-pearl/80 text-lg mb-12 leading-relaxed animate-fade-in delay-700 max-w-lg mx-auto">
           Through a series of refined questions, we'll unveil the perfect cocktail 
           that speaks to your distinguished taste and captures your essence.
         </p>
@@ -61,7 +61,7 @@ const LandingPage = () => {
 
           {/* Alternative Shuffle Button */}
           <div className="text-center">
-            <p className="text-premium-silver/60 text-sm mb-3">or</p>
+            <p className="text-luxury-pearl/60 text-sm mb-3">or</p>
             <button
               onClick={() => navigate('/shuffle')}
               onMouseEnter={(e) => {
@@ -72,17 +72,17 @@ const LandingPage = () => {
                 e.currentTarget.style.transform = 'scale(1) translateY(0)';
                 e.currentTarget.style.boxShadow = '0 8px 16px rgba(212, 175, 55, 0.2)';
               }}
-              className="group relative bg-premium-dark/50 backdrop-blur-sm border border-premium-gold/30 text-premium-gold hover:bg-premium-gold/10 text-lg px-12 py-4 rounded-xl transition-all duration-300 overflow-hidden"
+              className="group relative bg-luxury-charcoal/50 backdrop-blur-sm border border-luxury-gold/30 text-luxury-gold hover:bg-luxury-gold/10 text-lg px-12 py-4 rounded-xl transition-all duration-300 overflow-hidden"
             >
               <span className="relative z-10 font-medium">Surprise Me</span>
               
               {/* Button shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-premium-gold/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
             </button>
           </div>
           
           {/* Subtle call to action */}
-          <p className="text-premium-silver/50 text-sm mt-6 animate-pulse">
+          <p className="text-luxury-pearl/50 text-sm mt-6 animate-pulse">
             Your perfect cocktail awaits...
           </p>
         </div>

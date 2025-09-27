@@ -7,15 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Refined premium palette inspired by luxury brands
-        premium: {
-          black: '#0f0f0f',         // Warmer black
-          dark: '#1c1c1c',          // Rich dark
-          charcoal: '#2a2a2a',      // Sophisticated charcoal  
-          silver: '#a8a8a8',        // Muted silver
-          gold: '#d4a574',          // Warm gold (less yellow)
-          platinum: '#e8e6e0',      // Warm platinum
+        // Luxury palette inspired by precious metals and gemstones
+        luxury: {
+          // Gold Tones
+          gold: '#FFD700',           // Pure gold
+          champagne: '#F7E7CE',      // Light champagne gold
+          antique: '#CD7F32',        // Antique gold/brass
+          
+          // Rose Gold Tones  
+          rose: '#E8B4B8',           // Soft rose gold
+          roseDark: '#D4A574',       // Deep rose gold
+          blush: '#F4C2C2',          // Light rose blush
+          
+          // Brass Tones
+          brass: '#B5651D',          // Rich brass
+          brassLight: '#DAA520',     // Light brass
+          bronze: '#CD7F32',         // Bronze accent
+          
+          // Emerald Tones
+          emerald: '#50C878',        // Vibrant emerald
+          jade: '#00A86B',           // Deep jade green
+          mint: '#98FB98',           // Light mint accent
+          
+          // Supporting Neutrals
+          obsidian: '#0B0B0B',       // Deep black with warmth
+          charcoal: '#1A1A1A',       // Rich charcoal
+          pearl: '#F8F6F0',          // Warm pearl white
+          platinum: '#E5E4E2',       // Platinum silver
         },
+        // Keep studio colors for backward compatibility during transition
         studio: {
           // Sophisticated neutrals inspired by high-end design studios
           obsidian: '#0f0f0f',      // Deep black with warmth
@@ -34,7 +54,7 @@ export default {
       fontFamily: {
         'premium': ['Inter', 'system-ui', 'sans-serif'],
         'elegant': ['Playfair Display', 'serif'],
-        'script': ['Dancing Script', 'Playfair Display', 'serif'],
+        'script': ['Cormorant Garamond', 'Playfair Display', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
@@ -46,6 +66,11 @@ export default {
         'float-fast': 'floatFast 2s ease-in-out infinite',
         'shimmer': 'shimmer 4s ease-in-out infinite',
         'button-press': 'buttonPress 0.15s ease-out',
+        // Luxury-specific animations
+        'gold-shimmer': 'goldShimmer 3s ease-in-out infinite',
+        'emerald-glow': 'emeraldGlow 2s ease-in-out infinite alternate',
+        'rose-sparkle': 'roseSparkle 4s ease-in-out infinite',
+        'brass-reflection': 'brassReflection 5s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -109,10 +134,69 @@ export default {
           '0%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(0.95)' },
           '100%': { transform: 'scale(1.05)' },
+        },
+        // Luxury animation keyframes
+        goldShimmer: {
+          '0%': { 
+            backgroundPosition: '-200% 0',
+            boxShadow: '0 0 10px rgba(255, 215, 0, 0.3)'
+          },
+          '50%': {
+            boxShadow: '0 0 20px rgba(255, 215, 0, 0.6)'
+          },
+          '100%': { 
+            backgroundPosition: '200% 0',
+            boxShadow: '0 0 10px rgba(255, 215, 0, 0.3)'
+          },
+        },
+        emeraldGlow: {
+          '0%': { boxShadow: '0 0 15px rgba(80, 200, 120, 0.4)' },
+          '100%': { boxShadow: '0 0 30px rgba(80, 200, 120, 0.8)' },
+        },
+        roseSparkle: {
+          '0%, 100%': { 
+            filter: 'brightness(1) saturate(1)',
+            transform: 'scale(1)'
+          },
+          '25%': { 
+            filter: 'brightness(1.2) saturate(1.3)',
+            transform: 'scale(1.02)'
+          },
+          '50%': { 
+            filter: 'brightness(1.1) saturate(1.1)',
+            transform: 'scale(1)'
+          },
+          '75%': { 
+            filter: 'brightness(1.3) saturate(1.4)',
+            transform: 'scale(1.01)'
+          },
+        },
+        brassReflection: {
+          '0%': { 
+            backgroundPosition: '0% 50%',
+            filter: 'brightness(1)'
+          },
+          '50%': { 
+            backgroundPosition: '100% 50%',
+            filter: 'brightness(1.2)'
+          },
+          '100%': { 
+            backgroundPosition: '0% 50%',
+            filter: 'brightness(1)'
+          },
         }
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        // Luxury gradient combinations
+        'luxury-gold': 'linear-gradient(135deg, #FFD700, #F7E7CE)',
+        'luxury-rose': 'linear-gradient(135deg, #E8B4B8, #D4A574)',
+        'luxury-brass': 'linear-gradient(135deg, #B5651D, #CD7F32)',
+        'luxury-emerald': 'linear-gradient(135deg, #50C878, #00A86B)',
+        'luxury-mixed': 'linear-gradient(135deg, #FFD700, #E8B4B8, #50C878)',
+        'luxury-warm': 'linear-gradient(135deg, #FFD700, #D4A574)',
+        'luxury-cool': 'linear-gradient(135deg, #50C878, #E5E4E2)',
+        'luxury-royal': 'linear-gradient(135deg, #CD7F32, #00A86B)',
       }
     },
   },
