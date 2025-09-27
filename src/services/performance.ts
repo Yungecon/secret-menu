@@ -13,9 +13,17 @@ export class PerformanceMonitor {
 
   // Track page load performance
   trackPageLoad(pageName: string) {
-    if ('performance' in window) {
-      const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+    if (typeof window !== 'undefined' && 'performance' in window) {
+      let loadTime = 0;
+      const navEntries = performance.getEntriesByType('navigation');
+      if (navEntries && navEntries.length > 0) {
+        const navigation = navEntries[0] as PerformanceNavigationTiming;
+        loadTime = (navigation.loadEventEnd || 0) - (navigation.loadEventStart || 0);
+      } else if ((performance as any).timing) {
+        const t = (performance as any).timing;
+        // Fallback for older browsers
+        loadTime = Math.max(0, (t.loadEventEnd || 0) - (t.navigationStart || 0));
+      }
       
       this.metrics[`${pageName}_load_time`] = loadTime;
       
