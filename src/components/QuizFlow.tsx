@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuiz } from '../context/QuizContext';
 import { QuizAnswers, QuizQuestion } from '../types';
 import { trackQuizStart, trackQuestionAnswered, trackQuizCompleted } from '../utils/analytics';
+import { playButtonPress, playComplimentReveal, playQuizComplete } from '../utils/soundEffects';
 
 const QuizFlow = () => {
   const navigate = useNavigate();
@@ -234,6 +235,9 @@ const QuizFlow = () => {
   const [quizStartTime] = useState<number>(Date.now());
 
   const handleAnswer = (questionId: string, value: string) => {
+    // Play button press sound
+    playButtonPress();
+    
     // Track the answer
     trackQuestionAnswered(questionId, value, currentQuestion + 1);
     
@@ -242,6 +246,11 @@ const QuizFlow = () => {
     // Start the magical compliment sequence
     setShowingCompliment(true);
     setFeedbackMessage(message);
+    
+    // Play compliment reveal sound after a brief delay
+    setTimeout(() => {
+      playComplimentReveal();
+    }, 300);
     
     // After compliment animation completes, proceed to next question
     setTimeout(() => {
@@ -256,7 +265,8 @@ const QuizFlow = () => {
         setFeedbackMessage("");
         setShowingCompliment(false);
       } else {
-        // Quiz complete - track completion and pass answers to context
+        // Quiz complete - play completion sound and track
+        playQuizComplete();
         const completionTime = Date.now() - quizStartTime;
         trackQuizCompleted(questions.length, completionTime);
         setAnswers(newAnswers);
@@ -389,6 +399,7 @@ const QuizFlow = () => {
               onClick={() => handleAnswer(currentQ.id, option.value)}
               onTouchStart={(e) => {
                 e.currentTarget.style.transform = 'scale(0.98)';
+                e.currentTarget.style.filter = 'brightness(1.1)';
                 // Haptic feedback for supported devices
                 if ('vibrate' in navigator) {
                   navigator.vibrate(10);
@@ -396,6 +407,15 @@ const QuizFlow = () => {
               }}
               onTouchEnd={(e) => {
                 e.currentTarget.style.transform = '';
+                e.currentTarget.style.filter = '';
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.02) translateY(-2px)';
+                e.currentTarget.style.filter = 'brightness(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = '';
+                e.currentTarget.style.filter = '';
               }}
               disabled={showingCompliment}
               className={`w-full p-6 rounded-xl bg-gradient-to-r ${option.colorTheme} 

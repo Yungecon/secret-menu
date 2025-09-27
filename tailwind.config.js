@@ -36,7 +36,7 @@ export default {
         'float-slow': 'floatSlow 4s ease-in-out infinite',
         'float-medium': 'floatMedium 3s ease-in-out infinite',
         'float-fast': 'floatFast 2s ease-in-out infinite',
-        'shimmer': 'shimmer 3s ease-in-out infinite',
+        'shimmer': 'shimmer 4s ease-in-out infinite',
         'button-press': 'buttonPress 0.15s ease-out',
       },
       keyframes: {
