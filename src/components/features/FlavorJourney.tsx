@@ -62,11 +62,21 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
     // Filter available flavors based on spirit compatibility
     if (journeyData && selectedIngredients.baseSpirit) {
       const family = journeyData.flavor_families[flavorFamily];
-      const compatibleFlavors = Object.keys(family.flavors).filter(flavorKey => {
-        const flavor = family.flavors[flavorKey];
-        return flavor.compatible_spirits.includes(selectedIngredients.baseSpirit);
-      });
-      setAvailableFlavors(compatibleFlavors);
+      if (family && family.flavors) {
+        const compatibleFlavors = Object.keys(family.flavors).filter(flavorKey => {
+          const flavor = family.flavors[flavorKey];
+          return flavor.compatible_spirits && flavor.compatible_spirits.includes(selectedIngredients.baseSpirit);
+        });
+        
+        // If no compatible flavors found, show all flavors (fallback)
+        if (compatibleFlavors.length === 0) {
+          console.log(`No compatible flavors found for ${selectedIngredients.baseSpirit} in ${flavorFamily}, showing all flavors`);
+          setAvailableFlavors(Object.keys(family.flavors));
+        } else {
+          console.log(`Found ${compatibleFlavors.length} compatible flavors for ${selectedIngredients.baseSpirit} in ${flavorFamily}`);
+          setAvailableFlavors(compatibleFlavors);
+        }
+      }
     }
     
     setCurrentStep('specific-flavor');
@@ -424,8 +434,22 @@ const SpecificFlavorSelector: React.FC<SpecificFlavorSelectorProps> = ({
         These are the flavors that work best with your selected spirit.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        {availableFlavors.map((flavorKey) => {
+      {/* Debug info */}
+      {console.log('Available flavors:', availableFlavors)}
+      {console.log('Family:', family)}
+      {console.log('All family flavors:', family ? Object.keys(family.flavors) : 'No family')}
+
+      {availableFlavors.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">🔍</div>
+          <h3 className="text-xl font-semibold text-white mb-2">Loading flavors...</h3>
+          <p className="text-gray-400 mb-4">
+            Finding the perfect flavors for your selection
+          </p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {availableFlavors.map((flavorKey) => {
           const flavor = family?.flavors[flavorKey];
           if (!flavor) return null;
 
@@ -471,7 +495,8 @@ const SpecificFlavorSelector: React.FC<SpecificFlavorSelectorProps> = ({
             </button>
           );
         })}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
