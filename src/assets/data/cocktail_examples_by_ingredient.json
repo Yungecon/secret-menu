@@ -1,0 +1,425 @@
+{
+  "coffee_cocktails": [
+    {
+      "name": "Coffee Paloma",
+      "description": "Modern twist on the classic Paloma with coffee liqueur",
+      "ingredients": [
+        "2oz Don Julio Blanco Tequila",
+        "0.75oz Caffè Borghetti",
+        "0.5oz Fresh Lime Juice",
+        "4oz Grapefruit Soda"
+      ],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add tequila, coffee liqueur, and lime juice",
+        "Top with grapefruit soda",
+        "Stir gently",
+        "Garnish with lime wheel and coffee beans"
+      ],
+      "flavor_profile": "Sweet, citrusy, with rich coffee notes",
+      "best_for": "Afternoon sipping, transitioning from day to evening"
+    },
+    {
+      "name": "Espresso Manhattan",
+      "description": "Classic Manhattan enhanced with coffee liqueur",
+      "ingredients": [
+        "2oz Woodford Reserve Bourbon",
+        "0.5oz Caffè Borghetti",
+        "0.5oz Sweet Vermouth",
+        "2 dashes Aromatic Bitters"
+      ],
+      "instructions": [
+        "Stir all ingredients with ice for 30 seconds",
+        "Strain into chilled coupe glass",
+        "Garnish with coffee bean and orange twist"
+      ],
+      "flavor_profile": "Rich, complex, with coffee and vanilla notes",
+      "best_for": "After-dinner drink, sophisticated evening sipping"
+    },
+    {
+      "name": "Coffee Old Fashioned",
+      "description": "Whiskey Old Fashioned with coffee liqueur",
+      "ingredients": [
+        "2oz Buffalo Trace Bourbon",
+        "0.25oz Caffè Borghetti",
+        "0.25oz Simple Syrup",
+        "2 dashes Aromatic Bitters"
+      ],
+      "instructions": [
+        "Muddle sugar and bitters in glass",
+        "Add bourbon and coffee liqueur",
+        "Add ice and stir",
+        "Garnish with orange twist and coffee bean"
+      ],
+      "flavor_profile": "Bold, sweet, with coffee and oak notes",
+      "best_for": "Evening sipping, whiskey lovers"
+    }
+  ],
+  "amaro_cocktails": [
+    {
+      "name": "Amaro Manhattan",
+      "description": "Manhattan with Amaro Nonino instead of vermouth",
+      "ingredients": [
+        "2oz Rittenhouse Rye",
+        "0.75oz Amaro Nonino",
+        "2 dashes Aromatic Bitters"
+      ],
+      "instructions": [
+        "Stir all ingredients with ice for 30 seconds",
+        "Strain into chilled coupe glass",
+        "Garnish with orange twist"
+      ],
+      "flavor_profile": "Rich, herbal, with sweet and bitter balance",
+      "best_for": "After-dinner, sophisticated palates"
+    },
+    {
+      "name": "Paper Plane",
+      "description": "Modern classic with equal parts of four ingredients",
+      "ingredients": [
+        "0.75oz Buffalo Trace Bourbon",
+        "0.75oz Amaro Nonino",
+        "0.75oz Aperol",
+        "0.75oz Fresh Lemon Juice"
+      ],
+      "instructions": [
+        "Shake all ingredients with ice",
+        "Double strain into chilled coupe glass",
+        "Garnish with lemon twist"
+      ],
+      "flavor_profile": "Balanced, bitter-sweet, with citrus brightness",
+      "best_for": "Modern cocktail enthusiasts, balanced flavor lovers"
+    },
+    {
+      "name": "Negroni Bianco",
+      "description": "White Negroni with gin, Suze, and Lillet Blanc",
+      "ingredients": [
+        "1oz Hendrick's Gin",
+        "1oz Suze (or Amaro Montenegro)",
+        "1oz Lillet Blanc"
+      ],
+      "instructions": [
+        "Stir all ingredients with ice",
+        "Strain over ice in rocks glass",
+        "Garnish with lemon twist"
+      ],
+      "flavor_profile": "Herbal, bitter, with floral notes",
+      "best_for": "Aperitif, bitter cocktail lovers"
+    }
+  ],
+  "gin_variations": [
+    {
+      "name": "Hendrick's Cucumber Gimlet",
+      "description": "Refreshing gin cocktail with cucumber",
+      "ingredients": [
+        "2oz Hendrick's Gin",
+        "0.75oz Fresh Lime Juice",
+        "0.5oz Simple Syrup",
+        "3 cucumber slices"
+      ],
+      "instructions": [
+        "Muddle cucumber slices in shaker",
+        "Add gin, lime juice, and simple syrup",
+        "Shake with ice and double strain",
+        "Serve in chilled coupe with cucumber wheel"
+      ],
+      "flavor_profile": "Fresh, floral, with cucumber and rose notes",
+      "best_for": "Summer sipping, light and refreshing"
+    },
+    {
+      "name": "Botanical Mule",
+      "description": "Moscow Mule with botanical gin",
+      "ingredients": [
+        "2oz Hendrick's Gin",
+        "0.75oz Fresh Lime Juice",
+        "5oz Ginger Beer",
+        "Cucumber slices for garnish"
+      ],
+      "instructions": [
+        "Build in copper mug with ice",
+        "Add gin and lime juice",
+        "Top with ginger beer",
+        "Garnish with cucumber slices and mint"
+      ],
+      "flavor_profile": "Spicy, floral, with ginger and botanical notes",
+      "best_for": "Refreshing summer drink, gin lovers"
+    },
+    {
+      "name": "Aviation",
+      "description": "Classic gin cocktail with floral notes",
+      "ingredients": [
+        "2oz Tanqueray Gin",
+        "0.5oz Luxardo Maraschino",
+        "0.25oz Crème de Violette",
+        "0.75oz Fresh Lemon Juice"
+      ],
+      "instructions": [
+        "Shake all ingredients with ice",
+        "Double strain into chilled coupe glass",
+        "Garnish with brandied cherry"
+      ],
+      "flavor_profile": "Floral, citrusy, with violet and cherry notes",
+      "best_for": "Classic cocktail enthusiasts, floral lovers"
+    }
+  ],
+  "tequila_mezcal_cocktails": [
+    {
+      "name": "Smoky Paloma",
+      "description": "Paloma with mezcal for smoky complexity",
+      "ingredients": [
+        "1.5oz Vida Mezcal",
+        "0.5oz Fresh Lime Juice",
+        "0.5oz Simple Syrup",
+        "4oz Grapefruit Soda"
+      ],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add mezcal, lime juice, and simple syrup",
+        "Top with grapefruit soda",
+        "Garnish with lime wheel and salt rim"
+      ],
+      "flavor_profile": "Smoky, citrusy, with agave and grapefruit",
+      "best_for": "Adventurous palates, smoky cocktail lovers"
+    },
+    {
+      "name": "Oaxaca Old Fashioned",
+      "description": "Old Fashioned with mezcal and tequila",
+      "ingredients": [
+        "1.5oz Don Julio Blanco Tequila",
+        "0.5oz Vida Mezcal",
+        "0.25oz Agave Syrup",
+        "2 dashes Aromatic Bitters"
+      ],
+      "instructions": [
+        "Stir all ingredients with ice",
+        "Strain over ice in rocks glass",
+        "Garnish with orange twist"
+      ],
+      "flavor_profile": "Smoky, sweet, with agave and oak notes",
+      "best_for": "Spirit-forward lovers, agave enthusiasts"
+    },
+    {
+      "name": "Margarita with Mezcal",
+      "description": "Classic margarita with smoky mezcal",
+      "ingredients": [
+        "2oz Vida Mezcal",
+        "1oz Fresh Lime Juice",
+        "0.75oz Cointreau",
+        "0.25oz Simple Syrup"
+      ],
+      "instructions": [
+        "Shake all ingredients with ice",
+        "Strain into salt-rimmed glass with ice",
+        "Garnish with lime wheel"
+      ],
+      "flavor_profile": "Smoky, tart, with citrus and agave",
+      "best_for": "Margarita lovers seeking complexity"
+    }
+  ],
+  "whiskey_cocktails": [
+    {
+      "name": "Smoked Old Fashioned",
+      "description": "Classic Old Fashioned with smoked elements",
+      "ingredients": [
+        "2oz Woodford Reserve Bourbon",
+        "0.25oz Simple Syrup",
+        "2 dashes Aromatic Bitters",
+        "Smoked salt rim"
+      ],
+      "instructions": [
+        "Rim glass with smoked salt",
+        "Muddle sugar and bitters in glass",
+        "Add bourbon and ice",
+        "Stir and garnish with orange twist"
+      ],
+      "flavor_profile": "Smoky, sweet, with oak and vanilla",
+      "best_for": "Whiskey enthusiasts, smoky flavor lovers"
+    },
+    {
+      "name": "Boulevardier",
+      "description": "Negroni variation with whiskey",
+      "ingredients": [
+        "1.5oz Rittenhouse Rye",
+        "1oz Campari",
+        "1oz Sweet Vermouth"
+      ],
+      "instructions": [
+        "Stir all ingredients with ice",
+        "Strain over ice in rocks glass",
+        "Garnish with orange twist"
+      ],
+      "flavor_profile": "Bitter, sweet, with rye spice",
+      "best_for": "Bitter cocktail lovers, whiskey enthusiasts"
+    },
+    {
+      "name": "Whiskey Sour with Egg White",
+      "description": "Classic sour with frothy texture",
+      "ingredients": [
+        "2oz Buffalo Trace Bourbon",
+        "0.75oz Fresh Lemon Juice",
+        "0.75oz Simple Syrup",
+        "1 egg white"
+      ],
+      "instructions": [
+        "Dry shake all ingredients without ice",
+        "Add ice and shake vigorously",
+        "Double strain into chilled coupe",
+        "Garnish with cherry and orange slice"
+      ],
+      "flavor_profile": "Tart, sweet, with creamy texture",
+      "best_for": "Classic cocktail lovers, sour enthusiasts"
+    }
+  ],
+  "liqueur_cocktails": [
+    {
+      "name": "St-Germain Spritz",
+      "description": "Elegant spritz with elderflower liqueur",
+      "ingredients": [
+        "1.5oz Belvedere Vodka",
+        "1oz St-Germain",
+        "3oz Prosecco",
+        "Soda water to top"
+      ],
+      "instructions": [
+        "Build in wine glass with ice",
+        "Add vodka and St-Germain",
+        "Top with prosecco and soda",
+        "Garnish with lemon wheel"
+      ],
+      "flavor_profile": "Floral, light, with elderflower and citrus",
+      "best_for": "Light sipping, floral lovers, aperitif"
+    },
+    {
+      "name": "Chartreuse Swizzle",
+      "description": "Tropical drink with herbal liqueur",
+      "ingredients": [
+        "1.5oz Chartreuse Green",
+        "0.5oz Velvet Falernum",
+        "0.75oz Fresh Lime Juice",
+        "0.5oz Simple Syrup"
+      ],
+      "instructions": [
+        "Build in tall glass with crushed ice",
+        "Swizzle all ingredients",
+        "Top with more crushed ice",
+        "Garnish with mint and lime wheel"
+      ],
+      "flavor_profile": "Herbal, tropical, with complex botanicals",
+      "best_for": "Adventurous palates, herbal lovers"
+    },
+    {
+      "name": "White Russian with Variations",
+      "description": "Classic with coffee liqueur options",
+      "ingredients": [
+        "2oz Belvedere Vodka",
+        "1oz Kahlúa (or Caffè Borghetti)",
+        "1oz Heavy Cream"
+      ],
+      "instructions": [
+        "Build in rocks glass with ice",
+        "Add vodka and coffee liqueur",
+        "Float cream on top",
+        "Stir gently if desired"
+      ],
+      "flavor_profile": "Rich, creamy, with coffee and vanilla",
+      "best_for": "Dessert drink, coffee lovers, creamy cocktails"
+    }
+  ],
+  "modern_creations": [
+    {
+      "name": "Ginger Beer Highball",
+      "description": "Versatile highball with various spirits",
+      "ingredients": [
+        "2oz Spirit of Choice (Gin, Vodka, Rum, or Whiskey)",
+        "0.5oz Fresh Lime Juice",
+        "5oz Ginger Beer",
+        "Mint for garnish"
+      ],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add spirit and lime juice",
+        "Top with ginger beer",
+        "Garnish with mint sprig"
+      ],
+      "flavor_profile": "Spicy, refreshing, with ginger and citrus",
+      "best_for": "Versatile, refreshing, any time of day"
+    },
+    {
+      "name": "Tropical Rum Punch",
+      "description": "Tropical punch with multiple rums",
+      "ingredients": [
+        "1oz El Dorado 12 Year Rum",
+        "1oz Smith & Cross Rum",
+        "1oz Fresh Lime Juice",
+        "1oz Pineapple Juice",
+        "0.5oz Simple Syrup",
+        "2 dashes Aromatic Bitters"
+      ],
+      "instructions": [
+        "Shake all ingredients with ice",
+        "Strain over ice in tall glass",
+        "Top with soda water",
+        "Garnish with pineapple wedge and mint"
+      ],
+      "flavor_profile": "Tropical, complex, with multiple rum notes",
+      "best_for": "Tropical lovers, rum enthusiasts, party drinks"
+    },
+    {
+      "name": "Herbal Collins",
+      "description": "Collins with herbal complexity",
+      "ingredients": [
+        "2oz Hendrick's Gin",
+        "0.75oz Fresh Lemon Juice",
+        "0.5oz Simple Syrup",
+        "0.25oz St-Germain",
+        "3oz Soda Water"
+      ],
+      "instructions": [
+        "Shake gin, lemon, syrup, and St-Germain with ice",
+        "Strain into collins glass with ice",
+        "Top with soda water",
+        "Garnish with cucumber and lemon wheel"
+      ],
+      "flavor_profile": "Herbal, floral, with citrus and elderflower",
+      "best_for": "Light sipping, herbal lovers, summer drinks"
+    }
+  ],
+  "seasonal_suggestions": {
+    "spring": [
+      "St-Germain Spritz",
+      "Hendrick's Cucumber Gimlet",
+      "Botanical Mule"
+    ],
+    "summer": [
+      "Coffee Paloma",
+      "Smoky Paloma",
+      "Tropical Rum Punch"
+    ],
+    "fall": [
+      "Amaro Manhattan",
+      "Smoked Old Fashioned",
+      "Coffee Old Fashioned"
+    ],
+    "winter": [
+      "Boulevardier",
+      "White Russian",
+      "Chartreuse Swizzle"
+    ]
+  },
+  "difficulty_levels": {
+    "beginner": [
+      "St-Germain Spritz",
+      "Ginger Beer Highball",
+      "White Russian"
+    ],
+    "intermediate": [
+      "Coffee Paloma",
+      "Hendrick's Cucumber Gimlet",
+      "Amaro Manhattan"
+    ],
+    "advanced": [
+      "Paper Plane",
+      "Aviation",
+      "Oaxaca Old Fashioned"
+    ]
+  }
+}

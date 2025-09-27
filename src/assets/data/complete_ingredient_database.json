@@ -1,0 +1,702 @@
+{
+  "ingredients": [
+    {
+      "id": "belvedere-vodka",
+      "name": "Belvedere Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["grey-goose", "chopin", "ketel-one"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["polish"]
+    },
+    {
+      "id": "chopin-vodka",
+      "name": "Chopin Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["belvedere", "grey-goose", "ketel-one"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["polish"]
+    },
+    {
+      "id": "grey-goose-vodka",
+      "name": "Grey Goose Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["belvedere", "chopin", "ketel-one"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["french"]
+    },
+    {
+      "id": "ketel-one-vodka",
+      "name": "Ketel One Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["belvedere", "chopin", "grey-goose"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["dutch"]
+    },
+    {
+      "id": "pac-edge-vodka",
+      "name": "Pac Edge Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["belvedere", "chopin", "grey-goose"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["american"]
+    },
+    {
+      "id": "reyka-vodka",
+      "name": "Reyka Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["belvedere", "chopin", "grey-goose"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["icelandic"]
+    },
+    {
+      "id": "titos-vodka",
+      "name": "Tito's Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["belvedere", "chopin", "grey-goose"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["american"]
+    },
+    {
+      "id": "averell-plum-gin",
+      "name": "Averell Plum Gin",
+      "category": "gin",
+      "subcategory": "flavored",
+      "flavor_profile": {
+        "primary": ["juniper", "plum", "stone-fruit"],
+        "secondary": ["sweet", "floral", "spice"],
+        "tertiary": ["vanilla", "herbal", "citrus"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 6,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 3,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "bombay-sapphire", "tanqueray"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "aviation"],
+      "seasonal": false,
+      "regional": ["american"]
+    },
+    {
+      "id": "bols-gin",
+      "name": "Bols Gin",
+      "category": "gin",
+      "subcategory": "classic",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["beefeater", "tanqueray", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["dutch"]
+    },
+    {
+      "id": "bombay-sapphire-gin",
+      "name": "Bombay Sapphire Gin",
+      "category": "gin",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "tanqueray", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["english"]
+    },
+    {
+      "id": "brokers-gin",
+      "name": "Broker's Gin",
+      "category": "gin",
+      "subcategory": "classic",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["beefeater", "tanqueray", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["english"]
+    },
+    {
+      "id": "fords-gin",
+      "name": "Ford's Gin",
+      "category": "gin",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "bombay-sapphire", "tanqueray"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["american"]
+    },
+    {
+      "id": "hendricks-gin",
+      "name": "Hendrick's Gin",
+      "category": "gin",
+      "subcategory": "botanical",
+      "flavor_profile": {
+        "primary": ["juniper", "rose", "cucumber"],
+        "secondary": ["floral", "citrus", "spice"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 2,
+          "sour": 1,
+          "bitter": 3,
+          "spicy": 3,
+          "aromatic": 8
+        }
+      },
+      "pairings": ["cucumber", "rose", "elderflower", "tonic", "vermouth"],
+      "substitutions": ["bombay-sapphire", "tanqueray", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "aviation"],
+      "seasonal": false,
+      "regional": ["scottish"]
+    },
+    {
+      "id": "junipero-gin",
+      "name": "Junipero Gin",
+      "category": "gin",
+      "subcategory": "navy-strength",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 8,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 4,
+          "spicy": 5,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["tanqueray", "plymouth", "beefeater"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["american"]
+    },
+    {
+      "id": "monkey-47-gin",
+      "name": "Monkey 47 Gin",
+      "category": "gin",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 3,
+          "sour": 2,
+          "bitter": 4,
+          "spicy": 4,
+          "aromatic": 8
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "bombay-sapphire", "tanqueray"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["german"]
+    },
+    {
+      "id": "nolets-gin",
+      "name": "Nolet's Gin",
+      "category": "gin",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 3,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "bombay-sapphire", "tanqueray"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["dutch"]
+    },
+    {
+      "id": "plymouth-gin",
+      "name": "Plymouth Gin",
+      "category": "gin",
+      "subcategory": "classic",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["beefeater", "tanqueray", "bombay-sapphire"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["english"]
+    },
+    {
+      "id": "tanqueray-gin",
+      "name": "Tanqueray Gin",
+      "category": "gin",
+      "subcategory": "classic",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["beefeater", "bombay-sapphire", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["english"]
+    },
+    {
+      "id": "tanqueray-10-gin",
+      "name": "Tanqueray No. Ten Gin",
+      "category": "gin",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 3,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "bombay-sapphire", "tanqueray"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["english"]
+    },
+    {
+      "id": "beefeater-gin",
+      "name": "Beefeater Gin",
+      "category": "gin",
+      "subcategory": "classic",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 2,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["tanqueray", "bombay-sapphire", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["english"]
+    },
+    {
+      "id": "roku-gin",
+      "name": "Roku Gin",
+      "category": "gin",
+      "subcategory": "botanical",
+      "flavor_profile": {
+        "primary": ["juniper", "citrus", "spice"],
+        "secondary": ["herbal", "floral", "pepper"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 3,
+          "sour": 2,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["tonic", "citrus", "vermouth", "liqueurs"],
+      "substitutions": ["hendricks", "bombay-sapphire", "tanqueray"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+      "seasonal": false,
+      "regional": ["japanese"]
+    }
+  ],
+  "mixers": [
+    {
+      "id": "lime-juice",
+      "name": "Fresh Lime Juice",
+      "category": "mixer",
+      "subcategory": "citrus",
+      "flavor_profile": {
+        "primary": ["sour", "citrus", "bright"],
+        "secondary": ["tart", "fresh", "acidic"],
+        "tertiary": ["floral", "bitter", "mineral"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 1,
+          "sour": 9,
+          "bitter": 2,
+          "spicy": 0,
+          "aromatic": 4
+        }
+      },
+      "pairings": ["tequila", "gin", "rum", "vodka", "simple-syrup"],
+      "substitutions": ["lemon-juice", "grapefruit-juice", "lime-cordial"],
+      "best_uses": ["margarita", "gimlet", "daiquiri", "moscow-mule"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "lemon-juice",
+      "name": "Fresh Lemon Juice",
+      "category": "mixer",
+      "subcategory": "citrus",
+      "flavor_profile": {
+        "primary": ["sour", "citrus", "bright"],
+        "secondary": ["tart", "fresh", "acidic"],
+        "tertiary": ["floral", "bitter", "mineral"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 1,
+          "sour": 9,
+          "bitter": 2,
+          "spicy": 0,
+          "aromatic": 4
+        }
+      },
+      "pairings": ["whiskey", "gin", "rum", "vodka", "simple-syrup"],
+      "substitutions": ["lime-juice", "grapefruit-juice", "lemon-cordial"],
+      "best_uses": ["whiskey-sour", "gin-fizz", "daiquiri", "collins"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "ginger-beer",
+      "name": "Ginger Beer",
+      "category": "mixer",
+      "subcategory": "spiced",
+      "flavor_profile": {
+        "primary": ["ginger", "spicy", "sweet"],
+        "secondary": ["citrus", "carbonated", "warming"],
+        "tertiary": ["pepper", "lemon", "honey"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 5,
+          "sour": 2,
+          "bitter": 1,
+          "spicy": 7,
+          "aromatic": 5
+        }
+      },
+      "pairings": ["vodka", "rum", "whiskey", "tequila", "lime"],
+      "substitutions": ["ginger-ale", "ginger-syrup-soda", "spiced-soda"],
+      "best_uses": ["moscow-mule", "dark-n-stormy", "ginger-highball", "spiced-mule"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "grapefruit-soda",
+      "name": "Grapefruit Soda",
+      "category": "mixer",
+      "subcategory": "citrus",
+      "flavor_profile": {
+        "primary": ["grapefruit", "sweet", "citrus"],
+        "secondary": ["tart", "carbonated", "refreshing"],
+        "tertiary": ["bitter", "floral", "mineral"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 6,
+          "sour": 4,
+          "bitter": 3,
+          "spicy": 0,
+          "aromatic": 4
+        }
+      },
+      "pairings": ["tequila", "mezcal", "gin", "vodka", "lime"],
+      "substitutions": ["grapefruit-juice", "tonic", "citrus-soda"],
+      "best_uses": ["paloma", "greyhound", "grapefruit-highball", "citrus-spritz"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "tonic-water",
+      "name": "Tonic Water",
+      "category": "mixer",
+      "subcategory": "bitter",
+      "flavor_profile": {
+        "primary": ["bitter", "sweet", "carbonated"],
+        "secondary": ["quinine", "citrus", "refreshing"],
+        "tertiary": ["mineral", "floral", "herbal"],
+        "intensity": {
+          "overall": 4,
+          "sweet": 5,
+          "sour": 2,
+          "bitter": 6,
+          "spicy": 1,
+          "aromatic": 3
+        }
+      },
+      "pairings": ["gin", "vodka", "rum", "tequila", "citrus"],
+      "substitutions": ["soda-water", "bitter-lemon", "quinine-water"],
+      "best_uses": ["gin-tonic", "vodka-tonic", "rum-tonic", "tonic-highball"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "simple-syrup",
+      "name": "Simple Syrup",
+      "category": "mixer",
+      "subcategory": "sweetener",
+      "flavor_profile": {
+        "primary": ["sweet", "neutral", "smooth"],
+        "secondary": ["sugar", "balanced", "clean"],
+        "tertiary": ["vanilla", "honey", "caramel"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 10,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 0,
+          "aromatic": 1
+        }
+      },
+      "pairings": ["citrus", "spirits", "liqueurs", "bitters"],
+      "substitutions": ["honey-syrup", "agave-syrup", "demerara-syrup"],
+      "best_uses": ["sours", "daiquiri", "margarita", "old-fashioned"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "pineapple-juice",
+      "name": "Pineapple Juice",
+      "category": "mixer",
+      "subcategory": "tropical",
+      "flavor_profile": {
+        "primary": ["pineapple", "sweet", "tropical"],
+        "secondary": ["citrus", "bright", "fruity"],
+        "tertiary": ["vanilla", "coconut", "mineral"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 7,
+          "sour": 3,
+          "bitter": 1,
+          "spicy": 0,
+          "aromatic": 4
+        }
+      },
+      "pairings": ["rum", "tequila", "vodka", "coconut", "lime"],
+      "substitutions": ["orange-juice", "passionfruit-juice", "tropical-mix"],
+      "best_uses": ["pina-colada", "painkiller", "tropical-highball", "rum-punch"],
+      "seasonal": false,
+      "regional": ["universal"]
+    },
+    {
+      "id": "cranberry-juice",
+      "name": "Cranberry Juice",
+      "category": "mixer",
+      "subcategory": "tart",
+      "flavor_profile": {
+        "primary": ["cranberry", "tart", "sweet"],
+        "secondary": ["citrus", "bright", "fruity"],
+        "tertiary": ["bitter", "mineral", "herbal"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 6,
+          "sour": 6,
+          "bitter": 3,
+          "spicy": 0,
+          "aromatic": 3
+        }
+      },
+      "pairings": ["vodka", "gin", "rum", "citrus", "liqueurs"],
+      "substitutions": ["pomegranate-juice", "cherry-juice", "berry-mix"],
+      "best_uses": ["cosmopolitan", "cape-cod", "cranberry-highball", "vodka-cranberry"],
+      "seasonal": false,
+      "regional": ["universal"]
+    }
+  ]
+}

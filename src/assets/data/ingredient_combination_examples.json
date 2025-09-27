@@ -1,0 +1,444 @@
+{
+  "coffee_infused_examples": [
+    {
+      "scenario": "Coffee Paloma with Available Ingredients",
+      "available_ingredients": [
+        "don-julio-blanco",
+        "borghetti-coffee-liqueur", 
+        "lime-juice",
+        "grapefruit-soda"
+      ],
+      "generated_recipe": {
+        "name": "Coffee Paloma",
+        "ingredients": [
+          "2oz Don Julio Blanco Tequila",
+          "0.75oz Caffè Borghetti",
+          "0.5oz Fresh Lime Juice",
+          "4oz Grapefruit Soda"
+        ],
+        "flavor_balance": {
+          "sweet": 6,
+          "sour": 5,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 5,
+          "alcoholic": 4
+        },
+        "substitutions": [
+          {
+            "original": "Don Julio Blanco",
+            "substitute": "Patrón Silver",
+            "compatibility": 85,
+            "notes": "Similar agave profile and smoothness"
+          },
+          {
+            "original": "Caffè Borghetti",
+            "substitute": "Kahlúa",
+            "compatibility": 90,
+            "notes": "Similar coffee profile, slightly sweeter"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Manhattan with Coffee Twist",
+      "available_ingredients": [
+        "woodford-reserve-bourbon",
+        "borghetti-coffee-liqueur",
+        "aromatic-bitters"
+      ],
+      "generated_recipe": {
+        "name": "Coffee Manhattan",
+        "ingredients": [
+          "2oz Woodford Reserve Bourbon",
+          "0.75oz Caffè Borghetti",
+          "2 dashes Aromatic Bitters"
+        ],
+        "flavor_balance": {
+          "sweet": 7,
+          "sour": 1,
+          "bitter": 4,
+          "spicy": 3,
+          "aromatic": 6,
+          "alcoholic": 6
+        },
+        "substitutions": [
+          {
+            "original": "Woodford Reserve Bourbon",
+            "substitute": "Buffalo Trace",
+            "compatibility": 80,
+            "notes": "Similar vanilla and oak notes"
+          }
+        ]
+      }
+    }
+  ],
+  "amaro_variations_examples": [
+    {
+      "scenario": "Manhattan with Amaro Nonino",
+      "available_ingredients": [
+        "rittenhouse-rye",
+        "amaro-nonino",
+        "aromatic-bitters"
+      ],
+      "generated_recipe": {
+        "name": "Amaro Manhattan",
+        "ingredients": [
+          "2oz Rittenhouse Rye",
+          "0.75oz Amaro Nonino",
+          "2 dashes Aromatic Bitters"
+        ],
+        "flavor_balance": {
+          "sweet": 6,
+          "sour": 2,
+          "bitter": 5,
+          "spicy": 4,
+          "aromatic": 7,
+          "alcoholic": 6
+        },
+        "substitutions": [
+          {
+            "original": "Amaro Nonino",
+            "substitute": "Amaro Montenegro",
+            "compatibility": 85,
+            "notes": "Similar sweetness and herbal profile"
+          },
+          {
+            "original": "Rittenhouse Rye",
+            "substitute": "Sazerac Rye",
+            "compatibility": 90,
+            "notes": "Similar rye spice and character"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Paper Plane Cocktail",
+      "available_ingredients": [
+        "buffalo-trace-bourbon",
+        "amaro-nonino",
+        "aperol",
+        "lemon-juice"
+      ],
+      "generated_recipe": {
+        "name": "Paper Plane",
+        "ingredients": [
+          "0.75oz Buffalo Trace Bourbon",
+          "0.75oz Amaro Nonino",
+          "0.75oz Aperol",
+          "0.75oz Fresh Lemon Juice"
+        ],
+        "flavor_balance": {
+          "sweet": 5,
+          "sour": 6,
+          "bitter": 4,
+          "spicy": 3,
+          "aromatic": 6,
+          "alcoholic": 5
+        },
+        "substitutions": [
+          {
+            "original": "Buffalo Trace Bourbon",
+            "substitute": "Woodford Reserve",
+            "compatibility": 85,
+            "notes": "Similar bourbon character"
+          }
+        ]
+      }
+    }
+  ],
+  "gin_botanical_examples": [
+    {
+      "scenario": "Hendrick's with Cucumber",
+      "available_ingredients": [
+        "hendricks-gin",
+        "lime-juice",
+        "simple-syrup",
+        "cucumber"
+      ],
+      "generated_recipe": {
+        "name": "Hendrick's Cucumber Gimlet",
+        "ingredients": [
+          "2oz Hendrick's Gin",
+          "0.75oz Fresh Lime Juice",
+          "0.5oz Simple Syrup",
+          "3 cucumber slices (muddled)"
+        ],
+        "flavor_balance": {
+          "sweet": 4,
+          "sour": 6,
+          "bitter": 2,
+          "spicy": 2,
+          "aromatic": 7,
+          "alcoholic": 4
+        },
+        "substitutions": [
+          {
+            "original": "Hendrick's Gin",
+            "substitute": "Bombay Sapphire",
+            "compatibility": 75,
+            "notes": "Less floral, more juniper-forward"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Botanical Mule",
+      "available_ingredients": [
+        "hendricks-gin",
+        "ginger-beer",
+        "lime-juice"
+      ],
+      "generated_recipe": {
+        "name": "Botanical Mule",
+        "ingredients": [
+          "2oz Hendrick's Gin",
+          "0.75oz Fresh Lime Juice",
+          "5oz Ginger Beer"
+        ],
+        "flavor_balance": {
+          "sweet": 5,
+          "sour": 5,
+          "bitter": 2,
+          "spicy": 6,
+          "aromatic": 7,
+          "alcoholic": 4
+        },
+        "substitutions": [
+          {
+            "original": "Hendrick's Gin",
+            "substitute": "Tanqueray",
+            "compatibility": 80,
+            "notes": "More juniper-forward, less floral"
+          }
+        ]
+      }
+    }
+  ],
+  "tequila_mezcal_examples": [
+    {
+      "scenario": "Smoky Paloma",
+      "available_ingredients": [
+        "vida-mezcal",
+        "grapefruit-soda",
+        "lime-juice",
+        "simple-syrup"
+      ],
+      "generated_recipe": {
+        "name": "Smoky Paloma",
+        "ingredients": [
+          "1.5oz Vida Mezcal",
+          "0.5oz Fresh Lime Juice",
+          "0.5oz Simple Syrup",
+          "4oz Grapefruit Soda"
+        ],
+        "flavor_balance": {
+          "sweet": 5,
+          "sour": 5,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 6,
+          "alcoholic": 5
+        },
+        "substitutions": [
+          {
+            "original": "Vida Mezcal",
+            "substitute": "Del Maguey Chichicapa",
+            "compatibility": 85,
+            "notes": "Similar smoky profile, slightly different agave notes"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Oaxaca Old Fashioned",
+      "available_ingredients": [
+        "don-julio-blanco",
+        "vida-mezcal",
+        "agave-syrup",
+        "aromatic-bitters"
+      ],
+      "generated_recipe": {
+        "name": "Oaxaca Old Fashioned",
+        "ingredients": [
+          "1.5oz Don Julio Blanco Tequila",
+          "0.5oz Vida Mezcal",
+          "0.25oz Agave Syrup",
+          "2 dashes Aromatic Bitters"
+        ],
+        "flavor_balance": {
+          "sweet": 6,
+          "sour": 1,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 5,
+          "alcoholic": 6
+        },
+        "substitutions": [
+          {
+            "original": "Don Julio Blanco",
+            "substitute": "Fortaleza Blanco",
+            "compatibility": 85,
+            "notes": "Similar agave profile and quality"
+          }
+        ]
+      }
+    }
+  ],
+  "liqueur_showcase_examples": [
+    {
+      "scenario": "St-Germain Spritz",
+      "available_ingredients": [
+        "belvedere-vodka",
+        "st-germain",
+        "prosecco",
+        "soda-water"
+      ],
+      "generated_recipe": {
+        "name": "St-Germain Spritz",
+        "ingredients": [
+          "1.5oz Belvedere Vodka",
+          "1oz St-Germain",
+          "3oz Prosecco",
+          "Soda water to top"
+        ],
+        "flavor_balance": {
+          "sweet": 7,
+          "sour": 3,
+          "bitter": 2,
+          "spicy": 1,
+          "aromatic": 6,
+          "alcoholic": 3
+        },
+        "substitutions": [
+          {
+            "original": "Belvedere Vodka",
+            "substitute": "Grey Goose",
+            "compatibility": 90,
+            "notes": "Similar neutral profile and smoothness"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Chartreuse Last Word",
+      "available_ingredients": [
+        "hendricks-gin",
+        "chartreuse-green",
+        "luxardo-maraschino",
+        "lime-juice"
+      ],
+      "generated_recipe": {
+        "name": "Last Word",
+        "ingredients": [
+          "0.75oz Hendrick's Gin",
+          "0.75oz Chartreuse Green",
+          "0.75oz Luxardo Maraschino",
+          "0.75oz Fresh Lime Juice"
+        ],
+        "flavor_balance": {
+          "sweet": 5,
+          "sour": 6,
+          "bitter": 4,
+          "spicy": 6,
+          "aromatic": 8,
+          "alcoholic": 6
+        },
+        "substitutions": [
+          {
+            "original": "Hendrick's Gin",
+            "substitute": "Tanqueray",
+            "compatibility": 80,
+            "notes": "More juniper-forward, less floral"
+          }
+        ]
+      }
+    }
+  ],
+  "build_engine_demonstrations": [
+    {
+      "scenario": "Missing Ingredient Substitution",
+      "available_ingredients": [
+        "woodford-reserve-bourbon",
+        "sweet-vermouth",
+        "aromatic-bitters"
+      ],
+      "missing_ingredient": "amaro-nonino",
+      "generated_recipe": {
+        "name": "Classic Manhattan",
+        "ingredients": [
+          "2oz Woodford Reserve Bourbon",
+          "0.75oz Sweet Vermouth",
+          "2 dashes Aromatic Bitters"
+        ],
+        "suggested_substitutions": [
+          {
+            "original": "Amaro Nonino",
+            "substitute": "Sweet Vermouth",
+            "compatibility": 75,
+            "notes": "Classic Manhattan profile, less herbal complexity"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "Flavor Profile Matching",
+      "user_preferences": {
+        "sweetness": "medium",
+        "bitterness": "low",
+        "aromatic": "high"
+      },
+      "available_ingredients": [
+        "hendricks-gin",
+        "st-germain",
+        "lime-juice",
+        "tonic-water"
+      ],
+      "generated_recipe": {
+        "name": "Elderflower Gin & Tonic",
+        "ingredients": [
+          "2oz Hendrick's Gin",
+          "0.5oz St-Germain",
+          "4oz Tonic Water",
+          "0.5oz Fresh Lime Juice"
+        ],
+        "flavor_match_score": 92,
+        "reasoning": "High aromatic profile from gin and elderflower, moderate sweetness, low bitterness"
+      }
+    }
+  ],
+  "seasonal_recommendations": {
+    "spring": {
+      "ingredients": ["st-germain", "hendricks-gin", "cucumber", "elderflower"],
+      "recommended_cocktails": [
+        "Hendrick's Cucumber Gimlet",
+        "St-Germain Spritz",
+        "Botanical Gin & Tonic"
+      ]
+    },
+    "summer": {
+      "ingredients": ["tequila", "mezcal", "grapefruit-soda", "lime-juice"],
+      "recommended_cocktails": [
+        "Coffee Paloma",
+        "Smoky Paloma",
+        "Classic Paloma"
+      ]
+    },
+    "fall": {
+      "ingredients": ["bourbon", "amaro-nonino", "chartreuse", "aromatic-bitters"],
+      "recommended_cocktails": [
+        "Amaro Manhattan",
+        "Paper Plane",
+        "Chartreuse Last Word"
+      ]
+    },
+    "winter": {
+      "ingredients": ["whiskey", "bourbon", "coffee-liqueur", "cream"],
+      "recommended_cocktails": [
+        "Coffee Old Fashioned",
+        "White Russian",
+        "Smoked Manhattan"
+      ]
+    }
+  }
+}

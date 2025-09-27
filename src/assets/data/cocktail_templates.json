@@ -1,0 +1,382 @@
+{
+  "templates": [
+    {
+      "id": "manhattan-template",
+      "name": "Manhattan Template",
+      "type": "classic",
+      "description": "Classic stirred cocktail with whiskey, vermouth, and bitters",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "whiskey",
+          "proportion": { "min": 2.0, "max": 2.5, "default": 2.0 },
+          "alternatives": ["bourbon", "rye", "scotch"],
+          "flavor_profile": ["sweet", "oak", "spice"]
+        },
+        {
+          "role": "modifier",
+          "required": true,
+          "ingredient_type": "vermouth",
+          "proportion": { "min": 0.75, "max": 1.0, "default": 0.75 },
+          "alternatives": ["sweet-vermouth", "amaro", "fortified-wine"],
+          "flavor_profile": ["sweet", "herbal", "aromatic"]
+        },
+        {
+          "role": "bitter",
+          "required": true,
+          "ingredient_type": "bitters",
+          "proportion": { "min": 2, "max": 4, "default": 2 },
+          "alternatives": ["aromatic-bitters", "orange-bitters", "angostura"],
+          "flavor_profile": ["bitter", "spicy", "aromatic"]
+        }
+      ],
+      "build_type": "stirred",
+      "glassware": "coupe",
+      "garnish": ["brandied-cherry", "orange-twist"],
+      "instructions": [
+        "Stir ingredients with ice for 30 seconds",
+        "Strain into chilled coupe glass",
+        "Garnish with cherry or orange twist"
+      ],
+      "variations": [
+        "rye-manhattan",
+        "bourbon-manhattan",
+        "perfect-manhattan",
+        "amaro-manhattan",
+        "sherry-manhattan"
+      ]
+    },
+    {
+      "id": "paloma-template",
+      "name": "Paloma Template",
+      "type": "classic",
+      "description": "Refreshing tequila highball with grapefruit and lime",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "tequila",
+          "proportion": { "min": 1.5, "max": 2.5, "default": 2.0 },
+          "alternatives": ["blanco-tequila", "reposado-tequila", "mezcal"],
+          "flavor_profile": ["agave", "citrus", "pepper"]
+        },
+        {
+          "role": "citrus",
+          "required": true,
+          "ingredient_type": "citrus",
+          "proportion": { "min": 0.5, "max": 1.0, "default": 0.75 },
+          "alternatives": ["lime-juice", "lemon-juice"],
+          "flavor_profile": ["sour", "citrus", "bright"]
+        },
+        {
+          "role": "mixer",
+          "required": true,
+          "ingredient_type": "grapefruit",
+          "proportion": { "min": 4.0, "max": 6.0, "default": 5.0 },
+          "alternatives": ["grapefruit-soda", "grapefruit-juice", "tonic"],
+          "flavor_profile": ["grapefruit", "sweet", "citrus"]
+        }
+      ],
+      "build_type": "built",
+      "glassware": "highball",
+      "garnish": ["lime-wheel", "grapefruit-wheel", "salt-rim"],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add tequila and lime juice",
+        "Top with grapefruit soda",
+        "Stir gently",
+        "Garnish with citrus wheel"
+      ],
+      "variations": [
+        "classic-paloma",
+        "coffee-paloma",
+        "spicy-paloma",
+        "herbal-paloma",
+        "mezcal-paloma"
+      ]
+    },
+    {
+      "id": "mule-template",
+      "name": "Mule Template",
+      "type": "classic",
+      "description": "Spicy highball with ginger beer and citrus",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "spirit",
+          "proportion": { "min": 1.5, "max": 2.5, "default": 2.0 },
+          "alternatives": ["vodka", "tequila", "rum", "whiskey", "gin"],
+          "flavor_profile": ["neutral", "smooth", "versatile"]
+        },
+        {
+          "role": "citrus",
+          "required": true,
+          "ingredient_type": "citrus",
+          "proportion": { "min": 0.5, "max": 1.0, "default": 0.75 },
+          "alternatives": ["lime-juice", "lemon-juice"],
+          "flavor_profile": ["sour", "citrus", "bright"]
+        },
+        {
+          "role": "mixer",
+          "required": true,
+          "ingredient_type": "ginger-beer",
+          "proportion": { "min": 4.0, "max": 6.0, "default": 5.0 },
+          "alternatives": ["ginger-beer", "ginger-ale", "spiced-soda"],
+          "flavor_profile": ["ginger", "spicy", "sweet"]
+        }
+      ],
+      "build_type": "built",
+      "glassware": "copper-mug",
+      "garnish": ["lime-wheel", "mint-sprig", "ginger"],
+      "instructions": [
+        "Build in copper mug with ice",
+        "Add spirit and lime juice",
+        "Top with ginger beer",
+        "Stir gently",
+        "Garnish with lime wheel and mint"
+      ],
+      "variations": [
+        "moscow-mule",
+        "tequila-mule",
+        "rum-mule",
+        "whiskey-mule",
+        "gin-mule"
+      ]
+    },
+    {
+      "id": "old-fashioned-template",
+      "name": "Old Fashioned Template",
+      "type": "classic",
+      "description": "Spirit-forward cocktail with sugar, bitters, and citrus",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "whiskey",
+          "proportion": { "min": 2.0, "max": 2.5, "default": 2.0 },
+          "alternatives": ["bourbon", "rye", "scotch", "brandy"],
+          "flavor_profile": ["sweet", "oak", "spice"]
+        },
+        {
+          "role": "sweetener",
+          "required": true,
+          "ingredient_type": "sugar",
+          "proportion": { "min": 0.25, "max": 0.5, "default": 0.25 },
+          "alternatives": ["simple-syrup", "demerara-syrup", "honey-syrup", "maple-syrup"],
+          "flavor_profile": ["sweet", "rich", "caramel"]
+        },
+        {
+          "role": "bitter",
+          "required": true,
+          "ingredient_type": "bitters",
+          "proportion": { "min": 2, "max": 4, "default": 2 },
+          "alternatives": ["aromatic-bitters", "orange-bitters", "angostura"],
+          "flavor_profile": ["bitter", "spicy", "aromatic"]
+        }
+      ],
+      "build_type": "stirred",
+      "glassware": "rocks",
+      "garnish": ["orange-twist", "brandied-cherry"],
+      "instructions": [
+        "Muddle sugar and bitters in glass",
+        "Add spirit and ice",
+        "Stir for 30 seconds",
+        "Garnish with orange twist"
+      ],
+      "variations": [
+        "bourbon-old-fashioned",
+        "rye-old-fashioned",
+        "scotch-old-fashioned",
+        "brandy-old-fashioned",
+        "smoked-old-fashioned"
+      ]
+    },
+    {
+      "id": "gin-tonic-template",
+      "name": "Gin & Tonic Template",
+      "type": "classic",
+      "description": "Simple highball with gin and tonic water",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "gin",
+          "proportion": { "min": 1.5, "max": 2.5, "default": 2.0 },
+          "alternatives": ["london-dry-gin", "botanical-gin", "navy-strength-gin"],
+          "flavor_profile": ["juniper", "botanical", "aromatic"]
+        },
+        {
+          "role": "mixer",
+          "required": true,
+          "ingredient_type": "tonic",
+          "proportion": { "min": 4.0, "max": 6.0, "default": 5.0 },
+          "alternatives": ["tonic-water", "soda-water", "citrus-soda"],
+          "flavor_profile": ["bitter", "sweet", "carbonated"]
+        }
+      ],
+      "build_type": "built",
+      "glassware": "highball",
+      "garnish": ["lime-wheel", "cucumber", "herbs"],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add gin",
+        "Top with tonic water",
+        "Stir gently",
+        "Garnish with lime wheel"
+      ],
+      "variations": [
+        "classic-gin-tonic",
+        "cucumber-gin-tonic",
+        "herbal-gin-tonic",
+        "citrus-gin-tonic",
+        "botanical-gin-tonic"
+      ]
+    },
+    {
+      "id": "coffee-paloma-template",
+      "name": "Coffee Paloma Template",
+      "type": "modern",
+      "description": "Modern twist on Paloma with coffee liqueur",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "tequila",
+          "proportion": { "min": 1.5, "max": 2.0, "default": 1.75 },
+          "alternatives": ["blanco-tequila", "reposado-tequila"],
+          "flavor_profile": ["agave", "citrus", "pepper"]
+        },
+        {
+          "role": "modifier",
+          "required": true,
+          "ingredient_type": "coffee-liqueur",
+          "proportion": { "min": 0.5, "max": 1.0, "default": 0.75 },
+          "alternatives": ["borghetti", "kahlua", "tia-maria"],
+          "flavor_profile": ["coffee", "sweet", "aromatic"]
+        },
+        {
+          "role": "citrus",
+          "required": true,
+          "ingredient_type": "citrus",
+          "proportion": { "min": 0.5, "max": 0.75, "default": 0.5 },
+          "alternatives": ["lime-juice", "lemon-juice"],
+          "flavor_profile": ["sour", "citrus", "bright"]
+        },
+        {
+          "role": "mixer",
+          "required": true,
+          "ingredient_type": "grapefruit",
+          "proportion": { "min": 3.0, "max": 5.0, "default": 4.0 },
+          "alternatives": ["grapefruit-soda", "grapefruit-juice"],
+          "flavor_profile": ["grapefruit", "sweet", "citrus"]
+        }
+      ],
+      "build_type": "built",
+      "glassware": "highball",
+      "garnish": ["lime-wheel", "coffee-beans"],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add tequila, coffee liqueur, and lime juice",
+        "Top with grapefruit soda",
+        "Stir gently",
+        "Garnish with lime wheel and coffee beans"
+      ],
+      "variations": [
+        "espresso-paloma",
+        "mocha-paloma",
+        "spiced-coffee-paloma"
+      ]
+    },
+    {
+      "id": "amaro-sour-template",
+      "name": "Amaro Sour Template",
+      "type": "modern",
+      "description": "Modern sour with amaro and citrus",
+      "base_structure": [
+        {
+          "role": "base",
+          "required": true,
+          "ingredient_type": "amaro",
+          "proportion": { "min": 1.5, "max": 2.0, "default": 1.75 },
+          "alternatives": ["amaro-nonino", "amaro-montenegro", "campari"],
+          "flavor_profile": ["bitter", "sweet", "herbal"]
+        },
+        {
+          "role": "citrus",
+          "required": true,
+          "ingredient_type": "citrus",
+          "proportion": { "min": 0.75, "max": 1.0, "default": 0.75 },
+          "alternatives": ["lemon-juice", "lime-juice"],
+          "flavor_profile": ["sour", "citrus", "bright"]
+        },
+        {
+          "role": "sweetener",
+          "required": false,
+          "ingredient_type": "syrup",
+          "proportion": { "min": 0.25, "max": 0.5, "default": 0.25 },
+          "alternatives": ["simple-syrup", "honey-syrup", "agave-syrup"],
+          "flavor_profile": ["sweet", "rich"]
+        }
+      ],
+      "build_type": "shaken",
+      "glassware": "coupe",
+      "garnish": ["citrus-twist", "herbs"],
+      "instructions": [
+        "Shake all ingredients with ice",
+        "Double strain into chilled coupe",
+        "Garnish with citrus twist"
+      ],
+      "variations": [
+        "paper-plane",
+        "amaro-sour",
+        "bitter-sour"
+      ]
+    }
+  ],
+  "build_types": {
+    "stirred": {
+      "description": "Ingredients mixed with ice using a bar spoon",
+      "best_for": ["spirit-forward", "manhattan", "old-fashioned", "martini"],
+      "technique": "Stir for 30-45 seconds until properly chilled and diluted"
+    },
+    "shaken": {
+      "description": "Ingredients vigorously shaken with ice",
+      "best_for": ["sours", "daiquiri", "margarita", "cosmopolitan"],
+      "technique": "Shake for 10-15 seconds until properly chilled and frothy"
+    },
+    "built": {
+      "description": "Ingredients added directly to glass with ice",
+      "best_for": ["highballs", "mules", "collins", "tonic drinks"],
+      "technique": "Add ingredients to glass, top with mixer, stir gently"
+    },
+    "blended": {
+      "description": "Ingredients blended with ice",
+      "best_for": ["frozen drinks", "daiquiri", "pina-colada"],
+      "technique": "Blend until smooth and slushy consistency"
+    }
+  },
+  "glassware": {
+    "coupe": {
+      "description": "Broad, shallow glass for stirred cocktails",
+      "best_for": ["manhattan", "martini", "sours", "champagne cocktails"],
+      "capacity": "4-6 oz"
+    },
+    "rocks": {
+      "description": "Short, wide glass for spirit-forward drinks",
+      "best_for": ["old-fashioned", "negroni", "whiskey neat"],
+      "capacity": "6-8 oz"
+    },
+    "highball": {
+      "description": "Tall glass for long drinks",
+      "best_for": ["gin-tonic", "moscow-mule", "collins", "highballs"],
+      "capacity": "10-12 oz"
+    },
+    "copper-mug": {
+      "description": "Traditional vessel for mules",
+      "best_for": ["moscow-mule", "variations of mules"],
+      "capacity": "12-16 oz"
+    }
+  }
+}

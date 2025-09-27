@@ -1,0 +1,509 @@
+{
+  "ingredient_matrix": {
+    "spirits": {
+      "vodka": {
+        "category": "base_spirit",
+        "subcategories": ["premium", "craft", "flavored"],
+        "ingredients": [
+          {
+            "id": "belvedere-vodka",
+            "name": "Belvedere Vodka",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "chopin-vodka", 
+            "name": "Chopin Vodka",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "grey-goose-vodka",
+            "name": "Grey Goose Vodka", 
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "ketel-one-vodka",
+            "name": "Ketel One Vodka",
+            "tier": "premium", 
+            "price_point": "high",
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "pac-edge-vodka",
+            "name": "Pac Edge Vodka",
+            "tier": "premium",
+            "price_point": "high", 
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "reyka-vodka",
+            "name": "Reyka Vodka",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "titos-vodka",
+            "name": "Tito's Vodka",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["neutral", "clean", "smooth"],
+            "best_for": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "gin": {
+        "category": "base_spirit",
+        "subcategories": ["london-dry", "botanical", "navy-strength", "flavored"],
+        "ingredients": [
+          {
+            "id": "hendricks-gin",
+            "name": "Hendrick's Gin",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["juniper", "rose", "cucumber", "floral"],
+            "best_for": ["gin-tonic", "martini", "gin-fizz", "aviation"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "bombay-sapphire-gin",
+            "name": "Bombay Sapphire Gin",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["juniper", "citrus", "spice", "herbal"],
+            "best_for": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "tanqueray-gin",
+            "name": "Tanqueray Gin",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["juniper", "citrus", "spice", "herbal"],
+            "best_for": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "beefeater-gin",
+            "name": "Beefeater Gin",
+            "tier": "standard",
+            "price_point": "medium",
+            "flavor_profile": ["juniper", "citrus", "spice", "herbal"],
+            "best_for": ["gin-tonic", "martini", "gin-fizz", "negroni"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "low"
+          },
+          {
+            "id": "averell-plum-gin",
+            "name": "Averell Plum Gin",
+            "tier": "specialty",
+            "price_point": "high",
+            "flavor_profile": ["juniper", "plum", "stone-fruit", "sweet"],
+            "best_for": ["gin-tonic", "martini", "gin-fizz", "specialty-cocktails"],
+            "seasonal": true,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "tequila": {
+        "category": "base_spirit",
+        "subcategories": ["blanco", "reposado", "añejo", "extra-añejo"],
+        "ingredients": [
+          {
+            "id": "don-julio-blanco",
+            "name": "Don Julio Blanco",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["agave", "citrus", "pepper", "mineral"],
+            "best_for": ["margarita", "paloma", "tequila-sunrise", "mule"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "patron-silver",
+            "name": "Patrón Silver",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["agave", "citrus", "pepper", "smooth"],
+            "best_for": ["margarita", "paloma", "tequila-sunrise", "mule"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "fortaleza-blanco",
+            "name": "Fortaleza Blanco",
+            "tier": "craft",
+            "price_point": "high",
+            "flavor_profile": ["agave", "citrus", "pepper", "traditional"],
+            "best_for": ["margarita", "paloma", "neat", "traditional-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "whiskey": {
+        "category": "base_spirit",
+        "subcategories": ["bourbon", "rye", "scotch", "irish", "japanese"],
+        "ingredients": [
+          {
+            "id": "woodford-reserve-bourbon",
+            "name": "Woodford Reserve Bourbon",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["vanilla", "caramel", "oak", "spice"],
+            "best_for": ["old-fashioned", "manhattan", "whiskey-sour", "mint-julep"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "buffalo-trace-bourbon",
+            "name": "Buffalo Trace Bourbon",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["vanilla", "caramel", "oak", "smooth"],
+            "best_for": ["old-fashioned", "manhattan", "whiskey-sour", "highball"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "rittenhouse-rye",
+            "name": "Rittenhouse Rye",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["spice", "pepper", "oak", "bold"],
+            "best_for": ["manhattan", "old-fashioned", "sazerac", "boulevardier"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "rum": {
+        "category": "base_spirit",
+        "subcategories": ["white", "gold", "dark", "spiced", "aged"],
+        "ingredients": [
+          {
+            "id": "el-dorado-12-year",
+            "name": "El Dorado 12 Year",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["caramel", "vanilla", "spice", "smooth"],
+            "best_for": ["old-fashioned", "daiquiri", "mai-tai", "neat"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "smith-cross-rum",
+            "name": "Smith & Cross Rum",
+            "tier": "craft",
+            "price_point": "high",
+            "flavor_profile": ["funk", "tropical", "bold", "complex"],
+            "best_for": ["mai-tai", "jungle-bird", "daiquiri", "tiki-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "mezcal": {
+        "category": "base_spirit",
+        "subcategories": ["joven", "reposado", "añejo"],
+        "ingredients": [
+          {
+            "id": "vida-mezcal",
+            "name": "Vida Mezcal",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["smoky", "agave", "earthy", "complex"],
+            "best_for": ["paloma", "margarita", "old-fashioned", "neat"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "del-maguey-chichicapa",
+            "name": "Del Maguey Chichicapa",
+            "tier": "craft",
+            "price_point": "very-high",
+            "flavor_profile": ["smoky", "agave", "mineral", "traditional"],
+            "best_for": ["neat", "old-fashioned", "specialty-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "very-high"
+          }
+        ]
+      }
+    },
+    "liqueurs": {
+      "amari": {
+        "category": "modifier",
+        "subcategories": ["bitter", "sweet", "herbal"],
+        "ingredients": [
+          {
+            "id": "amaro-nonino",
+            "name": "Amaro Nonino",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["bitter", "sweet", "herbal", "complex"],
+            "best_for": ["manhattan-variations", "old-fashioned", "paper-plane", "neat"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "campari",
+            "name": "Campari",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["bitter", "sweet", "citrus", "herbal"],
+            "best_for": ["negroni", "americano", "boulevardier", "aperitif"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "aperol",
+            "name": "Aperol",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["bitter", "sweet", "citrus", "light"],
+            "best_for": ["aperol-spritz", "paper-plane", "aperitif"],
+            "seasonal": true,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "coffee": {
+        "category": "modifier",
+        "subcategories": ["coffee-liqueur", "coffee-syrup"],
+        "ingredients": [
+          {
+            "id": "borghetti-coffee-liqueur",
+            "name": "Caffè Borghetti",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["coffee", "sweet", "aromatic", "rich"],
+            "best_for": ["coffee-paloma", "espresso-martini", "white-russian", "coffee-old-fashioned"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "kahlua",
+            "name": "Kahlúa",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["coffee", "sweet", "vanilla", "smooth"],
+            "best_for": ["white-russian", "espresso-martini", "mudslide", "coffee-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "floral": {
+        "category": "modifier",
+        "subcategories": ["elderflower", "rose", "violet"],
+        "ingredients": [
+          {
+            "id": "st-germain",
+            "name": "St-Germain",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["elderflower", "sweet", "floral", "delicate"],
+            "best_for": ["st-germain-spritz", "gin-fizz", "champagne-cocktail", "floral-cocktails"],
+            "seasonal": true,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "chartreuse-green",
+            "name": "Chartreuse Green",
+            "tier": "premium",
+            "price_point": "very-high",
+            "flavor_profile": ["herbal", "spicy", "aromatic", "complex"],
+            "best_for": ["last-word", "chartreuse-swizzle", "industry-sour", "neat"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "very-high"
+          }
+        ]
+      }
+    },
+    "mixers": {
+      "citrus": {
+        "category": "mixer",
+        "subcategories": ["juice", "soda", "syrup"],
+        "ingredients": [
+          {
+            "id": "lime-juice",
+            "name": "Fresh Lime Juice",
+            "tier": "essential",
+            "price_point": "low",
+            "flavor_profile": ["sour", "citrus", "bright", "fresh"],
+            "best_for": ["margarita", "gimlet", "daiquiri", "moscow-mule"],
+            "seasonal": false,
+            "inventory_priority": "very-high",
+            "upsell_potential": "none"
+          },
+          {
+            "id": "grapefruit-soda",
+            "name": "Grapefruit Soda",
+            "tier": "essential",
+            "price_point": "low",
+            "flavor_profile": ["grapefruit", "sweet", "citrus", "carbonated"],
+            "best_for": ["paloma", "greyhound", "grapefruit-highball"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "low"
+          }
+        ]
+      },
+      "spiced": {
+        "category": "mixer",
+        "subcategories": ["ginger", "spice", "bitters"],
+        "ingredients": [
+          {
+            "id": "ginger-beer",
+            "name": "Ginger Beer",
+            "tier": "essential",
+            "price_point": "low",
+            "flavor_profile": ["ginger", "spicy", "sweet", "carbonated"],
+            "best_for": ["moscow-mule", "dark-n-stormy", "ginger-highball"],
+            "seasonal": false,
+            "inventory_priority": "very-high",
+            "upsell_potential": "low"
+          }
+        ]
+      }
+    }
+  },
+  "filtering_categories": {
+    "by_spirit_type": {
+      "vodka": ["belvedere-vodka", "chopin-vodka", "grey-goose-vodka", "ketel-one-vodka", "pac-edge-vodka", "reyka-vodka", "titos-vodka"],
+      "gin": ["hendricks-gin", "bombay-sapphire-gin", "tanqueray-gin", "beefeater-gin", "averell-plum-gin"],
+      "tequila": ["don-julio-blanco", "patron-silver", "fortaleza-blanco"],
+      "whiskey": ["woodford-reserve-bourbon", "buffalo-trace-bourbon", "rittenhouse-rye"],
+      "rum": ["el-dorado-12-year", "smith-cross-rum"],
+      "mezcal": ["vida-mezcal", "del-maguey-chichicapa"]
+    },
+    "by_price_point": {
+      "budget": ["titos-vodka", "beefeater-gin"],
+      "medium": ["tanqueray-gin", "buffalo-trace-bourbon", "kahlua"],
+      "high": ["belvedere-vodka", "hendricks-gin", "don-julio-blanco", "woodford-reserve-bourbon"],
+      "premium": ["del-maguey-chichicapa", "chartreuse-green", "amaro-nonino"]
+    },
+    "by_season": {
+      "spring": ["st-germain", "hendricks-gin", "cucumber"],
+      "summer": ["tequila", "mezcal", "grapefruit-soda", "lime-juice"],
+      "fall": ["bourbon", "amaro-nonino", "chartreuse", "aromatic-bitters"],
+      "winter": ["whiskey", "bourbon", "coffee-liqueur", "cream"]
+    },
+    "by_upsell_potential": {
+      "high": ["belvedere-vodka", "hendricks-gin", "don-julio-blanco", "woodford-reserve-bourbon", "amaro-nonino"],
+      "medium": ["tanqueray-gin", "buffalo-trace-bourbon", "campari", "kahlua"],
+      "low": ["beefeater-gin", "titos-vodka", "lime-juice", "ginger-beer"]
+    }
+  },
+  "inventory_priorities": {
+    "very_high": ["lime-juice", "ginger-beer", "simple-syrup"],
+    "high": ["belvedere-vodka", "hendricks-gin", "don-julio-blanco", "woodford-reserve-bourbon", "campari"],
+    "medium": ["amaro-nonino", "borghetti-coffee-liqueur", "st-germain", "vida-mezcal"],
+    "low": ["chartreuse-green", "del-maguey-chichicapa", "specialty-liqueurs"]
+  },
+  "seasonal_spotlights": {
+    "spring_2024": {
+      "featured": ["st-germain", "hendricks-gin", "cucumber", "elderflower"],
+      "cocktails": ["st-germain-spritz", "hendricks-cucumber-gimlet", "botanical-gin-tonic"],
+      "description": "Floral and refreshing cocktails perfect for spring"
+    },
+    "summer_2024": {
+      "featured": ["tequila", "mezcal", "grapefruit-soda", "lime-juice"],
+      "cocktails": ["coffee-paloma", "smoky-paloma", "classic-paloma"],
+      "description": "Bright and refreshing agave cocktails for summer"
+    },
+    "fall_2024": {
+      "featured": ["bourbon", "amaro-nonino", "chartreuse", "aromatic-bitters"],
+      "cocktails": ["amaro-manhattan", "paper-plane", "chartreuse-last-word"],
+      "description": "Rich and complex cocktails for autumn evenings"
+    },
+    "winter_2024": {
+      "featured": ["whiskey", "bourbon", "coffee-liqueur", "cream"],
+      "cocktails": ["coffee-old-fashioned", "white-russian", "smoked-manhattan"],
+      "description": "Warming and indulgent cocktails for winter"
+    }
+  },
+  "bartender_recommendations": {
+    "signature_drinks": [
+      {
+        "name": "Coffee Paloma",
+        "ingredients": ["don-julio-blanco", "borghetti-coffee-liqueur", "lime-juice", "grapefruit-soda"],
+        "reason": "Unique twist on classic Paloma with coffee complexity"
+      },
+      {
+        "name": "Amaro Manhattan",
+        "ingredients": ["rittenhouse-rye", "amaro-nonino", "aromatic-bitters"],
+        "reason": "Sophisticated Manhattan variation with herbal complexity"
+      }
+    ],
+    "upsell_opportunities": [
+      {
+        "base": "vodka-martini",
+        "upsell": "belvedere-vodka",
+        "reason": "Premium Polish vodka with exceptional smoothness"
+      },
+      {
+        "base": "gin-tonic",
+        "upsell": "hendricks-gin",
+        "reason": "Distinctive gin with rose and cucumber botanicals"
+      }
+    ]
+  }
+}

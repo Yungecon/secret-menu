@@ -84,3 +84,147 @@ export interface QuizQuestion {
   }[];
   category: 'flavor' | 'mood' | 'spirit' | 'style';
 }
+
+// Cocktail Build Engine Types
+export interface IngredientProfile {
+  id: string;
+  name: string;
+  category: string;
+  subcategory: string;
+  flavor_profile: {
+    primary: string[];
+    secondary: string[];
+    tertiary: string[];
+    intensity: {
+      overall: number;
+      sweet: number;
+      sour: number;
+      bitter: number;
+      spicy: number;
+      aromatic: number;
+    };
+  };
+  pairings: string[];
+  substitutions: string[];
+  best_uses: string[];
+  seasonal: boolean;
+  regional: string[];
+  notes: string;
+}
+
+export interface CocktailTemplate {
+  id: string;
+  name: string;
+  type: 'classic' | 'modern' | 'signature';
+  description: string;
+  base_structure: IngredientRole[];
+  build_type: 'stirred' | 'shaken' | 'built' | 'blended';
+  glassware: string;
+  garnish: string[];
+  instructions: string[];
+  variations: string[];
+}
+
+export interface IngredientRole {
+  role: 'base' | 'modifier' | 'sweetener' | 'bitter' | 'citrus' | 'mixer';
+  required: boolean;
+  ingredient_type: string;
+  proportion: {
+    min: number;
+    max: number;
+    default: number;
+  };
+  alternatives: string[];
+  flavor_profile: string[];
+}
+
+export interface FlavorBalance {
+  sweet: number;
+  sour: number;
+  bitter: number;
+  spicy: number;
+  aromatic: number;
+  alcoholic: number;
+}
+
+export interface GeneratedRecipe {
+  id: string;
+  name: string;
+  template_id: string;
+  generated: boolean;
+  ingredients: string[];
+  instructions: string[];
+  balance_profile: FlavorBalance;
+  complexity_score: number;
+  seasonal_notes: string[];
+  substitutions: Substitution[];
+  glassware: string;
+  garnish: string[];
+  build_type: string;
+}
+
+export interface Substitution {
+  original: string;
+  substitute: string;
+  ratio: number;
+  notes: string;
+  compatibility: number;
+}
+
+// Ingredient Spotlight Types
+export interface IngredientMatrix {
+  ingredient_matrix: {
+    spirits: {
+      [key: string]: {
+        category: string;
+        subcategories: string[];
+        ingredients: any[];
+      };
+    };
+    liqueurs: {
+      [key: string]: {
+        category: string;
+        subcategories: string[];
+        ingredients: any[];
+      };
+    };
+    mixers: {
+      [key: string]: {
+        category: string;
+        subcategories: string[];
+        ingredients: any[];
+      };
+    };
+  };
+  filtering_categories: {
+    by_spirit_type: { [key: string]: string[] };
+    by_price_point: { [key: string]: string[] };
+    by_season: { [key: string]: string[] };
+    by_upsell_potential: { [key: string]: string[] };
+  };
+  inventory_priorities: { [key: string]: string[] };
+  seasonal_spotlights: { [key: string]: any };
+  bartender_recommendations: {
+    signature_drinks: any[];
+    upsell_opportunities: any[];
+  };
+}
+
+export interface SpiritCategory {
+  name: string;
+  ingredients: any[];
+  totalCount: number;
+}
+
+export interface SeasonalSpotlight {
+  season: string;
+  featured: string[];
+  cocktails: string[];
+  description: string;
+}
+
+export interface BartenderRecommendation {
+  name: string;
+  ingredients: string[];
+  reason: string;
+}

@@ -1,0 +1,394 @@
+{
+  "ingredients": [
+    {
+      "id": "belvedere-vodka",
+      "name": "Belvedere Vodka",
+      "category": "vodka",
+      "subcategory": "premium",
+      "flavor_profile": {
+        "primary": ["neutral", "clean"],
+        "secondary": ["smooth", "creamy"],
+        "tertiary": ["slight-pepper", "mineral"],
+        "intensity": {
+          "overall": 3,
+          "sweet": 1,
+          "sour": 0,
+          "bitter": 0,
+          "spicy": 2,
+          "aromatic": 2
+        }
+      },
+      "pairings": ["citrus", "herbs", "vermouth", "liqueurs"],
+      "substitutions": ["grey-goose", "chopin", "ketel-one"],
+      "best_uses": ["martini", "moscow-mule", "collins", "cosmopolitan"],
+      "seasonal": false,
+      "regional": ["polish"],
+      "notes": "Premium Polish vodka with exceptional smoothness and subtle complexity"
+    },
+    {
+      "id": "hendricks-gin",
+      "name": "Hendrick's Gin",
+      "category": "gin",
+      "subcategory": "botanical",
+      "flavor_profile": {
+        "primary": ["juniper", "rose", "cucumber"],
+        "secondary": ["floral", "citrus", "spice"],
+        "tertiary": ["coriander", "angelica", "orange"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 2,
+          "sour": 1,
+          "bitter": 3,
+          "spicy": 3,
+          "aromatic": 8
+        }
+      },
+      "pairings": ["cucumber", "rose", "elderflower", "tonic", "vermouth"],
+      "substitutions": ["bombay-sapphire", "tanqueray", "plymouth"],
+      "best_uses": ["gin-tonic", "martini", "gin-fizz", "aviation"],
+      "seasonal": false,
+      "regional": ["scottish"],
+      "notes": "Distinctive gin with rose and cucumber botanicals, perfect for floral cocktails"
+    },
+    {
+      "id": "don-julio-blanco",
+      "name": "Don Julio Blanco",
+      "category": "tequila",
+      "subcategory": "blanco",
+      "flavor_profile": {
+        "primary": ["agave", "citrus", "pepper"],
+        "secondary": ["mineral", "herbal", "sweet"],
+        "tertiary": ["lime", "white-pepper", "grass"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 4,
+          "sour": 2,
+          "bitter": 1,
+          "spicy": 4,
+          "aromatic": 5
+        }
+      },
+      "pairings": ["lime", "grapefruit", "agave", "jalapeño", "cilantro"],
+      "substitutions": ["patron-silver", "casamigos-blanco", "fortaleza-blanco"],
+      "best_uses": ["margarita", "paloma", "tequila-sunrise", "mule"],
+      "seasonal": false,
+      "regional": ["mexican"],
+      "notes": "Premium blanco tequila with bright agave and citrus notes"
+    },
+    {
+      "id": "woodford-reserve-bourbon",
+      "name": "Woodford Reserve Bourbon",
+      "category": "whiskey",
+      "subcategory": "bourbon",
+      "flavor_profile": {
+        "primary": ["vanilla", "caramel", "oak"],
+        "secondary": ["spice", "toffee", "dried-fruit"],
+        "tertiary": ["honey", "nutmeg", "tobacco"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 6,
+          "sour": 1,
+          "bitter": 3,
+          "spicy": 4,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["vermouth", "bitters", "cherry", "orange", "maple"],
+      "substitutions": ["buffalo-trace", "maker's-mark", "four-roses-single-barrel"],
+      "best_uses": ["old-fashioned", "manhattan", "whiskey-sour", "mint-julep"],
+      "seasonal": false,
+      "regional": ["kentucky"],
+      "notes": "Rich, complex bourbon with exceptional balance and depth"
+    },
+    {
+      "id": "amaro-nonino",
+      "name": "Amaro Nonino",
+      "category": "amaro",
+      "subcategory": "medium",
+      "flavor_profile": {
+        "primary": ["bitter", "sweet", "herbal"],
+        "secondary": ["orange", "spice", "caramel"],
+        "tertiary": ["vanilla", "sage", "gentian"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 5,
+          "sour": 2,
+          "bitter": 4,
+          "spicy": 3,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["whiskey", "bourbon", "orange", "vermouth", "bitters"],
+      "substitutions": ["amaro-montenegro", "amaro-averna", "benedictine"],
+      "best_uses": ["manhattan-variations", "old-fashioned", "paper-plane", "amaro-sour"],
+      "seasonal": false,
+      "regional": ["italian"],
+      "notes": "Versatile amaro that works beautifully as a vermouth substitute"
+    },
+    {
+      "id": "borghetti-coffee-liqueur",
+      "name": "Caffè Borghetti",
+      "category": "liqueur",
+      "subcategory": "coffee",
+      "flavor_profile": {
+        "primary": ["coffee", "sweet", "aromatic"],
+        "secondary": ["vanilla", "caramel", "roasted"],
+        "tertiary": ["chocolate", "spice", "bitter"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 8,
+          "sour": 1,
+          "bitter": 4,
+          "spicy": 2,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["tequila", "rum", "vodka", "grapefruit", "lime"],
+      "substitutions": ["kahlua", "tia-maria", "coffee-syrup"],
+      "best_uses": ["coffee-paloma", "espresso-martini", "white-russian", "coffee-old-fashioned"],
+      "seasonal": false,
+      "regional": ["italian"],
+      "notes": "Rich coffee liqueur perfect for coffee-infused cocktails"
+    },
+    {
+      "id": "chartreuse-green",
+      "name": "Chartreuse Green",
+      "category": "liqueur",
+      "subcategory": "herbal",
+      "flavor_profile": {
+        "primary": ["herbal", "spicy", "aromatic"],
+        "secondary": ["sweet", "bitter", "complex"],
+        "tertiary": ["sage", "thyme", "mint"],
+        "intensity": {
+          "overall": 9,
+          "sweet": 6,
+          "sour": 1,
+          "bitter": 5,
+          "spicy": 7,
+          "aromatic": 9
+        }
+      },
+      "pairings": ["gin", "whiskey", "lime", "ginger", "citrus"],
+      "substitutions": ["chartreuse-yellow", "benedictine", "green-absinthe"],
+      "best_uses": ["last-word", "chartreuse-swizzle", "industry-sour", "green-point"],
+      "seasonal": false,
+      "regional": ["french"],
+      "notes": "Intensely herbal liqueur with complex botanical profile"
+    },
+    {
+      "id": "campari",
+      "name": "Campari",
+      "category": "amaro",
+      "subcategory": "bitter",
+      "flavor_profile": {
+        "primary": ["bitter", "sweet", "citrus"],
+        "secondary": ["herbal", "spicy", "aromatic"],
+        "tertiary": ["orange", "rhubarb", "quinine"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 4,
+          "sour": 3,
+          "bitter": 8,
+          "spicy": 3,
+          "aromatic": 6
+        }
+      },
+      "pairings": ["gin", "vermouth", "soda", "orange", "prosecco"],
+      "substitutions": ["aperol", "cappelletti-aperitivo", "cynar"],
+      "best_uses": ["negroni", "americano", "boulevardier", "jungle-bird"],
+      "seasonal": false,
+      "regional": ["italian"],
+      "notes": "Classic bitter aperitif with distinctive red color and complex flavor"
+    },
+    {
+      "id": "st-germain",
+      "name": "St-Germain",
+      "category": "liqueur",
+      "subcategory": "floral",
+      "flavor_profile": {
+        "primary": ["elderflower", "sweet", "floral"],
+        "secondary": ["citrus", "pear", "honey"],
+        "tertiary": ["lychee", "grapefruit", "vanilla"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 8,
+          "sour": 2,
+          "bitter": 1,
+          "spicy": 1,
+          "aromatic": 7
+        }
+      },
+      "pairings": ["gin", "vodka", "champagne", "citrus", "soda"],
+      "substitutions": ["elderflower-syrup", "lychee-liqueur", "floral-syrup"],
+      "best_uses": ["gin-fizz", "elderflower-spritz", "st-germain-cocktail", "champagne-cocktail"],
+      "seasonal": false,
+      "regional": ["french"],
+      "notes": "Delicate elderflower liqueur perfect for floral and refreshing cocktails"
+    },
+    {
+      "id": "lime-juice",
+      "name": "Fresh Lime Juice",
+      "category": "mixer",
+      "subcategory": "citrus",
+      "flavor_profile": {
+        "primary": ["sour", "citrus", "bright"],
+        "secondary": ["tart", "fresh", "acidic"],
+        "tertiary": ["floral", "bitter", "mineral"],
+        "intensity": {
+          "overall": 7,
+          "sweet": 1,
+          "sour": 9,
+          "bitter": 2,
+          "spicy": 0,
+          "aromatic": 4
+        }
+      },
+      "pairings": ["tequila", "gin", "rum", "vodka", "simple-syrup"],
+      "substitutions": ["lemon-juice", "grapefruit-juice", "lime-cordial"],
+      "best_uses": ["margarita", "gimlet", "daiquiri", "moscow-mule"],
+      "seasonal": false,
+      "regional": ["universal"],
+      "notes": "Essential citrus component for balancing sweetness in cocktails"
+    },
+    {
+      "id": "ginger-beer",
+      "name": "Ginger Beer",
+      "category": "mixer",
+      "subcategory": "spiced",
+      "flavor_profile": {
+        "primary": ["ginger", "spicy", "sweet"],
+        "secondary": ["citrus", "carbonated", "warming"],
+        "tertiary": ["pepper", "lemon", "honey"],
+        "intensity": {
+          "overall": 6,
+          "sweet": 5,
+          "sour": 2,
+          "bitter": 1,
+          "spicy": 7,
+          "aromatic": 5
+        }
+      },
+      "pairings": ["vodka", "rum", "whiskey", "tequila", "lime"],
+      "substitutions": ["ginger-ale", "ginger-syrup-soda", "spiced-soda"],
+      "best_uses": ["moscow-mule", "dark-n-stormy", "ginger-highball", "spiced-mule"],
+      "seasonal": false,
+      "regional": ["universal"],
+      "notes": "Spicy, carbonated mixer perfect for mules and highballs"
+    },
+    {
+      "id": "grapefruit-soda",
+      "name": "Grapefruit Soda",
+      "category": "mixer",
+      "subcategory": "citrus",
+      "flavor_profile": {
+        "primary": ["grapefruit", "sweet", "citrus"],
+        "secondary": ["tart", "carbonated", "refreshing"],
+        "tertiary": ["bitter", "floral", "mineral"],
+        "intensity": {
+          "overall": 5,
+          "sweet": 6,
+          "sour": 4,
+          "bitter": 3,
+          "spicy": 0,
+          "aromatic": 4
+        }
+      },
+      "pairings": ["tequila", "mezcal", "gin", "vodka", "lime"],
+      "substitutions": ["grapefruit-juice", "tonic", "citrus-soda"],
+      "best_uses": ["paloma", "greyhound", "grapefruit-highball", "citrus-spritz"],
+      "seasonal": false,
+      "regional": ["universal"],
+      "notes": "Refreshing citrus soda perfect for palomas and summer cocktails"
+    }
+  ],
+  "categories": {
+    "vodka": {
+      "description": "Neutral spirits with subtle flavor profiles",
+      "characteristics": ["clean", "smooth", "versatile"],
+      "best_pairs": ["citrus", "herbs", "vermouth", "liqueurs"]
+    },
+    "gin": {
+      "description": "Botanical spirits with juniper and herbal notes",
+      "characteristics": ["juniper", "botanical", "aromatic"],
+      "best_pairs": ["tonic", "vermouth", "citrus", "herbs"]
+    },
+    "tequila": {
+      "description": "Agave-based spirits with earthy and citrus notes",
+      "characteristics": ["agave", "citrus", "pepper", "mineral"],
+      "best_pairs": ["lime", "grapefruit", "agave", "spice"]
+    },
+    "whiskey": {
+      "description": "Aged spirits with complex oak and spice notes",
+      "characteristics": ["oak", "vanilla", "spice", "caramel"],
+      "best_pairs": ["vermouth", "bitters", "cherry", "maple"]
+    },
+    "amaro": {
+      "description": "Bitter herbal liqueurs with complex botanical profiles",
+      "characteristics": ["bitter", "herbal", "sweet", "complex"],
+      "best_pairs": ["whiskey", "gin", "citrus", "vermouth"]
+    },
+    "liqueur": {
+      "description": "Sweetened spirits with various flavor profiles",
+      "characteristics": ["sweet", "flavored", "versatile", "aromatic"],
+      "best_pairs": ["spirits", "citrus", "soda", "cream"]
+    },
+    "mixer": {
+      "description": "Non-alcoholic components for building cocktails",
+      "characteristics": ["balancing", "refreshing", "carbonated"],
+      "best_pairs": ["spirits", "liqueurs", "citrus", "herbs"]
+    }
+  },
+  "substitution_rules": [
+    {
+      "original": "borghetti-coffee-liqueur",
+      "substitutes": [
+        {
+          "ingredient": "kahlua",
+          "ratio": 1.0,
+          "notes": "Similar coffee profile, slightly sweeter",
+          "compatibility": 90
+        },
+        {
+          "ingredient": "coffee-syrup",
+          "ratio": 0.5,
+          "notes": "Reduce amount due to higher sweetness",
+          "compatibility": 75
+        }
+      ]
+    },
+    {
+      "original": "amaro-nonino",
+      "substitutes": [
+        {
+          "ingredient": "amaro-montenegro",
+          "ratio": 1.0,
+          "notes": "Similar sweetness and herbal profile",
+          "compatibility": 85
+        },
+        {
+          "ingredient": "benedictine",
+          "ratio": 0.75,
+          "notes": "Reduce amount, more herbal intensity",
+          "compatibility": 80
+        }
+      ]
+    },
+    {
+      "original": "lime-juice",
+      "substitutes": [
+        {
+          "ingredient": "lemon-juice",
+          "ratio": 1.0,
+          "notes": "Similar acidity, slightly different flavor",
+          "compatibility": 85
+        },
+        {
+          "ingredient": "lime-cordial",
+          "ratio": 1.5,
+          "notes": "Increase amount, sweeter profile",
+          "compatibility": 70
+        }
+      ]
+    }
+  ]
+}

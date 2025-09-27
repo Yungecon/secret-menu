@@ -1,0 +1,350 @@
+{
+  "generated_recipes": [
+    {
+      "id": "coffee-paloma-001",
+      "name": "Coffee Paloma",
+      "template_id": "coffee-paloma-template",
+      "generated": true,
+      "ingredients": [
+        "2oz Don Julio Blanco",
+        "0.75oz Caffè Borghetti",
+        "0.5oz Fresh Lime Juice",
+        "4oz Grapefruit Soda"
+      ],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add tequila, coffee liqueur, and lime juice",
+        "Top with grapefruit soda",
+        "Stir gently",
+        "Garnish with lime wheel and coffee beans"
+      ],
+      "balance_profile": {
+        "sweet": 6,
+        "sour": 5,
+        "bitter": 3,
+        "spicy": 4,
+        "aromatic": 5,
+        "alcoholic": 4
+      },
+      "complexity_score": 6,
+      "seasonal_notes": [
+        "Perfect for afternoon sipping",
+        "Coffee notes add warmth to the bright citrus",
+        "Great for transitioning from day to evening"
+      ],
+      "substitutions": [
+        {
+          "original": "Caffè Borghetti",
+          "substitute": "Kahlúa",
+          "ratio": 1.0,
+          "notes": "Similar coffee profile, slightly sweeter",
+          "compatibility": 90
+        },
+        {
+          "original": "Don Julio Blanco",
+          "substitute": "Patrón Silver",
+          "ratio": 1.0,
+          "notes": "Similar agave profile and smoothness",
+          "compatibility": 85
+        }
+      ],
+      "glassware": "highball",
+      "garnish": ["lime-wheel", "coffee-beans"],
+      "build_type": "built"
+    },
+    {
+      "id": "amaro-manhattan-001",
+      "name": "Amaro Manhattan",
+      "template_id": "manhattan-template",
+      "generated": true,
+      "ingredients": [
+        "2oz Woodford Reserve Bourbon",
+        "0.75oz Amaro Nonino",
+        "2 dashes Aromatic Bitters",
+        "Orange twist for garnish"
+      ],
+      "instructions": [
+        "Stir ingredients with ice for 30 seconds",
+        "Strain into chilled coupe glass",
+        "Express orange peel over drink",
+        "Garnish with orange twist"
+      ],
+      "balance_profile": {
+        "sweet": 7,
+        "sour": 2,
+        "bitter": 5,
+        "spicy": 4,
+        "aromatic": 7,
+        "alcoholic": 6
+      },
+      "complexity_score": 8,
+      "seasonal_notes": [
+        "Rich and warming for cooler months",
+        "Perfect after-dinner sipper",
+        "Amaro adds herbal complexity to classic Manhattan"
+      ],
+      "substitutions": [
+        {
+          "original": "Amaro Nonino",
+          "substitute": "Amaro Montenegro",
+          "ratio": 1.0,
+          "notes": "Similar sweetness and herbal profile",
+          "compatibility": 85
+        },
+        {
+          "original": "Woodford Reserve Bourbon",
+          "substitute": "Buffalo Trace",
+          "ratio": 1.0,
+          "notes": "Similar vanilla and oak notes",
+          "compatibility": 80
+        }
+      ],
+      "glassware": "coupe",
+      "garnish": ["orange-twist"],
+      "build_type": "stirred"
+    },
+    {
+      "id": "botanical-mule-001",
+      "name": "Botanical Mule",
+      "template_id": "mule-template",
+      "generated": true,
+      "ingredients": [
+        "2oz Hendrick's Gin",
+        "0.75oz Fresh Lime Juice",
+        "5oz Ginger Beer",
+        "Cucumber slices for garnish"
+      ],
+      "instructions": [
+        "Build in copper mug with ice",
+        "Add gin and lime juice",
+        "Top with ginger beer",
+        "Stir gently",
+        "Garnish with cucumber slices and mint"
+      ],
+      "balance_profile": {
+        "sweet": 5,
+        "sour": 5,
+        "bitter": 2,
+        "spicy": 6,
+        "aromatic": 7,
+        "alcoholic": 4
+      },
+      "complexity_score": 5,
+      "seasonal_notes": [
+        "Refreshing summer cocktail",
+        "Gin's botanicals complement ginger spice",
+        "Cucumber adds cooling effect"
+      ],
+      "substitutions": [
+        {
+          "original": "Hendrick's Gin",
+          "substitute": "Bombay Sapphire",
+          "ratio": 1.0,
+          "notes": "Similar juniper profile, less floral",
+          "compatibility": 80
+        },
+        {
+          "original": "Ginger Beer",
+          "substitute": "Ginger Ale",
+          "ratio": 1.0,
+          "notes": "Less spicy, more sweet",
+          "compatibility": 75
+        }
+      ],
+      "glassware": "copper-mug",
+      "garnish": ["cucumber-slices", "mint-sprig"],
+      "build_type": "built"
+    },
+    {
+      "id": "chartreuse-sour-001",
+      "name": "Chartreuse Sour",
+      "template_id": "amaro-sour-template",
+      "generated": true,
+      "ingredients": [
+        "1.75oz Chartreuse Green",
+        "0.75oz Fresh Lemon Juice",
+        "0.25oz Simple Syrup",
+        "Egg white for froth"
+      ],
+      "instructions": [
+        "Dry shake all ingredients without ice",
+        "Add ice and shake vigorously",
+        "Double strain into chilled coupe",
+        "Garnish with lemon twist"
+      ],
+      "balance_profile": {
+        "sweet": 6,
+        "sour": 6,
+        "bitter": 5,
+        "spicy": 7,
+        "aromatic": 9,
+        "alcoholic": 7
+      },
+      "complexity_score": 9,
+      "seasonal_notes": [
+        "Intensely herbal and complex",
+        "Perfect for adventurous palates",
+        "Chartreuse's 130 botanicals create unique flavor"
+      ],
+      "substitutions": [
+        {
+          "original": "Chartreuse Green",
+          "substitute": "Chartreuse Yellow",
+          "ratio": 1.0,
+          "notes": "Slightly sweeter, less intense",
+          "compatibility": 85
+        },
+        {
+          "original": "Simple Syrup",
+          "substitute": "Honey Syrup",
+          "ratio": 0.75,
+          "notes": "Reduce amount, honey is sweeter",
+          "compatibility": 80
+        }
+      ],
+      "glassware": "coupe",
+      "garnish": ["lemon-twist"],
+      "build_type": "shaken"
+    },
+    {
+      "id": "st-germain-spritz-001",
+      "name": "St-Germain Spritz",
+      "template_id": "gin-tonic-template",
+      "generated": true,
+      "ingredients": [
+        "2oz Belvedere Vodka",
+        "0.75oz St-Germain",
+        "4oz Tonic Water",
+        "Lime wheel for garnish"
+      ],
+      "instructions": [
+        "Build in highball glass with ice",
+        "Add vodka and St-Germain",
+        "Top with tonic water",
+        "Stir gently",
+        "Garnish with lime wheel"
+      ],
+      "balance_profile": {
+        "sweet": 7,
+        "sour": 3,
+        "bitter": 2,
+        "spicy": 1,
+        "aromatic": 6,
+        "alcoholic": 3
+      },
+      "complexity_score": 4,
+      "seasonal_notes": [
+        "Delicate and floral",
+        "Perfect for spring and summer",
+        "Elderflower adds unique floral dimension"
+      ],
+      "substitutions": [
+        {
+          "original": "St-Germain",
+          "substitute": "Elderflower Syrup",
+          "ratio": 0.5,
+          "notes": "Reduce amount, syrup is sweeter",
+          "compatibility": 70
+        },
+        {
+          "original": "Belvedere Vodka",
+          "substitute": "Grey Goose",
+          "ratio": 1.0,
+          "notes": "Similar neutral profile and smoothness",
+          "compatibility": 90
+        }
+      ],
+      "glassware": "highball",
+      "garnish": ["lime-wheel"],
+      "build_type": "built"
+    }
+  ],
+  "example_combinations": [
+    {
+      "name": "Coffee-Infused Classics",
+      "description": "Classic cocktails enhanced with coffee liqueur",
+      "ingredients": ["borghetti-coffee-liqueur", "tequila", "rum", "whiskey"],
+      "examples": [
+        "Coffee Paloma with Tequila and Borghetti",
+        "Coffee Old Fashioned with Bourbon and Borghetti",
+        "Espresso Martini with Vodka and Borghetti"
+      ]
+    },
+    {
+      "name": "Amaro Variations",
+      "description": "Classic cocktails with amaro substitutions",
+      "ingredients": ["amaro-nonino", "amaro-montenegro", "campari", "vermouth"],
+      "examples": [
+        "Manhattan with Amaro Nonino instead of vermouth",
+        "Negroni with different amari combinations",
+        "Amaro Sour with herbal complexity"
+      ]
+    },
+    {
+      "name": "Botanical Explorations",
+      "description": "Gin cocktails highlighting botanical complexity",
+      "ingredients": ["hendricks-gin", "bombay-sapphire", "tanqueray", "chartreuse-green"],
+      "examples": [
+        "Botanical Mule with Hendrick's and cucumber",
+        "Last Word with Chartreuse Green",
+        "Aviation with floral gin and violette"
+      ]
+    },
+    {
+      "name": "Modern Highballs",
+      "description": "Contemporary takes on classic highball drinks",
+      "ingredients": ["st-germain", "elderflower", "ginger-beer", "tonic"],
+      "examples": [
+        "St-Germain Spritz with vodka and tonic",
+        "Ginger Beer with various spirits",
+        "Tonic variations with botanical gins"
+      ]
+    }
+  ],
+  "flavor_balance_guide": {
+    "balanced": {
+      "description": "Well-rounded flavor profile",
+      "target_ranges": {
+        "sweet": [4, 6],
+        "sour": [4, 6],
+        "bitter": [3, 5],
+        "spicy": [2, 4],
+        "aromatic": [4, 7],
+        "alcoholic": [4, 6]
+      }
+    },
+    "spirit_forward": {
+      "description": "Strong alcohol presence with supporting flavors",
+      "target_ranges": {
+        "sweet": [3, 5],
+        "sour": [2, 4],
+        "bitter": [4, 7],
+        "spicy": [3, 6],
+        "aromatic": [5, 8],
+        "alcoholic": [6, 8]
+      }
+    },
+    "refreshing": {
+      "description": "Light, bright, and citrus-forward",
+      "target_ranges": {
+        "sweet": [3, 5],
+        "sour": [5, 7],
+        "bitter": [2, 4],
+        "spicy": [2, 4],
+        "aromatic": [3, 6],
+        "alcoholic": [3, 5]
+      }
+    },
+    "complex": {
+      "description": "Multi-layered with herbal and aromatic notes",
+      "target_ranges": {
+        "sweet": [4, 7],
+        "sour": [3, 5],
+        "bitter": [5, 8],
+        "spicy": [4, 7],
+        "aromatic": [6, 9],
+        "alcoholic": [5, 7]
+      }
+    }
+  }
+}
