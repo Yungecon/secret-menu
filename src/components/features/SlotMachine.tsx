@@ -1,387 +1,47 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SlotReel from './SlotReel';
-import { 
-  FLAVOR_ATTRIBUTES, 
-  MOOD_ATTRIBUTES, 
-  STYLE_ATTRIBUTES,
-  SlotMachineResult,
-  convertSlotToQuizAnswers
-} from '../../utils/slotMachineAttributes';
-import { generateRecommendations } from '../../services/recommendationEngine';
-import { RecommendationResult } from '../../types';
-
-interface ReelState {
-  isSpinning: boolean;
-  selectedAttribute?: string;
-}
 
 const SlotMachine = () => {
   const navigate = useNavigate();
-  
-  const [reelStates, setReelStates] = useState<ReelState[]>([
-    { isSpinning: true },
-    { isSpinning: true },
-    { isSpinning: true }
-  ]);
-  
-  const [gameState, setGameState] = useState<'spinning' | 'stopping' | 'complete' | 'results'>('spinning');
-  const [currentTap, setCurrentTap] = useState(0); // Which reel to stop next (0-2)
-  const [slotResult, setSlotResult] = useState<SlotMachineResult | null>(null);
-  const [cocktailResult, setCocktailResult] = useState<RecommendationResult | null>(null);
-  const [autoStopTimeouts, setAutoStopTimeouts] = useState<NodeJS.Timeout[]>([]);
 
-  // Start auto-stop timer for first reel on component mount
+  // Simplified state for debugging
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      // Direct state update instead of calling handleTap to avoid circular dependency
-      setGameState(prevState => {
-        if (prevState === 'spinning') {
-          setReelStates(prev => prev.map((reel, index) => 
-            index === 0 
-              ? { ...reel, isSpinning: false }
-              : reel
-          ));
-          return 'stopping';
-        }
-        return prevState;
-      });
-    }, 6000);
-    
-    setAutoStopTimeouts([timeout]);
-
-    // Cleanup on unmount
-    return () => {
-      clearTimeout(timeout);
-    };
+    // Simple loading test
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
-
-
-  // Handle tap to stop current reel
-  const handleTap = useCallback(() => {
-    if (gameState !== 'spinning' || currentTap >= 3) return;
-
-    // Clear the auto-stop timeout for current reel
-    if (autoStopTimeouts[currentTap]) {
-      clearTimeout(autoStopTimeouts[currentTap]);
-    }
-
-    setGameState('stopping');
-    
-    // Stop the current reel
-    setReelStates(prev => prev.map((reel, index) => 
-      index === currentTap 
-        ? { ...reel, isSpinning: false }
-        : reel
-    ));
-  }, [gameState, currentTap, autoStopTimeouts]);
-
-  // Handle when a reel stops and selects an attribute
-  const handleReelStop = useCallback((reelIndex: number, selectedAttribute: string) => {
-    setReelStates(prev => prev.map((reel, index) => 
-      index === reelIndex 
-        ? { ...reel, selectedAttribute }
-        : reel
-    ));
-
-    const nextTap = currentTap + 1;
-    setCurrentTap(nextTap);
-
-    if (nextTap < 3) {
-      // More reels to stop, return to spinning state and set auto-stop for next reel
-      setGameState('spinning');
-      
-      const timeout = setTimeout(() => {
-        setGameState(prevState => {
-          if (prevState === 'spinning') {
-            setReelStates(prev => prev.map((reel, index) => 
-              index === nextTap 
-                ? { ...reel, isSpinning: false }
-                : reel
-            ));
-            return 'stopping';
-          }
-          return prevState;
-        });
-      }, 6000);
-      
-      setAutoStopTimeouts(prev => {
-        const newTimeouts = [...prev];
-        newTimeouts[nextTap] = timeout;
-        return newTimeouts;
-      });
-    } else {
-      // All reels stopped, create final result
-      const updatedStates = [...reelStates];
-      updatedStates[reelIndex] = { ...updatedStates[reelIndex], selectedAttribute };
-      
-      // Check if we have all three attributes
-      const flavor = updatedStates[0].selectedAttribute;
-      const mood = updatedStates[1].selectedAttribute;
-      const style = updatedStates[2].selectedAttribute;
-      
-      if (flavor && mood && style) {
-        const result: SlotMachineResult = {
-          flavor,
-          mood,
-          style,
-          timestamp: Date.now()
-        };
-        
-        setSlotResult(result);
-        setGameState('complete');
-
-        // Generate cocktail recommendation after a brief pause
-        setTimeout(() => {
-          const quizAnswers = convertSlotToQuizAnswers(result);
-          const recommendation = generateRecommendations(quizAnswers);
-          setCocktailResult(recommendation);
-          setGameState('results');
-        }, 1500); // 1.5 second pause to show the combination
-      }
-    }
-  }, [currentTap, reelStates]);
-
-  // Reset for new spin
-  const spinAgain = useCallback(() => {
-    // Clear all auto-stop timeouts
-    autoStopTimeouts.forEach(timeout => clearTimeout(timeout));
-    
-    setGameState('spinning');
-    setCurrentTap(0);
-    setSlotResult(null);
-    setCocktailResult(null);
-    setReelStates([
-      { isSpinning: true },
-      { isSpinning: true },
-      { isSpinning: true }
-    ]);
-
-    // Set up auto-stop for first reel after 6 seconds
-    const timeout = setTimeout(() => {
-      setGameState(prevState => {
-        if (prevState === 'spinning') {
-          setReelStates(prev => prev.map((reel, index) => 
-            index === 0 
-              ? { ...reel, isSpinning: false }
-              : reel
-          ));
-          return 'stopping';
-        }
-        return prevState;
-      });
-    }, 6000);
-    
-    setAutoStopTimeouts([timeout]);
-  }, [autoStopTimeouts]);
-
-  const getInstructionText = () => {
-    if (gameState === 'spinning') return `Tap the glowing reel to stop it (${currentTap + 1} of 3) - or wait 6 seconds`;
-    if (gameState === 'stopping') return 'Reel stopping...';
-    if (gameState === 'complete') return 'The reels have aligned! 🎰';
-    if (gameState === 'results') return 'Your perfect cocktail awaits! 🍸';
-    return '';
-  };
-
-  const getReelAttributes = (reelIndex: number) => {
-    switch (reelIndex) {
-      case 0: return Array.from(FLAVOR_ATTRIBUTES);
-      case 1: return Array.from(MOOD_ATTRIBUTES);
-      case 2: return Array.from(STYLE_ATTRIBUTES);
-      default: return [];
-    }
-  };
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-2xl">Loading Slot Machine...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden bg-premium-black">
-      <div className="text-center max-w-6xl mx-auto relative z-10">
-        {/* Premium Title */}
-        <div className="mb-8">
-          <h1 className="font-elegant text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-premium-gold via-premium-silver to-premium-gold bg-clip-text text-transparent">
-            Secret Shuffle
-          </h1>
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-premium-gold to-transparent mx-auto"></div>
-        </div>
-
-        {/* Instructions */}
-        <div className="mb-8">
-          <p className="text-premium-silver text-xl mb-4">
-            Let the reels decide your cocktail destiny
-          </p>
-          <p className="text-premium-gold text-lg font-medium animate-pulse">
-            {getInstructionText()}
-          </p>
-        </div>
-
-        {/* Slot Machine Interface */}
-        <div className="bg-premium-dark/30 backdrop-blur-sm border border-premium-silver/20 rounded-3xl p-8 mb-8 slot-machine-glow">
-          {/* Reel Labels */}
-          <div className="flex justify-center gap-8 md:gap-16 mb-6">
-            <div className="text-center">
-              <h3 className="text-premium-gold text-sm font-semibold mb-2">FLAVORS</h3>
-              <div className="w-16 h-px bg-premium-gold/50"></div>
-            </div>
-            <div className="text-center">
-              <h3 className="text-premium-gold text-sm font-semibold mb-2">MOODS</h3>
-              <div className="w-16 h-px bg-premium-gold/50"></div>
-            </div>
-            <div className="text-center">
-              <h3 className="text-premium-gold text-sm font-semibold mb-2">STYLES</h3>
-              <div className="w-16 h-px bg-premium-gold/50"></div>
-            </div>
-          </div>
-
-          {/* Three Reels */}
-          <div className="flex justify-center gap-8 md:gap-16 mb-8">
-            {reelStates.map((reel, index) => (
-              <SlotReel
-                key={index}
-                attributes={getReelAttributes(index)}
-                isSpinning={reel.isSpinning}
-                onStop={(attribute) => handleReelStop(index, attribute)}
-                reelIndex={index}
-                disabled={gameState === 'spinning' && index !== currentTap}
-                canTap={gameState === 'spinning' && index === currentTap}
-                onTap={handleTap}
-              />
-            ))}
-          </div>
-
-          {/* Combination Display */}
-          {gameState === 'complete' && slotResult && (
-            <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-2xl p-6 mb-6 animate-fade-in">
-              <h3 className="text-premium-gold text-xl font-semibold mb-4">
-                ✨ Your Combination ✨
-              </h3>
-              <div className="flex justify-center gap-4 text-premium-silver">
-                <span className="bg-premium-dark/70 px-4 py-2 rounded-lg border border-premium-silver/20 capitalize">
-                  {slotResult.flavor}
-                </span>
-                <span className="text-premium-gold text-xl">+</span>
-                <span className="bg-premium-dark/70 px-4 py-2 rounded-lg border border-premium-silver/20 capitalize">
-                  {slotResult.mood}
-                </span>
-                <span className="text-premium-gold text-xl">+</span>
-                <span className="bg-premium-dark/70 px-4 py-2 rounded-lg border border-premium-silver/20 capitalize">
-                  {slotResult.style}
-                </span>
-              </div>
-              <p className="text-premium-silver/80 text-sm mt-4">
-                The spirits aligned perfectly! Finding your cocktail...
-              </p>
-            </div>
-          )}
-
-          {/* Cocktail Results Display */}
-          {gameState === 'results' && cocktailResult && (
-            <div className="animate-fade-in">
-              {/* Cocktail Reveal */}
-              <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-2xl p-8 mb-6">
-                <div className="text-center mb-6">
-                  <p className="text-premium-gold text-lg mb-4 italic">
-                    Your combination revealed...
-                  </p>
-                  <h2 className="font-elegant text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-premium-gold via-premium-silver to-premium-gold bg-clip-text text-transparent">
-                    {cocktailResult.primary.name}
-                  </h2>
-                  <div className="inline-flex items-center space-x-2 bg-premium-charcoal/30 px-4 py-2 rounded-full border border-premium-gold/20 mb-4">
-                    <div className="w-2 h-2 bg-premium-gold rounded-full animate-pulse"></div>
-                    <span className="text-premium-gold font-medium text-sm">
-                      {cocktailResult.matchScore}% Perfect Match
-                    </span>
-                    <div className="w-2 h-2 bg-premium-gold rounded-full animate-pulse delay-500"></div>
-                  </div>
-                </div>
-
-                {/* Cocktail Details */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <span className="text-premium-gold text-sm font-medium px-3 py-1 bg-premium-gold/10 rounded-full">
-                      {cocktailResult.primary.style}
-                    </span>
-                  </div>
-                  <p className="text-premium-silver text-lg mb-6 leading-relaxed italic text-center">
-                    "{cocktailResult.primary.notes || "A sophisticated blend that speaks to your refined palate"}"
-                  </p>
-                </div>
-
-                {/* Ingredients */}
-                <div className="mb-6">
-                  <h3 className="text-premium-platinum font-semibold text-lg mb-4 text-center">
-                    Crafted With
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {cocktailResult.primary.ingredients.map((ingredient, index) => (
-                      <div key={index} className="text-premium-silver text-center py-2 px-4 bg-premium-charcoal/30 rounded-lg">
-                        {ingredient}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Garnish and Glassware */}
-                <div className="border-t border-premium-silver/20 pt-4">
-                  <div className="flex justify-between text-sm text-premium-silver/70">
-                    <span>✨ Garnished with {cocktailResult.primary.garnish}</span>
-                    <span>🥃 Served in {cocktailResult.primary.glassware}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Adjacent Recommendations */}
-              {cocktailResult.adjacent.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-premium-platinum text-lg mb-4 text-center">You might also enjoy...</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {cocktailResult.adjacent.slice(0, 3).map((cocktail) => (
-                      <div
-                        key={cocktail.id}
-                        className="bg-premium-dark/30 border border-premium-silver/20 rounded-xl p-4 text-center"
-                      >
-                        <h4 className="text-premium-gold font-medium mb-2">
-                          {cocktail.name}
-                        </h4>
-                        <p className="text-premium-silver/80 text-sm mb-2">{cocktail.style}</p>
-                        <p className="text-premium-silver/60 text-xs">
-                          {cocktail.base_spirit_category}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {(gameState === 'complete' || gameState === 'results') && (
-            <button
-              onClick={spinAgain}
-              className="premium-button text-lg px-8 py-3 bg-gradient-to-r from-premium-gold to-premium-silver text-premium-black hover:scale-105 transition-all duration-300"
-            >
-              🎰 Spin Again
-            </button>
-          )}
-          
-          {/* Navigation buttons */}
+    <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="text-center text-white">
+        <h1 className="text-4xl font-bold mb-4">Secret Shuffle</h1>
+        <p className="text-xl mb-8">Slot Machine Coming Soon!</p>
+        
+        <div className="flex gap-4 justify-center">
           <button
             onClick={() => navigate('/')}
-            className="px-6 py-3 bg-premium-dark/50 border border-premium-silver/30 text-premium-silver rounded-lg hover:bg-premium-silver/10 transition-all duration-300"
+            className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all duration-300"
           >
             Back to Menu
           </button>
           <button
             onClick={() => navigate('/quiz')}
-            className="px-6 py-3 bg-premium-dark/50 border border-premium-silver/30 text-premium-silver rounded-lg hover:bg-premium-silver/10 transition-all duration-300"
+            className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-300"
           >
             Take Quiz Instead
           </button>
         </div>
-
-
       </div>
     </div>
   );
