@@ -633,11 +633,21 @@ export class CocktailBuildEngine {
     const cocktails: GeneratedRecipe[] = [];
     
     try {
+      console.log('Loading enhanced cocktail library...');
       // Load the enhanced cocktail library
       const response = await fetch('/enhanced_cocktail_library.json');
+      
+      if (!response.ok) {
+        throw new Error(`Failed to load cocktail library: ${response.status}`);
+      }
+      
       const libraryData = await response.json();
+      console.log('Loaded cocktail library:', libraryData);
       
       // Find matching cocktails based on selected ingredients
+      console.log('Searching for cocktails with:', selectedIngredients);
+      console.log('Available cocktails:', libraryData.cocktails.map((c: any) => c.name));
+      
       const matchingCocktails = libraryData.cocktails.filter((cocktail: any) => {
         const baseSpiritMatch = cocktail.base_spirit === selectedIngredients.baseSpirit;
         const flavorMatch = cocktail.tags.some((tag: string) => 
@@ -645,8 +655,11 @@ export class CocktailBuildEngine {
           selectedIngredients.flavorFamily.toLowerCase().includes(tag)
         );
         
+        console.log(`Cocktail ${cocktail.name}: baseSpiritMatch=${baseSpiritMatch}, flavorMatch=${flavorMatch}`);
         return baseSpiritMatch || flavorMatch;
       });
+      
+      console.log('Matching cocktails found:', matchingCocktails.length);
 
       // Convert matching cocktails to GeneratedRecipe format
       matchingCocktails.slice(0, 3).forEach((cocktail: any) => {

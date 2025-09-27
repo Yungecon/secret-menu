@@ -118,6 +118,10 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   };
 
   const generateCocktails = async () => {
+    console.log('Generate cocktails button clicked!');
+    console.log('Current selectedIngredients:', selectedIngredients);
+    console.log('Journey data loaded:', !!journeyData);
+    
     if (selectedIngredients.baseSpirit && selectedIngredients.flavorFamily) {
       try {
         console.log('Generating cocktails for:', selectedIngredients);
@@ -133,12 +137,16 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
           onCocktailGenerate?.(generatedCocktails);
         } else {
           console.log('No cocktails generated');
+          // Show a fallback message
+          alert('No cocktails found for your selection. Please try different ingredients.');
         }
       } catch (error) {
         console.error('Error generating cocktails:', error);
+        alert('Error generating cocktails. Please check the console for details.');
       }
     } else {
       console.log('Missing required ingredients:', selectedIngredients);
+      alert('Please complete all steps of the flavor journey first.');
     }
   };
 
