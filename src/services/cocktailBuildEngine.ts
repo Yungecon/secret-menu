@@ -55,28 +55,177 @@ export class CocktailBuildEngine {
 
   private async loadIngredientProfiles() {
     try {
-      const response = await fetch('/src/assets/data/ingredient_flavor_profiles.json');
+      // Load enhanced cocktail library instead of basic profiles
+      const response = await fetch('/enhanced_cocktail_library.json');
       const data = await response.json();
       
-      data.ingredients.forEach((ingredient: IngredientProfile) => {
-        this.ingredientProfiles.set(ingredient.id, ingredient);
-      });
+      // Create ingredient profiles from the cocktail library
+      this.createIngredientProfilesFromLibrary(data);
     } catch (error) {
       console.error('Error loading ingredient profiles:', error);
     }
   }
 
+  private createIngredientProfilesFromLibrary(libraryData: any) {
+    // Create profiles from base spirits
+    Object.entries(libraryData.base_spirits.traditional).forEach(([key, spirit]: [string, any]) => {
+        this.ingredientProfiles.set(key, {
+          id: key,
+          name: spirit.name,
+          category: 'spirit',
+          subcategory: 'base',
+          flavor_profile: {
+            primary: spirit.flavor_characteristics,
+            secondary: [],
+            tertiary: [],
+            intensity: {
+              overall: 7,
+              sweet: 5,
+              sour: 3,
+              bitter: 4,
+              spicy: 6,
+              aromatic: 8
+            }
+          },
+          pairings: [],
+          substitutions: [],
+          best_uses: spirit.best_for || [],
+          seasonal: false,
+          regional: [],
+          notes: spirit.description || ''
+        });
+    });
+
+    Object.entries(libraryData.base_spirits.non_traditional).forEach(([key, spirit]: [string, any]) => {
+        this.ingredientProfiles.set(key, {
+          id: key,
+          name: spirit.name,
+          category: 'spirit',
+          subcategory: 'specialty',
+          flavor_profile: {
+            primary: spirit.flavor_characteristics,
+            secondary: [],
+            tertiary: [],
+            intensity: {
+              overall: 8,
+              sweet: 6,
+              sour: 4,
+              bitter: 5,
+              spicy: 7,
+              aromatic: 9
+            }
+          },
+          pairings: [],
+          substitutions: [],
+          best_uses: spirit.best_for || [],
+          seasonal: false,
+          regional: [],
+          notes: spirit.description || ''
+        });
+    });
+
+    // Create profiles from modifying liqueurs
+    Object.values(libraryData.modifying_liqueurs).forEach((category: any) => {
+      Object.entries(category).forEach(([key, liqueur]: [string, any]) => {
+          this.ingredientProfiles.set(key, {
+            id: key,
+            name: liqueur.name,
+            category: 'liqueur',
+            subcategory: 'modifier',
+            flavor_profile: {
+              primary: liqueur.flavor_profile,
+              secondary: [],
+              tertiary: [],
+              intensity: {
+                overall: 6,
+                sweet: 8,
+                sour: 3,
+                bitter: 2,
+                spicy: 4,
+                aromatic: 7
+              }
+            },
+            pairings: liqueur.best_pairings || [],
+            substitutions: [],
+            best_uses: [],
+            seasonal: false,
+            regional: [],
+            notes: liqueur.description || ''
+          });
+      });
+    });
+  }
+
   private async loadTemplates() {
     try {
-      const response = await fetch('/src/assets/data/cocktail_templates.json');
+      // Load enhanced cocktail library for templates
+      const response = await fetch('/enhanced_cocktail_library.json');
       const data = await response.json();
       
-      data.templates.forEach((template: CocktailTemplate) => {
+      // Create templates from the cocktail library
+      data.cocktails.forEach((cocktail: any) => {
+        const template: CocktailTemplate = {
+          id: cocktail.id,
+          name: cocktail.name,
+          type: cocktail.base_spirit,
+          description: cocktail.description,
+          base_structure: this.createBaseStructureFromCocktail(cocktail),
+          build_type: cocktail.build_type,
+          glassware: cocktail.glassware,
+          garnish: cocktail.garnish,
+          instructions: cocktail.instructions,
+          variations: []
+        };
         this.templates.set(template.id, template);
       });
     } catch (error) {
       console.error('Error loading cocktail templates:', error);
     }
+  }
+
+  private createBaseStructureFromCocktail(cocktail: any) {
+    const structure = [];
+    
+    // Find base spirit
+    const baseIngredient = cocktail.ingredients.find((ing: any) => ing.role === 'base');
+    if (baseIngredient) {
+      structure.push({
+        role: 'base' as const,
+        required: true,
+        ingredient_type: cocktail.base_spirit,
+        proportion: { min: 1.5, max: 2.5, default: 2.0 },
+        alternatives: [cocktail.base_spirit],
+        flavor_profile: ['base']
+      });
+    }
+
+    // Find modifier
+    const modifierIngredient = cocktail.ingredients.find((ing: any) => ing.role === 'modifier');
+    if (modifierIngredient) {
+      structure.push({
+        role: 'modifier' as const,
+        required: true,
+        ingredient_type: 'liqueur',
+        proportion: { min: 0.5, max: 1.0, default: 0.75 },
+        alternatives: cocktail.modifying_liqueurs || [],
+        flavor_profile: ['modifier']
+      });
+    }
+
+    // Find acid
+    const acidIngredient = cocktail.ingredients.find((ing: any) => ing.role === 'acid');
+    if (acidIngredient) {
+      structure.push({
+        role: 'citrus' as const,
+        required: true,
+        ingredient_type: 'citrus',
+        proportion: { min: 0.5, max: 1.0, default: 0.75 },
+        alternatives: ['lime', 'lemon', 'grapefruit'],
+        flavor_profile: ['citrus', 'acid']
+      });
+    }
+
+    return structure;
   }
 
   /**
@@ -475,6 +624,121 @@ export class CocktailBuildEngine {
    */
   getAllIngredientProfiles(): IngredientProfile[] {
     return Array.from(this.ingredientProfiles.values());
+  }
+
+  /**
+   * Generate cocktails based on Flavor Journey selections
+   */
+  async generateFromFlavorJourney(selectedIngredients: any): Promise<GeneratedRecipe[]> {
+    const cocktails: GeneratedRecipe[] = [];
+    
+    try {
+      // Load the enhanced cocktail library
+      const response = await fetch('/enhanced_cocktail_library.json');
+      const libraryData = await response.json();
+      
+      // Find matching cocktails based on selected ingredients
+      const matchingCocktails = libraryData.cocktails.filter((cocktail: any) => {
+        const baseSpiritMatch = cocktail.base_spirit === selectedIngredients.baseSpirit;
+        const flavorMatch = cocktail.tags.some((tag: string) => 
+          selectedIngredients.flavorFamily && 
+          selectedIngredients.flavorFamily.toLowerCase().includes(tag)
+        );
+        
+        return baseSpiritMatch || flavorMatch;
+      });
+
+      // Convert matching cocktails to GeneratedRecipe format
+      matchingCocktails.slice(0, 3).forEach((cocktail: any) => {
+        const recipe: GeneratedRecipe = {
+          id: cocktail.id,
+          name: cocktail.name,
+          template_id: cocktail.id,
+          generated: true,
+          ingredients: cocktail.ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
+          instructions: cocktail.instructions,
+          balance_profile: {
+            sweet: cocktail.flavor_profile.sweet || 5,
+            sour: cocktail.flavor_profile.sour || 5,
+            bitter: cocktail.flavor_profile.bitter || 3,
+            spicy: cocktail.flavor_profile.spicy || 4,
+            aromatic: cocktail.flavor_profile.aromatic || 6,
+            alcoholic: cocktail.flavor_profile.alcoholic || 7
+          },
+          complexity_score: cocktail.difficulty === 'easy' ? 3 : cocktail.difficulty === 'intermediate' ? 6 : 9,
+          seasonal_notes: cocktail.seasonal_notes || [],
+          substitutions: [],
+          glassware: cocktail.glassware,
+          garnish: cocktail.garnish,
+          build_type: cocktail.build_type
+        };
+        
+        cocktails.push(recipe);
+      });
+
+      // If no exact matches, create a custom cocktail based on selections
+      if (cocktails.length === 0) {
+        const customCocktail = this.createCustomCocktail(selectedIngredients);
+        if (customCocktail) {
+          cocktails.push(customCocktail);
+        }
+      }
+
+    } catch (error) {
+      console.error('Error generating cocktails from flavor journey:', error);
+    }
+
+    return cocktails;
+  }
+
+  /**
+   * Create a custom cocktail based on Flavor Journey selections
+   */
+  private createCustomCocktail(selectedIngredients: any): GeneratedRecipe | null {
+    const baseSpirit = selectedIngredients.baseSpirit;
+    const flavorFamily = selectedIngredients.flavorFamily;
+    const specificFlavor = selectedIngredients.specificFlavor;
+
+    if (!baseSpirit || !flavorFamily) return null;
+
+    // Create a custom cocktail name
+    const cocktailName = `${specificFlavor || flavorFamily} ${baseSpirit} Creation`;
+
+    // Create basic ingredients based on selections
+    const ingredients = [
+      `2oz ${baseSpirit.charAt(0).toUpperCase() + baseSpirit.slice(1)}`,
+      `0.75oz ${specificFlavor || flavorFamily} liqueur`,
+      `0.75oz Fresh citrus juice`,
+      `0.5oz Simple syrup`
+    ];
+
+    return {
+      id: `custom-${Date.now()}`,
+      name: cocktailName,
+      template_id: 'custom-template',
+      generated: true,
+      ingredients,
+      instructions: [
+        "Combine all ingredients in a shaker with ice",
+        "Shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish as desired"
+      ],
+      balance_profile: {
+        sweet: 6,
+        sour: 6,
+        bitter: 3,
+        spicy: 4,
+        aromatic: 7,
+        alcoholic: 7
+      },
+      complexity_score: 5,
+      seasonal_notes: ["Custom creation based on your preferences"],
+      substitutions: [],
+      glassware: "coupe",
+      garnish: ["citrus-twist"],
+      build_type: "shaken"
+    };
   }
 }
 

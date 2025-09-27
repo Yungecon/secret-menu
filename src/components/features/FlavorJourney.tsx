@@ -115,22 +115,25 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   };
 
   const generateCocktails = async () => {
-    if (selectedIngredients.baseSpirit && selectedIngredients.specificFlavor) {
+    if (selectedIngredients.baseSpirit && selectedIngredients.flavorFamily) {
       try {
-        // Generate cocktails based on selected ingredients
-        const request = {
-          availableIngredients: [selectedIngredients.baseSpirit, selectedIngredients.specificFlavor],
-          preferences: {
-            spiritType: selectedIngredients.baseSpirit,
-            flavorProfile: [selectedIngredients.specificFlavor]
-          }
-        };
+        console.log('Generating cocktails for:', selectedIngredients);
         
-        const generatedCocktails = await cocktailBuildEngine.generateRecipe(request);
-        onCocktailGenerate?.([generatedCocktails].filter(Boolean));
+        // Use the new Flavor Journey generation method
+        const generatedCocktails = await cocktailBuildEngine.generateFromFlavorJourney(selectedIngredients);
+        
+        console.log('Generated cocktails:', generatedCocktails);
+        
+        if (generatedCocktails && generatedCocktails.length > 0) {
+          onCocktailGenerate?.(generatedCocktails);
+        } else {
+          console.log('No cocktails generated');
+        }
       } catch (error) {
         console.error('Error generating cocktails:', error);
       }
+    } else {
+      console.log('Missing required ingredients:', selectedIngredients);
     }
   };
 
@@ -434,10 +437,6 @@ const SpecificFlavorSelector: React.FC<SpecificFlavorSelectorProps> = ({
         These are the flavors that work best with your selected spirit.
       </p>
 
-      {/* Debug info */}
-      {console.log('Available flavors:', availableFlavors)}
-      {console.log('Family:', family)}
-      {console.log('All family flavors:', family ? Object.keys(family.flavors) : 'No family')}
 
       {availableFlavors.length === 0 ? (
         <div className="text-center py-12">
