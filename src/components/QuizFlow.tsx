@@ -20,6 +20,15 @@ const QuizFlow = () => {
       ]
     },
     {
+      id: 'citrusVsStone',
+      question: 'Which fruit family calls to you?',
+      category: 'flavor',
+      options: [
+        { label: 'Citrus & Bright', value: 'citrus', colorTheme: 'from-yellow-400 to-orange-400', tags: ['citrus', 'bright'] },
+        { label: 'Stone Fruit & Rich', value: 'stone', colorTheme: 'from-purple-500 to-pink-500', tags: ['stone', 'rich'] }
+      ]
+    },
+    {
       id: 'lightVsBoozy',
       question: 'How do you prefer to indulge?',
       category: 'style',
@@ -27,23 +36,81 @@ const QuizFlow = () => {
         { label: 'Light & Refreshing', value: 'light', colorTheme: 'from-blue-400 to-cyan-300', tags: ['light', 'refreshing'] },
         { label: 'Bold & Spirit-Forward', value: 'boozy', colorTheme: 'from-red-600 to-red-500', tags: ['boozy', 'spirit-forward'] }
       ]
+    },
+    {
+      id: 'classicVsExperimental',
+      question: 'What draws your adventurous spirit?',
+      category: 'style',
+      options: [
+        { label: 'Classic & Timeless', value: 'classic', colorTheme: 'from-gray-600 to-gray-500', tags: ['classic', 'timeless'] },
+        { label: 'Experimental & Bold', value: 'experimental', colorTheme: 'from-purple-600 to-indigo-600', tags: ['experimental', 'bold'] }
+      ]
+    },
+    {
+      id: 'moodPreference',
+      question: 'What mood shall we craft for you?',
+      category: 'mood',
+      options: [
+        { label: 'Celebratory & Joyful', value: 'celebratory', colorTheme: 'from-green-500 to-emerald-400', tags: ['celebratory', 'joyful'] },
+        { label: 'Elegant & Refined', value: 'elegant', colorTheme: 'from-indigo-500 to-purple-500', tags: ['elegant', 'refined'] },
+        { label: 'Cozy & Intimate', value: 'cozy', colorTheme: 'from-orange-500 to-red-500', tags: ['cozy', 'intimate'] },
+        { label: 'Adventurous & Playful', value: 'adventurous', colorTheme: 'from-teal-500 to-cyan-500', tags: ['adventurous', 'playful'] }
+      ]
     }
   ];
 
-  const handleAnswer = (questionId: string, value: string) => {
-    const newAnswers = { 
-      ...answers, 
-      [questionId as keyof QuizAnswers]: value as any 
+  const getComplimentaryMessage = (questionId: string, value: string): string => {
+    const messages: Record<string, Record<string, string>> = {
+      sweetVsBitter: {
+        sweet: "How delightfully indulgent of you...",
+        bitter: "Such sophisticated complexity in your taste..."
+      },
+      citrusVsStone: {
+        citrus: "Ah, a lover of bright, vivacious flavors...",
+        stone: "You appreciate the deeper, more mysterious notes..."
+      },
+      lightVsBoozy: {
+        light: "Elegantly refreshing choice...",
+        boozy: "A connoisseur of bold, spirited experiences..."
+      },
+      classicVsExperimental: {
+        classic: "Timeless taste, impeccably refined...",
+        experimental: "How wonderfully adventurous of you..."
+      },
+      moodPreference: {
+        celebratory: "Ready to toast to life's finest moments...",
+        elegant: "Such exquisite refinement in your selection...",
+        cozy: "You seek the warmth of intimate perfection...",
+        adventurous: "A spirit that craves delightful surprises..."
+      }
     };
-    setLocalAnswers(newAnswers);
+    
+    return messages[questionId]?.[value] || "Excellent choice...";
+  };
 
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      // Quiz complete - pass answers to context
-      setAnswers(newAnswers);
-      navigate('/results');
-    }
+  const [feedbackMessage, setFeedbackMessage] = useState<string>("");
+
+  const handleAnswer = (questionId: string, value: string) => {
+    const message = getComplimentaryMessage(questionId, value);
+    setFeedbackMessage(message);
+    
+    // Brief pause to show the compliment
+    setTimeout(() => {
+      const newAnswers = { 
+        ...answers, 
+        [questionId as keyof QuizAnswers]: value as any 
+      };
+      setLocalAnswers(newAnswers);
+
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setFeedbackMessage("");
+      } else {
+        // Quiz complete - pass answers to context
+        setAnswers(newAnswers);
+        navigate('/results');
+      }
+    }, 1200);
   };
 
   const currentQ = questions[currentQuestion];
@@ -90,10 +157,18 @@ const QuizFlow = () => {
           ))}
         </div>
 
-        {/* Encouraging message */}
-        <p className="text-premium-silver/70 mt-8 text-lg">
-          Excellent taste in considering your options...
-        </p>
+        {/* Dynamic feedback message */}
+        <div className="mt-8 h-8 flex items-center justify-center">
+          {feedbackMessage ? (
+            <p className="text-magical-glow text-lg animate-fade-in font-medium">
+              {feedbackMessage}
+            </p>
+          ) : (
+            <p className="text-premium-silver/70 text-lg">
+              Excellent taste in considering your options...
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -43,32 +43,46 @@ const Results = () => {
         {/* Magical reveal message */}
         <div className="mb-8">
           <p className="text-magical-glow text-lg mb-2">Your impeccable taste has led us to...</p>
-          <h1 className="font-elegant text-5xl md:text-6xl font-bold text-premium-gold mb-4">
+          <h1 className="font-elegant text-5xl md:text-6xl font-bold text-premium-gold mb-4 animate-fade-in">
             {primary.name}
           </h1>
-          <div className="w-32 h-0.5 bg-gradient-to-r from-magical-shimmer to-magical-glow mx-auto"></div>
+          <div className="w-32 h-0.5 bg-gradient-to-r from-magical-shimmer to-magical-glow mx-auto mb-2"></div>
+          <p className="text-premium-silver/60 text-sm">
+            {recommendations.matchScore}% match • A perfect harmony for your palate
+          </p>
         </div>
 
         {/* Cocktail details */}
         <div className="magical-card p-8 mb-8">
-          <p className="text-premium-silver text-lg mb-6 leading-relaxed">
-            {primary.notes || "A sophisticated blend that speaks to your refined palate"}
-          </p>
+          <div className="mb-6">
+            <div className="flex items-center justify-center mb-4">
+              <span className="text-premium-gold text-sm font-medium px-3 py-1 bg-premium-gold/10 rounded-full">
+                {primary.style}
+              </span>
+            </div>
+            <p className="text-premium-silver text-lg mb-6 leading-relaxed italic">
+              "{primary.notes || "A sophisticated blend that speaks to your refined palate"}"
+            </p>
+          </div>
           
           <div className="mb-6">
-            <h3 className="text-premium-platinum font-semibold text-xl mb-4">Ingredients</h3>
-            <ul className="space-y-2">
+            <h3 className="text-premium-platinum font-semibold text-xl mb-4 text-center">
+              Crafted With
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {primary.ingredients.map((ingredient, index) => (
-                <li key={index} className="text-premium-silver">
+                <div key={index} className="text-premium-silver text-center py-2 px-4 bg-premium-charcoal/30 rounded-lg">
                   {ingredient}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <div className="flex justify-between text-sm text-premium-silver/70">
-            <span>Garnished with {primary.garnish}</span>
-            <span>Served in {primary.glassware}</span>
+          <div className="border-t border-premium-silver/20 pt-4">
+            <div className="flex justify-between text-sm text-premium-silver/70">
+              <span>✨ Garnished with {primary.garnish}</span>
+              <span>🥃 Served in {primary.glassware}</span>
+            </div>
           </div>
         </div>
 
