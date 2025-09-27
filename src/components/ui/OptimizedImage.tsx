@@ -67,6 +67,12 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     // For now, return original src
     // In production, this would generate URLs like:
     // `https://res.cloudinary.com/demo/image/fetch/w_${width},h_${height},q_${quality},f_auto/${encodeURIComponent(src)}`
+    
+    // Suppress unused parameter warnings for future implementation
+    void width;
+    void height;
+    void quality;
+    
     return src;
   };
 

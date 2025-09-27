@@ -77,6 +77,11 @@ export class PerformanceMonitor {
 export const optimizeImage = (src: string, width?: number, quality?: number): string => {
   // For future implementation with image CDN
   // This would integrate with services like Cloudinary or ImageKit
+  
+  // Suppress unused parameter warnings for future implementation
+  void width;
+  void quality;
+  
   return src;
 };
 

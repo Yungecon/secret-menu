@@ -64,10 +64,10 @@ const LandingPage = () => {
           </p>
         </div>
 
-        <MagicalParticles>
-          {/* Additional magical trail */}
-          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-magical-glow/20 to-transparent animate-pulse delay-2000"></div>
-        </MagicalParticles>
+        <MagicalParticles />
+        
+        {/* Additional magical trail */}
+        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-magical-glow/20 to-transparent animate-pulse delay-2000"></div>
       </div>
     </div>
   );

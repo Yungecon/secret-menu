@@ -6,7 +6,6 @@ import { RecommendationResult } from '../../types';
 import { trackRecommendationViewed, trackQuizRestart } from '../../services/analytics';
 import { playCocktailReveal } from '../../services/soundEffects';
 import { MagicalLoader, GRADIENT_CLASSES, MagicalParticles } from '../ui/animations';
-import { ANIMATION_DELAYS } from '../../constants';
 
 const Results = () => {
   const navigate = useNavigate();

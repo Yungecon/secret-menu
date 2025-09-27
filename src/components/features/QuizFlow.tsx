@@ -4,7 +4,7 @@ import { useQuiz } from '../../hooks';
 import { QuizAnswers, QuizQuestion } from '../../types';
 import { trackQuizStart, trackQuestionAnswered, trackQuizCompleted } from '../../services/analytics';
 import { playButtonPress, playComplimentReveal, playQuizComplete } from '../../services/soundEffects';
-import { createButtonHandlers, MagicalParticles } from '../ui/animations';
+
 import { ANIMATION_DELAYS } from '../../constants';
 
 const QuizFlow = () => {
@@ -327,39 +327,8 @@ const QuizFlow = () => {
       <div className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
         showingCompliment ? 'opacity-20 blur-sm scale-95' : 'opacity-100 blur-none scale-100'
       }`}>
-        {/* Enhanced Progress indicator with sticky answers */}
+        {/* Enhanced Progress indicator */}
         <div className="mb-8">
-          {/* Sticky Previous Answers */}
-          {currentQuestion > 0 && (
-            <div className="mb-6">
-              <div className="flex flex-wrap justify-center gap-2 mb-4">
-                {questions.slice(0, currentQuestion).map((question, index) => {
-                  const answer = answers[question.id as keyof QuizAnswers];
-                  const selectedOption = question.options.find(opt => opt.value === answer);
-                  
-                  return (
-                    <div
-                      key={question.id}
-                      className="relative px-4 py-2 rounded-full text-sm font-medium text-premium-black
-                                bg-gradient-to-r from-premium-gold via-premium-platinum to-magical-glow
-                                animate-shimmer bg-[length:200%_100%] shadow-lg shadow-magical-glow/30
-                                border border-premium-gold/20"
-                    >
-                      <span className="relative z-10">
-                        {selectedOption?.label || answer}
-                      </span>
-                      
-                      {/* Iridescent glow effect */}
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-magical-shimmer/20 via-premium-gold/20 to-magical-glow/20 animate-pulse"></div>
-                    </div>
-                  );
-                })}
-              </div>
-              <p className="text-premium-silver/50 text-xs text-center italic">
-                Your exquisite choices so far...
-              </p>
-            </div>
-          )}
 
           {/* Progress dots */}
           <div className="flex justify-center items-center space-x-3 mb-6">
@@ -418,7 +387,38 @@ const QuizFlow = () => {
           </div>
         </div>
 
-        {/* Question with enhanced animation */}
+        {/* Previous Questions and Answers */}
+        {currentQuestion > 0 && (
+          <div className="mb-12 space-y-8">
+            {questions.slice(0, currentQuestion).map((question, index) => {
+              const answer = answers[question.id as keyof QuizAnswers];
+              const selectedOption = question.options.find(opt => opt.value === answer);
+              
+              // Define shiny text colors for each answer
+              const shinyColors = [
+                'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500',
+                'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
+                'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500',
+                'text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600',
+                'text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-pink-500'
+              ];
+              
+              return (
+                <div key={question.id} className="text-center">
+                  <h3 className="font-elegant text-2xl md:text-3xl font-medium mb-3 text-premium-silver/80">
+                    {question.question}
+                  </h3>
+                  <p className={`font-medium text-xl md:text-2xl ${shinyColors[index % shinyColors.length]} 
+                                animate-shimmer bg-[length:200%_100%] drop-shadow-lg`}>
+                    {selectedOption?.label || answer}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Current Question with enhanced animation */}
         <h2 
           key={currentQuestion} // Force re-render for animation
           className="font-elegant text-4xl md:text-5xl font-semibold mb-12 text-premium-platinum animate-slide-up"
@@ -428,7 +428,7 @@ const QuizFlow = () => {
 
         {/* Answer options with enhanced animations */}
         <div key={currentQuestion} className="space-y-6">
-          {currentQ.options.map((option, index) => (
+          {currentQ.options.map((option, optionIndex) => (
             <button
               key={option.value}
               onClick={() => handleAnswer(currentQ.id, option.value)}
@@ -461,7 +461,7 @@ const QuizFlow = () => {
                          transform-gpu will-change-transform
                          animate-slide-up`}
               style={{ 
-                animationDelay: `${index * 100}ms`,
+                animationDelay: `${optionIndex * 100}ms`,
                 backgroundSize: '200% 200%',
                 backgroundImage: `linear-gradient(45deg, var(--tw-gradient-from), var(--tw-gradient-to), var(--tw-gradient-from))`
               }}

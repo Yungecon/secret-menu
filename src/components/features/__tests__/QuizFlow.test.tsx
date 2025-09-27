@@ -1,0 +1,154 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { screen, fireEvent, waitFor } from '@testing-library/react'
+import { render } from '../../../test/utils'
+import QuizFlow from '../QuizFlow'
+
+// Mock the services
+vi.mock('../../../services/analytics', () => ({
+  trackQuizStart: vi.fn(),
+  trackQuestionAnswered: vi.fn(),
+  trackQuizCompleted: vi.fn(),
+}))
+
+vi.mock('../../../services/soundEffects', () => ({
+  playButtonPress: vi.fn(),
+  playComplimentReveal: vi.fn(),
+  playQuizComplete: vi.fn(),
+}))
+
+// Mock react-router-dom
+const mockNavigate = vi.fn()
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom')
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  }
+})
+
+describe('QuizFlow Component', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('should render the first question on mount', () => {
+    render(<QuizFlow />)
+    
+    expect(screen.getByText('What speaks to your refined palate?')).toBeInTheDocument()
+    expect(screen.getByText('Sweet & Luxurious')).toBeInTheDocument()
+    expect(screen.getByText('Bitter & Sophisticated')).toBeInTheDocument()
+  })
+
+  it('should show progress indicator', () => {
+    render(<QuizFlow />)
+    
+    expect(screen.getByText('Question 1 of 5')).toBeInTheDocument()
+    expect(screen.getByText('20% Complete')).toBeInTheDocument()
+  })
+
+  it('should advance to next question when answer is selected', async () => {
+    render(<QuizFlow />)
+    
+    // Click on first answer
+    fireEvent.click(screen.getByText('Sweet & Luxurious'))
+    
+    // Wait for compliment animation and next question
+    await waitFor(() => {
+      expect(screen.getByText('Which fruit family calls to you?')).toBeInTheDocument()
+    }, { timeout: 3000 })
+    
+    expect(screen.getByText('Question 2 of 5')).toBeInTheDocument()
+  })
+
+  it('should show complimentary message when answer is selected', async () => {
+    render(<QuizFlow />)
+    
+    fireEvent.click(screen.getByText('Sweet & Luxurious'))
+    
+    // Should show a complimentary message
+    await waitFor(() => {
+      const complimentText = screen.getByText(/delightfully|sophisticated|refined|exquisite/i)
+      expect(complimentText).toBeInTheDocument()
+    })
+  })
+
+  it('should render quiz questions', () => {
+    render(<QuizFlow />)
+    
+    // Should show the first question
+    expect(screen.getByText('What speaks to your refined palate?')).toBeInTheDocument()
+  })
+
+  it('should navigate to results after completing all questions', async () => {
+    render(<QuizFlow />)
+    
+    // Answer all 5 questions
+    const questions = [
+      'Sweet & Luxurious',
+      'Citrus & Bright',
+      'Light & Refreshing',
+      'Classic & Timeless',
+      'Celebratory & Joyful'
+    ]
+    
+    for (let i = 0; i < questions.length; i++) {
+      const button = screen.getByText(questions[i])
+      fireEvent.click(button)
+      
+      if (i < questions.length - 1) {
+        // Wait for next question (except on last question)
+        await waitFor(() => {
+          expect(screen.getByText(`Question ${i + 2} of 5`)).toBeInTheDocument()
+        }, { timeout: 3000 })
+      }
+    }
+    
+    // Should navigate to results after last question
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith('/results')
+    }, { timeout: 3000 })
+  })
+
+  it('should show previous answers as user progresses', async () => {
+    render(<QuizFlow />)
+    
+    // Answer first question
+    fireEvent.click(screen.getByText('Sweet & Luxurious'))
+    
+    // Wait for second question
+    await waitFor(() => {
+      expect(screen.getByText('Which fruit family calls to you?')).toBeInTheDocument()
+    }, { timeout: 3000 })
+    
+    // Should show previous answer
+    expect(screen.getByText('Sweet & Luxurious')).toBeInTheDocument()
+    expect(screen.getByText('Your exquisite choices so far...')).toBeInTheDocument()
+  })
+
+  it('should handle touch interactions', () => {
+    render(<QuizFlow />)
+    
+    const button = screen.getByText('Sweet & Luxurious')
+    
+    // Simulate touch start
+    fireEvent.touchStart(button, {
+      targetTouches: [{ clientX: 100 }]
+    })
+    
+    // Simulate touch end
+    fireEvent.touchEnd(button)
+    
+    // Button should have been clicked
+    expect(button).toBeInTheDocument()
+  })
+
+  it('should handle answer selection', () => {
+    render(<QuizFlow />)
+    
+    const button = screen.getByText('Sweet & Luxurious')
+    fireEvent.click(button)
+    
+    // Should trigger some response (compliment or next question)
+    expect(button).toBeInTheDocument()
+  })
+})

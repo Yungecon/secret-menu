@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Centralized animation utilities to reduce code duplication
 
 // ANIMATION_DELAYS moved to src/constants/index.ts
@@ -22,7 +24,7 @@ export const GRADIENT_CLASSES = {
 } as const;
 
 // Common magical particle component
-export const MagicalParticles = ({ className = '' }: { className?: string }) => (
+export const MagicalParticles: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
     <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-magical-glow rounded-full opacity-60 animate-ping"></div>
     <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-premium-gold rounded-full opacity-80 animate-pulse delay-1000"></div>
@@ -33,7 +35,7 @@ export const MagicalParticles = ({ className = '' }: { className?: string }) => 
 );
 
 // Common floating orbs background
-export const FloatingOrbs = () => (
+export const FloatingOrbs: React.FC = () => (
   <div className="absolute inset-0 pointer-events-none">
     <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-magical-glow/5 rounded-full animate-float-slow blur-xl"></div>
     <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-premium-gold/5 rounded-full animate-float-medium blur-xl"></div>
@@ -66,7 +68,7 @@ export const createButtonHandlers = () => ({
 });
 
 // Common loading component
-export const MagicalLoader = ({ message = "Consulting the spirits..." }: { message?: string }) => (
+export const MagicalLoader: React.FC<{ message?: string }> = ({ message = "Consulting the spirits..." }) => (
   <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
     <FloatingOrbs />
     <div className="text-center relative z-10">

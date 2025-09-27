@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 import { QuizAnswers } from '../types';
 
 interface QuizContextType {
@@ -7,7 +7,7 @@ interface QuizContextType {
   resetQuiz: () => void;
 }
 
-const QuizContext = createContext<QuizContextType | undefined>(undefined);
+export const QuizContext = createContext<QuizContextType | undefined>(undefined);
 
 export const QuizProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [answers, setAnswers] = useState<QuizAnswers>({});
