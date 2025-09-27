@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, act } from '@testing-library/react';
-import SlotReel from '../SlotReel';
+import SlotReel from '../secret-shuffle/SlotReel';
 
 // Mock timers for testing animations
 vi.useFakeTimers();

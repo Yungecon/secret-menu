@@ -17,7 +17,7 @@ interface ReelState {
   finalAttribute?: string;
 }
 
-const SlotReel: React.FC<SlotReelProps> = ({
+const SlotReel = ({
   attributes,
   isSpinning,
   onStop,
@@ -25,15 +25,15 @@ const SlotReel: React.FC<SlotReelProps> = ({
   disabled = false,
   canTap = false,
   onTap
-}) => {
+}: SlotReelProps) => {
   const [reelState, setReelState] = useState<ReelState>({
     isSpinning: false,
     isDecelerating: false,
     currentIndex: 0
   });
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const decelerationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
+  const decelerationTimeoutRef = useRef<number | null>(null);
   const reelRef = useRef<HTMLDivElement>(null);
 
   // Start spinning when isSpinning becomes true
@@ -54,8 +54,8 @@ const SlotReel: React.FC<SlotReelProps> = ({
     }));
 
     // Much faster spinning animation - cycle through attributes quickly
-    intervalRef.current = setInterval(() => {
-      setReelState(prev => ({
+    intervalRef.current = window.setInterval(() => {
+      setReelState((prev: ReelState) => ({
         ...prev,
         currentIndex: (prev.currentIndex + 1) % attributes.length
       }));
@@ -90,17 +90,17 @@ const SlotReel: React.FC<SlotReelProps> = ({
       // Quick exponential deceleration curve - total ~1.2s for deceleration
       const delay = baseDelay + (decelerationSteps * decelerationSteps * 12);
       
-      setReelState(prev => ({
+      setReelState((prev: ReelState) => ({
         ...prev,
         currentIndex: (prev.currentIndex + 1) % attributes.length
       }));
 
       if (decelerationSteps < maxSteps) {
-        decelerationTimeoutRef.current = setTimeout(decelerateStep, delay);
+        decelerationTimeoutRef.current = window.setTimeout(decelerateStep, delay);
       } else {
         // Very quick final settle - ~0.3s for bounce
-        setTimeout(() => {
-          setReelState(prev => ({
+        window.setTimeout(() => {
+          setReelState((prev: ReelState) => ({
             ...prev,
             isDecelerating: false,
             currentIndex: finalIndex,
@@ -110,10 +110,10 @@ const SlotReel: React.FC<SlotReelProps> = ({
           // Super quick bounce/settle animation
           if (reelRef.current) {
             reelRef.current.style.transform = 'translateY(-2px)';
-            setTimeout(() => {
+            window.setTimeout(() => {
               if (reelRef.current) {
                 reelRef.current.style.transform = 'translateY(0)';
-                setTimeout(() => {
+                window.setTimeout(() => {
                   if (reelRef.current) {
                     reelRef.current.style.transform = 'translateY(0)';
                     onStop(finalAttribute);
@@ -127,7 +127,7 @@ const SlotReel: React.FC<SlotReelProps> = ({
     };
 
     // Start deceleration immediately
-    decelerationTimeoutRef.current = setTimeout(decelerateStep, baseDelay);
+    decelerationTimeoutRef.current = window.setTimeout(decelerateStep, baseDelay);
   };
 
   // Cleanup intervals on unmount
@@ -249,3 +249,4 @@ const SlotReel: React.FC<SlotReelProps> = ({
 };
 
 export default SlotReel;
+

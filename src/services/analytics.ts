@@ -102,6 +102,15 @@ class Analytics {
 // Create singleton instance
 export const analytics = new Analytics();
 
+// General event helper for convenient imports
+export const trackEvent = (
+  category: string,
+  action: string,
+  label?: string,
+  value?: number,
+  customData?: Record<string, any>
+) => analytics.trackEvent(category, action, label, value, customData);
+
 // Export individual tracking functions for convenience
 export const trackQuizStart = () => analytics.trackQuizStart();
 export const trackQuestionAnswered = (questionId: string, answer: string, questionNumber: number) => 
