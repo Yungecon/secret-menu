@@ -41,14 +41,6 @@ export const FLAVOR_CARDS: CardData[] = [
     glowColor: 'luxury-emerald'
   },
   {
-    value: 'spicy',
-    icon: '🌶️',
-    label: 'Spicy',
-    description: 'Warm & Fiery',
-    gradient: 'from-luxury-brass to-luxury-gold',
-    glowColor: 'luxury-brass'
-  },
-  {
     value: 'herbal',
     icon: '🌿',
     label: 'Herbal',
@@ -57,24 +49,64 @@ export const FLAVOR_CARDS: CardData[] = [
     glowColor: 'luxury-emerald'
   },
   {
+    value: 'spicy',
+    icon: '🌶️',
+    label: 'Spicy',
+    description: 'Warm & Fiery',
+    gradient: 'from-luxury-brass to-luxury-gold',
+    glowColor: 'luxury-brass'
+  },
+  {
+    value: 'fruity',
+    icon: '🍓',
+    label: 'Fruity',
+    description: 'Juicy & Vibrant',
+    gradient: 'from-luxury-rose to-luxury-blush',
+    glowColor: 'luxury-rose'
+  },
+  {
+    value: 'floral',
+    icon: '🌸',
+    label: 'Floral',
+    description: 'Delicate & Fragrant',
+    gradient: 'from-luxury-rose to-luxury-pearl',
+    glowColor: 'luxury-rose'
+  },
+  {
     value: 'smoky',
     icon: '🔥',
     label: 'Smoky',
     description: 'Deep & Intense',
     gradient: 'from-luxury-charcoal to-luxury-antique',
     glowColor: 'luxury-charcoal'
+  },
+  {
+    value: 'creamy',
+    icon: '🥛',
+    label: 'Creamy',
+    description: 'Smooth & Luxurious',
+    gradient: 'from-luxury-pearl to-luxury-platinum',
+    glowColor: 'luxury-pearl'
+  },
+  {
+    value: 'tart',
+    icon: '🍋',
+    label: 'Tart',
+    description: 'Sharp & Refreshing',
+    gradient: 'from-luxury-mint to-luxury-emerald',
+    glowColor: 'luxury-mint'
   }
 ];
 
 // Mood attribute cards
 export const MOOD_CARDS: CardData[] = [
   {
-    value: 'celebratory',
-    icon: '🥂',
-    label: 'Celebratory',
-    description: 'Joyful & Festive',
-    gradient: 'from-luxury-gold to-luxury-brass',
-    glowColor: 'luxury-gold'
+    value: 'adventurous',
+    icon: '🗺️',
+    label: 'Adventurous',
+    description: 'Bold & Exciting',
+    gradient: 'from-luxury-emerald to-luxury-mint',
+    glowColor: 'luxury-emerald'
   },
   {
     value: 'elegant',
@@ -85,6 +117,14 @@ export const MOOD_CARDS: CardData[] = [
     glowColor: 'luxury-platinum'
   },
   {
+    value: 'playful',
+    icon: '🎪',
+    label: 'Playful',
+    description: 'Fun & Whimsical',
+    gradient: 'from-luxury-rose to-luxury-blush',
+    glowColor: 'luxury-rose'
+  },
+  {
     value: 'cozy',
     icon: '🕯️',
     label: 'Cozy',
@@ -93,12 +133,12 @@ export const MOOD_CARDS: CardData[] = [
     glowColor: 'luxury-brass'
   },
   {
-    value: 'adventurous',
-    icon: '🗺️',
-    label: 'Adventurous',
-    description: 'Bold & Exciting',
-    gradient: 'from-luxury-emerald to-luxury-mint',
-    glowColor: 'luxury-emerald'
+    value: 'celebratory',
+    icon: '🥂',
+    label: 'Celebratory',
+    description: 'Joyful & Festive',
+    gradient: 'from-luxury-gold to-luxury-brass',
+    glowColor: 'luxury-gold'
   },
   {
     value: 'sophisticated',
@@ -109,17 +149,57 @@ export const MOOD_CARDS: CardData[] = [
     glowColor: 'luxury-charcoal'
   },
   {
-    value: 'intimate',
-    icon: '🌹',
-    label: 'Intimate',
-    description: 'Personal & Close',
-    gradient: 'from-luxury-brass to-luxury-gold',
-    glowColor: 'luxury-brass'
+    value: 'bold',
+    icon: '⚡',
+    label: 'Bold',
+    description: 'Daring & Confident',
+    gradient: 'from-luxury-gold to-luxury-brass',
+    glowColor: 'luxury-gold'
+  },
+  {
+    value: 'refreshing',
+    icon: '💧',
+    label: 'Refreshing',
+    description: 'Cool & Revitalizing',
+    gradient: 'from-luxury-emerald to-luxury-mint',
+    glowColor: 'luxury-emerald'
+  },
+  {
+    value: 'mysterious',
+    icon: '🔮',
+    label: 'Mysterious',
+    description: 'Enigmatic & Intriguing',
+    gradient: 'from-luxury-charcoal to-luxury-antique',
+    glowColor: 'luxury-charcoal'
+  },
+  {
+    value: 'classic',
+    icon: '🏛️',
+    label: 'Classic',
+    description: 'Timeless & Traditional',
+    gradient: 'from-luxury-gold to-luxury-brass',
+    glowColor: 'luxury-gold'
   }
 ];
 
 // Style attribute cards
 export const STYLE_CARDS: CardData[] = [
+  {
+    value: 'classic',
+    icon: '🍸',
+    label: 'Classic',
+    description: 'Timeless & Elegant',
+    gradient: 'from-luxury-gold to-luxury-brass',
+    glowColor: 'luxury-gold'
+  },
+  {
+    value: 'experimental',
+    icon: '🧪',
+    label: 'Experimental',
+    description: 'Creative & Bold',
+    gradient: 'from-luxury-emerald to-luxury-gold',
+    glowColor: 'luxury-emerald'
+  },
   {
     value: 'light',
     icon: '☀️',
@@ -137,36 +217,52 @@ export const STYLE_CARDS: CardData[] = [
     glowColor: 'luxury-brass'
   },
   {
-    value: 'classic',
-    icon: '🍸',
-    label: 'Classic',
-    description: 'Timeless & Elegant',
-    gradient: 'from-luxury-gold to-luxury-brass',
-    glowColor: 'luxury-gold'
+    value: 'shaken',
+    icon: '🥤',
+    label: 'Shaken',
+    description: 'Vigorous & Frothy',
+    gradient: 'from-luxury-mint to-luxury-emerald',
+    glowColor: 'luxury-mint'
   },
   {
-    value: 'modern',
-    icon: '✨',
-    label: 'Modern',
-    description: 'Innovative & Fresh',
+    value: 'stirred',
+    icon: '🥄',
+    label: 'Stirred',
+    description: 'Smooth & Refined',
     gradient: 'from-luxury-platinum to-luxury-pearl',
     glowColor: 'luxury-platinum'
   },
   {
-    value: 'balanced',
-    icon: '⚖️',
-    label: 'Balanced',
-    description: 'Harmonious & Smooth',
+    value: 'built',
+    icon: '🏗️',
+    label: 'Built',
+    description: 'Layered & Complex',
     gradient: 'from-luxury-charcoal to-luxury-antique',
     glowColor: 'luxury-charcoal'
   },
   {
-    value: 'experimental',
-    icon: '🧪',
-    label: 'Experimental',
-    description: 'Creative & Bold',
+    value: 'tropical',
+    icon: '🌴',
+    label: 'Tropical',
+    description: 'Exotic & Vibrant',
     gradient: 'from-luxury-emerald to-luxury-gold',
     glowColor: 'luxury-emerald'
+  },
+  {
+    value: 'seasonal',
+    icon: '🍂',
+    label: 'Seasonal',
+    description: 'Timely & Fresh',
+    gradient: 'from-luxury-brass to-luxury-gold',
+    glowColor: 'luxury-brass'
+  },
+  {
+    value: 'premium',
+    icon: '💎',
+    label: 'Premium',
+    description: 'Luxurious & Exclusive',
+    gradient: 'from-luxury-platinum to-luxury-pearl',
+    glowColor: 'luxury-platinum'
   }
 ];
 
