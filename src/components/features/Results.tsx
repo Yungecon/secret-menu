@@ -18,97 +18,12 @@ const Results = () => {
       if (Object.keys(answers).length > 0) {
         console.log('Loading recommendations for answers:', answers);
         
-        // IMMEDIATE FALLBACK - Skip all complex logic for now
-        console.log('Using immediate fallback recommendation...');
-        const fallbackResult = {
-          primary: {
-            id: 'fallback-cocktail-1',
-            name: 'The Mystic\'s Elixir',
-            base_spirit_category: 'gin',
-            base_brand: 'gin',
-            style: 'Classic',
-            build_type: 'Stirred',
-            difficulty: 'intermediate',
-            complexity_score: 6,
-            flavor_tags: ['classic', 'sophisticated', 'elegant'],
-            mood_tags: ['elegant', 'refined', 'mysterious'],
-            ingredients: ['2oz Premium Gin', '0.5oz Dry Vermouth', '2 dashes Orange Bitters', 'Lemon twist'],
-            garnish: 'Lemon twist',
-            glassware: 'Coupe glass',
-            notes: 'A sophisticated gin martini with a touch of mystery. Perfect for those who appreciate the finer things in life.',
-            balance_profile: {
-              sweet: 2,
-              sour: 3,
-              bitter: 6,
-              spicy: 4,
-              aromatic: 8,
-              alcoholic: 8
-            },
-            seasonal_notes: ['Perfect year-round', 'Elegant and timeless']
-          },
-          adjacent: [
-            {
-              id: 'fallback-cocktail-2',
-              name: 'The Sage\'s Secret',
-              base_spirit_category: 'whiskey',
-              base_brand: 'whiskey',
-              style: 'Classic',
-              build_type: 'Stirred',
-              difficulty: 'intermediate',
-              complexity_score: 6,
-              flavor_tags: ['classic', 'sophisticated', 'rich'],
-              mood_tags: ['elegant', 'refined', 'contemplative'],
-              ingredients: ['2oz Bourbon', '0.5oz Sweet Vermouth', '2 dashes Angostura Bitters', 'Orange peel'],
-              garnish: 'Orange peel',
-              glassware: 'Rocks glass',
-              notes: 'A rich and contemplative whiskey cocktail that speaks to the soul.',
-              balance_profile: {
-                sweet: 4,
-                sour: 2,
-                bitter: 6,
-                spicy: 5,
-                aromatic: 7,
-                alcoholic: 8
-              },
-              seasonal_notes: ['Perfect for cooler months', 'Rich and warming']
-            },
-            {
-              id: 'fallback-cocktail-3',
-              name: 'The Oracle\'s Vision',
-              base_spirit_category: 'rum',
-              base_brand: 'rum',
-              style: 'Tropical',
-              build_type: 'Shaken',
-              difficulty: 'intermediate',
-              complexity_score: 6,
-              flavor_tags: ['tropical', 'fruity', 'refreshing'],
-              mood_tags: ['celebratory', 'exotic', 'vibrant'],
-              ingredients: ['2oz Aged Rum', '1oz Fresh Lime Juice', '0.5oz Simple Syrup', '0.5oz Orange Liqueur', 'Lime wheel'],
-              garnish: 'Lime wheel',
-              glassware: 'Coupe glass',
-              notes: 'A tropical delight that transports you to exotic shores.',
-              balance_profile: {
-                sweet: 6,
-                sour: 7,
-                bitter: 2,
-                spicy: 3,
-                aromatic: 6,
-                alcoholic: 7
-              },
-              seasonal_notes: ['Perfect for warm weather', 'Tropical and refreshing']
-            }
-          ],
-          matchScore: 95
-        };
-        
-        console.log('Setting fallback recommendations:', fallbackResult.primary.name);
-        setRecommendations(fallbackResult);
-        
-        /* COMMENTED OUT COMPLEX LOGIC FOR NOW
         try {
+          console.log('Attempting to load recommendations with improved engine...');
+          
           // Add timeout to prevent infinite loading
           const timeoutPromise = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Recommendation loading timeout')), 10000); // 10 second timeout
+            setTimeout(() => reject(new Error('Recommendation loading timeout')), 15000); // 15 second timeout
           });
           
           // Check if we have all required answers for enhanced recommendations
@@ -117,6 +32,8 @@ const Results = () => {
                                answers.lightVsBoozy && 
                                answers.classicVsExperimental && 
                                answers.moodPreference;
+          
+          console.log('Has all answers for enhanced recommendations:', hasAllAnswers);
           
           // Use enhanced recommendations if we have all answers, otherwise use regular
           const recommendationPromise = hasAllAnswers 
@@ -129,23 +46,24 @@ const Results = () => {
           setRecommendations(result);
         } catch (error) {
           console.error('Error loading recommendations:', error);
-          // Set a fallback recommendation to prevent infinite loading
-          setRecommendations({
+          
+          // Enhanced fallback with multiple sophisticated cocktails
+          const fallbackResult = {
             primary: {
-              id: 'fallback-cocktail',
-              name: 'Classic Martini',
+              id: 'fallback-cocktail-1',
+              name: 'The Mystic\'s Elixir',
               base_spirit_category: 'gin',
               base_brand: 'gin',
               style: 'Classic',
               build_type: 'Stirred',
               difficulty: 'intermediate',
               complexity_score: 6,
-              flavor_tags: ['classic', 'sophisticated'],
-              mood_tags: ['elegant', 'refined'],
-              ingredients: ['2oz Gin', '0.5oz Dry Vermouth', 'Olive or Lemon twist'],
-              garnish: 'Olive or Lemon twist',
-              glassware: 'Martini glass',
-              notes: 'A timeless classic that never goes out of style.',
+              flavor_tags: ['classic', 'sophisticated', 'elegant'],
+              mood_tags: ['elegant', 'refined', 'mysterious'],
+              ingredients: ['2oz Premium Gin', '0.5oz Dry Vermouth', '2 dashes Orange Bitters', 'Lemon twist'],
+              garnish: 'Lemon twist',
+              glassware: 'Coupe glass',
+              notes: 'A sophisticated gin martini with a touch of mystery. Perfect for those who appreciate the finer things in life.',
               balance_profile: {
                 sweet: 2,
                 sour: 3,
@@ -154,13 +72,66 @@ const Results = () => {
                 aromatic: 8,
                 alcoholic: 8
               },
-              seasonal_notes: []
+              seasonal_notes: ['Perfect year-round', 'Elegant and timeless']
             },
-            adjacent: [],
-            matchScore: 85
-          });
+            adjacent: [
+              {
+                id: 'fallback-cocktail-2',
+                name: 'The Sage\'s Secret',
+                base_spirit_category: 'whiskey',
+                base_brand: 'whiskey',
+                style: 'Classic',
+                build_type: 'Stirred',
+                difficulty: 'intermediate',
+                complexity_score: 6,
+                flavor_tags: ['classic', 'sophisticated', 'rich'],
+                mood_tags: ['elegant', 'refined', 'contemplative'],
+                ingredients: ['2oz Bourbon', '0.5oz Sweet Vermouth', '2 dashes Angostura Bitters', 'Orange peel'],
+                garnish: 'Orange peel',
+                glassware: 'Rocks glass',
+                notes: 'A rich and contemplative whiskey cocktail that speaks to the soul.',
+                balance_profile: {
+                  sweet: 4,
+                  sour: 2,
+                  bitter: 6,
+                  spicy: 5,
+                  aromatic: 7,
+                  alcoholic: 8
+                },
+                seasonal_notes: ['Perfect for cooler months', 'Rich and warming']
+              },
+              {
+                id: 'fallback-cocktail-3',
+                name: 'The Oracle\'s Vision',
+                base_spirit_category: 'rum',
+                base_brand: 'rum',
+                style: 'Tropical',
+                build_type: 'Shaken',
+                difficulty: 'intermediate',
+                complexity_score: 6,
+                flavor_tags: ['tropical', 'fruity', 'refreshing'],
+                mood_tags: ['celebratory', 'exotic', 'vibrant'],
+                ingredients: ['2oz Aged Rum', '1oz Fresh Lime Juice', '0.5oz Simple Syrup', '0.5oz Orange Liqueur', 'Lime wheel'],
+                garnish: 'Lime wheel',
+                glassware: 'Coupe glass',
+                notes: 'A tropical delight that transports you to exotic shores.',
+                balance_profile: {
+                  sweet: 6,
+                  sour: 7,
+                  bitter: 2,
+                  spicy: 3,
+                  aromatic: 6,
+                  alcoholic: 7
+                },
+                seasonal_notes: ['Perfect for warm weather', 'Tropical and refreshing']
+              }
+            ],
+            matchScore: 95
+          };
+          
+          console.log('Using fallback recommendations:', fallbackResult.primary.name);
+          setRecommendations(fallbackResult);
         }
-        */
         
         // Track recommendation viewed with enhanced analytics
         if (recommendations && 'fuzzyMatches' in recommendations && 'fallbackUsed' in recommendations) {
