@@ -62,6 +62,9 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
     const newSelection = { baseSpirit: spiritKey };
     setSelectedIngredients(newSelection);
     setCurrentStep('flavor-family');
+    
+    // Reset recently shown cocktails when starting a new journey
+    cocktailBuildEngine.resetRecentlyShownFlavorJourney();
   };
 
   const handleFlavorFamilySelect = (flavorFamily: string) => {
@@ -140,6 +143,8 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   const handleTryAnother = () => {
     console.log('handleTryAnother called - resetting quiz and navigating to main page');
     resetQuiz();
+    // Reset recently shown cocktails for fresh recommendations
+    cocktailBuildEngine.resetRecentlyShownFlavorJourney();
     navigate('/');
   };
 

@@ -133,10 +133,30 @@ const AMARO_PROFILES: Record<string, any> = {
 export class CocktailBuildEngine {
   private ingredientProfiles: Map<string, IngredientProfile> = new Map();
   private templates: Map<string, CocktailTemplate> = new Map();
+  
+  // Track recently shown cocktails for Flavor Journey to avoid repetition
+  private recentlyShownFlavorJourney: Set<string> = new Set();
+  private readonly MAX_RECENT_FLAVOR_JOURNEY = 15;
 
   constructor() {
     this.loadIngredientProfiles();
     this.loadTemplates();
+  }
+
+  // Method to reset recently shown cocktails for Flavor Journey
+  resetRecentlyShownFlavorJourney() {
+    this.recentlyShownFlavorJourney.clear();
+  }
+
+  // Method to add cocktail to recently shown list for Flavor Journey
+  private addToRecentlyShownFlavorJourney(cocktailId: string) {
+    this.recentlyShownFlavorJourney.add(cocktailId);
+    
+    // Keep only the most recent cocktails
+    if (this.recentlyShownFlavorJourney.size > this.MAX_RECENT_FLAVOR_JOURNEY) {
+      const cocktailsArray = Array.from(this.recentlyShownFlavorJourney);
+      this.recentlyShownFlavorJourney = new Set(cocktailsArray.slice(-this.MAX_RECENT_FLAVOR_JOURNEY));
+    }
   }
 
   private async loadIngredientProfiles() {
@@ -810,8 +830,23 @@ export class CocktailBuildEngine {
         return baseSpiritMatch && (flavorFamilyMatch || specificFlavorMatch);
       });
 
+      // Filter out recently shown cocktails for more variety
+      const availableCocktails = matchingCocktails.filter(cocktail => 
+        !this.recentlyShownFlavorJourney.has(cocktail.id)
+      );
+      
+      // If we've shown too many recently, use all cocktails for some repetition
+      const cocktailsToUse = availableCocktails.length > 8 ? availableCocktails : matchingCocktails;
+      
+      // Enhanced randomization with multiple shuffle passes
+      const shuffledCocktails = [...cocktailsToUse].sort(() => Math.random() - 0.5)
+                                                   .sort(() => Math.random() - 0.5);
+      const selectedCocktails = shuffledCocktails.slice(0, 12);
+      
       // Convert matching cocktails to GeneratedRecipe format
-      matchingCocktails.slice(0, 12).forEach((cocktail: any) => {
+      selectedCocktails.forEach((cocktail: any) => {
+        // Track this cocktail as recently shown
+        this.addToRecentlyShownFlavorJourney(cocktail.id);
         const recipe: GeneratedRecipe = {
           id: cocktail.id,
           name: cocktail.name,
