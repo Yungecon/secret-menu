@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cocktailBuildEngine } from '../../services/cocktailBuildEngine';
 import { CocktailResults } from './CocktailResults';
 import { DATA_PATHS } from '../../constants';
+import { useQuiz } from '../../hooks';
 
 interface FlavorJourneyProps {
   onCocktailGenerate?: (cocktails: any[]) => void;
@@ -30,6 +32,8 @@ interface FlavorJourneyData {
 export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   onCocktailGenerate
 }) => {
+  const navigate = useNavigate();
+  const { resetQuiz } = useQuiz();
   const [journeyData, setJourneyData] = useState<FlavorJourneyData | null>(null);
   const [selectedIngredients, setSelectedIngredients] = useState<SelectedIngredients>({});
   const [currentStep, setCurrentStep] = useState<'spirit' | 'flavor-family' | 'specific-flavor' | 'relationships' | 'dna'>('spirit');
@@ -133,14 +137,10 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
     }
   };
 
-  const resetJourney = () => {
-    setSelectedIngredients({});
-    setCurrentStep('spirit');
-    setAvailableFlavors([]);
-    setRelationshipInfo(null);
-    setDnaProfile(null);
-    setGeneratedCocktails([]);
-    setShowResults(false);
+  const handleTryAnother = () => {
+    console.log('handleTryAnother called - resetting quiz and navigating to main page');
+    resetQuiz();
+    navigate('/');
   };
 
   if (!journeyData) {
@@ -158,7 +158,7 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
       <CocktailResults
         cocktails={generatedCocktails}
         onBack={() => setShowResults(false)}
-        onStartOver={resetJourney}
+        onStartOver={handleTryAnother}
       />
     );
   }
@@ -229,7 +229,7 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
           dnaProfile={dnaProfile}
           onGenerateCocktails={generateCocktails}
           onBack={() => setCurrentStep('relationships')}
-          onReset={resetJourney}
+          onReset={handleTryAnother}
         />
       )}
     </div>

@@ -40,7 +40,7 @@ export const CocktailResults: React.FC<CocktailResultsProps> = ({
           onClick={onStartOver}
           className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors font-medium"
         >
-          Start New Journey 🍸
+          Discover Another Masterpiece
         </button>
       </div>
     </div>
