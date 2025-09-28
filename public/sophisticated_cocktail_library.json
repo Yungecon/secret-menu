@@ -1,0 +1,285 @@
+{
+  "cocktails": [
+    {
+      "id": "the-veil-of-spring",
+      "name": "The Veil of Spring",
+      "description": "A mystical elixir where the earthy complexity of mezcal meets the delicate sweetness of elderflower, creating a cocktail that dances between smoke and spring blossoms. The gin provides botanical backbone while the elderflower liqueur adds ethereal sweetness - like a secret whispered by nature itself.",
+      "base_spirit": "mezcal",
+      "modifying_liqueurs": ["st-germain", "cointreau"],
+      "ingredients": [
+        {"name": "Mezcal", "amount": "1.5oz", "role": "base", "notes": "Smoky agave complexity"},
+        {"name": "Gin", "amount": "0.5oz", "role": "support", "notes": "Botanical backbone"},
+        {"name": "St-Germain", "amount": "0.75oz", "role": "modifier", "notes": "Elderflower sweetness"},
+        {"name": "Cointreau", "amount": "0.25oz", "role": "accent", "notes": "Orange brightness"},
+        {"name": "Lemon Juice", "amount": "0.5oz", "role": "acid", "notes": "Fresh acidity"}
+      ],
+      "instructions": [
+        "Combine all ingredients in a shaker with ice",
+        "Shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish with a lemon twist and edible flower"
+      ],
+      "glassware": "coupe",
+      "garnish": ["lemon-twist", "edible-flower"],
+      "flavor_profile": {
+        "smoky": 8,
+        "floral": 9,
+        "citrus": 7,
+        "sweet": 6,
+        "complex": 9
+      },
+      "seasonal_notes": ["Perfect for spring evenings", "Bridal showers", "Garden parties"],
+      "difficulty": "intermediate",
+      "build_type": "shaken",
+      "tags": ["mezcal", "elderflower", "gin", "floral", "smoky", "spring", "mystical"],
+      "style": "Mystical Fusion",
+      "notes": "A drink that captures the ethereal beauty of spring's first bloom"
+    },
+    {
+      "id": "machu-picchu-dreams",
+      "name": "Machu Picchu Dreams",
+      "description": "A tropical revelation that showcases pisco's unique grape-based character enhanced by passion fruit's exotic tartness. The Peruvian grape brandy's floral notes harmonize beautifully with the passion fruit's tropical complexity, while egg white creates a luxurious silky texture - like a dream of ancient Incan splendor.",
+      "base_spirit": "pisco",
+      "modifying_liqueurs": ["passion-fruit-liqueur"],
+      "ingredients": [
+        {"name": "Pisco", "amount": "2oz", "role": "base", "notes": "Peruvian grape brandy"},
+        {"name": "Passion Fruit Liqueur", "amount": "0.75oz", "role": "modifier", "notes": "Tropical tartness"},
+        {"name": "Lime Juice", "amount": "0.75oz", "role": "acid", "notes": "Fresh citrus"},
+        {"name": "Simple Syrup", "amount": "0.5oz", "role": "sweetener", "notes": "Balance"},
+        {"name": "Egg White", "amount": "1oz", "role": "texture", "notes": "Silky foam"}
+      ],
+      "instructions": [
+        "Dry shake all ingredients without ice for 30 seconds",
+        "Add ice and shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish with passion fruit seeds and mint"
+      ],
+      "glassware": "coupe",
+      "garnish": ["passion-fruit-seeds", "mint"],
+      "flavor_profile": {
+        "tropical": 9,
+        "tart": 8,
+        "floral": 7,
+        "sweet": 6,
+        "complex": 8
+      },
+      "seasonal_notes": ["Summer evenings", "Beach vibes", "Tropical parties"],
+      "difficulty": "intermediate",
+      "build_type": "shaken",
+      "tags": ["pisco", "passion-fruit", "tropical", "peruvian", "exotic", "ancient"],
+      "style": "Tropical Heritage",
+      "notes": "A drink that transports you to the mystical heights of the Andes"
+    },
+    {
+      "id": "freyjas-garden",
+      "name": "Freyja's Garden",
+      "description": "A refreshing Scandinavian twist where aquavit's distinctive caraway and dill notes create an unexpectedly perfect pairing with cucumber's cool freshness. This cocktail bridges Nordic tradition with modern mixology - like a blessing from the goddess of love and fertility herself.",
+      "base_spirit": "aquavit",
+      "modifying_liqueurs": ["st-germain"],
+      "ingredients": [
+        {"name": "Aquavit", "amount": "2oz", "role": "base", "notes": "Scandinavian caraway spirit"},
+        {"name": "Cucumber Juice", "amount": "1oz", "role": "modifier", "notes": "Cool freshness"},
+        {"name": "Lemon Juice", "amount": "0.75oz", "role": "acid", "notes": "Bright acidity"},
+        {"name": "St-Germain", "amount": "0.5oz", "role": "accent", "notes": "Floral sweetness"},
+        {"name": "Soda Water", "amount": "3oz", "role": "dilution", "notes": "Effervescence"}
+      ],
+      "instructions": [
+        "Combine aquavit, cucumber juice, lemon juice, and St-Germain in a shaker",
+        "Shake with ice for 10 seconds",
+        "Strain into a highball glass filled with fresh ice",
+        "Top with soda water",
+        "Garnish with cucumber ribbon and dill sprig"
+      ],
+      "glassware": "highball",
+      "garnish": ["cucumber-ribbon", "dill-sprig"],
+      "flavor_profile": {
+        "herbal": 8,
+        "fresh": 9,
+        "citrus": 6,
+        "spicy": 5,
+        "refreshing": 10
+      },
+      "seasonal_notes": ["Summer afternoons", "Brunch", "Hot weather refreshment"],
+      "difficulty": "easy",
+      "build_type": "shaken-and-topped",
+      "tags": ["aquavit", "cucumber", "nordic", "fresh", "herbal", "goddess"],
+      "style": "Nordic Fresh",
+      "notes": "A drink blessed by the Norse goddess of love and spring"
+    },
+    {
+      "id": "midnight-in-montmartre",
+      "name": "Midnight in Montmartre",
+      "description": "A sophisticated blend of whiskey and coffee that captures the essence of late-night Parisian creativity. The rich, complex flavors dance together like artists in a bohemian café, where inspiration flows as freely as the conversation - a drink for dreamers and visionaries.",
+      "base_spirit": "whiskey",
+      "modifying_liqueurs": ["coffee-liqueur"],
+      "ingredients": [
+        {"name": "Whiskey", "amount": "2oz", "role": "base", "notes": "Rich, complex spirit"},
+        {"name": "Coffee Liqueur", "amount": "0.75oz", "role": "modifier", "notes": "Dark, aromatic coffee"},
+        {"name": "Simple Syrup", "amount": "0.5oz", "role": "sweetener", "notes": "Balance"},
+        {"name": "Orange Bitters", "amount": "2 dashes", "role": "accent", "notes": "Citrus complexity"},
+        {"name": "Orange Peel", "amount": "1 strip", "role": "garnish", "notes": "Aromatic finish"}
+      ],
+      "instructions": [
+        "Combine whiskey, coffee liqueur, simple syrup, and bitters in a mixing glass",
+        "Add ice and stir for 30 seconds",
+        "Strain into a rocks glass over a large ice cube",
+        "Express orange peel over the drink and garnish"
+      ],
+      "glassware": "rocks",
+      "garnish": ["orange-peel"],
+      "flavor_profile": {
+        "rich": 9,
+        "coffee": 8,
+        "citrus": 6,
+        "sweet": 5,
+        "complex": 9
+      },
+      "seasonal_notes": ["Late night", "Winter evenings", "Creative inspiration"],
+      "difficulty": "intermediate",
+      "build_type": "stirred",
+      "tags": ["whiskey", "coffee", "parisian", "bohemian", "artistic", "sophisticated"],
+      "style": "Bohemian Classic",
+      "notes": "A drink for artists, writers, and midnight dreamers"
+    },
+    {
+      "id": "the-stoics-garden",
+      "name": "The Stoic's Garden",
+      "description": "A perfectly balanced gin cocktail that embodies the philosophical principles of stoicism - finding inner peace through simplicity and wisdom. The elderflower and cucumber create a serene, contemplative experience that invites reflection and mindfulness.",
+      "base_spirit": "gin",
+      "modifying_liqueurs": ["st-germain"],
+      "ingredients": [
+        {"name": "Gin", "amount": "2oz", "role": "base", "notes": "Botanical complexity"},
+        {"name": "St-Germain", "amount": "0.75oz", "role": "modifier", "notes": "Elderflower sweetness"},
+        {"name": "Cucumber Juice", "amount": "0.5oz", "role": "modifier", "notes": "Cool freshness"},
+        {"name": "Lemon Juice", "amount": "0.5oz", "role": "acid", "notes": "Bright acidity"},
+        {"name": "Simple Syrup", "amount": "0.25oz", "role": "sweetener", "notes": "Balance"}
+      ],
+      "instructions": [
+        "Combine all ingredients in a shaker with ice",
+        "Shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish with cucumber ribbon and edible flower"
+      ],
+      "glassware": "coupe",
+      "garnish": ["cucumber-ribbon", "edible-flower"],
+      "flavor_profile": {
+        "botanical": 8,
+        "floral": 7,
+        "fresh": 9,
+        "citrus": 6,
+        "balanced": 10
+      },
+      "seasonal_notes": ["Spring mornings", "Meditation", "Garden contemplation"],
+      "difficulty": "easy",
+      "build_type": "shaken",
+      "tags": ["gin", "elderflower", "cucumber", "philosophical", "balanced", "serene"],
+      "style": "Philosophical Balance",
+      "notes": "A drink that embodies the wisdom of ancient philosophers"
+    },
+    {
+      "id": "the-alchemists-elixir",
+      "name": "The Alchemist's Elixir",
+      "description": "A complex mezcal cocktail that represents the alchemical process of transformation. The smoky agave meets the golden sweetness of honey and the mysterious depth of amaro, creating a drink that seems to hold the secrets of turning base metals into gold - or at least turning a simple evening into something magical.",
+      "base_spirit": "mezcal",
+      "modifying_liqueurs": ["amaro", "honey-liqueur"],
+      "ingredients": [
+        {"name": "Mezcal", "amount": "2oz", "role": "base", "notes": "Smoky agave complexity"},
+        {"name": "Amaro", "amount": "0.75oz", "role": "modifier", "notes": "Herbal bitterness"},
+        {"name": "Honey Liqueur", "amount": "0.5oz", "role": "modifier", "notes": "Golden sweetness"},
+        {"name": "Lemon Juice", "amount": "0.5oz", "role": "acid", "notes": "Bright acidity"},
+        {"name": "Orange Bitters", "amount": "2 dashes", "role": "accent", "notes": "Citrus complexity"}
+      ],
+      "instructions": [
+        "Combine all ingredients in a shaker with ice",
+        "Shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish with a lemon twist and gold leaf"
+      ],
+      "glassware": "coupe",
+      "garnish": ["lemon-twist", "gold-leaf"],
+      "flavor_profile": {
+        "smoky": 8,
+        "herbal": 7,
+        "sweet": 6,
+        "bitter": 5,
+        "complex": 10
+      },
+      "seasonal_notes": ["Autumn evenings", "Mystical gatherings", "Transformation rituals"],
+      "difficulty": "advanced",
+      "build_type": "shaken",
+      "tags": ["mezcal", "amaro", "honey", "alchemical", "mystical", "transformation"],
+      "style": "Mystical Alchemy",
+      "notes": "A drink that holds the secrets of ancient transformation"
+    },
+    {
+      "id": "venus-rising",
+      "name": "Venus Rising",
+      "description": "A romantic and elegant cocktail that captures the essence of the goddess of love. The floral notes of rose and the delicate sweetness of elderflower create a drink that's both sophisticated and seductive - perfect for moments of romance and celebration.",
+      "base_spirit": "gin",
+      "modifying_liqueurs": ["st-germain", "rose-liqueur"],
+      "ingredients": [
+        {"name": "Gin", "amount": "2oz", "role": "base", "notes": "Botanical complexity"},
+        {"name": "St-Germain", "amount": "0.75oz", "role": "modifier", "notes": "Elderflower sweetness"},
+        {"name": "Rose Liqueur", "amount": "0.5oz", "role": "modifier", "notes": "Floral romance"},
+        {"name": "Lemon Juice", "amount": "0.5oz", "role": "acid", "notes": "Bright acidity"},
+        {"name": "Simple Syrup", "amount": "0.25oz", "role": "sweetener", "notes": "Balance"}
+      ],
+      "instructions": [
+        "Combine all ingredients in a shaker with ice",
+        "Shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish with rose petals and edible gold"
+      ],
+      "glassware": "coupe",
+      "garnish": ["rose-petals", "edible-gold"],
+      "flavor_profile": {
+        "floral": 10,
+        "romantic": 9,
+        "sweet": 7,
+        "citrus": 6,
+        "elegant": 9
+      },
+      "seasonal_notes": ["Valentine's Day", "Anniversaries", "Romantic evenings"],
+      "difficulty": "intermediate",
+      "build_type": "shaken",
+      "tags": ["gin", "elderflower", "rose", "romantic", "goddess", "elegant"],
+      "style": "Romantic Elegance",
+      "notes": "A drink that embodies the divine feminine energy"
+    },
+    {
+      "id": "the-oracles-vision",
+      "name": "The Oracle's Vision",
+      "description": "A mysterious and complex cocktail that seems to hold the secrets of the future. The combination of mezcal, chartreuse, and absinthe creates a drink that's both otherworldly and profound - like a glimpse into the divine mysteries that only the chosen few can understand.",
+      "base_spirit": "mezcal",
+      "modifying_liqueurs": ["chartreuse", "absinthe"],
+      "ingredients": [
+        {"name": "Mezcal", "amount": "2oz", "role": "base", "notes": "Smoky agave complexity"},
+        {"name": "Chartreuse", "amount": "0.75oz", "role": "modifier", "notes": "Herbal mystique"},
+        {"name": "Absinthe", "amount": "0.25oz", "role": "accent", "notes": "Anise mystery"},
+        {"name": "Lemon Juice", "amount": "0.5oz", "role": "acid", "notes": "Bright acidity"},
+        {"name": "Simple Syrup", "amount": "0.25oz", "role": "sweetener", "notes": "Balance"}
+      ],
+      "instructions": [
+        "Combine all ingredients in a shaker with ice",
+        "Shake vigorously for 15 seconds",
+        "Double strain into a chilled coupe glass",
+        "Garnish with a lemon twist and star anise"
+      ],
+      "glassware": "coupe",
+      "garnish": ["lemon-twist", "star-anise"],
+      "flavor_profile": {
+        "mysterious": 10,
+        "herbal": 8,
+        "smoky": 7,
+        "anise": 6,
+        "complex": 10
+      },
+      "seasonal_notes": ["Mystical gatherings", "Fortune telling", "Divine inspiration"],
+      "difficulty": "advanced",
+      "build_type": "shaken",
+      "tags": ["mezcal", "chartreuse", "absinthe", "mystical", "oracle", "divine"],
+      "style": "Mystical Divination",
+      "notes": "A drink that reveals the secrets of the universe"
+    }
+  ]
+}
