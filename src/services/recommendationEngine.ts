@@ -141,7 +141,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   const usedLiqueurs = new Set();
   
   // Extract liqueurs from primary cocktail for diversity tracking
-  const primaryLiqueurs = primary.ingredients.filter((ing: string) => 
+  const primaryLiqueurs = primary.ingredients.filter((ing: any) => 
     ing.toLowerCase().includes('liqueur') || 
     ing.toLowerCase().includes('amaro') ||
     ing.toLowerCase().includes('chartreuse') ||
@@ -149,7 +149,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     ing.toLowerCase().includes('campari') ||
     ing.toLowerCase().includes('aperol')
   );
-  primaryLiqueurs.forEach((liqueur: string) => usedLiqueurs.add(liqueur.toLowerCase()));
+  primaryLiqueurs.forEach((liqueur: any) => usedLiqueurs.add(liqueur.toLowerCase()));
   
   // Enhanced randomization with spirit diversity weighting
   const timestamp = Date.now();
@@ -171,7 +171,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     if (premiumSpirits.includes(spiritB.toLowerCase())) diversityBoostB += 10;
     
     // Check for diverse liqueurs
-    const liqueursA = a.cocktail.ingredients.filter((ing: string) => 
+    const liqueursA = a.cocktail.ingredients.filter((ing: any) => 
       ing.toLowerCase().includes('liqueur') || 
       ing.toLowerCase().includes('amaro') ||
       ing.toLowerCase().includes('chartreuse') ||
@@ -179,7 +179,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
       ing.toLowerCase().includes('campari') ||
       ing.toLowerCase().includes('aperol')
     );
-    const liqueursB = b.cocktail.ingredients.filter((ing: string) => 
+    const liqueursB = b.cocktail.ingredients.filter((ing: any) => 
       ing.toLowerCase().includes('liqueur') || 
       ing.toLowerCase().includes('amaro') ||
       ing.toLowerCase().includes('chartreuse') ||
@@ -188,8 +188,8 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
       ing.toLowerCase().includes('aperol')
     );
     
-    const newLiqueursA = liqueursA.filter((l: string) => !usedLiqueurs.has(l.toLowerCase())).length;
-    const newLiqueursB = liqueursB.filter((l: string) => !usedLiqueurs.has(l.toLowerCase())).length;
+    const newLiqueursA = liqueursA.filter((l: any) => !usedLiqueurs.has(l.toLowerCase())).length;
+    const newLiqueursB = liqueursB.filter((l: any) => !usedLiqueurs.has(l.toLowerCase())).length;
     
     diversityBoostA += newLiqueursA * 5;
     diversityBoostB += newLiqueursB * 5;
@@ -211,7 +211,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     const isNotDuplicate = !usedCocktailIds.has(cocktail.id);
     
     // Check for liqueur diversity
-    const cocktailLiqueurs = cocktail.ingredients.filter((ing: string) => 
+    const cocktailLiqueurs = cocktail.ingredients.filter((ing: any) => 
       ing.toLowerCase().includes('liqueur') || 
       ing.toLowerCase().includes('amaro') ||
       ing.toLowerCase().includes('chartreuse') ||
@@ -219,7 +219,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
       ing.toLowerCase().includes('campari') ||
       ing.toLowerCase().includes('aperol')
     );
-    const hasNewLiqueurs = cocktailLiqueurs.some((l: string) => !usedLiqueurs.has(l.toLowerCase()));
+    const hasNewLiqueurs = cocktailLiqueurs.some((l: any) => !usedLiqueurs.has(l.toLowerCase()));
     
     // Select if it differs in at least one major category and isn't a duplicate
     if (isNotDuplicate && (hasDifferentSpirit || hasDifferentStyle || hasDifferentBuildType || hasNewLiqueurs)) {
@@ -228,7 +228,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
       usedStyles.add(cocktail.style);
       usedBuildTypes.add(cocktail.build_type);
       usedCocktailIds.add(cocktail.id);
-      cocktailLiqueurs.forEach((liqueur: string) => usedLiqueurs.add(liqueur.toLowerCase()));
+      cocktailLiqueurs.forEach((liqueur: any) => usedLiqueurs.add(liqueur.toLowerCase()));
     }
   }
   
