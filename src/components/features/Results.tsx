@@ -13,6 +13,8 @@ const Results = () => {
   const [recommendations, setRecommendations] = useState<RecommendationResult | EnhancedRecommendationResult | null>(null);
 
   useEffect(() => {
+    let timeoutId: number | undefined;
+
     if (Object.keys(answers).length > 0) {
       try {
         // Check if we have all required answers for enhanced recommendations
@@ -57,10 +59,35 @@ const Results = () => {
         } catch {}
       }
     } else {
-      // No answers - redirect to start
-      navigate('/');
+      // No answers - generate a safe fallback instead of redirecting to avoid loader hang
+      try {
+        const fallback = generateRecommendations({} as any);
+        setRecommendations(fallback);
+        trackRecommendationViewed(fallback.primary.name, fallback.matchScore);
+        setTimeout(() => {
+          playCocktailReveal();
+        }, 500);
+      } catch {}
     }
-  }, [answers, navigate]);
+    
+    // Safety timeout: if still no recommendations after a short delay, populate fallback
+    timeoutId = window.setTimeout(() => {
+      if (!recommendations) {
+        try {
+          const fallback = generateRecommendations({} as any);
+          setRecommendations(fallback);
+          trackRecommendationViewed(fallback.primary.name, fallback.matchScore);
+          setTimeout(() => {
+            playCocktailReveal();
+          }, 300);
+        } catch {}
+      }
+    }, 1500);
+
+    return () => {
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, [answers, navigate, recommendations]);
 
   const handleTryAnother = () => {
     trackQuizRestart();

@@ -68,9 +68,10 @@ export const convertSlotToQuizAnswers = (slotResult: SlotMachineResult): QuizAns
   const { flavor, mood, style } = slotResult;
   
   // Map flavor attributes to quiz format
-  const sweetVsBitter = (): 'sweet' | 'bitter' | undefined => {
+  const sweetVsBitter = (): 'sweet' | 'bitter' | 'balanced' | undefined => {
     if (['sweet', 'fruity', 'creamy'].includes(flavor)) return 'sweet';
     if (['bitter', 'herbal', 'smoky'].includes(flavor)) return 'bitter';
+    if (['tart'].includes(flavor)) return 'balanced';
     return undefined;
   };
 
@@ -82,7 +83,8 @@ export const convertSlotToQuizAnswers = (slotResult: SlotMachineResult): QuizAns
 
   // Map style attributes to quiz format
   const lightVsBoozy = (): 'light' | 'boozy' | undefined => {
-    if (['light', 'built', 'tropical'].includes(style)) return 'light';
+    // Treat shaken as medium leaning light for better coverage
+    if (['light', 'built', 'tropical', 'shaken'].includes(style)) return 'light';
     if (['boozy', 'stirred', 'premium'].includes(style)) return 'boozy';
     return undefined;
   };
@@ -97,7 +99,7 @@ export const convertSlotToQuizAnswers = (slotResult: SlotMachineResult): QuizAns
   // Map mood to quiz format
   const moodPreference = (): 'celebratory' | 'elegant' | 'cozy' | 'adventurous' | undefined => {
     if (['celebratory', 'party', 'festive'].includes(mood)) return 'celebratory';
-    if (['elegant', 'sophisticated', 'refined'].includes(mood)) return 'elegant';
+    if (['elegant', 'sophisticated', 'refined', 'mysterious'].includes(mood)) return 'elegant';
     if (['cozy', 'intimate', 'warm'].includes(mood)) return 'cozy';
     if (['adventurous', 'bold', 'exciting'].includes(mood)) return 'adventurous';
     return undefined;
