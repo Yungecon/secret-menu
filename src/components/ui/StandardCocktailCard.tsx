@@ -7,7 +7,6 @@ interface CocktailCardProps {
     style?: string;
     notes?: string;
     ingredients: string[];
-    instructions?: string[];
     garnish: string | string[];
     glassware: string;
     matchScore?: number;
@@ -27,7 +26,6 @@ interface CocktailCardProps {
   showMatchScore?: boolean;
   showFlavorProfile?: boolean;
   showDifficulty?: boolean;
-  showInstructions?: boolean;
   className?: string;
   onClick?: () => void;
 }
@@ -37,7 +35,6 @@ export const StandardCocktailCard: React.FC<CocktailCardProps> = ({
   showMatchScore = true,
   showFlavorProfile = false,
   showDifficulty = false,
-  showInstructions = true,
   className = '',
   onClick
 }) => {
@@ -140,20 +137,6 @@ export const StandardCocktailCard: React.FC<CocktailCardProps> = ({
         </ul>
       </div>
 
-      {/* Instructions */}
-      {showInstructions && cocktail.instructions && cocktail.instructions.length > 0 && (
-        <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-300 mb-2">Instructions</h4>
-          <ol className="space-y-1">
-            {cocktail.instructions.map((instruction, idx) => (
-              <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
-                <span className="text-purple-400 font-medium text-xs mt-0.5">{idx + 1}.</span>
-                <span>{instruction}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
 
       {/* Glassware & Garnish */}
       <div className="flex justify-between items-center text-sm text-gray-400 mb-4">

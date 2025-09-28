@@ -279,7 +279,6 @@ export class CocktailBuildEngine {
           build_type: cocktail.build_type,
           glassware: cocktail.glassware,
           garnish: cocktail.garnish,
-          instructions: cocktail.instructions,
           variations: []
         };
         this.templates.set(template.id, template);
@@ -555,7 +554,6 @@ export class CocktailBuildEngine {
     proportions: Map<string, number>
   ): GeneratedRecipe {
     const ingredients: string[] = [];
-    const instructions = [...template.instructions];
 
     // Build ingredient list with proportions
     for (const [, ingredientId] of mapping) {
@@ -588,7 +586,6 @@ export class CocktailBuildEngine {
       template_id: template.id,
       generated: true,
       ingredients,
-      instructions,
       balance_profile: {
         sweet: 0,
         sour: 0,
@@ -856,7 +853,6 @@ export class CocktailBuildEngine {
             const ingredientName = this.replaceGenericAmaro(ing.name, cocktail.base_spirit);
             return `${ing.amount} ${ingredientName}`;
           }),
-          instructions: cocktail.instructions,
           balance_profile: {
             sweet: cocktail.flavor_profile.sweet || 5,
             sour: cocktail.flavor_profile.sour || 5,
@@ -967,7 +963,6 @@ export class CocktailBuildEngine {
 
     // Create ingredients based on flavor family and specific selections
     let ingredients: string[] = [];
-    let instructions: string[] = [];
     let glassware = "coupe";
     let garnish = ["citrus-twist"];
     let buildType = "shaken";
@@ -1053,33 +1048,12 @@ export class CocktailBuildEngine {
         ];
     }
 
-    // Customize instructions based on build type
-    switch (buildType) {
-      case 'muddled-and-shaken':
-        instructions = [
-          "Muddle fresh herbs with simple syrup in a shaker",
-          "Add remaining ingredients and ice",
-          "Shake vigorously for 15 seconds",
-          "Double strain into a chilled coupe glass",
-          "Garnish as specified"
-        ];
-        break;
-      default:
-        instructions = [
-          "Combine all ingredients in a shaker with ice",
-          "Shake vigorously for 15 seconds",
-          "Double strain into a chilled coupe glass",
-          "Garnish as specified"
-        ];
-    }
-
     return {
       id: `custom-${Date.now()}`,
       name: cocktailName,
       template_id: 'custom-template',
       generated: true,
       ingredients,
-      instructions,
       balance_profile: balanceProfile,
       complexity_score: 5,
       seasonal_notes: [`Custom ${flavorFamily} creation tailored to your taste`],

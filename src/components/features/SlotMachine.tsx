@@ -8,7 +8,7 @@ import {
   SlotMachineResult,
   convertSlotToQuizAnswers
 } from '../../utils/slotMachineAttributes';
-import { generateRecommendations } from '../../services/recommendationEngine';
+import { generateRecommendations, resetRecentlyShownCocktails } from '../../services/recommendationEngine';
 import { RecommendationResult } from '../../types';
 import { StandardCocktailCard } from '../ui/StandardCocktailCard';
 
@@ -81,8 +81,11 @@ const SlotMachine = () => {
         setSlotResult(result);
         setGameState('complete');
 
-        // Generate cocktail recommendation after a brief pause
+        // Generate cocktail recommendation using slot machine attributes
         setTimeout(async () => {
+          // Reset recently shown cocktails for fresh results
+          resetRecentlyShownCocktails();
+          
           const quizAnswers = convertSlotToQuizAnswers(result);
           const recommendation = await generateRecommendations(quizAnswers);
           setCocktailResult(recommendation);
@@ -207,32 +210,32 @@ const SlotMachine = () => {
             <div className="animate-fade-in">
               <div className="text-center mb-6">
                 <p className="text-premium-gold text-lg mb-4 italic">
-                  Your combination revealed...
+                  Your combination revealed these magical cocktails...
                 </p>
               </div>
-              <StandardCocktailCard
-                cocktail={{
-                  id: cocktailResult.primary.id,
-                  name: cocktailResult.primary.name,
-                  style: cocktailResult.primary.style,
-                  notes: cocktailResult.primary.notes || "A sophisticated blend that speaks to your refined palate",
-                  ingredients: cocktailResult.primary.ingredients,
-                  instructions: (cocktailResult.primary as any).instructions || [],
-                  garnish: cocktailResult.primary.garnish,
-                  glassware: cocktailResult.primary.glassware,
-                  matchScore: cocktailResult.matchScore,
-                  build_type: cocktailResult.primary.build_type,
-                  difficulty: (cocktailResult.primary as any).difficulty,
-                  complexity_score: (cocktailResult.primary as any).complexity_score || 5,
-                  balance_profile: (cocktailResult.primary as any).balance_profile || { sweet: 5, sour: 5, bitter: 3, spicy: 4, aromatic: 6, alcoholic: 7 },
-                  seasonal_notes: (cocktailResult.primary as any).seasonal_notes || []
-                }}
-                showMatchScore={true}
-                showFlavorProfile={true}
-                showDifficulty={true}
-                showInstructions={true}
-                className="max-w-2xl mx-auto"
-              />
+              <div className="max-w-4xl mx-auto">
+                <StandardCocktailCard
+                  cocktail={{
+                    id: cocktailResult.primary.id,
+                    name: cocktailResult.primary.name,
+                    style: (cocktailResult.primary as any).style || "Sophisticated",
+                    notes: (cocktailResult.primary as any).notes || "A sophisticated blend that speaks to your refined palate",
+                    ingredients: cocktailResult.primary.ingredients,
+                    garnish: cocktailResult.primary.garnish,
+                    glassware: cocktailResult.primary.glassware,
+                    matchScore: cocktailResult.matchScore,
+                    build_type: cocktailResult.primary.build_type,
+                    difficulty: (cocktailResult.primary as any).difficulty || "intermediate",
+                    complexity_score: (cocktailResult.primary as any).complexity_score || 5,
+                    balance_profile: (cocktailResult.primary as any).balance_profile || { sweet: 5, sour: 5, bitter: 3, spicy: 4, aromatic: 6, alcoholic: 7 },
+                    seasonal_notes: (cocktailResult.primary as any).seasonal_notes || []
+                  }}
+                  showMatchScore={true}
+                  showFlavorProfile={true}
+                  showDifficulty={true}
+                  className="max-w-2xl mx-auto"
+                />
+              </div>
             </div>
           )}
         </div>

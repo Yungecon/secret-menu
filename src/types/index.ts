@@ -11,6 +11,26 @@ export interface Cocktail {
   garnish: string;
   glassware: string;
   notes: string;
+  // Enhanced properties for better tag matching
+  comprehensive_tags?: string[];
+  enhanced_flavor_profile?: {
+    primary: string;
+    secondary: string;
+    intensity: number;
+    sweetness: number;
+    bitterness: number;
+    acidity: number;
+    aromatic: number;
+    tags: string[];
+  };
+  enhanced_tags?: {
+    flavor_profile: any;
+    mood_tags: string[];
+    style_tags: string[];
+    intensity_tags: string[];
+    occasion_tags: string[];
+    ingredient_categories: any;
+  };
 }
 
 export interface QuizAnswers {
@@ -121,7 +141,6 @@ export interface CocktailTemplate {
   build_type: 'stirred' | 'shaken' | 'built' | 'blended';
   glassware: string;
   garnish: string[];
-  instructions: string[];
   variations: string[];
 }
 
@@ -165,7 +184,6 @@ export interface GeneratedRecipe {
   template_id: string;
   generated: boolean;
   ingredients: string[];
-  instructions: string[];
   balance_profile: FlavorBalance;
   complexity_score: number;
   seasonal_notes: string[];
@@ -173,6 +191,7 @@ export interface GeneratedRecipe {
   glassware: string;
   garnish: string[];
   build_type: string;
+  instructions?: string[];
 }
 
 export interface Substitution {

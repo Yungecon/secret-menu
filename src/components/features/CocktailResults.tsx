@@ -34,7 +34,6 @@ export const CocktailResults: React.FC<CocktailResultsProps> = ({
               style: (cocktail as any).style,
               notes: (cocktail as any).notes || "A sophisticated blend crafted for your refined palate",
               ingredients: cocktail.ingredients,
-              instructions: cocktail.instructions,
               garnish: cocktail.garnish,
               glassware: cocktail.glassware,
               matchScore: (cocktail as any).matchScore,
@@ -47,7 +46,6 @@ export const CocktailResults: React.FC<CocktailResultsProps> = ({
             showMatchScore={false}
             showFlavorProfile={true}
             showDifficulty={true}
-            showInstructions={true}
           />
         ))}
       </div>

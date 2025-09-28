@@ -325,10 +325,15 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     let score = 75; // Start with a high base score for magical feeling
     let matchingFactors = 0;
     
-    // Enhanced flavor preference scoring with fuzzy matching
+    // Enhanced flavor preference scoring with comprehensive tag matching
     if (answers.sweetVsBitter === 'sweet') {
-      // Tag-based matching
-      if (cocktail.flavor_tags.some(tag => ['sweet', 'fruity'].includes(tag))) {
+      // Enhanced tag-based matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['sweet', 'luxurious', 'rich', 'indulgent'].includes(tag))) {
+        score += 18;
+        matchingFactors++;
+      }
+      // Enhanced flavor profile matching
+      if (cocktail.enhanced_flavor_profile?.primary === 'sweet' || ((cocktail.enhanced_flavor_profile?.sweetness ?? 0) >= 7)) {
         score += 15;
         matchingFactors++;
       }
@@ -337,11 +342,18 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
         score += 12;
         matchingFactors++;
       }
-      // Penalty for bitter
-      if (cocktail.flavor_tags.some(tag => ['bitter', 'dry'].includes(tag))) score -= 5;
+      // Penalty for bitter profiles
+      if (((cocktail.enhanced_flavor_profile?.bitterness ?? 0) >= 7) || (cocktail.comprehensive_tags?.some((tag: string) => ['bitter', 'dry'].includes(tag)) ?? false)) {
+        score -= 8;
+      }
     } else if (answers.sweetVsBitter === 'bitter') {
-      // Tag-based matching
-      if (cocktail.flavor_tags.some(tag => ['bitter', 'dry', 'herbal'].includes(tag))) {
+      // Enhanced tag-based matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['bitter', 'sophisticated', 'herbal', 'complex'].includes(tag))) {
+        score += 18;
+        matchingFactors++;
+      }
+      // Enhanced flavor profile matching
+      if (cocktail.enhanced_flavor_profile?.primary === 'bitter' || (cocktail.enhanced_flavor_profile?.bitterness ?? 0) >= 7) {
         score += 15;
         matchingFactors++;
       }
@@ -350,16 +362,25 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
         score += 12;
         matchingFactors++;
       }
-      // Penalty for sweet
-      if (cocktail.flavor_tags.some(tag => ['sweet', 'fruity'].includes(tag))) score -= 5;
+      // Penalty for sweet profiles
+      if (((cocktail.enhanced_flavor_profile?.sweetness ?? 0) >= 7) || (cocktail.comprehensive_tags?.some((tag: string) => ['sweet', 'fruity', 'luxurious'].includes(tag)) ?? false)) {
+        score -= 8;
+      }
     } else if (answers.sweetVsBitter === 'balanced') {
-      // Balanced prefers cocktails with both elements or neutral profiles
-      if (cocktail.flavor_tags.some(tag => ['balanced', 'harmonious', 'elegant'].includes(tag))) {
+      // Enhanced balanced matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['balanced', 'harmonious', 'elegant', 'refined'].includes(tag))) {
+        score += 18;
+        matchingFactors++;
+      }
+      // Enhanced flavor profile matching for balanced
+      if (cocktail.enhanced_flavor_profile?.primary === 'balanced' || 
+          ((cocktail.enhanced_flavor_profile?.sweetness ?? 0) >= 4 && (cocktail.enhanced_flavor_profile?.sweetness ?? 0) <= 6 &&
+           (cocktail.enhanced_flavor_profile?.bitterness ?? 0) >= 4 && (cocktail.enhanced_flavor_profile?.bitterness ?? 0) <= 6)) {
         score += 15;
         matchingFactors++;
       }
       // Bonus for cocktails that aren't extremely sweet or bitter
-      if (!cocktail.flavor_tags.some(tag => ['bitter', 'sweet'].includes(tag))) {
+      if (!cocktail.comprehensive_tags?.some((tag: string) => ['bitter', 'sweet'].includes(tag))) {
         score += 8;
         matchingFactors++;
       }
@@ -367,8 +388,13 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     
     // Enhanced fruit preference scoring
     if (answers.citrusVsStone === 'citrus') {
-      // Tag-based matching
-      if (cocktail.flavor_tags.some(tag => ['citrus', 'bright'].includes(tag))) {
+      // Enhanced tag-based matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['citrus', 'bright', 'refreshing', 'zesty'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Enhanced flavor profile matching
+      if (cocktail.enhanced_flavor_profile?.primary === 'citrus' || ((cocktail.enhanced_flavor_profile?.acidity ?? 0) >= 7)) {
         score += 12;
         matchingFactors++;
       }
@@ -378,8 +404,13 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
         matchingFactors++;
       }
     } else if (answers.citrusVsStone === 'stone') {
-      // Tag-based matching
-      if (cocktail.flavor_tags.some(tag => ['rich', 'deep', 'fruity', 'stone'].includes(tag))) {
+      // Enhanced tag-based matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['stone', 'rich', 'deep', 'fruity', 'indulgent'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Enhanced flavor profile matching
+      if (cocktail.enhanced_flavor_profile?.primary === 'tropical' || (cocktail.enhanced_flavor_profile?.aromatic ?? 0) >= 7) {
         score += 12;
         matchingFactors++;
       }
@@ -389,8 +420,13 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
         matchingFactors++;
       }
     } else if (answers.citrusVsStone === 'tropical') {
-      // Tag-based matching
-      if (cocktail.flavor_tags.some(tag => ['tropical', 'exotic', 'fruity'].includes(tag))) {
+      // Enhanced tag-based matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['tropical', 'exotic', 'fruity', 'vibrant'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Enhanced flavor profile matching
+      if (cocktail.enhanced_flavor_profile?.primary === 'tropical' || (cocktail.enhanced_flavor_profile?.aromatic ?? 0) >= 7) {
         score += 12;
         matchingFactors++;
       }
@@ -403,7 +439,13 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     
     // Enhanced style preference scoring
     if (answers.lightVsBoozy === 'light') {
-      if (cocktail.flavor_tags.some(tag => ['light', 'refreshing', 'bubbly', 'long'].includes(tag))) {
+      // Enhanced tag matching for light cocktails
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['light', 'refreshing', 'effervescent', 'airy'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Enhanced intensity profile matching
+      if (cocktail.enhanced_flavor_profile?.intensity ?? 5 <= 4) {
         score += 12;
         matchingFactors++;
       }
@@ -416,7 +458,13 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
         matchingFactors++;
       }
     } else if (answers.lightVsBoozy === 'boozy') {
-      if (cocktail.flavor_tags.some(tag => ['boozy', 'spirit-forward', 'rich', 'aromatic'].includes(tag))) {
+      // Enhanced tag matching for boozy cocktails
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['boozy', 'spirit-forward', 'strong', 'bold'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Enhanced intensity profile matching
+      if (cocktail.enhanced_flavor_profile?.intensity ?? 5 >= 8) {
         score += 12;
         matchingFactors++;
       }
@@ -428,8 +476,13 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
         matchingFactors++;
       }
     } else if (answers.lightVsBoozy === 'medium') {
-      // Medium prefers balanced cocktails - not too light, not too boozy
-      if (cocktail.flavor_tags.some(tag => ['medium', 'versatile', 'balanced'].includes(tag))) {
+      // Enhanced medium intensity matching
+      if (cocktail.comprehensive_tags?.some((tag: string) => ['medium', 'versatile', 'balanced', 'approachable'].includes(tag))) {
+        score += 15;
+        matchingFactors++;
+      }
+      // Enhanced intensity profile matching
+        if ((cocktail.enhanced_flavor_profile?.intensity ?? 5) >= 5 && (cocktail.enhanced_flavor_profile?.intensity ?? 5) <= 7) {
         score += 12;
         matchingFactors++;
       }

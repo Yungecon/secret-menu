@@ -62,6 +62,58 @@ export const SLOT_MACHINE_ATTRIBUTES: SlotMachineAttributes = {
 };
 
 /**
+ * Converts slot machine results to Flavor Journey format for ingredient spotlight
+ */
+export const convertSlotToFlavorJourney = (slotResult: SlotMachineResult): {
+  baseSpirit: string;
+  flavorFamily: string;
+  specificFlavor: string;
+} => {
+  const { flavor, mood, style } = slotResult;
+  
+  // Map to base spirits based on style and mood
+  const getBaseSpirit = (): string => {
+    if (style === 'tropical' || mood === 'playful') return 'rum';
+    if (style === 'premium' || mood === 'elegant') return 'cognac';
+    if (style === 'boozy' || mood === 'bold') return 'whiskey';
+    if (style === 'light' || mood === 'refreshing') return 'vodka';
+    if (style === 'classic' || mood === 'sophisticated') return 'gin';
+    if (style === 'experimental' || mood === 'adventurous') return 'mezcal';
+    return 'vodka'; // default
+  };
+  
+  // Map to flavor families
+  const getFlavorFamily = (): string => {
+    if (['citrus', 'tart'].includes(flavor)) return 'citrus';
+    if (['herbal', 'smoky'].includes(flavor)) return 'herbal';
+    if (['floral', 'sweet'].includes(flavor)) return 'floral';
+    if (['spicy', 'bold'].includes(flavor)) return 'spicy';
+    if (['fruity', 'creamy'].includes(flavor)) return 'tropical';
+    return 'citrus'; // default
+  };
+  
+  // Map to specific flavors
+  const getSpecificFlavor = (): string => {
+    if (flavor === 'citrus') return 'lemon';
+    if (flavor === 'herbal') return 'mint';
+    if (flavor === 'floral') return 'rose';
+    if (flavor === 'spicy') return 'ginger';
+    if (flavor === 'fruity') return 'passion-fruit';
+    if (flavor === 'sweet') return 'vanilla';
+    if (flavor === 'smoky') return 'smoke';
+    if (flavor === 'tart') return 'lime';
+    if (flavor === 'creamy') return 'coconut';
+    return 'lemon'; // default
+  };
+  
+  return {
+    baseSpirit: getBaseSpirit(),
+    flavorFamily: getFlavorFamily(),
+    specificFlavor: getSpecificFlavor()
+  };
+};
+
+/**
  * Converts slot machine results to quiz-compatible format for recommendation engine
  */
 export const convertSlotToQuizAnswers = (slotResult: SlotMachineResult): QuizAnswers => {

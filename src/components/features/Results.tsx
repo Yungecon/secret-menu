@@ -119,7 +119,6 @@ const Results = () => {
               style: primary.style,
               notes: primary.notes || "A sophisticated blend that speaks to your refined palate",
               ingredients: primary.ingredients,
-              instructions: (primary as any).instructions || [],
               garnish: primary.garnish,
               glassware: primary.glassware,
               matchScore: recommendations.matchScore,
@@ -132,7 +131,6 @@ const Results = () => {
             showMatchScore={true}
             showFlavorProfile={true}
             showDifficulty={true}
-            showInstructions={true}
             className="max-w-2xl mx-auto"
           />
         </div>
@@ -151,7 +149,6 @@ const Results = () => {
                     style: cocktail.style,
                     notes: cocktail.notes || "A delightful alternative that complements your taste",
                     ingredients: cocktail.ingredients,
-                    instructions: (cocktail as any).instructions || [],
                     garnish: cocktail.garnish,
                     glassware: cocktail.glassware,
                     matchScore: 85, // Default match score for adjacent cocktails
@@ -164,7 +161,6 @@ const Results = () => {
                   showMatchScore={true}
                   showFlavorProfile={true}
                   showDifficulty={true}
-                  showInstructions={true}
                   onClick={async () => {
                     // Track the cocktail as recently shown
                     resetRecentlyShownCocktails(); // Clear the list to allow this cocktail to be shown
