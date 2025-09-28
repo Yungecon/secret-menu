@@ -7,7 +7,7 @@ describe('Recommendation Engine', () => {
     // Reset any state before each test
   })
 
-  it('should return recommendations with valid structure', () => {
+  it('should return recommendations with valid structure', async () => {
     const answers: QuizAnswers = {
       sweetVsBitter: 'sweet',
       citrusVsStone: 'citrus',
@@ -16,7 +16,7 @@ describe('Recommendation Engine', () => {
       moodPreference: 'celebratory'
     }
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     expect(result).toBeDefined()
     expect(result.primary).toBeDefined()
@@ -27,7 +27,7 @@ describe('Recommendation Engine', () => {
     expect(result.matchScore).toBeLessThanOrEqual(100)
   })
 
-  it('should return high match scores for complete answers', () => {
+  it('should return high match scores for complete answers', async () => {
     const answers: QuizAnswers = {
       sweetVsBitter: 'sweet',
       citrusVsStone: 'citrus',
@@ -36,20 +36,20 @@ describe('Recommendation Engine', () => {
       moodPreference: 'celebratory'
     }
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     // The algorithm should return high scores (90-98%)
     expect(result.matchScore).toBeGreaterThanOrEqual(90)
     expect(result.matchScore).toBeLessThanOrEqual(98)
   })
 
-  it('should handle partial answers gracefully', () => {
+  it('should handle partial answers gracefully', async () => {
     const answers: QuizAnswers = {
       sweetVsBitter: 'sweet'
       // Only one answer provided
     }
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     expect(result).toBeDefined()
     expect(result.primary).toBeDefined()
@@ -57,14 +57,14 @@ describe('Recommendation Engine', () => {
     expect(result.matchScore).toBeGreaterThan(0)
   })
 
-  it('should return adjacent cocktails that are different from primary', () => {
+  it('should return adjacent cocktails that are different from primary', async () => {
     const answers: QuizAnswers = {
       sweetVsBitter: 'sweet',
       citrusVsStone: 'citrus',
       moodPreference: 'celebratory'
     }
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     expect(result.adjacent.length).toBeLessThanOrEqual(3)
     
@@ -74,10 +74,10 @@ describe('Recommendation Engine', () => {
     })
   })
 
-  it('should handle empty answers object', () => {
+  it('should handle empty answers object', async () => {
     const answers: QuizAnswers = {}
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     expect(result).toBeDefined()
     expect(result.primary).toBeDefined()
@@ -85,7 +85,7 @@ describe('Recommendation Engine', () => {
     expect(result.matchScore).toBeGreaterThan(0)
   })
 
-  it('should return integer match scores', () => {
+  it('should return integer match scores', async () => {
     const answers: QuizAnswers = {
       sweetVsBitter: 'sweet',
       citrusVsStone: 'citrus',
@@ -94,12 +94,12 @@ describe('Recommendation Engine', () => {
       moodPreference: 'adventurous'
     }
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     expect(Number.isInteger(result.matchScore)).toBe(true)
   })
 
-  it('should return cocktails with required properties', () => {
+  it('should return cocktails with required properties', async () => {
     const answers: QuizAnswers = {
       sweetVsBitter: 'bitter',
       citrusVsStone: 'stone',
@@ -108,7 +108,7 @@ describe('Recommendation Engine', () => {
       moodPreference: 'elegant'
     }
 
-    const result = generateRecommendations(answers)
+    const result = await generateRecommendations(answers)
 
     // Check primary cocktail has all required properties
     expect(result.primary.name).toBeDefined()
@@ -122,7 +122,7 @@ describe('Recommendation Engine', () => {
 
   // Enhanced recommendation engine tests
   describe('Enhanced Recommendation Engine', () => {
-    it('should return enhanced recommendations with fuzzy matching metadata', () => {
+    it('should return enhanced recommendations with fuzzy matching metadata', async () => {
       const answers: EnhancedQuizAnswers = {
         sweetVsBitter: 'sweet',
         citrusVsStone: 'citrus',
@@ -131,7 +131,7 @@ describe('Recommendation Engine', () => {
         moodPreference: 'celebratory'
       }
 
-      const result = generateEnhancedRecommendations(answers)
+      const result = await generateEnhancedRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()
@@ -141,7 +141,7 @@ describe('Recommendation Engine', () => {
       expect(typeof result.fallbackUsed).toBe('boolean')
     })
 
-    it('should handle new third options correctly', () => {
+    it('should handle new third options correctly', async () => {
       const answers: EnhancedQuizAnswers = {
         sweetVsBitter: 'balanced',
         citrusVsStone: 'tropical',
@@ -150,14 +150,14 @@ describe('Recommendation Engine', () => {
         moodPreference: 'elegant'
       }
 
-      const result = generateEnhancedRecommendations(answers)
+      const result = await generateEnhancedRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()
       expect(result.matchScore).toBeGreaterThanOrEqual(85)
     })
 
-    it('should use fuzzy matching when exact tags are missing', () => {
+    it('should use fuzzy matching when exact tags are missing', async () => {
       // Test a combination that might require fuzzy matching
       const answers: EnhancedQuizAnswers = {
         sweetVsBitter: 'balanced',
@@ -167,7 +167,7 @@ describe('Recommendation Engine', () => {
         moodPreference: 'cozy'
       }
 
-      const result = generateEnhancedRecommendations(answers)
+      const result = await generateEnhancedRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()
@@ -180,7 +180,7 @@ describe('Recommendation Engine', () => {
       }
     })
 
-    it('should provide high match scores for all combinations', () => {
+    it('should provide high match scores for all combinations', async () => {
       const testCombinations = [
         {
           sweetVsBitter: 'sweet' as const,
@@ -205,15 +205,15 @@ describe('Recommendation Engine', () => {
         }
       ]
 
-      testCombinations.forEach(answers => {
-        const result = generateEnhancedRecommendations(answers)
+      for (const answers of testCombinations) {
+        const result = await generateEnhancedRecommendations(answers)
         expect(result.matchScore).toBeGreaterThanOrEqual(85)
         expect(result.primary).toBeDefined()
         expect(result.adjacent).toBeInstanceOf(Array)
-      })
+      }
     })
 
-    it('should return adjacent cocktails with good scores', () => {
+    it('should return adjacent cocktails with good scores', async () => {
       const answers: EnhancedQuizAnswers = {
         sweetVsBitter: 'sweet',
         citrusVsStone: 'citrus',
@@ -222,7 +222,7 @@ describe('Recommendation Engine', () => {
         moodPreference: 'celebratory'
       }
 
-      const result = generateEnhancedRecommendations(answers)
+      const result = await generateEnhancedRecommendations(answers)
 
       expect(result.adjacent.length).toBeLessThanOrEqual(3)
       expect(result.adjacent.length).toBeGreaterThanOrEqual(0)
@@ -236,7 +236,7 @@ describe('Recommendation Engine', () => {
 
   // Fuzzy matching tests
   describe('Fuzzy Matching', () => {
-    it('should handle balanced flavor preference', () => {
+    it('should handle balanced flavor preference', async () => {
       const answers: QuizAnswers = {
         sweetVsBitter: 'balanced',
         citrusVsStone: 'citrus',
@@ -245,14 +245,14 @@ describe('Recommendation Engine', () => {
         moodPreference: 'celebratory'
       }
 
-      const result = generateRecommendations(answers)
+      const result = await generateRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()
       expect(result.matchScore).toBeGreaterThanOrEqual(85)
     })
 
-    it('should handle tropical fruit preference', () => {
+    it('should handle tropical fruit preference', async () => {
       const answers: QuizAnswers = {
         sweetVsBitter: 'sweet',
         citrusVsStone: 'tropical',
@@ -261,14 +261,14 @@ describe('Recommendation Engine', () => {
         moodPreference: 'adventurous'
       }
 
-      const result = generateRecommendations(answers)
+      const result = await generateRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()
       expect(result.matchScore).toBeGreaterThanOrEqual(85)
     })
 
-    it('should handle medium intensity preference', () => {
+    it('should handle medium intensity preference', async () => {
       const answers: QuizAnswers = {
         sweetVsBitter: 'balanced',
         citrusVsStone: 'citrus',
@@ -277,14 +277,14 @@ describe('Recommendation Engine', () => {
         moodPreference: 'elegant'
       }
 
-      const result = generateRecommendations(answers)
+      const result = await generateRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()
       expect(result.matchScore).toBeGreaterThanOrEqual(85)
     })
 
-    it('should handle modern style preference', () => {
+    it('should handle modern style preference', async () => {
       const answers: QuizAnswers = {
         sweetVsBitter: 'sweet',
         citrusVsStone: 'citrus',
@@ -293,7 +293,7 @@ describe('Recommendation Engine', () => {
         moodPreference: 'celebratory'
       }
 
-      const result = generateRecommendations(answers)
+      const result = await generateRecommendations(answers)
 
       expect(result).toBeDefined()
       expect(result.primary).toBeDefined()

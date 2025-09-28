@@ -14,7 +14,8 @@ const Results = () => {
   const [recommendations, setRecommendations] = useState<RecommendationResult | EnhancedRecommendationResult | null>(null);
 
   useEffect(() => {
-    if (Object.keys(answers).length > 0) {
+    const loadRecommendations = async () => {
+      if (Object.keys(answers).length > 0) {
       // Check if we have all required answers for enhanced recommendations
       const hasAllAnswers = answers.sweetVsBitter && 
                            answers.citrusVsStone && 
@@ -24,8 +25,8 @@ const Results = () => {
       
       // Use enhanced recommendations if we have all answers, otherwise use regular
       const result = hasAllAnswers 
-        ? generateEnhancedRecommendations(answers as any) // Type assertion needed for now
-        : generateRecommendations(answers);
+        ? await generateEnhancedRecommendations(answers as any) // Type assertion needed for now
+        : await generateRecommendations(answers);
       
       setRecommendations(result);
       
@@ -45,10 +46,13 @@ const Results = () => {
       setTimeout(() => {
         playCocktailReveal();
       }, 1000);
-    } else {
-      // No answers - redirect to start
-      navigate('/');
-    }
+      } else {
+        // No answers - redirect to start
+        navigate('/');
+      }
+    };
+    
+    loadRecommendations();
   }, [answers, navigate]);
 
   const handleTryAnother = () => {

@@ -1,5 +1,37 @@
 import { Cocktail, QuizAnswers, RecommendationResult, EnhancedQuizAnswers } from '../types';
-import cocktailData from '../assets/data/secret_menu_mvp_cocktails.json';
+import { DATA_PATHS } from '../constants';
+
+// Load enhanced cocktail library
+let cocktailData: Cocktail[] = [];
+
+const loadCocktailData = async () => {
+  if (cocktailData.length === 0) {
+    try {
+      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
+      const data = await response.json();
+      cocktailData = data.cocktails.map((cocktail: any) => ({
+        id: cocktail.id,
+        name: cocktail.name,
+        base_spirit_category: cocktail.base_spirit,
+        base_brand: cocktail.base_spirit,
+        style: cocktail.flavor_profile?.smoky ? 'Smoky' : cocktail.flavor_profile?.floral ? 'Floral' : 'Classic',
+        build_type: cocktail.build_type || 'Shaken',
+        flavor_tags: Object.keys(cocktail.flavor_profile || {}),
+        mood_tags: ['sophisticated', 'refined'],
+        ingredients: cocktail.ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
+        garnish: cocktail.garnish?.join(', ') || 'Lemon twist',
+        glassware: cocktail.glassware,
+        notes: cocktail.description
+      }));
+    } catch (error) {
+      console.error('Error loading enhanced cocktail library:', error);
+      // Fallback to old data
+      const fallbackResponse = await fetch(DATA_PATHS.SECRET_MENU_COCKTAILS);
+      cocktailData = await fallbackResponse.json();
+    }
+  }
+  return cocktailData;
+};
 
 // Fuzzy matching helper functions
 const hasIngredient = (cocktail: Cocktail, ingredients: string[]): boolean => {
@@ -101,8 +133,8 @@ const performFuzzyMatching = (cocktail: Cocktail, answers: EnhancedQuizAnswers):
   return { score: fuzzyScore, fuzzyMatches };
 };
 
-export const generateRecommendations = (answers: QuizAnswers): RecommendationResult => {
-  const cocktails = cocktailData as Cocktail[];
+export const generateRecommendations = async (answers: QuizAnswers): Promise<RecommendationResult> => {
+  const cocktails = await loadCocktailData();
   
   // Score each cocktail based on quiz answers with enhanced fuzzy matching
   const scoredCocktails = cocktails.map(cocktail => {
@@ -326,8 +358,8 @@ export const generateRecommendations = (answers: QuizAnswers): RecommendationRes
 };
 
 // Enhanced recommendation engine with fuzzy matching metadata
-export const generateEnhancedRecommendations = (answers: EnhancedQuizAnswers): RecommendationResult & { fuzzyMatches?: string[]; fallbackUsed?: boolean } => {
-  const cocktails = cocktailData as Cocktail[];
+export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswers): Promise<RecommendationResult & { fuzzyMatches?: string[]; fallbackUsed?: boolean }> => {
+  const cocktails = await loadCocktailData();
   
   // Score each cocktail with enhanced fuzzy matching
   const scoredCocktails = cocktails.map(cocktail => {

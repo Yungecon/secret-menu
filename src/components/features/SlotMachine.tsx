@@ -82,9 +82,9 @@ const SlotMachine = () => {
         setGameState('complete');
 
         // Generate cocktail recommendation after a brief pause
-        setTimeout(() => {
+        setTimeout(async () => {
           const quizAnswers = convertSlotToQuizAnswers(result);
-          const recommendation = generateRecommendations(quizAnswers);
+          const recommendation = await generateRecommendations(quizAnswers);
           setCocktailResult(recommendation);
           setGameState('results');
         }, 1500);
