@@ -14,36 +14,48 @@ const Results = () => {
 
   useEffect(() => {
     if (Object.keys(answers).length > 0) {
-      // Check if we have all required answers for enhanced recommendations
-      const hasAllAnswers = answers.sweetVsBitter && 
-                           answers.citrusVsStone && 
-                           answers.lightVsBoozy && 
-                           answers.classicVsExperimental && 
-                           answers.moodPreference;
-      
-      // Use enhanced recommendations if we have all answers, otherwise use regular
-      const result = hasAllAnswers 
-        ? generateEnhancedRecommendations(answers as any) // Type assertion needed for now
-        : generateRecommendations(answers);
-      
-      setRecommendations(result);
-      
-      // Track recommendation viewed with enhanced analytics
-      if ('fuzzyMatches' in result && 'fallbackUsed' in result) {
-        const enhancedResult = result as EnhancedRecommendationResult;
-        if (enhancedResult.fuzzyMatches || enhancedResult.fallbackUsed) {
-          trackEnhancedRecommendationViewed(enhancedResult.primary.name, enhancedResult.matchScore, enhancedResult.fuzzyMatches, enhancedResult.fallbackUsed);
+      try {
+        // Check if we have all required answers for enhanced recommendations
+        const hasAllAnswers = answers.sweetVsBitter && 
+                             answers.citrusVsStone && 
+                             answers.lightVsBoozy && 
+                             answers.classicVsExperimental && 
+                             answers.moodPreference;
+
+        // Use enhanced recommendations if we have all answers, otherwise use regular
+        const result = hasAllAnswers 
+          ? generateEnhancedRecommendations(answers as any) // Type assertion needed for now
+          : generateRecommendations(answers);
+
+        setRecommendations(result);
+
+        // Track recommendation viewed with enhanced analytics
+        if ('fuzzyMatches' in result && 'fallbackUsed' in result) {
+          const enhancedResult = result as EnhancedRecommendationResult;
+          if (enhancedResult.fuzzyMatches || enhancedResult.fallbackUsed) {
+            trackEnhancedRecommendationViewed(enhancedResult.primary.name, enhancedResult.matchScore, enhancedResult.fuzzyMatches, enhancedResult.fallbackUsed);
+          } else {
+            trackRecommendationViewed(result.primary.name, result.matchScore);
+          }
         } else {
           trackRecommendationViewed(result.primary.name, result.matchScore);
         }
-      } else {
-        trackRecommendationViewed(result.primary.name, result.matchScore);
+
+        // Play cocktail reveal sound after a brief delay
+        setTimeout(() => {
+          playCocktailReveal();
+        }, 1000);
+      } catch (err) {
+        // Fallback: generate a safe default recommendation
+        try {
+          const fallback = generateRecommendations({} as any);
+          setRecommendations(fallback);
+          trackRecommendationViewed(fallback.primary.name, fallback.matchScore);
+          setTimeout(() => {
+            playCocktailReveal();
+          }, 500);
+        } catch {}
       }
-      
-      // Play cocktail reveal sound after a brief delay
-      setTimeout(() => {
-        playCocktailReveal();
-      }, 1000);
     } else {
       // No answers - redirect to start
       navigate('/');
