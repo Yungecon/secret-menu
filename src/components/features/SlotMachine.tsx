@@ -82,10 +82,19 @@ const SlotMachine = () => {
 
         // Generate cocktail recommendation after a brief pause
         setTimeout(() => {
-          const quizAnswers = convertSlotToQuizAnswers(result);
-          const recommendation = generateRecommendations(quizAnswers);
-          setCocktailResult(recommendation);
-          setGameState('results');
+          try {
+            const quizAnswers = convertSlotToQuizAnswers(result);
+            const recommendation = generateRecommendations(quizAnswers);
+            setCocktailResult(recommendation);
+            setGameState('results');
+          } catch (err) {
+            // Fallback to a generic recommendation to avoid getting stuck
+            try {
+              const fallback = generateRecommendations({} as any);
+              setCocktailResult(fallback);
+              setGameState('results');
+            } catch {}
+          }
         }, 1500);
       }
     }
