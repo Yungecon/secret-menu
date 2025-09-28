@@ -8,22 +8,36 @@ import {
 } from '../types';
 import { DATA_PATHS } from '../constants';
 
-// Specific amaros from the ingredient database
-const SPECIFIC_AMAROS = [
-  'Amaro Montenegro',
-  'Amaro Nonino', 
-  'Amaro Averna',
-  'Amaro Lucano',
-  'Amaro Ramazzotti',
-  'Amaro Sibilla',
-  'Amaro Meletti',
-  'Aperol',
-  'Campari',
-  'Cappelletti Aperitivo',
-  'Cynar',
-  'Fernet Branca',
-  'Fernet Vallet',
-  'Punt e Mes'
+// Real amaros and liqueurs from the ingredient database
+const REAL_AMAROS = [
+  'aperol', 'angostura-amaro', 'averna', 'bruto-americano', 'campari',
+  'cardamaro', 'cynar', 'cynar-70', 'fernet-branca', 'montenegro',
+  'ramazzotti', 'ramazzotti-rosato', 'tuaca', 'zucca-rabarbaro'
+];
+
+const REAL_LIQUEURS = [
+  'chinola-passionfruit', 'combier-orang', 'combier-watermelon',
+  'fruitful-clementine', 'fruitful-smoked-jalapeno', 'fruitful-watermelon',
+  'fruitful-passionfruit', 'fruitful-yuzu', 'fruitful-dragonfruit',
+  'giffard-banane-du-bresil', 'giffard-lychee', 'giffard-mango',
+  'giffard-pampelmouse', 'giffard-violette', 'luxardo-maraschino',
+  'luxardo-amaretto', 'napoleon-mandarin', 'pama-pomegranate',
+  'becherovka', 'benedictine', 'botanika-angelica-elderflower',
+  'chartreuse-cuvee', 'chartreuse-green', 'chartreuse-vep',
+  'chartreuse-yellow', 'dolin-genepy', 'frangelico', 'giffard-mint',
+  'giffard-vanille', 'st-germain-elderflower', 'tempus-fuget-creme-de-menthe',
+  'zirbenz-alpine-liqueur', 'baileys-chocolate', 'borghetti-coffee-liqueur',
+  'giffard-creme-de-cacao', 'cointreau', 'grand-marnier', 'licor-43',
+  'midori', 'rose-liqueur'
+];
+
+const REAL_SYRUPS = [
+  'bitter-truth-golden-falernum', 'gran-ponche-tamarindo', 'hamilton-pimento-dram',
+  'heirloom-alchermes', 'heirloom-pineapple-amaro', 'lazzaroti-pech-amaretto',
+  'maleza-cacahuate', 'maleza-cempasuchitl', 'montarez-coffee-creme',
+  'mattei-cap-corse-blanc', 'mattei-cap-corse-rouge', 'giffard-apertif-syrup',
+  'giffard-elderflower-syrup', 'giffard-ginger-syrup', 'giffard-grapefruit-syrup',
+  'giffard-pineapple-syrup'
 ];
 
 // Amaro flavor profiles for intelligent selection (unused but kept for future reference)
@@ -761,33 +775,66 @@ export class CocktailBuildEngine {
   /**
    * Select the best amaro based on the base spirit and cocktail context
    */
-  private selectBestAmaro(baseSpirit: string, _cocktailContext: any = {}): string {
-    // Default selections based on base spirit
+  private selectBestRealIngredient(baseSpirit: string, ingredientType: string): string {
+    // Spirit preferences for real ingredients
     const spiritPreferences: Record<string, string[]> = {
-      'mezcal': ['Fernet Branca', 'Amaro Averna', 'Amaro Nonino'],
-      'tequila': ['Amaro Lucano', 'Amaro Ramazzotti', 'Amaro Sibilla'],
-      'gin': ['Aperol', 'Campari', 'Amaro Lucano'],
-      'vodka': ['Aperol', 'Cappelletti Aperitivo', 'Amaro Montenegro'],
-      'whiskey': ['Amaro Nonino', 'Fernet Branca', 'Amaro Averna'],
-      'bourbon': ['Amaro Nonino', 'Amaro Averna', 'Fernet Branca'],
-      'brandy': ['Amaro Nonino', 'Amaro Montenegro', 'Amaro Averna'],
-      'rum': ['Amaro Averna', 'Amaro Sibilla', 'Fernet Branca'],
-      'cognac': ['Amaro Nonino', 'Amaro Montenegro', 'Punt e Mes']
+      'mezcal': ['fernet-branca', 'averna', 'montenegro', 'chartreuse-green'],
+      'tequila': ['montenegro', 'ramazzotti', 'cynar', 'chartreuse-yellow'],
+      'gin': ['aperol', 'campari', 'montenegro', 'st-germain-elderflower'],
+      'vodka': ['aperol', 'campari', 'montenegro', 'cointreau'],
+      'whiskey': ['montenegro', 'fernet-branca', 'averna', 'benedictine'],
+      'bourbon': ['montenegro', 'averna', 'fernet-branca', 'benedictine'],
+      'brandy': ['montenegro', 'montenegro', 'averna', 'grand-marnier'],
+      'rum': ['averna', 'cynar', 'fernet-branca', 'cointreau'],
+      'cognac': ['montenegro', 'montenegro', 'averna', 'grand-marnier'],
+      'pisco': ['pisco', 'cynar', 'averna', 'cointreau'],
+      'aquavit': ['aquavit', 'fernet-branca', 'cynar', 'benedictine'],
+      'armagnac': ['armagnac', 'montenegro', 'averna', 'grand-marnier'],
+      'shochu': ['shochu', 'sake', 'cynar', 'benedictine']
     };
 
-    const preferredAmaros = spiritPreferences[baseSpirit] || spiritPreferences['gin'];
+    // Select based on ingredient type
+    let ingredientList: string[] = [];
     
-    // Return a random amaro from the preferred list for variety
-    return preferredAmaros[Math.floor(Math.random() * preferredAmaros.length)];
+    if (ingredientType.toLowerCase().includes('amaro')) {
+      ingredientList = REAL_AMAROS;
+    } else if (ingredientType.toLowerCase().includes('liqueur')) {
+      ingredientList = REAL_LIQUEURS;
+    } else if (ingredientType.toLowerCase().includes('syrup')) {
+      ingredientList = REAL_SYRUPS;
+    } else {
+      // Default to liqueurs for variety
+      ingredientList = REAL_LIQUEURS;
+    }
+
+    // Get preferred ingredients for this spirit
+    const preferredIngredients = spiritPreferences[baseSpirit] || spiritPreferences['gin'];
+    
+    // Filter to only include ingredients that are in our real ingredient list
+    const availablePreferred = preferredIngredients.filter(ing => ingredientList.includes(ing));
+    
+    // If we have preferred ingredients available, use them
+    if (availablePreferred.length > 0) {
+      return availablePreferred[Math.floor(Math.random() * availablePreferred.length)];
+    }
+    
+    // Otherwise, return a random ingredient from the appropriate category
+    return ingredientList[Math.floor(Math.random() * ingredientList.length)];
   }
 
   /**
    * Replace generic amaro references with specific amaros
    */
   private replaceGenericAmaro(ingredient: string, baseSpirit: string): string {
-    if (ingredient.toLowerCase().includes('amaro') && !SPECIFIC_AMAROS.some(amaro => ingredient.includes(amaro))) {
-      const specificAmaro = this.selectBestAmaro(baseSpirit);
-      return ingredient.replace(/amaro/gi, specificAmaro);
+    // Check if this is a generic ingredient that needs to be replaced with a real one
+    const genericIngredients = ['amaro', 'liqueur', 'syrup', 'bitters'];
+    const isGeneric = genericIngredients.some(generic => 
+      ingredient.toLowerCase().includes(generic)
+    );
+    
+    if (isGeneric) {
+      const realIngredient = this.selectBestRealIngredient(baseSpirit, ingredient);
+      return realIngredient;
     }
     return ingredient;
   }
@@ -990,13 +1037,14 @@ export class CocktailBuildEngine {
         break;
         
       case 'herbal':
-        const herbalAmaro = this.selectBestAmaro(baseSpirit);
+        const herbalAmaro = this.selectBestRealIngredient(baseSpirit, 'amaro');
+        const herbalLiqueur = this.selectBestRealIngredient(baseSpirit, 'liqueur');
         ingredients = [
           `2oz ${spiritName}`,
           `0.75oz ${herbalAmaro}`,
           `0.5oz Fresh lime juice`,
           `0.5oz Simple syrup`,
-          `0.25oz Green Chartreuse`
+          `0.25oz ${herbalLiqueur}`
         ];
         buildType = "shaken";
         garnish = [`${specificFlavor || 'herb'}-sprig`];
@@ -1004,11 +1052,13 @@ export class CocktailBuildEngine {
         break;
         
       case 'floral':
+        const floralLiqueur = this.selectBestRealIngredient(baseSpirit, 'liqueur');
+        const floralSyrup = this.selectBestRealIngredient(baseSpirit, 'syrup');
         ingredients = [
           `2oz ${spiritName}`,
-          `0.75oz St-Germain`,
+          `0.75oz ${floralLiqueur}`,
           `0.5oz Fresh lemon juice`,
-          `0.5oz Simple syrup`,
+          `0.5oz ${floralSyrup}`,
           `0.25oz Rose water`
         ];
         garnish = ["edible-flower"];
@@ -1016,11 +1066,13 @@ export class CocktailBuildEngine {
         break;
         
       case 'spicy':
+        const spicyLiqueur = this.selectBestRealIngredient(baseSpirit, 'liqueur');
+        const spicySyrup = this.selectBestRealIngredient(baseSpirit, 'syrup');
         ingredients = [
           `2oz ${spiritName}`,
           `0.75oz Fresh lime juice`,
-          `0.5oz Simple syrup`,
-          `0.25oz Jalapeño simple syrup`,
+          `0.5oz ${spicySyrup}`,
+          `0.25oz ${spicyLiqueur}`,
           `2 dashes Angostura bitters`
         ];
         garnish = ["jalapeño-slice"];
@@ -1028,23 +1080,27 @@ export class CocktailBuildEngine {
         break;
         
       case 'tropical':
+        const tropicalLiqueur = this.selectBestRealIngredient(baseSpirit, 'liqueur');
+        const tropicalSyrup = this.selectBestRealIngredient(baseSpirit, 'syrup');
         ingredients = [
           `2oz ${spiritName}`,
           `0.75oz Fresh ${specificFlavor || 'passion-fruit'} juice`,
           `0.5oz Coconut cream`,
-          `0.5oz Simple syrup`,
-          `0.25oz Lime juice`
+          `0.5oz ${tropicalSyrup}`,
+          `0.25oz ${tropicalLiqueur}`
         ];
         garnish = ["pineapple-wedge", "cherry"];
         balanceProfile = { sweet: 8, sour: 6, bitter: 2, spicy: 3, aromatic: 6, alcoholic: 6 };
         break;
         
       default:
+        const defaultLiqueur = this.selectBestRealIngredient(baseSpirit, 'liqueur');
+        const defaultSyrup = this.selectBestRealIngredient(baseSpirit, 'syrup');
         ingredients = [
           `2oz ${spiritName}`,
           `0.75oz Fresh citrus juice`,
-          `0.5oz Simple syrup`,
-          `0.25oz Triple sec`
+          `0.5oz ${defaultSyrup}`,
+          `0.25oz ${defaultLiqueur}`
         ];
     }
 

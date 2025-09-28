@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SlotReel from './SlotReel';
 import { 
@@ -31,10 +31,47 @@ const SlotMachine = () => {
   const [currentTap, setCurrentTap] = useState(0);
   const [slotResult, setSlotResult] = useState<SlotMachineResult | null>(null);
   const [cocktailResult, setCocktailResult] = useState<RecommendationResult | null>(null);
+  
+  // Auto-selection timer state
+  const [countdown, setCountdown] = useState(6);
+  const countdownRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Start countdown timer when game begins
+  const startCountdown = useCallback(() => {
+    if (countdownRef.current) {
+      clearInterval(countdownRef.current);
+    }
+    
+    setCountdown(6);
+    countdownRef.current = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          // Auto-stop current reel when countdown reaches 0
+          if (gameState === 'spinning' && currentTap < 3) {
+            setGameState('stopping');
+            setReelStates(prevReels => prevReels.map((reel, index) => 
+              index === currentTap 
+                ? { ...reel, isSpinning: false }
+                : reel
+            ));
+          }
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  }, [gameState, currentTap]);
+
 
   // Handle tap to stop current reel
   const handleTap = useCallback(() => {
     if (gameState !== 'spinning' || currentTap >= 3) return;
+
+    // Clear countdown timer when user manually taps
+    if (countdownRef.current) {
+      clearInterval(countdownRef.current);
+      countdownRef.current = null;
+    }
 
     setGameState('stopping');
     
@@ -58,8 +95,9 @@ const SlotMachine = () => {
     setCurrentTap(nextTap);
 
     if (nextTap < 3) {
-      // More reels to stop, return to spinning state
+      // More reels to stop, return to spinning state and restart countdown
       setGameState('spinning');
+      startCountdown();
     } else {
       // All reels stopped, create final result
       const updatedStates = [...reelStates];
@@ -81,6 +119,12 @@ const SlotMachine = () => {
         setSlotResult(result);
         setGameState('complete');
 
+        // Clear countdown timer when game is complete
+        if (countdownRef.current) {
+          clearInterval(countdownRef.current);
+          countdownRef.current = null;
+        }
+
         // Generate cocktail recommendation using slot machine attributes
         setTimeout(async () => {
           // Reset recently shown cocktails for fresh results
@@ -93,7 +137,7 @@ const SlotMachine = () => {
         }, 1500);
       }
     }
-  }, [currentTap, reelStates]);
+  }, [currentTap, reelStates, startCountdown]);
 
   // Reset for new spin
   const spinAgain = useCallback(() => {
@@ -106,10 +150,34 @@ const SlotMachine = () => {
       { isSpinning: true },
       { isSpinning: true }
     ]);
-  }, []);
+    
+    // Clear any existing countdown and start new one
+    if (countdownRef.current) {
+      clearInterval(countdownRef.current);
+      countdownRef.current = null;
+    }
+    startCountdown();
+  }, [startCountdown]);
+
+  // Start countdown timer when component mounts
+  useEffect(() => {
+    if (gameState === 'spinning') {
+      startCountdown();
+    }
+    
+    // Cleanup timer on unmount
+    return () => {
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+        countdownRef.current = null;
+      }
+    };
+  }, [startCountdown, gameState]);
 
   const getInstructionText = () => {
-    if (gameState === 'spinning') return `Tap the glowing reel to stop it (${currentTap + 1} of 3)`;
+    if (gameState === 'spinning') {
+      return `Tap the glowing reel to stop it (${currentTap + 1} of 3) - Auto-stops in ${countdown}s`;
+    }
     if (gameState === 'stopping') return 'Reel stopping...';
     if (gameState === 'complete') return 'The reels have aligned! 🎰';
     if (gameState === 'results') return 'Your perfect cocktail awaits! 🍸';
@@ -144,6 +212,22 @@ const SlotMachine = () => {
           <p className="text-premium-gold text-lg font-medium animate-pulse">
             {getInstructionText()}
           </p>
+          
+          {/* Countdown Timer */}
+          {gameState === 'spinning' && countdown > 0 && (
+            <div className="mt-4 flex items-center justify-center">
+              <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-full px-6 py-2">
+                <div className="flex items-center gap-2">
+                  <div className={`text-2xl font-bold ${countdown <= 3 ? 'text-red-400 animate-pulse' : 'text-premium-gold'}`}>
+                    {countdown}
+                  </div>
+                  <div className="text-premium-silver text-sm">
+                    seconds until auto-select
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Slot Machine Interface */}

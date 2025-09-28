@@ -5,18 +5,9 @@
       "name": "Aperol",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "orange"
-        ],
-        "secondary": [
-          "sweet",
-          "herbal"
-        ],
-        "tertiary": [
-          "rhubarb",
-          "gentian"
-        ]
+        "primary": ["bitter", "orange"],
+        "secondary": ["sweet", "herbal"],
+        "tertiary": ["rhubarb", "gentian"]
       },
       "intensity": {
         "overall": 4,
@@ -32,18 +23,9 @@
       "name": "Angostura Amaro",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "herbal"
-        ],
-        "secondary": [
-          "spice",
-          "citrus"
-        ],
-        "tertiary": [
-          "gentian",
-          "cinnamon"
-        ]
+        "primary": ["bitter", "herbal"],
+        "secondary": ["spice", "citrus"],
+        "tertiary": ["gentian", "cinnamon"]
       },
       "intensity": {
         "overall": 6,
@@ -59,18 +41,9 @@
       "name": "Averna",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "herbal"
-        ],
-        "secondary": [
-          "sweet",
-          "citrus"
-        ],
-        "tertiary": [
-          "licorice",
-          "vanilla"
-        ]
+        "primary": ["bitter", "herbal"],
+        "secondary": ["sweet", "citrus"],
+        "tertiary": ["licorice", "vanilla"]
       },
       "intensity": {
         "overall": 5,
@@ -86,18 +59,9 @@
       "name": "Bruto Americano",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "citrus"
-        ],
-        "secondary": [
-          "herbal",
-          "spice"
-        ],
-        "tertiary": [
-          "gentian",
-          "orange"
-        ]
+        "primary": ["bitter", "citrus"],
+        "secondary": ["herbal", "spice"],
+        "tertiary": ["gentian", "orange"]
       },
       "intensity": {
         "overall": 5,
@@ -113,18 +77,9 @@
       "name": "Campari",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "citrus"
-        ],
-        "secondary": [
-          "herbal",
-          "sweet"
-        ],
-        "tertiary": [
-          "quinine",
-          "orange"
-        ]
+        "primary": ["bitter", "citrus"],
+        "secondary": ["herbal", "sweet"],
+        "tertiary": ["quinine", "orange"]
       },
       "intensity": {
         "overall": 6,
@@ -140,18 +95,9 @@
       "name": "Cardamaro",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "bitter"
-        ],
-        "secondary": [
-          "sweet",
-          "spice"
-        ],
-        "tertiary": [
-          "cardamom",
-          "artichoke"
-        ]
+        "primary": ["herbal", "bitter"],
+        "secondary": ["sweet", "spice"],
+        "tertiary": ["cardamom", "artichoke"]
       },
       "intensity": {
         "overall": 4,
@@ -167,18 +113,9 @@
       "name": "Cynar",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "herbal"
-        ],
-        "secondary": [
-          "artichoke",
-          "sweet"
-        ],
-        "tertiary": [
-          "citrus",
-          "spice"
-        ]
+        "primary": ["bitter", "herbal"],
+        "secondary": ["artichoke", "sweet"],
+        "tertiary": ["citrus", "spice"]
       },
       "intensity": {
         "overall": 5,
@@ -194,18 +131,9 @@
       "name": "Cynar 70",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "herbal"
-        ],
-        "secondary": [
-          "artichoke",
-          "sweet"
-        ],
-        "tertiary": [
-          "citrus",
-          "spice"
-        ]
+        "primary": ["bitter", "herbal"],
+        "secondary": ["artichoke", "sweet"],
+        "tertiary": ["citrus", "spice"]
       },
       "intensity": {
         "overall": 7,
@@ -221,18 +149,9 @@
       "name": "Fernet Branca",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "herbal"
-        ],
-        "secondary": [
-          "mint",
-          "spice"
-        ],
-        "tertiary": [
-          "menthol",
-          "licorice"
-        ]
+        "primary": ["bitter", "herbal"],
+        "secondary": ["mint", "spice"],
+        "tertiary": ["menthol", "licorice"]
       },
       "intensity": {
         "overall": 8,
@@ -248,18 +167,9 @@
       "name": "Montenegro",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "sweet"
-        ],
-        "secondary": [
-          "citrus",
-          "bitter"
-        ],
-        "tertiary": [
-          "orange",
-          "vanilla"
-        ]
+        "primary": ["herbal", "sweet"],
+        "secondary": ["citrus", "bitter"],
+        "tertiary": ["orange", "vanilla"]
       },
       "intensity": {
         "overall": 4,
@@ -275,18 +185,9 @@
       "name": "Ramazzotti",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "sweet"
-        ],
-        "secondary": [
-          "bitter",
-          "citrus"
-        ],
-        "tertiary": [
-          "orange",
-          "vanilla"
-        ]
+        "primary": ["herbal", "sweet"],
+        "secondary": ["bitter", "citrus"],
+        "tertiary": ["orange", "vanilla"]
       },
       "intensity": {
         "overall": 4,
@@ -302,18 +203,9 @@
       "name": "Ramazzotti Rosato",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "sweet"
-        ],
-        "secondary": [
-          "rose",
-          "bitter"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["herbal", "sweet"],
+        "secondary": ["rose", "bitter"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -329,18 +221,9 @@
       "name": "Tuaca",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "vanilla",
-          "sweet"
-        ],
-        "secondary": [
-          "citrus",
-          "spice"
-        ],
-        "tertiary": [
-          "brandy",
-          "caramel"
-        ]
+        "primary": ["vanilla", "sweet"],
+        "secondary": ["citrus", "spice"],
+        "tertiary": ["brandy", "caramel"]
       },
       "intensity": {
         "overall": 3,
@@ -356,18 +239,9 @@
       "name": "Zucca Rabarbaro",
       "category": "amaro",
       "flavor_profile": {
-        "primary": [
-          "bitter",
-          "rhubarb"
-        ],
-        "secondary": [
-          "herbal",
-          "sweet"
-        ],
-        "tertiary": [
-          "citrus",
-          "spice"
-        ]
+        "primary": ["bitter", "rhubarb"],
+        "secondary": ["herbal", "sweet"],
+        "tertiary": ["citrus", "spice"]
       },
       "intensity": {
         "overall": 5,
@@ -383,18 +257,9 @@
       "name": "Chinola Passionfruit Liqueur",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "passionfruit",
-          "tropical"
-        ],
-        "secondary": [
-          "sweet",
-          "tart"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["passionfruit", "tropical"],
+        "secondary": ["sweet", "tart"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -410,18 +275,9 @@
       "name": "Combier Orang",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "orange",
-          "citrus"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "peel",
-          "floral"
-        ]
+        "primary": ["orange", "citrus"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["peel", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -437,18 +293,9 @@
       "name": "Combier Watermelon",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "watermelon",
-          "fresh"
-        ],
-        "secondary": [
-          "sweet",
-          "fruity"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["watermelon", "fresh"],
+        "secondary": ["sweet", "fruity"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -464,18 +311,9 @@
       "name": "Fruitful Clementine",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "clementine",
-          "citrus"
-        ],
-        "secondary": [
-          "sweet",
-          "tart"
-        ],
-        "tertiary": [
-          "orange",
-          "floral"
-        ]
+        "primary": ["clementine", "citrus"],
+        "secondary": ["sweet", "tart"],
+        "tertiary": ["orange", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -491,18 +329,9 @@
       "name": "Fruitful Smoked Jalapeno",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "jalapeno",
-          "smoky"
-        ],
-        "secondary": [
-          "spicy",
-          "sweet"
-        ],
-        "tertiary": [
-          "pepper",
-          "heat"
-        ]
+        "primary": ["jalapeno", "smoky"],
+        "secondary": ["spicy", "sweet"],
+        "tertiary": ["pepper", "heat"]
       },
       "intensity": {
         "overall": 6,
@@ -518,18 +347,9 @@
       "name": "Fruitful Watermelon",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "watermelon",
-          "fresh"
-        ],
-        "secondary": [
-          "sweet",
-          "fruity"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["watermelon", "fresh"],
+        "secondary": ["sweet", "fruity"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -545,18 +365,9 @@
       "name": "Fruitful Passionfruit",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "passionfruit",
-          "tropical"
-        ],
-        "secondary": [
-          "sweet",
-          "tart"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["passionfruit", "tropical"],
+        "secondary": ["sweet", "tart"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -572,18 +383,9 @@
       "name": "Fruitful Yuzu",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "yuzu",
-          "citrus"
-        ],
-        "secondary": [
-          "tart",
-          "sweet"
-        ],
-        "tertiary": [
-          "grapefruit",
-          "floral"
-        ]
+        "primary": ["yuzu", "citrus"],
+        "secondary": ["tart", "sweet"],
+        "tertiary": ["grapefruit", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -599,18 +401,9 @@
       "name": "Fruitful Dragonfruit",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "dragonfruit",
-          "tropical"
-        ],
-        "secondary": [
-          "sweet",
-          "fruity"
-        ],
-        "tertiary": [
-          "kiwi",
-          "floral"
-        ]
+        "primary": ["dragonfruit", "tropical"],
+        "secondary": ["sweet", "fruity"],
+        "tertiary": ["kiwi", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -626,18 +419,9 @@
       "name": "Giffard Banane Du Bresil",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "banana",
-          "tropical"
-        ],
-        "secondary": [
-          "sweet",
-          "creamy"
-        ],
-        "tertiary": [
-          "vanilla",
-          "caramel"
-        ]
+        "primary": ["banana", "tropical"],
+        "secondary": ["sweet", "creamy"],
+        "tertiary": ["vanilla", "caramel"]
       },
       "intensity": {
         "overall": 3,
@@ -653,18 +437,9 @@
       "name": "Giffard Lychee",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "lychee",
-          "tropical"
-        ],
-        "secondary": [
-          "sweet",
-          "floral"
-        ],
-        "tertiary": [
-          "rose",
-          "delicate"
-        ]
+        "primary": ["lychee", "tropical"],
+        "secondary": ["sweet", "floral"],
+        "tertiary": ["rose", "delicate"]
       },
       "intensity": {
         "overall": 3,
@@ -680,18 +455,9 @@
       "name": "Giffard Mango",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "mango",
-          "tropical"
-        ],
-        "secondary": [
-          "sweet",
-          "fruity"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["mango", "tropical"],
+        "secondary": ["sweet", "fruity"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -707,18 +473,9 @@
       "name": "Giffard Pampelmouse",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "grapefruit",
-          "citrus"
-        ],
-        "secondary": [
-          "tart",
-          "sweet"
-        ],
-        "tertiary": [
-          "bitter",
-          "floral"
-        ]
+        "primary": ["grapefruit", "citrus"],
+        "secondary": ["tart", "sweet"],
+        "tertiary": ["bitter", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -734,18 +491,9 @@
       "name": "Giffard Violette",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "violet",
-          "floral"
-        ],
-        "secondary": [
-          "sweet",
-          "delicate"
-        ],
-        "tertiary": [
-          "perfume",
-          "elegant"
-        ]
+        "primary": ["violet", "floral"],
+        "secondary": ["sweet", "delicate"],
+        "tertiary": ["perfume", "elegant"]
       },
       "intensity": {
         "overall": 3,
@@ -761,18 +509,9 @@
       "name": "Luxardo Maraschino",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "cherry",
-          "stone-fruit"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "almond",
-          "floral"
-        ]
+        "primary": ["cherry", "stone-fruit"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["almond", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -788,18 +527,9 @@
       "name": "Luxardo Amaretto",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "almond",
-          "stone-fruit"
-        ],
-        "secondary": [
-          "sweet",
-          "nutty"
-        ],
-        "tertiary": [
-          "vanilla",
-          "marzipan"
-        ]
+        "primary": ["almond", "stone-fruit"],
+        "secondary": ["sweet", "nutty"],
+        "tertiary": ["vanilla", "marzipan"]
       },
       "intensity": {
         "overall": 3,
@@ -815,18 +545,9 @@
       "name": "Napoleon Mandarin",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "mandarin",
-          "citrus"
-        ],
-        "secondary": [
-          "sweet",
-          "tart"
-        ],
-        "tertiary": [
-          "orange",
-          "floral"
-        ]
+        "primary": ["mandarin", "citrus"],
+        "secondary": ["sweet", "tart"],
+        "tertiary": ["orange", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -842,18 +563,9 @@
       "name": "Pama Pomegranate",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "pomegranate",
-          "fruity"
-        ],
-        "secondary": [
-          "sweet",
-          "tart"
-        ],
-        "tertiary": [
-          "berry",
-          "floral"
-        ]
+        "primary": ["pomegranate", "fruity"],
+        "secondary": ["sweet", "tart"],
+        "tertiary": ["berry", "floral"]
       },
       "intensity": {
         "overall": 4,
@@ -869,18 +581,9 @@
       "name": "Becherovka",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "spice"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "cinnamon",
-          "clove"
-        ]
+        "primary": ["herbal", "spice"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["cinnamon", "clove"]
       },
       "intensity": {
         "overall": 5,
@@ -896,18 +599,9 @@
       "name": "Benedictine",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "sweet"
-        ],
-        "secondary": [
-          "spice",
-          "citrus"
-        ],
-        "tertiary": [
-          "honey",
-          "vanilla"
-        ]
+        "primary": ["herbal", "sweet"],
+        "secondary": ["spice", "citrus"],
+        "tertiary": ["honey", "vanilla"]
       },
       "intensity": {
         "overall": 4,
@@ -923,18 +617,9 @@
       "name": "Botanika Angelica Elderflower",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "elderflower",
-          "floral"
-        ],
-        "secondary": [
-          "sweet",
-          "herbal"
-        ],
-        "tertiary": [
-          "angelica",
-          "delicate"
-        ]
+        "primary": ["elderflower", "floral"],
+        "secondary": ["sweet", "herbal"],
+        "tertiary": ["angelica", "delicate"]
       },
       "intensity": {
         "overall": 3,
@@ -950,18 +635,9 @@
       "name": "Chartreuse Cuvee",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "complex"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "spice",
-          "floral"
-        ]
+        "primary": ["herbal", "complex"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["spice", "floral"]
       },
       "intensity": {
         "overall": 6,
@@ -977,18 +653,9 @@
       "name": "Chartreuse Green",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "bitter"
-        ],
-        "secondary": [
-          "sweet",
-          "spice"
-        ],
-        "tertiary": [
-          "mint",
-          "floral"
-        ]
+        "primary": ["herbal", "bitter"],
+        "secondary": ["sweet", "spice"],
+        "tertiary": ["mint", "floral"]
       },
       "intensity": {
         "overall": 7,
@@ -1004,18 +671,9 @@
       "name": "Chartreuse VEP",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "complex"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "aged",
-          "spice"
-        ]
+        "primary": ["herbal", "complex"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["aged", "spice"]
       },
       "intensity": {
         "overall": 8,
@@ -1031,18 +689,9 @@
       "name": "Chartreuse Yellow",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "sweet"
-        ],
-        "secondary": [
-          "honey",
-          "spice"
-        ],
-        "tertiary": [
-          "floral",
-          "vanilla"
-        ]
+        "primary": ["herbal", "sweet"],
+        "secondary": ["honey", "spice"],
+        "tertiary": ["floral", "vanilla"]
       },
       "intensity": {
         "overall": 5,
@@ -1058,18 +707,9 @@
       "name": "Dolin Genepy",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "herbal",
-          "alpine"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "floral",
-          "mint"
-        ]
+        "primary": ["herbal", "alpine"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["floral", "mint"]
       },
       "intensity": {
         "overall": 4,
@@ -1085,18 +725,9 @@
       "name": "Frangelico",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "hazelnut",
-          "sweet"
-        ],
-        "secondary": [
-          "vanilla",
-          "nutty"
-        ],
-        "tertiary": [
-          "chocolate",
-          "caramel"
-        ]
+        "primary": ["hazelnut", "sweet"],
+        "secondary": ["vanilla", "nutty"],
+        "tertiary": ["chocolate", "caramel"]
       },
       "intensity": {
         "overall": 3,
@@ -1112,18 +743,9 @@
       "name": "Giffard Mint",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "mint",
-          "fresh"
-        ],
-        "secondary": [
-          "sweet",
-          "herbal"
-        ],
-        "tertiary": [
-          "cooling",
-          "floral"
-        ]
+        "primary": ["mint", "fresh"],
+        "secondary": ["sweet", "herbal"],
+        "tertiary": ["cooling", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -1139,18 +761,9 @@
       "name": "Giffard Vanille",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "vanilla",
-          "sweet"
-        ],
-        "secondary": [
-          "creamy",
-          "smooth"
-        ],
-        "tertiary": [
-          "caramel",
-          "floral"
-        ]
+        "primary": ["vanilla", "sweet"],
+        "secondary": ["creamy", "smooth"],
+        "tertiary": ["caramel", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -1166,18 +779,9 @@
       "name": "St. Germain Elderflower",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "elderflower",
-          "floral"
-        ],
-        "secondary": [
-          "sweet",
-          "delicate"
-        ],
-        "tertiary": [
-          "pear",
-          "citrus"
-        ]
+        "primary": ["elderflower", "floral"],
+        "secondary": ["sweet", "delicate"],
+        "tertiary": ["pear", "citrus"]
       },
       "intensity": {
         "overall": 3,
@@ -1193,18 +797,9 @@
       "name": "Tempus Fuget Crème De Menthe",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "mint",
-          "fresh"
-        ],
-        "secondary": [
-          "sweet",
-          "cooling"
-        ],
-        "tertiary": [
-          "herbal",
-          "floral"
-        ]
+        "primary": ["mint", "fresh"],
+        "secondary": ["sweet", "cooling"],
+        "tertiary": ["herbal", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -1220,18 +815,9 @@
       "name": "Zirbenz Alpine Liqueur",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "pine",
-          "alpine"
-        ],
-        "secondary": [
-          "sweet",
-          "herbal"
-        ],
-        "tertiary": [
-          "floral",
-          "mountain"
-        ]
+        "primary": ["pine", "alpine"],
+        "secondary": ["sweet", "herbal"],
+        "tertiary": ["floral", "mountain"]
       },
       "intensity": {
         "overall": 4,
@@ -1247,18 +833,9 @@
       "name": "Bailey's Chocolate",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "chocolate",
-          "creamy"
-        ],
-        "secondary": [
-          "sweet",
-          "smooth"
-        ],
-        "tertiary": [
-          "vanilla",
-          "caramel"
-        ]
+        "primary": ["chocolate", "creamy"],
+        "secondary": ["sweet", "smooth"],
+        "tertiary": ["vanilla", "caramel"]
       },
       "intensity": {
         "overall": 3,
@@ -1274,18 +851,9 @@
       "name": "Borghetti Coffee Liqueur",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "coffee",
-          "bitter"
-        ],
-        "secondary": [
-          "sweet",
-          "roasted"
-        ],
-        "tertiary": [
-          "vanilla",
-          "caramel"
-        ]
+        "primary": ["coffee", "bitter"],
+        "secondary": ["sweet", "roasted"],
+        "tertiary": ["vanilla", "caramel"]
       },
       "intensity": {
         "overall": 4,
@@ -1301,18 +869,9 @@
       "name": "Giffard Crème de Cacao",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "chocolate",
-          "sweet"
-        ],
-        "secondary": [
-          "vanilla",
-          "creamy"
-        ],
-        "tertiary": [
-          "cocoa",
-          "smooth"
-        ]
+        "primary": ["chocolate", "sweet"],
+        "secondary": ["vanilla", "creamy"],
+        "tertiary": ["cocoa", "smooth"]
       },
       "intensity": {
         "overall": 3,
@@ -1328,18 +887,9 @@
       "name": "Cointreau",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "orange",
-          "citrus"
-        ],
-        "secondary": [
-          "sweet",
-          "bitter"
-        ],
-        "tertiary": [
-          "peel",
-          "floral"
-        ]
+        "primary": ["orange", "citrus"],
+        "secondary": ["sweet", "bitter"],
+        "tertiary": ["peel", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -1355,18 +905,9 @@
       "name": "Grand Marnier",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "orange",
-          "cognac"
-        ],
-        "secondary": [
-          "sweet",
-          "smooth"
-        ],
-        "tertiary": [
-          "vanilla",
-          "caramel"
-        ]
+        "primary": ["orange", "cognac"],
+        "secondary": ["sweet", "smooth"],
+        "tertiary": ["vanilla", "caramel"]
       },
       "intensity": {
         "overall": 4,
@@ -1382,18 +923,9 @@
       "name": "Licor 43",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "vanilla",
-          "sweet"
-        ],
-        "secondary": [
-          "citrus",
-          "spice"
-        ],
-        "tertiary": [
-          "caramel",
-          "floral"
-        ]
+        "primary": ["vanilla", "sweet"],
+        "secondary": ["citrus", "spice"],
+        "tertiary": ["caramel", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -1409,18 +941,9 @@
       "name": "Midori",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "melon",
-          "sweet"
-        ],
-        "secondary": [
-          "fruity",
-          "fresh"
-        ],
-        "tertiary": [
-          "citrus",
-          "floral"
-        ]
+        "primary": ["melon", "sweet"],
+        "secondary": ["fruity", "fresh"],
+        "tertiary": ["citrus", "floral"]
       },
       "intensity": {
         "overall": 3,
@@ -1436,18 +959,9 @@
       "name": "Rose Liqueur",
       "category": "liqueur",
       "flavor_profile": {
-        "primary": [
-          "rose",
-          "floral"
-        ],
-        "secondary": [
-          "sweet",
-          "delicate"
-        ],
-        "tertiary": [
-          "perfume",
-          "elegant"
-        ]
+        "primary": ["rose", "floral"],
+        "secondary": ["sweet", "delicate"],
+        "tertiary": ["perfume", "elegant"]
       },
       "intensity": {
         "overall": 3,
