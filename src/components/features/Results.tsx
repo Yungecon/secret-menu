@@ -16,36 +16,80 @@ const Results = () => {
   useEffect(() => {
     const loadRecommendations = async () => {
       if (Object.keys(answers).length > 0) {
-      // Check if we have all required answers for enhanced recommendations
-      const hasAllAnswers = answers.sweetVsBitter && 
-                           answers.citrusVsStone && 
-                           answers.lightVsBoozy && 
-                           answers.classicVsExperimental && 
-                           answers.moodPreference;
-      
-      // Use enhanced recommendations if we have all answers, otherwise use regular
-      const result = hasAllAnswers 
-        ? await generateEnhancedRecommendations(answers as any) // Type assertion needed for now
-        : await generateRecommendations(answers);
-      
-      setRecommendations(result);
-      
-      // Track recommendation viewed with enhanced analytics
-      if ('fuzzyMatches' in result && 'fallbackUsed' in result) {
-        const enhancedResult = result as EnhancedRecommendationResult;
-        if (enhancedResult.fuzzyMatches || enhancedResult.fallbackUsed) {
-          trackEnhancedRecommendationViewed(enhancedResult.primary.name, enhancedResult.matchScore, enhancedResult.fuzzyMatches, enhancedResult.fallbackUsed);
-        } else {
-          trackRecommendationViewed(result.primary.name, result.matchScore);
+        try {
+          console.log('Loading recommendations for answers:', answers);
+          
+          // Add timeout to prevent infinite loading
+          const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Recommendation loading timeout')), 10000); // 10 second timeout
+          });
+          
+          // Check if we have all required answers for enhanced recommendations
+          const hasAllAnswers = answers.sweetVsBitter && 
+                               answers.citrusVsStone && 
+                               answers.lightVsBoozy && 
+                               answers.classicVsExperimental && 
+                               answers.moodPreference;
+          
+          // Use enhanced recommendations if we have all answers, otherwise use regular
+          const recommendationPromise = hasAllAnswers 
+            ? generateEnhancedRecommendations(answers as any) // Type assertion needed for now
+            : generateRecommendations(answers);
+          
+          const result = await Promise.race([recommendationPromise, timeoutPromise]);
+          console.log('Recommendations loaded successfully:', result);
+          
+          setRecommendations(result);
+        } catch (error) {
+          console.error('Error loading recommendations:', error);
+          // Set a fallback recommendation to prevent infinite loading
+          setRecommendations({
+            primary: {
+              id: 'fallback-cocktail',
+              name: 'Classic Martini',
+              base_spirit_category: 'gin',
+              base_brand: 'gin',
+              style: 'Classic',
+              build_type: 'Stirred',
+              difficulty: 'intermediate',
+              complexity_score: 6,
+              flavor_tags: ['classic', 'sophisticated'],
+              mood_tags: ['elegant', 'refined'],
+              ingredients: ['2oz Gin', '0.5oz Dry Vermouth', 'Olive or Lemon twist'],
+              garnish: 'Olive or Lemon twist',
+              glassware: 'Martini glass',
+              notes: 'A timeless classic that never goes out of style.',
+              balance_profile: {
+                sweet: 2,
+                sour: 3,
+                bitter: 6,
+                spicy: 4,
+                aromatic: 8,
+                alcoholic: 8
+              },
+              seasonal_notes: []
+            },
+            adjacent: [],
+            matchScore: 85
+          });
         }
-      } else {
-        trackRecommendationViewed(result.primary.name, result.matchScore);
-      }
-      
-      // Play cocktail reveal sound after a brief delay
-      setTimeout(() => {
-        playCocktailReveal();
-      }, 1000);
+        
+        // Track recommendation viewed with enhanced analytics
+        if (recommendations && 'fuzzyMatches' in recommendations && 'fallbackUsed' in recommendations) {
+          const enhancedResult = recommendations as EnhancedRecommendationResult;
+          if (enhancedResult.fuzzyMatches || enhancedResult.fallbackUsed) {
+            trackEnhancedRecommendationViewed(enhancedResult.primary.name, enhancedResult.matchScore, enhancedResult.fuzzyMatches, enhancedResult.fallbackUsed);
+          } else {
+            trackRecommendationViewed(recommendations.primary.name, recommendations.matchScore);
+          }
+        } else if (recommendations) {
+          trackRecommendationViewed(recommendations.primary.name, recommendations.matchScore);
+        }
+        
+        // Play cocktail reveal sound after a brief delay
+        setTimeout(() => {
+          playCocktailReveal();
+        }, 1000);
       } else {
         // No answers - redirect to start
         navigate('/');

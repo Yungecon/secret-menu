@@ -41,33 +41,47 @@ export const getRandomCocktail = async (): Promise<Cocktail | null> => {
 const loadCocktailData = async () => {
   // Always reload data to ensure we get the latest sophisticated names
   try {
+    console.log('Loading cocktail data from:', DATA_PATHS.SOPHISTICATED_COCKTAIL_LIBRARY);
     const response = await fetch(DATA_PATHS.SOPHISTICATED_COCKTAIL_LIBRARY);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch cocktail data: ${response.status} ${response.statusText}`);
+    }
+    
     const data = await response.json();
-    cocktailData = data.cocktails.map((cocktail: any) => ({
-      id: cocktail.id,
-      name: cocktail.name,
-      base_spirit_category: cocktail.base_spirit,
-      base_brand: cocktail.base_spirit,
-      style: cocktail.style || (cocktail.flavor_profile?.smoky ? 'Smoky' : cocktail.flavor_profile?.floral ? 'Floral' : 'Classic'),
-      build_type: cocktail.build_type || 'Shaken',
-      difficulty: cocktail.difficulty || 'intermediate',
-      complexity_score: cocktail.difficulty === 'easy' ? 3 : cocktail.difficulty === 'intermediate' ? 6 : 8,
-      flavor_tags: Object.keys(cocktail.flavor_profile || {}),
-      mood_tags: ['sophisticated', 'refined'],
-      ingredients: cocktail.ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
-      garnish: cocktail.garnish?.join(', ') || 'Lemon twist',
-      glassware: cocktail.glassware,
-      notes: cocktail.description,
-      balance_profile: {
-        sweet: cocktail.flavor_profile?.sweet || 5,
-        sour: cocktail.flavor_profile?.citrus || 5,
-        bitter: cocktail.flavor_profile?.bitter || 3,
-        spicy: cocktail.flavor_profile?.spicy || 4,
-        aromatic: cocktail.flavor_profile?.floral || 6,
-        alcoholic: cocktail.flavor_profile?.complex || 7
-      },
-      seasonal_notes: cocktail.seasonal_notes || []
-    }));
+    console.log('Loaded cocktail data:', data.cocktails?.length || 0, 'cocktails');
+    
+    cocktailData = data.cocktails.map((cocktail: any) => {
+      console.log('Processing cocktail:', cocktail.id, cocktail.name);
+      return {
+        id: cocktail.id,
+        name: cocktail.name,
+        base_spirit_category: cocktail.base_spirit,
+        base_brand: cocktail.base_spirit,
+        style: cocktail.style || (cocktail.flavor_profile?.smoky ? 'Smoky' : cocktail.flavor_profile?.floral ? 'Floral' : 'Classic'),
+        build_type: cocktail.build_type || 'Shaken',
+        difficulty: cocktail.difficulty || 'intermediate',
+        complexity_score: cocktail.difficulty === 'easy' ? 3 : cocktail.difficulty === 'intermediate' ? 6 : 8,
+        flavor_tags: Object.keys(cocktail.flavor_profile || {}),
+        mood_tags: ['sophisticated', 'refined'],
+        ingredients: cocktail.ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
+        garnish: cocktail.garnish?.join(', ') || 'Lemon twist',
+        glassware: cocktail.glassware,
+        notes: cocktail.description,
+        balance_profile: {
+          sweet: cocktail.flavor_profile?.sweet || 5,
+          sour: cocktail.flavor_profile?.citrus || 5,
+          bitter: cocktail.flavor_profile?.bitter || 3,
+          spicy: cocktail.flavor_profile?.spicy || 4,
+          aromatic: cocktail.flavor_profile?.floral || 6,
+          alcoholic: cocktail.flavor_profile?.complex || 7
+        },
+        seasonal_notes: cocktail.seasonal_notes || [],
+        // Add enhanced fields for better matching
+        comprehensive_tags: cocktail.tags || [],
+        enhanced_flavor_profile: cocktail.flavor_profile || {}
+      };
+    });
   } catch (error) {
     console.error('Error loading sophisticated cocktail library:', error);
     throw new Error('Failed to load cocktail data. Please refresh the page.');
@@ -309,19 +323,49 @@ const performFuzzyMatching = (cocktail: Cocktail, answers: EnhancedQuizAnswers):
 };
 
 export const generateRecommendations = async (answers: QuizAnswers): Promise<RecommendationResult> => {
-  const cocktails = await loadCocktailData();
+  console.log('Starting generateRecommendations with answers:', answers);
   
+  try {
+    const cocktails = await loadCocktailData();
+    console.log('Loaded cocktails for recommendations:', cocktails.length);
+    
+    // TEMPORARY: Return a simple result to test if the issue is in the complex logic
+    if (cocktails.length > 0) {
+      const randomCocktail = cocktails[Math.floor(Math.random() * Math.min(10, cocktails.length))];
+      console.log('Returning simple result with:', randomCocktail.name);
+      
+      return {
+        primary: randomCocktail,
+        adjacent: cocktails.slice(0, 3).filter(c => c.id !== randomCocktail.id),
+        matchScore: 92
+      };
+    }
+    
+    throw new Error('No cocktails available');
+  } catch (error) {
+    console.error('Error in generateRecommendations:', error);
+    throw error;
+  }
+  
+  // COMMENTED OUT COMPLEX LOGIC FOR NOW
+  /*
   // Filter out recently shown cocktails for more variety
   const availableCocktails = filterRecentlyShown(cocktails);
+  console.log('Available cocktails after filtering:', availableCocktails.length);
   
   // If we've shown too many recently, reset the list to allow some repetition
   const cocktailsToUse = availableCocktails.length > 10 ? availableCocktails : cocktails;
+  console.log('Using cocktails:', cocktailsToUse.length);
   
   // Add randomization seed based on timestamp and answers to ensure variety
   // const randomizationSeed = Date.now() + JSON.stringify(answers).length;
   
   // Score each cocktail based on quiz answers with enhanced fuzzy matching
-  const scoredCocktails = cocktailsToUse.map(cocktail => {
+  console.log('Starting to score cocktails...');
+  const scoredCocktails = cocktailsToUse.map((cocktail, index) => {
+    if (index % 50 === 0) {
+      console.log(`Scoring cocktail ${index + 1}/${cocktailsToUse.length}:`, cocktail.name);
+    }
     let score = 75; // Start with a high base score for magical feeling
     let matchingFactors = 0;
     
@@ -565,6 +609,8 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     return { cocktail, score, matchingFactors };
   });
   
+  console.log('Finished scoring cocktails, starting sort...');
+  
   // Enhanced sorting with randomization for variety
   const sortedCocktails = scoredCocktails.sort((a, b) => {
     // Primary sort by score
@@ -583,15 +629,22 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     return randomB - randomA;
   });
   
+  console.log('Sorting complete, selecting recommendations...');
+  
   // Get primary recommendation with additional randomization for top candidates
   const topCandidates = sortedCocktails.slice(0, Math.min(5, sortedCocktails.length));
+  console.log('Top candidates:', topCandidates.length);
+  
   const primary = topCandidates[Math.floor(Math.random() * topCandidates.length)].cocktail;
+  console.log('Selected primary:', primary.name);
   
   // Track the primary recommendation to avoid repetition
   addToRecentlyShown(primary);
   
   // Get diverse adjacent recommendations with improved algorithm
+  console.log('Getting adjacent recommendations...');
   const adjacent = getDiverseRecommendations(sortedCocktails.slice(1), primary, 8);
+  console.log('Got adjacent recommendations:', adjacent.length);
   
   // Track adjacent recommendations too
   adjacent.forEach(cocktail => addToRecentlyShown(cocktail));
@@ -599,11 +652,14 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
   // Ensure the match score feels magical (90-98%)
   const finalScore = Math.min(98, Math.max(90, sortedCocktails[0].score));
   
+  console.log('Recommendation generation complete, returning result...');
+  
   return {
     primary,
     adjacent,
     matchScore: finalScore
   };
+  */
 };
 
 // Enhanced recommendation engine with fuzzy matching metadata
