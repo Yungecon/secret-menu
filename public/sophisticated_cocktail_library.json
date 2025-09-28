@@ -1167,7 +1167,7 @@
     },
     {
       "id": "cocktail-14",
-      "name": "Autumn's Crown",
+      "name": "Summer's Autumn's Crown",
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Sake and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
@@ -7594,7 +7594,7 @@
     },
     {
       "id": "cocktail-84",
-      "name": "The Ancient Nectar",
+      "name": "Summer's Ancient Nectar",
       "description": "A sophisticated rum cocktail that showcases the complex interplay between Chambord and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "rum",
       "modifying_liqueurs": [
@@ -10149,7 +10149,7 @@
     },
     {
       "id": "cocktail-112",
-      "name": "The Harvest Bridge",
+      "name": "Summer's Harvest Bridge",
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Chambord and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
@@ -12075,7 +12075,7 @@
     },
     {
       "id": "cocktail-133",
-      "name": "The Air Mystery",
+      "name": "Summer's Air Mystery",
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
@@ -13470,7 +13470,7 @@
     },
     {
       "id": "cocktail-148",
-      "name": "The Medieval Quest",
+      "name": "Summer's Medieval Quest",
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
@@ -13646,7 +13646,7 @@
     },
     {
       "id": "cocktail-150",
-      "name": "The Prophet's Gateway",
+      "name": "Summer's Prophet's Gateway",
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Midori and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
@@ -14012,7 +14012,7 @@
     },
     {
       "id": "cocktail-154",
-      "name": "The Air Ambrosia",
+      "name": "Summer's Air Ambrosia",
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Hibiscus Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
@@ -15469,7 +15469,7 @@
     },
     {
       "id": "cocktail-170",
-      "name": "The Venetian Renaissance",
+      "name": "Summer's Venetian Renaissance",
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Coconut Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
@@ -15928,7 +15928,7 @@
     },
     {
       "id": "cocktail-175",
-      "name": "The Cosmos Elixir",
+      "name": "Summer's Cosmos Elixir",
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Campari and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
@@ -16920,7 +16920,7 @@
     },
     {
       "id": "cocktail-186",
-      "name": "The Lightning Potion",
+      "name": "Summer's Lightning Potion",
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Aperol and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
@@ -20722,7 +20722,7 @@
     },
     {
       "id": "cocktail-228",
-      "name": "Summer's Scepter",
+      "name": "Summer's Summer's Scepter",
       "description": "A sophisticated pisco cocktail that showcases the complex interplay between Rose Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "pisco",
       "modifying_liqueurs": [
@@ -22105,7 +22105,7 @@
     },
     {
       "id": "cocktail-243",
-      "name": "The Earth Jewel",
+      "name": "Summer's Earth Jewel",
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
@@ -22661,7 +22661,7 @@
     },
     {
       "id": "cocktail-249",
-      "name": "The Serenade Renaissance",
+      "name": "Summer's Serenade Renaissance",
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
@@ -23603,7 +23603,7 @@
     },
     {
       "id": "cocktail-259",
-      "name": "The Classic Essence",
+      "name": "Summer's Classic Essence",
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
@@ -23695,7 +23695,7 @@
     },
     {
       "id": "cocktail-260",
-      "name": "The Thunder Vision",
+      "name": "Summer's Thunder Vision",
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
@@ -24144,7 +24144,7 @@
     },
     {
       "id": "cocktail-265",
-      "name": "The Aurora's Scepter",
+      "name": "Summer's Aurora's Scepter",
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
@@ -24845,7 +24845,7 @@
     },
     {
       "id": "cocktail-273",
-      "name": "The Victorian Renaissance",
+      "name": "Summer's Victorian Renaissance",
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Chartreuse and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
@@ -27351,7 +27351,7 @@
     },
     {
       "id": "cocktail-300",
-      "name": "The London Essence",
+      "name": "Summer's London Essence",
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Campari and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
