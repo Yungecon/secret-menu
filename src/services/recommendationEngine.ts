@@ -131,27 +131,78 @@ const hasMediumIntensityIngredients = (cocktail: Cocktail): boolean => {
          cocktail.flavor_tags.some(tag => ['medium', 'versatile', 'balanced'].includes(tag));
 };
 
-// Enhanced diversity algorithm with better randomization and novelty
+// Enhanced diversity algorithm with spirit variety and liqueur diversity
 const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, maxCount: number): Cocktail[] => {
   const selected: Cocktail[] = [];
   const usedSpirits = new Set([primary.base_spirit_category]);
   const usedStyles = new Set([primary.style]);
   const usedBuildTypes = new Set([primary.build_type]);
   const usedCocktailIds = new Set([primary.id]);
+  const usedLiqueurs = new Set();
   
-  // Enhanced randomization: shuffle multiple times and add timestamp-based seed
+  // Extract liqueurs from primary cocktail for diversity tracking
+  const primaryLiqueurs = primary.ingredients.filter((ing: string) => 
+    ing.toLowerCase().includes('liqueur') || 
+    ing.toLowerCase().includes('amaro') ||
+    ing.toLowerCase().includes('chartreuse') ||
+    ing.toLowerCase().includes('st-germain') ||
+    ing.toLowerCase().includes('campari') ||
+    ing.toLowerCase().includes('aperol')
+  );
+  primaryLiqueurs.forEach((liqueur: string) => usedLiqueurs.add(liqueur.toLowerCase()));
+  
+  // Enhanced randomization with spirit diversity weighting
   const timestamp = Date.now();
   const shuffledCocktails = [...scoredCocktails].sort((a, b) => {
-    // Multiple randomization factors for better distribution
-    const randomA = Math.random() + (a.score / 100) + (timestamp % 1000) / 1000;
-    const randomB = Math.random() + (b.score / 100) + (timestamp % 1000) / 1000;
+    // Boost score for diverse spirits and liqueurs
+    let diversityBoostA = 0;
+    let diversityBoostB = 0;
+    
+    const spiritA = a.cocktail.base_spirit_category;
+    const spiritB = b.cocktail.base_spirit_category;
+    
+    // Prioritize underrepresented spirits
+    if (!usedSpirits.has(spiritA)) diversityBoostA += 15;
+    if (!usedSpirits.has(spiritB)) diversityBoostB += 15;
+    
+    // Prioritize premium/unique spirits
+    const premiumSpirits = ['pisco', 'cognac', 'armagnac', 'aquavit', 'shochu', 'mezcal'];
+    if (premiumSpirits.includes(spiritA.toLowerCase())) diversityBoostA += 10;
+    if (premiumSpirits.includes(spiritB.toLowerCase())) diversityBoostB += 10;
+    
+    // Check for diverse liqueurs
+    const liqueursA = a.cocktail.ingredients.filter((ing: string) => 
+      ing.toLowerCase().includes('liqueur') || 
+      ing.toLowerCase().includes('amaro') ||
+      ing.toLowerCase().includes('chartreuse') ||
+      ing.toLowerCase().includes('st-germain') ||
+      ing.toLowerCase().includes('campari') ||
+      ing.toLowerCase().includes('aperol')
+    );
+    const liqueursB = b.cocktail.ingredients.filter((ing: string) => 
+      ing.toLowerCase().includes('liqueur') || 
+      ing.toLowerCase().includes('amaro') ||
+      ing.toLowerCase().includes('chartreuse') ||
+      ing.toLowerCase().includes('st-germain') ||
+      ing.toLowerCase().includes('campari') ||
+      ing.toLowerCase().includes('aperol')
+    );
+    
+    const newLiqueursA = liqueursA.filter((l: string) => !usedLiqueurs.has(l.toLowerCase())).length;
+    const newLiqueursB = liqueursB.filter((l: string) => !usedLiqueurs.has(l.toLowerCase())).length;
+    
+    diversityBoostA += newLiqueursA * 5;
+    diversityBoostB += newLiqueursB * 5;
+    
+    const randomA = Math.random() + (a.score + diversityBoostA) / 100 + (timestamp % 1000) / 1000;
+    const randomB = Math.random() + (b.score + diversityBoostB) / 100 + (timestamp % 1000) / 1000;
     return randomB - randomA;
   });
   
   // First pass: Select cocktails with different spirits, styles, or build types
   for (const item of shuffledCocktails) {
     if (selected.length >= maxCount) break;
-    if (item.score < 70) continue; // Lowered threshold for more variety
+    if (item.score < 65) continue; // Lowered threshold for more variety
     
     const cocktail = item.cocktail;
     const hasDifferentSpirit = !usedSpirits.has(cocktail.base_spirit_category);
@@ -159,13 +210,25 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     const hasDifferentBuildType = !usedBuildTypes.has(cocktail.build_type);
     const isNotDuplicate = !usedCocktailIds.has(cocktail.id);
     
+    // Check for liqueur diversity
+    const cocktailLiqueurs = cocktail.ingredients.filter((ing: string) => 
+      ing.toLowerCase().includes('liqueur') || 
+      ing.toLowerCase().includes('amaro') ||
+      ing.toLowerCase().includes('chartreuse') ||
+      ing.toLowerCase().includes('st-germain') ||
+      ing.toLowerCase().includes('campari') ||
+      ing.toLowerCase().includes('aperol')
+    );
+    const hasNewLiqueurs = cocktailLiqueurs.some((l: string) => !usedLiqueurs.has(l.toLowerCase()));
+    
     // Select if it differs in at least one major category and isn't a duplicate
-    if (isNotDuplicate && (hasDifferentSpirit || hasDifferentStyle || hasDifferentBuildType)) {
+    if (isNotDuplicate && (hasDifferentSpirit || hasDifferentStyle || hasDifferentBuildType || hasNewLiqueurs)) {
       selected.push(cocktail);
       usedSpirits.add(cocktail.base_spirit_category);
       usedStyles.add(cocktail.style);
       usedBuildTypes.add(cocktail.build_type);
       usedCocktailIds.add(cocktail.id);
+      cocktailLiqueurs.forEach((liqueur: string) => usedLiqueurs.add(liqueur.toLowerCase()));
     }
   }
   
@@ -173,7 +236,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   if (selected.length < maxCount) {
     for (const item of shuffledCocktails) {
       if (selected.length >= maxCount) break;
-      if (item.score < 75) continue; // Lowered threshold
+      if (item.score < 70) continue; // Lowered threshold
       
       const cocktail = item.cocktail;
       if (!usedCocktailIds.has(cocktail.id)) {
@@ -187,7 +250,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   if (selected.length < maxCount) {
     for (const item of shuffledCocktails) {
       if (selected.length >= maxCount) break;
-      if (item.score < 60) continue; // Even lower threshold for maximum variety
+      if (item.score < 55) continue; // Even lower threshold for maximum variety
       
       const cocktail = item.cocktail;
       if (!usedCocktailIds.has(cocktail.id)) {

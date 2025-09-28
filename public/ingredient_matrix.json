@@ -278,6 +278,130 @@
             "upsell_potential": "very-high"
           }
         ]
+      },
+      "pisco": {
+        "category": "base_spirit",
+        "subcategories": ["acholado", "quebranta", "italia"],
+        "ingredients": [
+          {
+            "id": "barsol-pisco",
+            "name": "Barsol Pisco",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["grape", "floral", "smooth", "complex"],
+            "best_for": ["pisco-sour", "chilcano", "pisco-cocktails", "neat"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "macchu-pisco",
+            "name": "Macchu Pisco",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["grape", "citrus", "clean", "bright"],
+            "best_for": ["pisco-sour", "chilcano", "citrus-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "cognac": {
+        "category": "base_spirit",
+        "subcategories": ["vs", "vsop", "xo"],
+        "ingredients": [
+          {
+            "id": "hennessy-vsop",
+            "name": "Hennessy VSOP",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["vanilla", "oak", "spice", "smooth"],
+            "best_for": ["sidecar", "brandy-cocktails", "vieux-carre", "neat"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "courvoisier-vsop",
+            "name": "Courvoisier VSOP",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["fruity", "oak", "smooth", "elegant"],
+            "best_for": ["sidecar", "brandy-cocktails", "champagne-cocktail", "neat"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "armagnac": {
+        "category": "base_spirit",
+        "subcategories": ["vs", "vsop", "xo"],
+        "ingredients": [
+          {
+            "id": "chateau-de-laubade-armagnac",
+            "name": "Château de Laubade Armagnac",
+            "tier": "premium",
+            "price_point": "very-high",
+            "flavor_profile": ["prune", "oak", "spice", "complex"],
+            "best_for": ["armagnac-cocktails", "vieux-carre", "neat", "digestif"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "very-high"
+          }
+        ]
+      },
+      "brandy": {
+        "category": "base_spirit",
+        "subcategories": ["american", "french", "spanish"],
+        "ingredients": [
+          {
+            "id": "e-and-j-brandy",
+            "name": "E&J Brandy",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["smooth", "fruity", "vanilla", "accessible"],
+            "best_for": ["brandy-cocktails", "sidecar", "brandy-old-fashioned"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "aquavit": {
+        "category": "base_spirit",
+        "subcategories": ["danish", "norwegian", "swedish"],
+        "ingredients": [
+          {
+            "id": "aalborg-aquavit",
+            "name": "Aalborg Aquavit",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["caraway", "dill", "spice", "herbal"],
+            "best_for": ["aquavit-cocktails", "scandinavian-cocktails", "neat"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "shochu": {
+        "category": "base_spirit",
+        "subcategories": ["sweet-potato", "barley", "rice"],
+        "ingredients": [
+          {
+            "id": "iichiko-shochu",
+            "name": "Iichiko Shochu",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["clean", "smooth", "subtle", "refined"],
+            "best_for": ["shochu-cocktails", "japanese-cocktails", "highball", "neat"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "medium"
+          }
+        ]
       }
     },
     "liqueurs": {
@@ -350,7 +474,7 @@
       },
       "floral": {
         "category": "modifier",
-        "subcategories": ["elderflower", "rose", "violet"],
+        "subcategories": ["elderflower", "rose", "violet", "hibiscus"],
         "ingredients": [
           {
             "id": "st-germain",
@@ -373,6 +497,145 @@
             "seasonal": false,
             "inventory_priority": "low",
             "upsell_potential": "very-high"
+          },
+          {
+            "id": "rose-liqueur",
+            "name": "Rose Liqueur",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["rose", "floral", "sweet", "delicate", "romantic"],
+            "best_for": ["rose-cocktails", "champagne-cocktail", "gin-cocktails", "floral-martini"],
+            "seasonal": true,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "hibiscus-liqueur",
+            "name": "Hibiscus Liqueur",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["hibiscus", "tart", "floral", "citrus", "tropical"],
+            "best_for": ["tropical-cocktails", "tequila-cocktails", "spritz", "summer-drinks"],
+            "seasonal": true,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "fruit": {
+        "category": "modifier",
+        "subcategories": ["passion-fruit", "coconut", "orange", "cherry"],
+        "ingredients": [
+          {
+            "id": "passion-fruit-liqueur",
+            "name": "Passion Fruit Liqueur",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["passion-fruit", "tropical", "sweet", "tart", "exotic"],
+            "best_for": ["tropical-cocktails", "rum-cocktails", "tiki-drinks", "summer-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "coconut-liqueur",
+            "name": "Coconut Liqueur",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["coconut", "tropical", "sweet", "creamy", "exotic"],
+            "best_for": ["tropical-cocktails", "rum-cocktails", "tiki-drinks", "pina-colada"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "triple-sec",
+            "name": "Triple Sec",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["orange", "citrus", "sweet", "bright"],
+            "best_for": ["margarita", "cosmopolitan", "sidecar", "citrus-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "high",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "cherry-heering",
+            "name": "Cherry Heering",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["cherry", "sweet", "dark", "rich", "complex"],
+            "best_for": ["blood-and-sand", "cherry-cocktails", "manhattan-variations", "dessert-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          }
+        ]
+      },
+      "herbal": {
+        "category": "modifier",
+        "subcategories": ["chartreuse", "benedictine", "fernet"],
+        "ingredients": [
+          {
+            "id": "chartreuse-yellow",
+            "name": "Chartreuse Yellow",
+            "tier": "premium",
+            "price_point": "very-high",
+            "flavor_profile": ["herbal", "sweet", "spicy", "aromatic", "complex"],
+            "best_for": ["last-word", "industry-sour", "chartreuse-cocktails", "neat"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "very-high"
+          },
+          {
+            "id": "benedictine",
+            "name": "Benedictine",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["herbal", "sweet", "spicy", "aromatic", "medicinal"],
+            "best_for": ["vieux-carre", "benedictine-cocktails", "manhattan-variations", "brandy-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "high"
+          },
+          {
+            "id": "fernet-branca",
+            "name": "Fernet Branca",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["bitter", "herbal", "minty", "medicinal", "complex"],
+            "best_for": ["fernet-and-coke", "industry-sour", "neat", "digestif"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "medium"
+          }
+        ]
+      },
+      "nut": {
+        "category": "modifier",
+        "subcategories": ["amaretto", "frangelico", "nocello"],
+        "ingredients": [
+          {
+            "id": "amaretto",
+            "name": "Amaretto",
+            "tier": "premium",
+            "price_point": "medium",
+            "flavor_profile": ["almond", "sweet", "nutty", "marzipan"],
+            "best_for": ["amaretto-sour", "godfather", "dessert-cocktails", "coffee-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "medium",
+            "upsell_potential": "medium"
+          },
+          {
+            "id": "frangelico",
+            "name": "Frangelico",
+            "tier": "premium",
+            "price_point": "high",
+            "flavor_profile": ["hazelnut", "sweet", "nutty", "vanilla"],
+            "best_for": ["frangelico-sour", "dessert-cocktails", "coffee-cocktails", "nut-cocktails"],
+            "seasonal": false,
+            "inventory_priority": "low",
+            "upsell_potential": "high"
           }
         ]
       }
@@ -432,7 +695,13 @@
       "tequila": ["don-julio-blanco", "patron-silver", "fortaleza-blanco"],
       "whiskey": ["woodford-reserve-bourbon", "buffalo-trace-bourbon", "rittenhouse-rye"],
       "rum": ["el-dorado-12-year", "smith-cross-rum"],
-      "mezcal": ["vida-mezcal", "del-maguey-chichicapa"]
+      "mezcal": ["vida-mezcal", "del-maguey-chichicapa"],
+      "pisco": ["barsol-pisco", "macchu-pisco"],
+      "cognac": ["hennessy-vsop", "courvoisier-vsop"],
+      "armagnac": ["chateau-de-laubade-armagnac"],
+      "brandy": ["e-and-j-brandy"],
+      "aquavit": ["aalborg-aquavit"],
+      "shochu": ["iichiko-shochu"]
     },
     "by_price_point": {
       "budget": ["titos-vodka", "beefeater-gin"],
