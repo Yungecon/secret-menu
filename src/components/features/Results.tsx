@@ -120,9 +120,16 @@ const Results = () => {
               ingredients: primary.ingredients,
               garnish: primary.garnish,
               glassware: primary.glassware,
-              matchScore: recommendations.matchScore
+              matchScore: recommendations.matchScore,
+              build_type: primary.build_type,
+              difficulty: (primary as any).difficulty || 'intermediate',
+              complexity_score: (primary as any).complexity_score || 5,
+              balance_profile: (primary as any).balance_profile || { sweet: 5, sour: 5, bitter: 3, spicy: 4, aromatic: 6, alcoholic: 7 },
+              seasonal_notes: (primary as any).seasonal_notes || []
             }}
             showMatchScore={true}
+            showFlavorProfile={true}
+            showDifficulty={true}
             className="max-w-2xl mx-auto"
           />
         </div>
@@ -143,9 +150,16 @@ const Results = () => {
                     ingredients: cocktail.ingredients,
                     garnish: cocktail.garnish,
                     glassware: cocktail.glassware,
-                    matchScore: 85 // Default match score for adjacent cocktails
+                    matchScore: 85, // Default match score for adjacent cocktails
+                    build_type: cocktail.build_type,
+                    difficulty: (cocktail as any).difficulty || 'intermediate',
+                    complexity_score: (cocktail as any).complexity_score || 5,
+                    balance_profile: (cocktail as any).balance_profile || { sweet: 5, sour: 5, bitter: 3, spicy: 4, aromatic: 6, alcoholic: 7 },
+                    seasonal_notes: (cocktail as any).seasonal_notes || []
                   }}
                   showMatchScore={true}
+                  showFlavorProfile={true}
+                  showDifficulty={true}
                   onClick={() => {
                     // Switch to this cocktail as the primary recommendation
                     const newRecommendations = {
