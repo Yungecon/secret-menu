@@ -10,6 +10,7 @@ import {
 } from '../../utils/slotMachineAttributes';
 import { generateRecommendations } from '../../services/recommendationEngine';
 import { RecommendationResult } from '../../types';
+import { StandardCocktailCard } from '../ui/StandardCocktailCard';
 
 interface ReelState {
   isSpinning: boolean;
@@ -204,57 +205,25 @@ const SlotMachine = () => {
           {/* Cocktail Results Display */}
           {gameState === 'results' && cocktailResult && (
             <div className="animate-fade-in">
-              <div className="bg-premium-dark/50 border border-premium-gold/30 rounded-2xl p-8 mb-6">
-                <div className="text-center mb-6">
-                  <p className="text-premium-gold text-lg mb-4 italic">
-                    Your combination revealed...
-                  </p>
-                  <h2 className="font-elegant text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-premium-gold via-premium-silver to-premium-gold bg-clip-text text-transparent">
-                    {cocktailResult.primary.name}
-                  </h2>
-                  <div className="inline-flex items-center space-x-2 bg-premium-charcoal/30 px-4 py-2 rounded-full border border-premium-gold/20 mb-4">
-                    <div className="w-2 h-2 bg-premium-gold rounded-full animate-pulse"></div>
-                    <span className="text-premium-gold font-medium text-sm">
-                      {cocktailResult.matchScore}% Perfect Match
-                    </span>
-                    <div className="w-2 h-2 bg-premium-gold rounded-full animate-pulse delay-500"></div>
-                  </div>
-                </div>
-
-                {/* Cocktail Details */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <span className="text-premium-gold text-sm font-medium px-3 py-1 bg-premium-gold/10 rounded-full">
-                      {cocktailResult.primary.style}
-                    </span>
-                  </div>
-                  <p className="text-premium-silver text-lg mb-6 leading-relaxed italic text-center">
-                    "{cocktailResult.primary.notes || "A sophisticated blend that speaks to your refined palate"}"
-                  </p>
-                </div>
-
-                {/* Ingredients */}
-                <div className="mb-6">
-                  <h3 className="text-premium-platinum font-semibold text-lg mb-4 text-center">
-                    Crafted With
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {cocktailResult.primary.ingredients.map((ingredient, index) => (
-                      <div key={index} className="text-premium-silver text-center py-2 px-4 bg-premium-charcoal/30 rounded-lg">
-                        {ingredient}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Garnish and Glassware */}
-                <div className="border-t border-premium-silver/20 pt-4">
-                  <div className="flex justify-between text-sm text-premium-silver/70">
-                    <span>✨ Garnished with {cocktailResult.primary.garnish}</span>
-                    <span>🥃 Served in {cocktailResult.primary.glassware}</span>
-                  </div>
-                </div>
+              <div className="text-center mb-6">
+                <p className="text-premium-gold text-lg mb-4 italic">
+                  Your combination revealed...
+                </p>
               </div>
+              <StandardCocktailCard
+                cocktail={{
+                  id: cocktailResult.primary.id,
+                  name: cocktailResult.primary.name,
+                  style: cocktailResult.primary.style,
+                  notes: cocktailResult.primary.notes || "A sophisticated blend that speaks to your refined palate",
+                  ingredients: cocktailResult.primary.ingredients,
+                  garnish: cocktailResult.primary.garnish,
+                  glassware: cocktailResult.primary.glassware,
+                  matchScore: cocktailResult.matchScore
+                }}
+                showMatchScore={true}
+                className="max-w-2xl mx-auto"
+              />
             </div>
           )}
         </div>

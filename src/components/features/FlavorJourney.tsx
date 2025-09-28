@@ -137,16 +137,12 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
           onCocktailGenerate?.(generatedCocktails);
         } else {
           console.log('No cocktails generated');
-          // Show a fallback message
-          alert('No cocktails found for your selection. Please try different ingredients.');
         }
       } catch (error) {
         console.error('Error generating cocktails:', error);
-        alert('Error generating cocktails. Please check the console for details.');
       }
     } else {
       console.log('Missing required ingredients:', selectedIngredients);
-      alert('Please complete all steps of the flavor journey first.');
     }
   };
 

@@ -6,6 +6,7 @@ import { RecommendationResult, EnhancedRecommendationResult } from '../../types'
 import { trackRecommendationViewed, trackEnhancedRecommendationViewed, trackQuizRestart } from '../../services/analytics';
 import { playCocktailReveal } from '../../services/soundEffects';
 import { MagicalLoader, MagicalParticles } from '../ui/animations';
+import { StandardCocktailCard } from '../ui/StandardCocktailCard';
 
 const Results = () => {
   const navigate = useNavigate();
@@ -105,37 +106,21 @@ const Results = () => {
         </div>
 
         {/* Cocktail details */}
-        <div className="magical-card p-8 mb-8">
-          <div className="mb-6">
-            <div className="flex items-center justify-center mb-4">
-              <span className="text-luxury-gold text-sm font-medium px-3 py-1 bg-luxury-gold/10 rounded-full">
-                {primary.style}
-              </span>
-            </div>
-            <p className="text-luxury-pearl text-lg mb-6 leading-relaxed italic">
-              "{primary.notes || "A sophisticated blend that speaks to your refined palate"}"
-            </p>
-          </div>
-          
-          <div className="mb-6">
-            <h3 className="text-luxury-platinum font-semibold text-xl mb-4 text-center">
-              Crafted With
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {primary.ingredients.map((ingredient, index) => (
-                <div key={index} className="text-luxury-pearl text-center py-2 px-4 bg-luxury-charcoal/30 rounded-lg">
-                  {ingredient}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="border-t border-luxury-platinum/20 pt-4">
-            <div className="flex justify-between text-sm text-luxury-pearl/70">
-              <span>✨ Garnished with {primary.garnish}</span>
-              <span>🥃 Served in {primary.glassware}</span>
-            </div>
-          </div>
+        <div className="mb-8">
+          <StandardCocktailCard
+            cocktail={{
+              id: primary.id,
+              name: primary.name,
+              style: primary.style,
+              notes: primary.notes || "A sophisticated blend that speaks to your refined palate",
+              ingredients: primary.ingredients,
+              garnish: primary.garnish,
+              glassware: primary.glassware,
+              matchScore: recommendations.matchScore
+            }}
+            showMatchScore={true}
+            className="max-w-2xl mx-auto"
+          />
         </div>
 
         {/* Adjacent recommendations - now clickable */}
@@ -144,8 +129,19 @@ const Results = () => {
             <h3 className="text-luxury-platinum text-lg mb-4">You might also enjoy...</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adjacent.map((cocktail) => (
-                <button
+                <StandardCocktailCard
                   key={cocktail.id}
+                  cocktail={{
+                    id: cocktail.id,
+                    name: cocktail.name,
+                    style: cocktail.style,
+                    notes: cocktail.notes || "A delightful alternative that complements your taste",
+                    ingredients: cocktail.ingredients,
+                    garnish: cocktail.garnish,
+                    glassware: cocktail.glassware,
+                    matchScore: 85 // Default match score for adjacent cocktails
+                  }}
+                  showMatchScore={true}
                   onClick={() => {
                     // Switch to this cocktail as the primary recommendation
                     const newRecommendations = {
@@ -163,19 +159,7 @@ const Results = () => {
                       playCocktailReveal();
                     }, 300);
                   }}
-                  className="magical-card p-4 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-luxury-gold/20 active:scale-95 text-left group"
-                >
-                  <h4 className="text-luxury-gold font-medium mb-2 group-hover:text-luxury-champagne transition-colors">
-                    {cocktail.name}
-                  </h4>
-                  <p className="text-luxury-pearl/80 text-sm mb-2">{cocktail.style}</p>
-                  <p className="text-luxury-pearl/60 text-xs italic">
-                    Tap to explore this exquisite creation
-                  </p>
-                  
-                  {/* Hover shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out opacity-0 group-hover:opacity-100 rounded-xl"></div>
-                </button>
+                />
               ))}
             </div>
           </div>
