@@ -4,6 +4,26 @@ import { DATA_PATHS } from '../constants';
 // Load sophisticated cocktail library
 let cocktailData: Cocktail[] = [];
 
+// Track recently shown cocktails to avoid repetition
+let recentlyShownCocktails: Set<string> = new Set();
+const MAX_RECENT_COCKTAILS = 20; // Keep track of last 20 shown cocktails
+
+// Function to filter out recently shown cocktails
+const filterRecentlyShown = (cocktails: Cocktail[]): Cocktail[] => {
+  return cocktails.filter(cocktail => !recentlyShownCocktails.has(cocktail.id));
+};
+
+// Function to add cocktail to recently shown list
+const addToRecentlyShown = (cocktail: Cocktail) => {
+  recentlyShownCocktails.add(cocktail.id);
+  
+  // Keep only the most recent cocktails
+  if (recentlyShownCocktails.size > MAX_RECENT_COCKTAILS) {
+    const cocktailsArray = Array.from(recentlyShownCocktails);
+    recentlyShownCocktails = new Set(cocktailsArray.slice(-MAX_RECENT_COCKTAILS));
+  }
+};
+
 const loadCocktailData = async () => {
   // Always reload data to ensure we get the latest sophisticated names
   try {
@@ -97,7 +117,7 @@ const hasMediumIntensityIngredients = (cocktail: Cocktail): boolean => {
          cocktail.flavor_tags.some(tag => ['medium', 'versatile', 'balanced'].includes(tag));
 };
 
-// Diversity algorithm to ensure varied recommendations
+// Enhanced diversity algorithm with better randomization and novelty
 const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, maxCount: number): Cocktail[] => {
   const selected: Cocktail[] = [];
   const usedSpirits = new Set([primary.base_spirit_category]);
@@ -105,13 +125,19 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   const usedBuildTypes = new Set([primary.build_type]);
   const usedCocktailIds = new Set([primary.id]);
   
-  // Shuffle the scored cocktails to add some randomness
-  const shuffledCocktails = [...scoredCocktails].sort(() => Math.random() - 0.5);
+  // Enhanced randomization: shuffle multiple times and add timestamp-based seed
+  const timestamp = Date.now();
+  const shuffledCocktails = [...scoredCocktails].sort((a, b) => {
+    // Multiple randomization factors for better distribution
+    const randomA = Math.random() + (a.score / 100) + (timestamp % 1000) / 1000;
+    const randomB = Math.random() + (b.score / 100) + (timestamp % 1000) / 1000;
+    return randomB - randomA;
+  });
   
   // First pass: Select cocktails with different spirits, styles, or build types
   for (const item of shuffledCocktails) {
     if (selected.length >= maxCount) break;
-    if (item.score < 75) continue; // Minimum quality threshold
+    if (item.score < 70) continue; // Lowered threshold for more variety
     
     const cocktail = item.cocktail;
     const hasDifferentSpirit = !usedSpirits.has(cocktail.base_spirit_category);
@@ -133,7 +159,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   if (selected.length < maxCount) {
     for (const item of shuffledCocktails) {
       if (selected.length >= maxCount) break;
-      if (item.score < 80) continue;
+      if (item.score < 75) continue; // Lowered threshold
       
       const cocktail = item.cocktail;
       if (!usedCocktailIds.has(cocktail.id)) {
@@ -143,8 +169,22 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     }
   }
   
-  // Shuffle the final selection to randomize order
-  return selected.sort(() => Math.random() - 0.5);
+  // Third pass: Add any remaining cocktails for maximum variety
+  if (selected.length < maxCount) {
+    for (const item of shuffledCocktails) {
+      if (selected.length >= maxCount) break;
+      if (item.score < 60) continue; // Even lower threshold for maximum variety
+      
+      const cocktail = item.cocktail;
+      if (!usedCocktailIds.has(cocktail.id)) {
+        selected.push(cocktail);
+        usedCocktailIds.add(cocktail.id);
+      }
+    }
+  }
+  
+  // Enhanced final shuffle with multiple randomization passes
+  return selected.sort(() => Math.random() - 0.5).sort(() => Math.random() - 0.5);
 };
 
 // Enhanced fuzzy matching with metadata tracking
@@ -194,8 +234,17 @@ const performFuzzyMatching = (cocktail: Cocktail, answers: EnhancedQuizAnswers):
 export const generateRecommendations = async (answers: QuizAnswers): Promise<RecommendationResult> => {
   const cocktails = await loadCocktailData();
   
+  // Filter out recently shown cocktails for more variety
+  const availableCocktails = filterRecentlyShown(cocktails);
+  
+  // If we've shown too many recently, reset the list to allow some repetition
+  const cocktailsToUse = availableCocktails.length > 10 ? availableCocktails : cocktails;
+  
+  // Add randomization seed based on timestamp and answers to ensure variety
+  // const randomizationSeed = Date.now() + JSON.stringify(answers).length;
+  
   // Score each cocktail based on quiz answers with enhanced fuzzy matching
-  const scoredCocktails = cocktails.map(cocktail => {
+  const scoredCocktails = cocktailsToUse.map(cocktail => {
     let score = 75; // Start with a high base score for magical feeling
     let matchingFactors = 0;
     
@@ -376,25 +425,46 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     if (matchingFactors >= 4) score += 5;
     if (matchingFactors >= 5) score += 5;
     
+    // Add randomization factor to score to ensure variety
+    const randomFactor = (Math.random() - 0.5) * 10; // ±5 point variation
+    score += randomFactor;
+    
     // Ensure minimum score for magical feeling
-    score = Math.max(score, 85);
+    score = Math.max(score, 80);
     
     return { cocktail, score, matchingFactors };
   });
   
-  // Sort by score and matching factors
+  // Enhanced sorting with randomization for variety
   const sortedCocktails = scoredCocktails.sort((a, b) => {
-    if (b.score === a.score) {
+    // Primary sort by score
+    if (Math.abs(b.score - a.score) > 5) {
+      return b.score - a.score;
+    }
+    
+    // For similar scores, add randomization
+    const randomA = Math.random();
+    const randomB = Math.random();
+    
+    if (b.matchingFactors !== a.matchingFactors) {
       return b.matchingFactors - a.matchingFactors;
     }
-    return b.score - a.score;
+    
+    return randomB - randomA;
   });
   
-  // Get primary recommendation
-  const primary = sortedCocktails[0].cocktail;
+  // Get primary recommendation with additional randomization for top candidates
+  const topCandidates = sortedCocktails.slice(0, Math.min(5, sortedCocktails.length));
+  const primary = topCandidates[Math.floor(Math.random() * topCandidates.length)].cocktail;
+  
+  // Track the primary recommendation to avoid repetition
+  addToRecentlyShown(primary);
   
   // Get diverse adjacent recommendations with improved algorithm
   const adjacent = getDiverseRecommendations(sortedCocktails.slice(1), primary, 8);
+  
+  // Track adjacent recommendations too
+  adjacent.forEach(cocktail => addToRecentlyShown(cocktail));
   
   // Ensure the match score feels magical (90-98%)
   const finalScore = Math.min(98, Math.max(90, sortedCocktails[0].score));
@@ -410,8 +480,17 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
 export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswers): Promise<RecommendationResult & { fuzzyMatches?: string[]; fallbackUsed?: boolean }> => {
   const cocktails = await loadCocktailData();
   
+  // Filter out recently shown cocktails for more variety
+  const availableCocktails = filterRecentlyShown(cocktails);
+  
+  // If we've shown too many recently, reset the list to allow some repetition
+  const cocktailsToUse = availableCocktails.length > 10 ? availableCocktails : cocktails;
+  
+  // Add randomization seed based on timestamp and answers to ensure variety
+  // const randomizationSeed = Date.now() + JSON.stringify(answers).length;
+  
   // Score each cocktail with enhanced fuzzy matching
-  const scoredCocktails = cocktails.map(cocktail => {
+  const scoredCocktails = cocktailsToUse.map(cocktail => {
     let score = 75; // Start with a high base score for magical feeling
     let matchingFactors = 0;
     let fuzzyMatches: string[] = [];
@@ -650,25 +729,46 @@ export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswe
     if (matchingFactors >= 4) score += 5;
     if (matchingFactors >= 5) score += 5;
     
+    // Add randomization factor to score to ensure variety
+    const randomFactor = (Math.random() - 0.5) * 10; // ±5 point variation
+    score += randomFactor;
+    
     // Ensure minimum score for magical feeling
-    score = Math.max(score, 85);
+    score = Math.max(score, 80);
     
     return { cocktail, score, matchingFactors, fuzzyMatches, fallbackUsed };
   });
   
-  // Sort by score and matching factors
+  // Enhanced sorting with randomization for variety
   const sortedCocktails = scoredCocktails.sort((a, b) => {
-    if (b.score === a.score) {
+    // Primary sort by score
+    if (Math.abs(b.score - a.score) > 5) {
+      return b.score - a.score;
+    }
+    
+    // For similar scores, add randomization
+    const randomA = Math.random();
+    const randomB = Math.random();
+    
+    if (b.matchingFactors !== a.matchingFactors) {
       return b.matchingFactors - a.matchingFactors;
     }
-    return b.score - a.score;
+    
+    return randomB - randomA;
   });
   
-  // Get primary recommendation
-  const primary = sortedCocktails[0].cocktail;
+  // Get primary recommendation with additional randomization for top candidates
+  const topCandidates = sortedCocktails.slice(0, Math.min(5, sortedCocktails.length));
+  const primary = topCandidates[Math.floor(Math.random() * topCandidates.length)].cocktail;
+  
+  // Track the primary recommendation to avoid repetition
+  addToRecentlyShown(primary);
   
   // Get diverse adjacent recommendations with improved algorithm
   const adjacent = getDiverseRecommendations(sortedCocktails.slice(1), primary, 8);
+  
+  // Track adjacent recommendations too
+  adjacent.forEach(cocktail => addToRecentlyShown(cocktail));
   
   // Ensure the match score feels magical (90-98%)
   const finalScore = Math.min(98, Math.max(90, sortedCocktails[0].score));

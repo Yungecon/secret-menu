@@ -217,11 +217,20 @@ const SlotMachine = () => {
                   style: cocktailResult.primary.style,
                   notes: cocktailResult.primary.notes || "A sophisticated blend that speaks to your refined palate",
                   ingredients: cocktailResult.primary.ingredients,
+                  instructions: (cocktailResult.primary as any).instructions || [],
                   garnish: cocktailResult.primary.garnish,
                   glassware: cocktailResult.primary.glassware,
-                  matchScore: cocktailResult.matchScore
+                  matchScore: cocktailResult.matchScore,
+                  build_type: cocktailResult.primary.build_type,
+                  difficulty: (cocktailResult.primary as any).difficulty,
+                  complexity_score: (cocktailResult.primary as any).complexity_score || 5,
+                  balance_profile: (cocktailResult.primary as any).balance_profile || { sweet: 5, sour: 5, bitter: 3, spicy: 4, aromatic: 6, alcoholic: 7 },
+                  seasonal_notes: (cocktailResult.primary as any).seasonal_notes || []
                 }}
                 showMatchScore={true}
+                showFlavorProfile={true}
+                showDifficulty={true}
+                showInstructions={true}
                 className="max-w-2xl mx-auto"
               />
             </div>

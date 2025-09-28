@@ -7,7 +7,8 @@ interface CocktailCardProps {
     style?: string;
     notes?: string;
     ingredients: string[];
-    garnish: string;
+    instructions?: string[];
+    garnish: string | string[];
     glassware: string;
     matchScore?: number;
     build_type?: string;
@@ -26,6 +27,7 @@ interface CocktailCardProps {
   showMatchScore?: boolean;
   showFlavorProfile?: boolean;
   showDifficulty?: boolean;
+  showInstructions?: boolean;
   className?: string;
   onClick?: () => void;
 }
@@ -35,6 +37,7 @@ export const StandardCocktailCard: React.FC<CocktailCardProps> = ({
   showMatchScore = true,
   showFlavorProfile = false,
   showDifficulty = false,
+  showInstructions = true,
   className = '',
   onClick
 }) => {
@@ -57,7 +60,7 @@ export const StandardCocktailCard: React.FC<CocktailCardProps> = ({
     >
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-semibold text-white group-hover:text-purple-300 transition-colors">
+        <h3 className="text-xl font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent group-hover:from-yellow-300 group-hover:to-yellow-500 transition-all duration-300">
           {cocktail.name}
         </h3>
         <div className="flex gap-2">
@@ -137,6 +140,21 @@ export const StandardCocktailCard: React.FC<CocktailCardProps> = ({
         </ul>
       </div>
 
+      {/* Instructions */}
+      {showInstructions && cocktail.instructions && cocktail.instructions.length > 0 && (
+        <div className="mb-4">
+          <h4 className="text-sm font-medium text-gray-300 mb-2">Instructions</h4>
+          <ol className="space-y-1">
+            {cocktail.instructions.map((instruction, idx) => (
+              <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
+                <span className="text-purple-400 font-medium text-xs mt-0.5">{idx + 1}.</span>
+                <span>{instruction}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
       {/* Glassware & Garnish */}
       <div className="flex justify-between items-center text-sm text-gray-400 mb-4">
         <div className="flex items-center gap-1">
@@ -145,7 +163,7 @@ export const StandardCocktailCard: React.FC<CocktailCardProps> = ({
         </div>
         <div className="flex items-center gap-1">
           <span>🌸</span>
-          <span>{cocktail.garnish}</span>
+          <span>{Array.isArray(cocktail.garnish) ? cocktail.garnish.join(', ') : cocktail.garnish}</span>
         </div>
       </div>
 
