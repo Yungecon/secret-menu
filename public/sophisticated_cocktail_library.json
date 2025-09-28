@@ -6,7 +6,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "plum-wine"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -96,7 +96,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "passion-fruit-liqueur"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -617,7 +617,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "amaro-nonino"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -702,7 +702,7 @@
       "description": "A sophisticated rum cocktail that showcases the complex interplay between Benedictine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "rum",
       "modifying_liqueurs": [
-        "benedictine"
+        "nectarine-liqueur"
       ],
       "ingredients": [
         {
@@ -800,7 +800,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between St-Germain and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "st-germain"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -1073,7 +1073,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "amaro-averna"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -1171,7 +1171,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Sake and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "sake"
+        "mango-liqueur"
       ],
       "ingredients": [
         {
@@ -1458,7 +1458,7 @@
       "description": "A sophisticated vodka cocktail that showcases the complex interplay between Coconut Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "vodka",
       "modifying_liqueurs": [
-        "coconut-liqueur"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -1726,7 +1726,7 @@
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Cointreau and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
-        "cointreau"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -4153,7 +4153,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Baileys and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "baileys"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -4607,7 +4607,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "amaro-montenegro"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -6968,7 +6968,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "grand-marnier"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -9348,7 +9348,7 @@
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
-        "amaro-sibilla"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -14460,7 +14460,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "amaro-nonino"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -15841,7 +15841,7 @@
       "description": "A sophisticated pisco cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "pisco",
       "modifying_liqueurs": [
-        "plum-wine"
+        "hibiscus-liqueur"
       ],
       "ingredients": [
         {
@@ -16102,7 +16102,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "amaro-averna"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -16278,7 +16278,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "plum-wine"
+        "grand-marnier"
       ],
       "ingredients": [
         {
@@ -16552,7 +16552,7 @@
       "description": "A sophisticated armagnac cocktail that showcases the complex interplay between Hibiscus Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "armagnac",
       "modifying_liqueurs": [
-        "hibiscus-liqueur"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -17022,7 +17022,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Benedictine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "benedictine"
+        "st-germain"
       ],
       "ingredients": [
         {
@@ -18028,7 +18028,7 @@
       "description": "A sophisticated rum cocktail that showcases the complex interplay between Benedictine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "rum",
       "modifying_liqueurs": [
-        "benedictine"
+        "rambutan-liqueur"
       ],
       "ingredients": [
         {
@@ -18119,7 +18119,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Chambord and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "chambord"
+        "baileys"
       ],
       "ingredients": [
         {
@@ -18216,7 +18216,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "amaro-lucano"
+        "rambutan-liqueur"
       ],
       "ingredients": [
         {
@@ -19030,7 +19030,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between St-Germain and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "st-germain"
+        "baileys"
       ],
       "ingredients": [
         {
@@ -19291,7 +19291,7 @@
       "description": "A sophisticated armagnac cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "armagnac",
       "modifying_liqueurs": [
-        "amaro-lucano"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -19558,7 +19558,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between St-Germain and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "st-germain"
+        "benedictine"
       ],
       "ingredients": [
         {
@@ -19817,7 +19817,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Cointreau and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "cointreau"
+        "durian-liqueur"
       ],
       "ingredients": [
         {
@@ -20726,7 +20726,7 @@
       "description": "A sophisticated pisco cocktail that showcases the complex interplay between Rose Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "pisco",
       "modifying_liqueurs": [
-        "rose-liqueur"
+        "baileys"
       ],
       "ingredients": [
         {
@@ -21000,7 +21000,7 @@
       "description": "A sophisticated vodka cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "vodka",
       "modifying_liqueurs": [
-        "grand-marnier"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -21194,7 +21194,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Coconut Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "coconut-liqueur"
+        "cointreau"
       ],
       "ingredients": [
         {
@@ -21292,7 +21292,7 @@
       "description": "A sophisticated vodka cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "vodka",
       "modifying_liqueurs": [
-        "grand-marnier"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -21376,7 +21376,7 @@
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Hibiscus Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
-        "hibiscus-liqueur"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -21467,7 +21467,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "plum-wine"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -21655,7 +21655,7 @@
       "description": "A sophisticated vodka cocktail that showcases the complex interplay between Cointreau and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "vodka",
       "modifying_liqueurs": [
-        "cointreau"
+        "mango-liqueur"
       ],
       "ingredients": [
         {
@@ -21927,7 +21927,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Hibiscus Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "hibiscus-liqueur"
+        "plum-wine"
       ],
       "ingredients": [
         {
@@ -22200,7 +22200,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between St-Germain and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "st-germain"
+        "plum-wine"
       ],
       "ingredients": [
         {
@@ -22296,7 +22296,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Benedictine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "benedictine"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -22393,7 +22393,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Sake and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "sake"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -22477,7 +22477,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Sake and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "sake"
+        "plum-wine"
       ],
       "ingredients": [
         {
@@ -22567,7 +22567,7 @@
       "description": "A sophisticated rum cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "rum",
       "modifying_liqueurs": [
-        "fernet-branca"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -22665,7 +22665,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "grand-marnier"
+        "midori"
       ],
       "ingredients": [
         {
@@ -22749,7 +22749,7 @@
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Baileys and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
-        "baileys"
+        "rambutan-liqueur"
       ],
       "ingredients": [
         {
@@ -22848,7 +22848,7 @@
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Kahlúa and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
-        "kahlua"
+        "plum-wine"
       ],
       "ingredients": [
         {
@@ -22946,7 +22946,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Coconut Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "coconut-liqueur"
+        "campari"
       ],
       "ingredients": [
         {
@@ -23037,7 +23037,7 @@
       "description": "A sophisticated armagnac cocktail that showcases the complex interplay between St-Germain and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "armagnac",
       "modifying_liqueurs": [
-        "st-germain"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -23127,7 +23127,7 @@
       "description": "A sophisticated pisco cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "pisco",
       "modifying_liqueurs": [
-        "grand-marnier"
+        "chambord"
       ],
       "ingredients": [
         {
@@ -23218,7 +23218,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Grand Marnier and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "grand-marnier"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -23316,7 +23316,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "plum-wine"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -23413,7 +23413,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Rose Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "rose-liqueur"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -23510,7 +23510,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Sake and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "sake"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -23607,7 +23607,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "plum-wine"
+        "nectarine-liqueur"
       ],
       "ingredients": [
         {
@@ -23699,7 +23699,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "passion-fruit-liqueur"
+        "aperol"
       ],
       "ingredients": [
         {
@@ -23967,7 +23967,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "campari"
+        "baileys"
       ],
       "ingredients": [
         {
@@ -24058,7 +24058,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Chartreuse and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "chartreuse"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -24148,7 +24148,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "plum-wine"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -24232,7 +24232,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Baileys and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "baileys"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -24317,7 +24317,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Chambord and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "chambord"
+        "midori"
       ],
       "ingredients": [
         {
@@ -24401,7 +24401,7 @@
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Campari and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
-        "campari"
+        "mango-liqueur"
       ],
       "ingredients": [
         {
@@ -24498,7 +24498,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Chartreuse and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "chartreuse"
+        "plum-wine"
       ],
       "ingredients": [
         {
@@ -24582,7 +24582,7 @@
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
-        "passion-fruit-liqueur"
+        "hibiscus-liqueur"
       ],
       "ingredients": [
         {
@@ -24674,7 +24674,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Midori and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "midori"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -24759,7 +24759,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Sake and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "sake"
+        "mango-liqueur"
       ],
       "ingredients": [
         {
@@ -24849,7 +24849,7 @@
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Chartreuse and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
-        "chartreuse"
+        "hibiscus-liqueur"
       ],
       "ingredients": [
         {
@@ -24939,7 +24939,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Coconut Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "coconut-liqueur"
+        "chambord"
       ],
       "ingredients": [
         {
@@ -25037,7 +25037,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Baileys and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "baileys"
+        "durian-liqueur"
       ],
       "ingredients": [
         {
@@ -25134,7 +25134,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Kahlúa and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "kahlua"
+        "sake"
       ],
       "ingredients": [
         {
@@ -25219,7 +25219,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Aperol and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "aperol"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -25407,7 +25407,7 @@
       "description": "A sophisticated armagnac cocktail that showcases the complex interplay between Rose Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "armagnac",
       "modifying_liqueurs": [
-        "rose-liqueur"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -25504,7 +25504,7 @@
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
-        "amaro-averna"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -25589,7 +25589,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Plum Wine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "plum-wine"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -25679,7 +25679,7 @@
       "description": "A sophisticated rum cocktail that showcases the complex interplay between Baileys and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "rum",
       "modifying_liqueurs": [
-        "baileys"
+        "aperol"
       ],
       "ingredients": [
         {
@@ -25771,7 +25771,7 @@
       "description": "A sophisticated tequila cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "tequila",
       "modifying_liqueurs": [
-        "amaro-ramazzotti"
+        "durian-liqueur"
       ],
       "ingredients": [
         {
@@ -25862,7 +25862,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Baileys and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "baileys"
+        "mango-liqueur"
       ],
       "ingredients": [
         {
@@ -25959,7 +25959,7 @@
       "description": "A sophisticated brandy cocktail that showcases the complex interplay between Midori and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "brandy",
       "modifying_liqueurs": [
-        "midori"
+        "st-germain"
       ],
       "ingredients": [
         {
@@ -26064,7 +26064,7 @@
       "description": "A sophisticated pisco cocktail that showcases the complex interplay between Benedictine and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "pisco",
       "modifying_liqueurs": [
-        "benedictine"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -26155,7 +26155,7 @@
       "description": "A sophisticated whiskey cocktail that showcases the complex interplay between Kahlúa and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "whiskey",
       "modifying_liqueurs": [
-        "kahlua"
+        "peach-liqueur"
       ],
       "ingredients": [
         {
@@ -26246,7 +26246,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "passion-fruit-liqueur"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -26331,7 +26331,7 @@
       "description": "A sophisticated pisco cocktail that showcases the complex interplay between Amaro and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "pisco",
       "modifying_liqueurs": [
-        "aperol"
+        "kahlua"
       ],
       "ingredients": [
         {
@@ -26423,7 +26423,7 @@
       "description": "A sophisticated gin cocktail that showcases the complex interplay between Chambord and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "gin",
       "modifying_liqueurs": [
-        "chambord"
+        "rambutan-liqueur"
       ],
       "ingredients": [
         {
@@ -26514,7 +26514,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Passion Fruit Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "passion-fruit-liqueur"
+        "durian-liqueur"
       ],
       "ingredients": [
         {
@@ -26605,7 +26605,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Coconut Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "coconut-liqueur"
+        "kahlua"
       ],
       "ingredients": [
         {
@@ -26697,7 +26697,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Hibiscus Liqueur and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "hibiscus-liqueur"
+        "lychee-liqueur"
       ],
       "ingredients": [
         {
@@ -26790,7 +26790,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Midori and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "midori"
+        "rose-liqueur"
       ],
       "ingredients": [
         {
@@ -26887,7 +26887,7 @@
       "description": "A sophisticated aquavit cocktail that showcases the complex interplay between Cointreau and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "aquavit",
       "modifying_liqueurs": [
-        "cointreau"
+        "passion-fruit-liqueur"
       ],
       "ingredients": [
         {
@@ -26984,7 +26984,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between Aperol and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "aperol"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -27076,7 +27076,7 @@
       "description": "A sophisticated mezcal cocktail that showcases the complex interplay between St-Germain and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "mezcal",
       "modifying_liqueurs": [
-        "st-germain"
+        "cherry-liqueur"
       ],
       "ingredients": [
         {
@@ -27174,7 +27174,7 @@
       "description": "A sophisticated vodka cocktail that showcases the complex interplay between Kahlúa and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "vodka",
       "modifying_liqueurs": [
-        "kahlua"
+        "apricot-liqueur"
       ],
       "ingredients": [
         {
@@ -27259,7 +27259,7 @@
       "description": "A sophisticated shochu cocktail that showcases the complex interplay between Cointreau and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "shochu",
       "modifying_liqueurs": [
-        "cointreau"
+        "campari"
       ],
       "ingredients": [
         {
@@ -27355,7 +27355,7 @@
       "description": "A sophisticated cognac cocktail that showcases the complex interplay between Campari and carefully selected ingredients. This drink represents the pinnacle of mixological artistry, where every element has been chosen to create a harmonious and memorable experience.",
       "base_spirit": "cognac",
       "modifying_liqueurs": [
-        "campari"
+        "nectarine-liqueur"
       ],
       "ingredients": [
         {
