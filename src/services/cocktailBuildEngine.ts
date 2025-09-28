@@ -8,6 +8,128 @@ import {
 } from '../types';
 import { DATA_PATHS } from '../constants';
 
+// Specific amaros from the ingredient database
+const SPECIFIC_AMAROS = [
+  'Amaro Montenegro',
+  'Amaro Nonino', 
+  'Amaro Averna',
+  'Amaro Lucano',
+  'Amaro Ramazzotti',
+  'Amaro Sibilla',
+  'Amaro Meletti',
+  'Aperol',
+  'Campari',
+  'Cappelletti Aperitivo',
+  'Cynar',
+  'Fernet Branca',
+  'Fernet Vallet',
+  'Punt e Mes'
+];
+
+// Amaro flavor profiles for intelligent selection (unused but kept for future reference)
+/*
+const AMARO_PROFILES: Record<string, any> = {
+  'Amaro Montenegro': {
+    flavor: ['sweet', 'orange', 'vanilla', 'herbal'],
+    intensity: 'medium',
+    bitterness: 'low',
+    sweetness: 'high',
+    best_for: ['mezcal', 'whiskey', 'gin']
+  },
+  'Amaro Nonino': {
+    flavor: ['orange', 'gentian', 'licorice', 'warm'],
+    intensity: 'medium',
+    bitterness: 'medium',
+    sweetness: 'medium',
+    best_for: ['bourbon', 'whiskey', 'brandy']
+  },
+  'Amaro Averna': {
+    flavor: ['licorice', 'orange', 'herbal', 'spice'],
+    intensity: 'medium-high',
+    bitterness: 'medium',
+    sweetness: 'medium',
+    best_for: ['mezcal', 'whiskey', 'rum']
+  },
+  'Amaro Lucano': {
+    flavor: ['herbal', 'citrus', 'spice', 'gentian'],
+    intensity: 'medium',
+    bitterness: 'medium',
+    sweetness: 'medium',
+    best_for: ['gin', 'vodka', 'tequila']
+  },
+  'Amaro Ramazzotti': {
+    flavor: ['orange', 'vanilla', 'herbal', 'bitter'],
+    intensity: 'medium',
+    bitterness: 'medium-high',
+    sweetness: 'medium',
+    best_for: ['gin', 'vodka', 'tequila']
+  },
+  'Amaro Sibilla': {
+    flavor: ['herbal', 'gentian', 'citrus', 'spice'],
+    intensity: 'medium-high',
+    bitterness: 'high',
+    sweetness: 'low',
+    best_for: ['gin', 'vodka', 'tequila']
+  },
+  'Amaro Meletti': {
+    flavor: ['saffron', 'saffron', 'orange', 'herbal'],
+    intensity: 'medium',
+    bitterness: 'medium',
+    sweetness: 'medium',
+    best_for: ['gin', 'vodka', 'tequila']
+  },
+  'Aperol': {
+    flavor: ['orange', 'bitter', 'citrus', 'refreshing'],
+    intensity: 'low-medium',
+    bitterness: 'medium',
+    sweetness: 'high',
+    best_for: ['gin', 'vodka', 'prosecco']
+  },
+  'Campari': {
+    flavor: ['bitter', 'orange', 'herbal', 'citrus'],
+    intensity: 'medium-high',
+    bitterness: 'high',
+    sweetness: 'low',
+    best_for: ['gin', 'vodka', 'whiskey']
+  },
+  'Cappelletti Aperitivo': {
+    flavor: ['bitter', 'orange', 'herbal', 'citrus'],
+    intensity: 'medium',
+    bitterness: 'medium',
+    sweetness: 'medium',
+    best_for: ['gin', 'vodka', 'prosecco']
+  },
+  'Cynar': {
+    flavor: ['artichoke', 'bitter', 'herbal', 'vegetal'],
+    intensity: 'medium',
+    bitterness: 'medium',
+    sweetness: 'low',
+    best_for: ['gin', 'vodka', 'tequila']
+  },
+  'Fernet Branca': {
+    flavor: ['menthol', 'bitter', 'herbal', 'spice'],
+    intensity: 'high',
+    bitterness: 'very-high',
+    sweetness: 'very-low',
+    best_for: ['whiskey', 'mezcal', 'gin']
+  },
+  'Fernet Vallet': {
+    flavor: ['menthol', 'bitter', 'herbal', 'spice'],
+    intensity: 'high',
+    bitterness: 'very-high',
+    sweetness: 'very-low',
+    best_for: ['whiskey', 'mezcal', 'gin']
+  },
+  'Punt e Mes': {
+    flavor: ['bitter', 'sweet', 'orange', 'herbal'],
+    intensity: 'medium',
+    bitterness: 'medium',
+    sweetness: 'medium',
+    best_for: ['gin', 'whiskey', 'vermouth']
+  }
+};
+*/
+
 export class CocktailBuildEngine {
   private ingredientProfiles: Map<string, IngredientProfile> = new Map();
   private templates: Map<string, CocktailTemplate> = new Map();
@@ -20,7 +142,7 @@ export class CocktailBuildEngine {
   private async loadIngredientProfiles() {
     try {
       // Load enhanced cocktail library instead of basic profiles
-      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
+      const response = await fetch(DATA_PATHS.SOPHISTICATED_COCKTAIL_LIBRARY);
       const data = await response.json();
       
       // Create ingredient profiles from the cocktail library
@@ -123,7 +245,7 @@ export class CocktailBuildEngine {
   private async loadTemplates() {
     try {
       // Load enhanced cocktail library for templates
-      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
+      const response = await fetch(DATA_PATHS.SOPHISTICATED_COCKTAIL_LIBRARY);
       const data = await response.json();
       
       // Create templates from the cocktail library
@@ -422,7 +544,18 @@ export class CocktailBuildEngine {
       
       if (profile) {
         const proportionStr = this.formatProportion(proportion);
-        ingredients.push(`${proportionStr} ${profile.name}`);
+        let ingredientName = profile.name;
+        
+        // Replace generic amaro with specific amaro based on base spirit
+        if (mapping.has('base')) {
+          const baseSpiritId = mapping.get('base');
+          const baseProfile = this.ingredientProfiles.get(baseSpiritId || '');
+          if (baseProfile) {
+            ingredientName = this.replaceGenericAmaro(ingredientName, baseProfile.category);
+          }
+        }
+        
+        ingredients.push(`${proportionStr} ${ingredientName}`);
       }
     }
 
@@ -479,7 +612,25 @@ export class CocktailBuildEngine {
       const modifierProfile = this.ingredientProfiles.get(modifier);
       
       if (spiritProfile && modifierProfile) {
-        return `${modifierProfile.name} ${spiritProfile.name} ${template.name}`;
+        // Use sophisticated naming for generated recipes too
+        const spiritName = spiritProfile.name.toLowerCase();
+        const modifierName = modifierProfile.name.toLowerCase();
+        
+        // Determine flavor family based on modifier
+        let flavorFamily = 'mystical';
+        if (modifierName.includes('citrus') || modifierName.includes('lemon') || modifierName.includes('lime')) {
+          flavorFamily = 'citrus';
+        } else if (modifierName.includes('herb') || modifierName.includes('mint') || modifierName.includes('basil')) {
+          flavorFamily = 'herbal';
+        } else if (modifierName.includes('flower') || modifierName.includes('elderflower') || modifierName.includes('rose')) {
+          flavorFamily = 'floral';
+        } else if (modifierName.includes('spice') || modifierName.includes('cinnamon') || modifierName.includes('ginger')) {
+          flavorFamily = 'spicy';
+        } else if (modifierName.includes('tropical') || modifierName.includes('coconut') || modifierName.includes('passion')) {
+          flavorFamily = 'tropical';
+        }
+        
+        return this.generateSophisticatedCustomName(spiritName, flavorFamily, modifierName);
       }
     }
     
@@ -591,6 +742,40 @@ export class CocktailBuildEngine {
   }
 
   /**
+   * Select the best amaro based on the base spirit and cocktail context
+   */
+  private selectBestAmaro(baseSpirit: string, _cocktailContext: any = {}): string {
+    // Default selections based on base spirit
+    const spiritPreferences: Record<string, string[]> = {
+      'mezcal': ['Fernet Branca', 'Amaro Averna', 'Amaro Nonino'],
+      'tequila': ['Amaro Lucano', 'Amaro Ramazzotti', 'Amaro Sibilla'],
+      'gin': ['Aperol', 'Campari', 'Amaro Lucano'],
+      'vodka': ['Aperol', 'Cappelletti Aperitivo', 'Amaro Montenegro'],
+      'whiskey': ['Amaro Nonino', 'Fernet Branca', 'Amaro Averna'],
+      'bourbon': ['Amaro Nonino', 'Amaro Averna', 'Fernet Branca'],
+      'brandy': ['Amaro Nonino', 'Amaro Montenegro', 'Amaro Averna'],
+      'rum': ['Amaro Averna', 'Amaro Sibilla', 'Fernet Branca'],
+      'cognac': ['Amaro Nonino', 'Amaro Montenegro', 'Punt e Mes']
+    };
+
+    const preferredAmaros = spiritPreferences[baseSpirit] || spiritPreferences['gin'];
+    
+    // Return a random amaro from the preferred list for variety
+    return preferredAmaros[Math.floor(Math.random() * preferredAmaros.length)];
+  }
+
+  /**
+   * Replace generic amaro references with specific amaros
+   */
+  private replaceGenericAmaro(ingredient: string, baseSpirit: string): string {
+    if (ingredient.toLowerCase().includes('amaro') && !SPECIFIC_AMAROS.some(amaro => ingredient.includes(amaro))) {
+      const specificAmaro = this.selectBestAmaro(baseSpirit);
+      return ingredient.replace(/amaro/gi, specificAmaro);
+    }
+    return ingredient;
+  }
+
+  /**
    * Generate cocktails based on Flavor Journey selections
    */
   async generateFromFlavorJourney(selectedIngredients: any): Promise<GeneratedRecipe[]> {
@@ -598,7 +783,7 @@ export class CocktailBuildEngine {
     
     try {
       // Load the enhanced cocktail library
-      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
+      const response = await fetch(DATA_PATHS.SOPHISTICATED_COCKTAIL_LIBRARY);
       
       if (!response.ok) {
         throw new Error(`Failed to load cocktail library: ${response.status}`);
@@ -608,22 +793,34 @@ export class CocktailBuildEngine {
       
       const matchingCocktails = libraryData.cocktails.filter((cocktail: any) => {
         const baseSpiritMatch = cocktail.base_spirit === selectedIngredients.baseSpirit;
-        const flavorMatch = cocktail.tags.some((tag: string) => 
-          selectedIngredients.flavorFamily && 
-          selectedIngredients.flavorFamily.toLowerCase().includes(tag)
-        );
         
-        return baseSpiritMatch || flavorMatch;
+        // Check for flavor family match (e.g., "citrus" family matches "citrus" tag)
+        const flavorFamilyMatch = selectedIngredients.flavorFamily && 
+          cocktail.tags.some((tag: string) => 
+            tag.toLowerCase() === selectedIngredients.flavorFamily.toLowerCase()
+          );
+        
+        // Check for specific flavor match (e.g., "lemon" specific flavor matches "lemon" tag)
+        const specificFlavorMatch = selectedIngredients.specificFlavor && 
+          cocktail.tags.some((tag: string) => 
+            tag.toLowerCase() === selectedIngredients.specificFlavor.toLowerCase()
+          );
+        
+        // Return true if base spirit matches AND (flavor family OR specific flavor matches)
+        return baseSpiritMatch && (flavorFamilyMatch || specificFlavorMatch);
       });
 
       // Convert matching cocktails to GeneratedRecipe format
-      matchingCocktails.slice(0, 3).forEach((cocktail: any) => {
+      matchingCocktails.slice(0, 12).forEach((cocktail: any) => {
         const recipe: GeneratedRecipe = {
           id: cocktail.id,
           name: cocktail.name,
           template_id: cocktail.id,
           generated: true,
-          ingredients: cocktail.ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
+          ingredients: cocktail.ingredients.map((ing: any) => {
+            const ingredientName = this.replaceGenericAmaro(ing.name, cocktail.base_spirit);
+            return `${ing.amount} ${ingredientName}`;
+          }),
           instructions: cocktail.instructions,
           balance_profile: {
             sweet: cocktail.flavor_profile.sweet || 5,
@@ -660,6 +857,64 @@ export class CocktailBuildEngine {
   }
 
   /**
+   * Generate a sophisticated name for custom cocktails
+   */
+  private generateSophisticatedCustomName(_baseSpirit: string, flavorFamily: string, specificFlavor?: string): string {
+    // Sophisticated naming themes based on the naming system
+    const namingThemes = {
+      mystical: ["The Oracle's", "The Alchemist's", "The Enchanter's", "The Mystic's", "The Seer's", "The Prophet's", "The Sage's", "The Shaman's"],
+      romantic: ["Venus's", "Cupid's", "Aphrodite's", "The Lover's", "The Beloved's", "The Enchanted", "The Serenade", "The Embrace"],
+      literary: ["The Poet's", "The Bard's", "The Scholar's", "The Philosopher's", "The Writer's", "The Dreamer's", "The Visionary's", "The Muse's"],
+      geographical: ["The Venetian", "The Parisian", "The Tokyo", "The London", "The Havana", "The Manhattan", "The Brooklyn", "The Queens"],
+      seasonal: ["Spring's", "Summer's", "Autumn's", "Winter's", "The Equinox", "The Solstice", "The Harvest", "The Bloom"],
+      celestial: ["The Moon's", "The Star's", "The Comet's", "The Aurora's", "The Eclipse", "The Constellation", "The Galaxy", "The Cosmos"],
+      elemental: ["The Fire", "The Water", "The Earth", "The Air", "The Storm", "The Thunder", "The Lightning", "The Rainbow"],
+      historical: ["The Ancient", "The Medieval", "The Renaissance", "The Victorian", "The Art Deco", "The Jazz Age", "The Golden Age", "The Classic"]
+    };
+
+    const suffixes = [
+      "Elixir", "Dream", "Vision", "Secret", "Mystery", "Charm", "Spell", "Magic", 
+      "Essence", "Nectar", "Ambrosia", "Potion", "Brew", "Concoction", "Creation", 
+      "Masterpiece", "Treasure", "Gem", "Jewel", "Crown", "Scepter", "Wand", "Key", 
+      "Door", "Portal", "Gateway", "Bridge", "Path", "Journey", "Adventure", "Quest", 
+      "Discovery", "Revelation", "Awakening", "Transformation", "Evolution", "Revolution"
+    ];
+
+    // Select theme based on flavor family and base spirit
+    let selectedTheme = 'mystical'; // default
+    
+    if (flavorFamily === 'citrus') {
+      selectedTheme = 'celestial';
+    } else if (flavorFamily === 'herbal') {
+      selectedTheme = 'mystical';
+    } else if (flavorFamily === 'floral') {
+      selectedTheme = 'romantic';
+    } else if (flavorFamily === 'spicy') {
+      selectedTheme = 'elemental';
+    } else if (flavorFamily === 'tropical') {
+      selectedTheme = 'geographical';
+    }
+
+    // Special handling for specific flavors
+    if (specificFlavor) {
+      if (specificFlavor.toLowerCase().includes('cinnamon')) {
+        selectedTheme = 'historical';
+      } else if (specificFlavor.toLowerCase().includes('vanilla')) {
+        selectedTheme = 'romantic';
+      } else if (specificFlavor.toLowerCase().includes('smoke')) {
+        selectedTheme = 'elemental';
+      }
+    }
+
+    // Select random prefix and suffix
+    const themePrefixes = namingThemes[selectedTheme as keyof typeof namingThemes];
+    const prefix = themePrefixes[Math.floor(Math.random() * themePrefixes.length)];
+    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+
+    return `${prefix} ${suffix}`;
+  }
+
+  /**
    * Create a custom cocktail based on Flavor Journey selections
    */
   private createCustomCocktail(selectedIngredients: any): GeneratedRecipe | null {
@@ -669,16 +924,119 @@ export class CocktailBuildEngine {
 
     if (!baseSpirit || !flavorFamily) return null;
 
-    // Create a custom cocktail name
-    const cocktailName = `${specificFlavor || flavorFamily} ${baseSpirit} Creation`;
+    // Generate a sophisticated cocktail name using the naming system
+    const cocktailName = this.generateSophisticatedCustomName(baseSpirit, flavorFamily, specificFlavor);
 
-    // Create basic ingredients based on selections
-    const ingredients = [
-      `2oz ${baseSpirit.charAt(0).toUpperCase() + baseSpirit.slice(1)}`,
-      `0.75oz ${specificFlavor || flavorFamily} liqueur`,
-      `0.75oz Fresh citrus juice`,
-      `0.5oz Simple syrup`
-    ];
+    // Create a more readable spirit name for ingredients
+    const spiritName = baseSpirit.charAt(0).toUpperCase() + baseSpirit.slice(1);
+
+    // Create ingredients based on flavor family and specific selections
+    let ingredients: string[] = [];
+    let instructions: string[] = [];
+    let glassware = "coupe";
+    let garnish = ["citrus-twist"];
+    let buildType = "shaken";
+    let balanceProfile = {
+      sweet: 6,
+      sour: 6,
+      bitter: 3,
+      spicy: 4,
+      aromatic: 7,
+      alcoholic: 7
+    };
+
+    // Customize based on flavor family
+    switch (flavorFamily) {
+      case 'citrus':
+        ingredients = [
+          `2oz ${spiritName}`,
+          `0.75oz Fresh ${specificFlavor || 'lemon'} juice`,
+          `0.5oz ${specificFlavor || 'lemon'} liqueur`,
+          `0.5oz Simple syrup`,
+          `0.25oz Triple sec`
+        ];
+        garnish = [`${specificFlavor || 'lemon'}-twist`];
+        balanceProfile = { sweet: 5, sour: 8, bitter: 2, spicy: 3, aromatic: 6, alcoholic: 7 };
+        break;
+        
+      case 'herbal':
+        const herbalAmaro = this.selectBestAmaro(baseSpirit);
+        ingredients = [
+          `2oz ${spiritName}`,
+          `0.75oz ${herbalAmaro}`,
+          `0.5oz Fresh lime juice`,
+          `0.5oz Simple syrup`,
+          `0.25oz Green Chartreuse`
+        ];
+        buildType = "shaken";
+        garnish = [`${specificFlavor || 'herb'}-sprig`];
+        balanceProfile = { sweet: 4, sour: 6, bitter: 5, spicy: 4, aromatic: 8, alcoholic: 7 };
+        break;
+        
+      case 'floral':
+        ingredients = [
+          `2oz ${spiritName}`,
+          `0.75oz St-Germain`,
+          `0.5oz Fresh lemon juice`,
+          `0.5oz Simple syrup`,
+          `0.25oz Rose water`
+        ];
+        garnish = ["edible-flower"];
+        balanceProfile = { sweet: 7, sour: 5, bitter: 3, spicy: 2, aromatic: 9, alcoholic: 6 };
+        break;
+        
+      case 'spicy':
+        ingredients = [
+          `2oz ${spiritName}`,
+          `0.75oz Fresh lime juice`,
+          `0.5oz Simple syrup`,
+          `0.25oz Jalapeño simple syrup`,
+          `2 dashes Angostura bitters`
+        ];
+        garnish = ["jalapeño-slice"];
+        balanceProfile = { sweet: 5, sour: 6, bitter: 4, spicy: 8, aromatic: 5, alcoholic: 7 };
+        break;
+        
+      case 'tropical':
+        ingredients = [
+          `2oz ${spiritName}`,
+          `0.75oz Fresh ${specificFlavor || 'passion-fruit'} juice`,
+          `0.5oz Coconut cream`,
+          `0.5oz Simple syrup`,
+          `0.25oz Lime juice`
+        ];
+        garnish = ["pineapple-wedge", "cherry"];
+        balanceProfile = { sweet: 8, sour: 6, bitter: 2, spicy: 3, aromatic: 6, alcoholic: 6 };
+        break;
+        
+      default:
+        ingredients = [
+          `2oz ${spiritName}`,
+          `0.75oz Fresh citrus juice`,
+          `0.5oz Simple syrup`,
+          `0.25oz Triple sec`
+        ];
+    }
+
+    // Customize instructions based on build type
+    switch (buildType) {
+      case 'muddled-and-shaken':
+        instructions = [
+          "Muddle fresh herbs with simple syrup in a shaker",
+          "Add remaining ingredients and ice",
+          "Shake vigorously for 15 seconds",
+          "Double strain into a chilled coupe glass",
+          "Garnish as specified"
+        ];
+        break;
+      default:
+        instructions = [
+          "Combine all ingredients in a shaker with ice",
+          "Shake vigorously for 15 seconds",
+          "Double strain into a chilled coupe glass",
+          "Garnish as specified"
+        ];
+    }
 
     return {
       id: `custom-${Date.now()}`,
@@ -686,26 +1044,14 @@ export class CocktailBuildEngine {
       template_id: 'custom-template',
       generated: true,
       ingredients,
-      instructions: [
-        "Combine all ingredients in a shaker with ice",
-        "Shake vigorously for 15 seconds",
-        "Double strain into a chilled coupe glass",
-        "Garnish as desired"
-      ],
-      balance_profile: {
-        sweet: 6,
-        sour: 6,
-        bitter: 3,
-        spicy: 4,
-        aromatic: 7,
-        alcoholic: 7
-      },
+      instructions,
+      balance_profile: balanceProfile,
       complexity_score: 5,
-      seasonal_notes: ["Custom creation based on your preferences"],
+      seasonal_notes: [`Custom ${flavorFamily} creation tailored to your taste`],
       substitutions: [],
-      glassware: "coupe",
-      garnish: ["citrus-twist"],
-      build_type: "shaken"
+      glassware,
+      garnish,
+      build_type: buildType
     };
   }
 }
