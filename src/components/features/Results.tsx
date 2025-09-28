@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuiz } from '../../hooks';
-import { generateRecommendations, generateEnhancedRecommendations } from '../../services/recommendationEngine';
+import { generateRecommendations, generateEnhancedRecommendations, resetRecentlyShownCocktails } from '../../services/recommendationEngine';
 import { useEffect, useState } from 'react';
 import { RecommendationResult, EnhancedRecommendationResult } from '../../types';
 import { trackRecommendationViewed, trackEnhancedRecommendationViewed, trackQuizRestart } from '../../services/analytics';
@@ -58,6 +58,7 @@ const Results = () => {
   const handleTryAnother = () => {
     trackQuizRestart();
     resetQuiz();
+    resetRecentlyShownCocktails(); // Reset recently shown cocktails for fresh recommendations
     navigate('/');
   };
 
@@ -164,11 +165,20 @@ const Results = () => {
                   showFlavorProfile={true}
                   showDifficulty={true}
                   showInstructions={true}
-                  onClick={() => {
-                    // Switch to this cocktail as the primary recommendation
+                  onClick={async () => {
+                    // Track the cocktail as recently shown
+                    resetRecentlyShownCocktails(); // Clear the list to allow this cocktail to be shown
+                    
+                    // Generate new recommendations with the selected cocktail as primary
+                    const newAnswers = { ...answers };
+                    const newResult = Object.keys(newAnswers).length > 0 
+                      ? await generateEnhancedRecommendations(newAnswers as any)
+                      : await generateRecommendations(newAnswers);
+                    
+                    // Create new recommendations with the selected cocktail as primary
                     const newRecommendations = {
                       primary: cocktail,
-                      adjacent: adjacent.filter(c => c.id !== cocktail.id).concat([primary]).slice(0, 3),
+                      adjacent: newResult.adjacent.filter(c => c.id !== cocktail.id).slice(0, 3),
                       matchScore: Math.max(88, Math.floor(Math.random() * 8) + 90) // Generate high match score
                     };
                     setRecommendations(newRecommendations);

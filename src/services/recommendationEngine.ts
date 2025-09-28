@@ -24,6 +24,20 @@ const addToRecentlyShown = (cocktail: Cocktail) => {
   }
 };
 
+// Function to reset recently shown cocktails (call when starting new quiz)
+export const resetRecentlyShownCocktails = () => {
+  recentlyShownCocktails.clear();
+};
+
+// Function to get a completely random cocktail for maximum variety
+export const getRandomCocktail = async (): Promise<Cocktail | null> => {
+  const cocktails = await loadCocktailData();
+  if (cocktails.length === 0) return null;
+  
+  const randomIndex = Math.floor(Math.random() * cocktails.length);
+  return cocktails[randomIndex];
+};
+
 const loadCocktailData = async () => {
   // Always reload data to ensure we get the latest sophisticated names
   try {
