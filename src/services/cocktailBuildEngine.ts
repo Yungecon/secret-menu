@@ -831,7 +831,7 @@ export class CocktailBuildEngine {
       });
 
       // Filter out recently shown cocktails for more variety
-      const availableCocktails = matchingCocktails.filter(cocktail => 
+      const availableCocktails = matchingCocktails.filter((cocktail: any) => 
         !this.recentlyShownFlavorJourney.has(cocktail.id)
       );
       
