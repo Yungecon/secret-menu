@@ -25,9 +25,7 @@ const loadCocktailData = async () => {
       }));
     } catch (error) {
       console.error('Error loading enhanced cocktail library:', error);
-      // Fallback to old data
-      const fallbackResponse = await fetch(DATA_PATHS.SECRET_MENU_COCKTAILS);
-      cocktailData = await fallbackResponse.json();
+      throw new Error('Failed to load cocktail data. Please refresh the page.');
     }
   }
   return cocktailData;

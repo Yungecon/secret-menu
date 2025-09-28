@@ -37,7 +37,7 @@ export const DATA_PATHS = {
   ENHANCED_COCKTAIL_LIBRARY: '/enhanced_cocktail_library.json',
   FLAVOR_JOURNEY_DATA: '/flavor_journey_data.json',
   INGREDIENT_MATRIX: '/ingredient_matrix.json',
-  SECRET_MENU_COCKTAILS: '/src/assets/data/secret_menu_mvp_cocktails.json'
+  SECRET_MENU_COCKTAILS: '/secret_menu_mvp_cocktails.json'
 } as const;
 
 // Error messages
