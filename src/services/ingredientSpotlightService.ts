@@ -1,26 +1,13 @@
-import { IngredientMatrix, BartenderRecommendation } from '../types';
+import { 
+  IngredientMatrix, 
+  BartenderRecommendation,
+  IngredientFilter,
+  IngredientSearchResult,
+  SeasonalRecommendation
+} from '../types';
+import { DATA_PATHS } from '../constants';
 
-export interface IngredientFilter {
-  spiritType?: string;
-  pricePoint?: 'budget' | 'medium' | 'high' | 'premium';
-  season?: 'spring' | 'summer' | 'fall' | 'winter';
-  upsellPotential?: 'low' | 'medium' | 'high' | 'very-high';
-  inventoryPriority?: 'very_high' | 'high' | 'medium' | 'low';
-}
-
-export interface IngredientSearchResult {
-  ingredient: any;
-  relevanceScore: number;
-  matchReasons: string[];
-  suggestedCocktails: string[];
-}
-
-export interface SeasonalRecommendation {
-  season: string;
-  featuredIngredients: any[];
-  recommendedCocktails: string[];
-  description: string;
-}
+export type { IngredientFilter, IngredientSearchResult, SeasonalRecommendation };
 
 export class IngredientSpotlightService {
   private ingredientMatrix: IngredientMatrix | null = null;
@@ -31,7 +18,7 @@ export class IngredientSpotlightService {
 
   private async loadIngredientMatrix() {
     try {
-      const response = await fetch('/src/assets/data/ingredient_matrix.json');
+      const response = await fetch(DATA_PATHS.INGREDIENT_MATRIX);
       this.ingredientMatrix = await response.json();
     } catch (error) {
       console.error('Error loading ingredient matrix:', error);

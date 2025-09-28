@@ -82,9 +82,8 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
         {/* Flavor Journey Tab */}
         {activeTab === 'journey' && (
           <FlavorJourney
-            onCocktailGenerate={(cocktails) => {
+            onCocktailGenerate={() => {
               // Handle generated cocktails
-              console.log('Generated cocktails:', cocktails);
               // Could redirect to results page or show in modal
             }}
           />
@@ -106,7 +105,7 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
               <div>
                 <h3 className="text-2xl font-semibold mb-4">Featured Ingredients</h3>
                 <div className="space-y-4">
-                  {seasonalSpotlight.featuredIngredients.map((ingredient, index) => (
+                  {seasonalSpotlight.featuredIngredients.map((ingredient: any, index: number) => (
                     <div
                       key={index}
                       onClick={() => handleIngredientClick(ingredient)}
@@ -130,7 +129,7 @@ export const IngredientSpotlight: React.FC<IngredientSpotlightProps> = ({
               <div>
                 <h3 className="text-2xl font-semibold mb-4">Recommended Cocktails</h3>
                 <div className="space-y-4">
-                  {seasonalSpotlight.recommendedCocktails.map((cocktail, index) => (
+                  {seasonalSpotlight.recommendedCocktails.map((cocktail: any, index: number) => (
                     <button
                       key={index}
                       onClick={() => handleCocktailClick(cocktail)}

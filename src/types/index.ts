@@ -147,6 +147,18 @@ export interface FlavorBalance {
   alcoholic: number;
 }
 
+// Cocktail Build Engine Types
+export interface RecipeGenerationRequest {
+  availableIngredients: string[];
+  templateId?: string;
+  preferences?: {
+    spiritType?: string;
+    flavorProfile?: string[];
+    sweetness?: number;
+    strength?: number;
+  };
+}
+
 export interface GeneratedRecipe {
   id: string;
   name: string;
@@ -227,4 +239,27 @@ export interface BartenderRecommendation {
   name: string;
   ingredients: string[];
   reason: string;
+}
+
+// Ingredient Spotlight Service Types
+export interface IngredientFilter {
+  spiritType?: string;
+  pricePoint?: 'budget' | 'medium' | 'high' | 'premium';
+  season?: 'spring' | 'summer' | 'fall' | 'winter';
+  upsellPotential?: 'low' | 'medium' | 'high' | 'very-high';
+  inventoryPriority?: 'very_high' | 'high' | 'medium' | 'low';
+}
+
+export interface IngredientSearchResult {
+  ingredient: any;
+  relevanceScore: number;
+  matchReasons: string[];
+  suggestedCocktails: string[];
+}
+
+export interface SeasonalRecommendation {
+  season: string;
+  featuredIngredients: any[];
+  recommendedCocktails: string[];
+  description: string;
 }

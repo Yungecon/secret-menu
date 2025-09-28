@@ -1,48 +1,12 @@
-import { CocktailTemplate, IngredientProfile, FlavorBalance } from '../types';
-
-export interface RecipeGenerationRequest {
-  availableIngredients: string[];
-  templateId?: string;
-  preferences?: {
-    spiritType?: string;
-    flavorProfile?: string[];
-    sweetness?: number;
-    strength?: number;
-  };
-}
-
-export interface GeneratedRecipe {
-  id: string;
-  name: string;
-  template_id: string;
-  generated: boolean;
-  ingredients: string[];
-  instructions: string[];
-  balance_profile: FlavorBalance;
-  complexity_score: number;
-  seasonal_notes: string[];
-  substitutions: Substitution[];
-  glassware: string;
-  garnish: string[];
-  build_type: string;
-}
-
-export interface Substitution {
-  original: string;
-  substitute: string;
-  ratio: number;
-  notes: string;
-  compatibility: number;
-}
-
-export interface LocalFlavorBalance {
-  sweet: number;
-  sour: number;
-  bitter: number;
-  spicy: number;
-  aromatic: number;
-  alcoholic: number;
-}
+import { 
+  CocktailTemplate, 
+  IngredientProfile, 
+  FlavorBalance, 
+  RecipeGenerationRequest,
+  GeneratedRecipe,
+  Substitution
+} from '../types';
+import { DATA_PATHS } from '../constants';
 
 export class CocktailBuildEngine {
   private ingredientProfiles: Map<string, IngredientProfile> = new Map();
@@ -56,7 +20,7 @@ export class CocktailBuildEngine {
   private async loadIngredientProfiles() {
     try {
       // Load enhanced cocktail library instead of basic profiles
-      const response = await fetch('/enhanced_cocktail_library.json');
+      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
       const data = await response.json();
       
       // Create ingredient profiles from the cocktail library
@@ -159,7 +123,7 @@ export class CocktailBuildEngine {
   private async loadTemplates() {
     try {
       // Load enhanced cocktail library for templates
-      const response = await fetch('/enhanced_cocktail_library.json');
+      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
       const data = await response.json();
       
       // Create templates from the cocktail library
@@ -540,7 +504,7 @@ export class CocktailBuildEngine {
   /**
    * Calculate flavor balance of the recipe
    */
-  private calculateFlavorBalance(mapping: Map<string, string>): LocalFlavorBalance {
+  private calculateFlavorBalance(mapping: Map<string, string>): FlavorBalance {
     const balance: FlavorBalance = {
       sweet: 0,
       sour: 0,
@@ -633,20 +597,14 @@ export class CocktailBuildEngine {
     const cocktails: GeneratedRecipe[] = [];
     
     try {
-      console.log('Loading enhanced cocktail library...');
       // Load the enhanced cocktail library
-      const response = await fetch('/enhanced_cocktail_library.json');
+      const response = await fetch(DATA_PATHS.ENHANCED_COCKTAIL_LIBRARY);
       
       if (!response.ok) {
         throw new Error(`Failed to load cocktail library: ${response.status}`);
       }
       
       const libraryData = await response.json();
-      console.log('Loaded cocktail library:', libraryData);
-      
-      // Find matching cocktails based on selected ingredients
-      console.log('Searching for cocktails with:', selectedIngredients);
-      console.log('Available cocktails:', libraryData.cocktails.map((c: any) => c.name));
       
       const matchingCocktails = libraryData.cocktails.filter((cocktail: any) => {
         const baseSpiritMatch = cocktail.base_spirit === selectedIngredients.baseSpirit;
@@ -655,11 +613,8 @@ export class CocktailBuildEngine {
           selectedIngredients.flavorFamily.toLowerCase().includes(tag)
         );
         
-        console.log(`Cocktail ${cocktail.name}: baseSpiritMatch=${baseSpiritMatch}, flavorMatch=${flavorMatch}`);
         return baseSpiritMatch || flavorMatch;
       });
-      
-      console.log('Matching cocktails found:', matchingCocktails.length);
 
       // Convert matching cocktails to GeneratedRecipe format
       matchingCocktails.slice(0, 3).forEach((cocktail: any) => {

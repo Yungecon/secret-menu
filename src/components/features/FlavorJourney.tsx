@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { cocktailBuildEngine } from '../../services/cocktailBuildEngine';
 import { CocktailResults } from './CocktailResults';
+import { DATA_PATHS } from '../../constants';
 
 interface FlavorJourneyProps {
   onCocktailGenerate?: (cocktails: any[]) => void;
@@ -42,7 +43,7 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   useEffect(() => {
     const loadJourneyData = async () => {
       try {
-        const response = await fetch('/flavor_journey_data.json');
+        const response = await fetch(DATA_PATHS.FLAVOR_JOURNEY_DATA);
         const data = await response.json();
         setJourneyData(data);
       } catch (error) {
@@ -71,14 +72,12 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
           return flavor.compatible_spirits && flavor.compatible_spirits.includes(selectedIngredients.baseSpirit);
         });
         
-        // If no compatible flavors found, show all flavors (fallback)
-        if (compatibleFlavors.length === 0) {
-          console.log(`No compatible flavors found for ${selectedIngredients.baseSpirit} in ${flavorFamily}, showing all flavors`);
-          setAvailableFlavors(Object.keys(family.flavors));
-        } else {
-          console.log(`Found ${compatibleFlavors.length} compatible flavors for ${selectedIngredients.baseSpirit} in ${flavorFamily}`);
-          setAvailableFlavors(compatibleFlavors);
-        }
+            // If no compatible flavors found, show all flavors (fallback)
+            if (compatibleFlavors.length === 0) {
+              setAvailableFlavors(Object.keys(family.flavors));
+            } else {
+              setAvailableFlavors(compatibleFlavors);
+            }
       }
     }
     
@@ -118,31 +117,19 @@ export const FlavorJourney: React.FC<FlavorJourneyProps> = ({
   };
 
   const generateCocktails = async () => {
-    console.log('Generate cocktails button clicked!');
-    console.log('Current selectedIngredients:', selectedIngredients);
-    console.log('Journey data loaded:', !!journeyData);
-    
     if (selectedIngredients.baseSpirit && selectedIngredients.flavorFamily) {
       try {
-        console.log('Generating cocktails for:', selectedIngredients);
-        
         // Use the new Flavor Journey generation method
         const generatedCocktails = await cocktailBuildEngine.generateFromFlavorJourney(selectedIngredients);
-        
-        console.log('Generated cocktails:', generatedCocktails);
         
         if (generatedCocktails && generatedCocktails.length > 0) {
           setGeneratedCocktails(generatedCocktails);
           setShowResults(true);
           onCocktailGenerate?.(generatedCocktails);
-        } else {
-          console.log('No cocktails generated');
         }
       } catch (error) {
         console.error('Error generating cocktails:', error);
       }
-    } else {
-      console.log('Missing required ingredients:', selectedIngredients);
     }
   };
 
