@@ -702,22 +702,11 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
   
   console.log('Finished scoring cocktails, starting sort...');
   
-  // Enhanced sorting with randomization for variety
+  // Deterministic sorting by score, then matching factors, then id
   const sortedCocktails = scoredCocktails.sort((a, b) => {
-    // Primary sort by score
-    if (Math.abs(b.score - a.score) > 5) {
-      return b.score - a.score;
-    }
-    
-    // For similar scores, add randomization
-    const randomA = Math.random();
-    const randomB = Math.random();
-    
-    if (b.matchingFactors !== a.matchingFactors) {
-      return b.matchingFactors - a.matchingFactors;
-    }
-    
-    return randomB - randomA;
+    if (b.score !== a.score) return b.score - a.score;
+    if (b.matchingFactors !== a.matchingFactors) return b.matchingFactors - a.matchingFactors;
+    return a.cocktail.id < b.cocktail.id ? -1 : a.cocktail.id > b.cocktail.id ? 1 : 0;
   });
   
   console.log('Sorting complete, selecting recommendations...');
@@ -1089,9 +1078,8 @@ export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswe
     return randomB - randomA;
   });
   
-  // Get primary recommendation with additional randomization for top candidates
-  const topCandidates = sortedCocktails.slice(0, Math.min(5, sortedCocktails.length));
-  const primary = topCandidates[Math.floor(Math.random() * topCandidates.length)].cocktail;
+  // Get primary recommendation deterministically
+  const primary = sortedCocktails[0].cocktail;
   
   // Track the primary recommendation to avoid repetition
   addToRecentlyShown(primary);
@@ -1102,8 +1090,8 @@ export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswe
   // Track adjacent recommendations too
   adjacent.forEach(cocktail => addToRecentlyShown(cocktail));
   
-  // Ensure the match score feels magical (90-98%)
-  const finalScore = Math.min(98, Math.max(90, sortedCocktails[0].score));
+  // Deterministic final score (no randomness)
+  const finalScore = Math.max(0, Math.min(100, Math.round(sortedCocktails[0].score)));
   
   // Collect fuzzy matching metadata
   const allFuzzyMatches = sortedCocktails[0].fuzzyMatches || [];
@@ -1119,40 +1107,9 @@ export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswe
   
   } catch (error) {
     console.error('Error in generateEnhancedRecommendations, using fallback:', error);
-    
-    // Fallback for enhanced recommendations - use a random sophisticated name
-    const fallbackNames = [
-      'The Oracle\'s Elixir', 'The Mystic\'s Vision', 'The Enchanter\'s Dream',
-      'The Sage\'s Secret', 'The Prophet\'s Revelation', 'The Shaman\'s Potion',
-      'The Alchemist\'s Discovery', 'The Seer\'s Wisdom', 'The Bard\'s Tale'
-    ];
-    const randomName = fallbackNames[Math.floor(Math.random() * fallbackNames.length)];
-    
-    const fallbackCocktail = {
-      id: 'enhanced-fallback-1',
-      name: randomName,
-      base_spirit_category: 'gin',
-      base_brand: 'gin',
-      style: 'Classic',
-      build_type: 'Stirred',
-      difficulty: 'intermediate',
-      complexity_score: 6,
-      flavor_tags: ['classic', 'sophisticated', 'mysterious'],
-      mood_tags: ['elegant', 'refined', 'mysterious'],
-      ingredients: ['2oz Premium Gin', '0.5oz Dry Vermouth', '2 dashes Orange Bitters', 'Lemon twist'],
-      garnish: 'Lemon twist',
-      glassware: 'Coupe glass',
-      notes: 'A mysterious and sophisticated cocktail that reveals its secrets slowly.',
-      balance_profile: { sweet: 2, sour: 3, bitter: 6, spicy: 4, aromatic: 8, alcoholic: 8 },
-      seasonal_notes: ['Perfect year-round', 'Elegant and timeless']
-    };
-    
-    return {
-      primary: fallbackCocktail,
-      adjacent: [],
-      matchScore: 95,
-      fuzzyMatches: ['fallback-used'],
-      fallbackUsed: true
-    };
+
+    // Deterministic fallback: use basic engine (dataset-driven) rather than fabricated cocktail
+    const basicResult = await generateRecommendations(answers);
+    return { ...basicResult, fallbackUsed: true } as RecommendationResult & { fallbackUsed: boolean };
   }
 };
