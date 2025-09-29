@@ -304,7 +304,16 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   
   // Enhanced randomization with spirit diversity weighting
   const timestamp = Date.now();
-  const shuffledCocktails = [...scoredCocktails].sort((a, b) => {
+  
+  // Pre-shuffle for better randomization
+  let shuffledCocktails = [...scoredCocktails];
+  for (let i = shuffledCocktails.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledCocktails[i], shuffledCocktails[j]] = [shuffledCocktails[j], shuffledCocktails[i]];
+  }
+  
+  // Then sort with diversity weighting
+  shuffledCocktails = shuffledCocktails.sort((a, b) => {
     // Boost score for diverse spirits and liqueurs
     let diversityBoostA = 0;
     let diversityBoostB = 0;
@@ -345,8 +354,9 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     diversityBoostA += newLiqueursA * 5;
     diversityBoostB += newLiqueursB * 5;
     
-    const randomA = Math.random() + (a.score + diversityBoostA) / 100 + (timestamp % 1000) / 1000;
-    const randomB = Math.random() + (b.score + diversityBoostB) / 100 + (timestamp % 1000) / 1000;
+    // Add more entropy with multiple random factors
+    const randomA = Math.random() * 0.4 + Math.random() * 0.3 + (a.score + diversityBoostA) / 100 + (timestamp % 1000) / 1000;
+    const randomB = Math.random() * 0.4 + Math.random() * 0.3 + (b.score + diversityBoostB) / 100 + (timestamp % 1000) / 1000;
     return randomB - randomA;
   });
   
@@ -1115,10 +1125,17 @@ export const generateEnhancedRecommendations = async (answers: EnhancedQuizAnswe
   } catch (error) {
     console.error('Error in generateEnhancedRecommendations, using fallback:', error);
     
-    // Fallback for enhanced recommendations
+    // Fallback for enhanced recommendations - use a random sophisticated name
+    const fallbackNames = [
+      'The Oracle\'s Elixir', 'The Mystic\'s Vision', 'The Enchanter\'s Dream',
+      'The Sage\'s Secret', 'The Prophet\'s Revelation', 'The Shaman\'s Potion',
+      'The Alchemist\'s Discovery', 'The Seer\'s Wisdom', 'The Bard\'s Tale'
+    ];
+    const randomName = fallbackNames[Math.floor(Math.random() * fallbackNames.length)];
+    
     const fallbackCocktail = {
       id: 'enhanced-fallback-1',
-      name: 'The Alchemist\'s Secret',
+      name: randomName,
       base_spirit_category: 'gin',
       base_brand: 'gin',
       style: 'Classic',
