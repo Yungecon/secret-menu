@@ -1,5 +1,6 @@
 import { Cocktail, QuizAnswers, RecommendationResult, EnhancedQuizAnswers } from '../types';
 import { DATA_PATHS } from '../constants';
+import { replaceGenericModifierWithInventory } from './inventory';
 
 // Load sophisticated cocktail library
 let cocktailData: Cocktail[] = [];
@@ -200,7 +201,10 @@ const loadCocktailData = async () => {
         mood_tags: generatedTags.mood_tags,
         occasion_tags: generatedTags.occasion_tags,
         ingredient_tags: cocktail.tags || [], // Keep original ingredient tags
-        ingredients: cocktail.ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
+        ingredients: cocktail.ingredients.map((ing: any) => {
+          const name = replaceGenericModifierWithInventory(ing.name, cocktail.base_spirit);
+          return `${ing.amount} ${name}`;
+        }),
         garnish: cocktail.garnish?.join(', ') || 'Lemon twist',
         glassware: cocktail.glassware,
         notes: cocktail.description,
@@ -578,7 +582,7 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     // Enhanced style preference scoring
     if (answers.lightVsBoozy === 'light') {
       // Tag matching for light cocktails
-      if (cocktail.style_tags?.some((tag: string) => ['light', 'refreshing', 'effervescent', 'airy', 'approachable'].includes(tag))) {
+      if (cocktail.flavor_tags?.some((tag: string) => ['light', 'refreshing', 'effervescent', 'airy', 'approachable'].includes(tag))) {
         score += 18;
         matchingFactors++;
       }
@@ -593,7 +597,7 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
       }
     } else if (answers.lightVsBoozy === 'boozy') {
       // Tag matching for boozy cocktails
-      if (cocktail.style_tags?.some((tag: string) => ['boozy', 'spirit-forward', 'strong', 'bold'].includes(tag))) {
+      if (cocktail.flavor_tags?.some((tag: string) => ['boozy', 'spirit-forward', 'strong', 'bold'].includes(tag))) {
         score += 18;
         matchingFactors++;
       }
@@ -607,7 +611,7 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
       }
     } else if (answers.lightVsBoozy === 'medium') {
       // Tag matching for medium intensity cocktails
-      if (cocktail.style_tags?.some((tag: string) => ['medium', 'versatile', 'balanced', 'approachable'].includes(tag))) {
+      if (cocktail.flavor_tags?.some((tag: string) => ['medium', 'versatile', 'balanced', 'approachable'].includes(tag))) {
         score += 18;
         matchingFactors++;
       }

@@ -40,7 +40,7 @@ const Results = () => {
             ? generateEnhancedRecommendations(answers as any) // Type assertion needed for now
             : generateRecommendations(answers);
           
-          const result = await Promise.race([recommendationPromise, timeoutPromise]);
+          const result = await Promise.race([recommendationPromise, timeoutPromise]) as RecommendationResult | EnhancedRecommendationResult;
           console.log('Recommendations loaded successfully:', result);
           
           setRecommendations(result);
