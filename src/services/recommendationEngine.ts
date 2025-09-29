@@ -302,18 +302,8 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   );
   primaryLiqueurs.forEach((liqueur: any) => usedLiqueurs.add(liqueur.toLowerCase()));
   
-  // Enhanced randomization with spirit diversity weighting
-  const timestamp = Date.now();
-  
-  // Pre-shuffle for better randomization
-  let shuffledCocktails = [...scoredCocktails];
-  for (let i = shuffledCocktails.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledCocktails[i], shuffledCocktails[j]] = [shuffledCocktails[j], shuffledCocktails[i]];
-  }
-  
-  // Then sort with diversity weighting
-  shuffledCocktails = shuffledCocktails.sort((a, b) => {
+  // Deterministic ordering by score with diversity as a secondary tie-breaker
+  const orderedCocktails = [...scoredCocktails].sort((a, b) => {
     // Boost score for diverse spirits and liqueurs
     let diversityBoostA = 0;
     let diversityBoostB = 0;
@@ -353,15 +343,20 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     
     diversityBoostA += newLiqueursA * 5;
     diversityBoostB += newLiqueursB * 5;
-    
-    // Add more entropy with multiple random factors
-    const randomA = Math.random() * 0.4 + Math.random() * 0.3 + (a.score + diversityBoostA) / 100 + (timestamp % 1000) / 1000;
-    const randomB = Math.random() * 0.4 + Math.random() * 0.3 + (b.score + diversityBoostB) / 100 + (timestamp % 1000) / 1000;
-    return randomB - randomA;
+    const effectiveA = a.score + diversityBoostA;
+    const effectiveB = b.score + diversityBoostB;
+    if (effectiveB !== effectiveA) {
+      return effectiveB - effectiveA; // Higher first
+    }
+    // Stable deterministic tie-breakers
+    if (a.cocktail.id !== b.cocktail.id) {
+      return a.cocktail.id < b.cocktail.id ? -1 : 1;
+    }
+    return 0;
   });
   
   // First pass: Select cocktails with different spirits, styles, or build types
-  for (const item of shuffledCocktails) {
+  for (const item of orderedCocktails) {
     if (selected.length >= maxCount) break;
     if (item.score < 65) continue; // Lowered threshold for more variety
     
@@ -395,7 +390,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   
   // Second pass: Fill remaining slots with high-scoring cocktails
   if (selected.length < maxCount) {
-    for (const item of shuffledCocktails) {
+    for (const item of orderedCocktails) {
       if (selected.length >= maxCount) break;
       if (item.score < 70) continue; // Lowered threshold
       
@@ -409,7 +404,7 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
   
   // Third pass: Add any remaining cocktails for maximum variety
   if (selected.length < maxCount) {
-    for (const item of shuffledCocktails) {
+    for (const item of orderedCocktails) {
       if (selected.length >= maxCount) break;
       if (item.score < 55) continue; // Even lower threshold for maximum variety
       
@@ -421,8 +416,8 @@ const getDiverseRecommendations = (scoredCocktails: any[], primary: Cocktail, ma
     }
   }
   
-  // Enhanced final shuffle with multiple randomization passes
-  return selected.sort(() => Math.random() - 0.5).sort(() => Math.random() - 0.5);
+  // Return deterministically ordered selections
+  return selected.slice(0, maxCount);
 };
 
 // Enhanced fuzzy matching with metadata tracking
