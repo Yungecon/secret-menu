@@ -690,10 +690,6 @@ export const generateRecommendations = async (answers: QuizAnswers): Promise<Rec
     if (matchingFactors >= 4) score += 5;
     if (matchingFactors >= 5) score += 5;
     
-    // Add randomization factor to score to ensure variety
-    const randomFactor = (Math.random() - 0.5) * 10; // ±5 point variation
-    score += randomFactor;
-    
     // Ensure minimum score for magical feeling
     score = Math.max(score, 80);
     
